@@ -1,0 +1,4 @@
+{
+  "live_api_url": "http://127.0.0.1:8080/v1",
+  "note": "Release builds prefer this URL with use_mock=false (D-NET-05). Debug may override via More."
+}

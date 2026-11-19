@@ -1,0 +1,79 @@
+{
+  "asset_id": "H02",
+  "animation": "idle",
+  "frame_count": 8,
+  "frame_w": 256,
+  "frame_h": 256,
+  "atlas_w": 2048,
+  "atlas_h": 256,
+  "image": "atlas.png",
+  "transparent": true,
+  "opaque_pixels": 97625,
+  "frames": [
+    {
+      "name": "idle_00",
+      "x": 0,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0001.png"
+    },
+    {
+      "name": "idle_01",
+      "x": 256,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0002.png"
+    },
+    {
+      "name": "idle_02",
+      "x": 512,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0003.png"
+    },
+    {
+      "name": "idle_03",
+      "x": 768,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0004.png"
+    },
+    {
+      "name": "idle_04",
+      "x": 1024,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0005.png"
+    },
+    {
+      "name": "idle_05",
+      "x": 1280,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0006.png"
+    },
+    {
+      "name": "idle_06",
+      "x": 1536,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0007.png"
+    },
+    {
+      "name": "idle_07",
+      "x": 1792,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "frame_0008.png"
+    }
+  ],
+  "note": "Dev sample from Blender pipeline — not final art (D-ART-02)"
+}

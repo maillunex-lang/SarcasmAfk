@@ -94,7 +94,17 @@ static func dialog_portrait_for(speaker_id: String) -> Texture2D:
 			return tex("res://assets/dialogs/dialog_portrait_NPC_TERMINAL.jpg")
 
 
+static func combat_idle(unit_id: String) -> String:
+	var path := "res://assets/combat/%s/%s_idle.png" % [unit_id, unit_id]
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
 static func enemy_sprite_for_type(enemy_type: String) -> String:
+	var combat := combat_idle(enemy_type)
+	if combat != "":
+		return combat
 	match enemy_type:
 		"E01":
 			return "res://assets/enemies/E01/E01_living_ticket.jpg"

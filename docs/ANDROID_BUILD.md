@@ -30,6 +30,27 @@ bash scripts/build_debug_apk.sh
 
 `tools/android/` and `build/*.apk` are gitignored.
 
-## Release (later)
+## Release keystore probe
 
-Separate step after debug verification. Requires owner-supplied keystore path + passwords via env (`ANDROID_RELEASE_KEYSTORE`, …). Do not invent a new release key if one already exists.
+```bash
+bash scripts/check_release_keystore.sh
+# exit 2 = unavailable (current cloud/VPS state: only debug keystores found;
+# GitHub Actions secrets not readable with agent token)
+```
+
+## Release (blocked until owner keystore)
+
+Requires existing keystore via env (never create/overwrite):
+
+- `ANDROID_RELEASE_KEYSTORE` (path)
+- `ANDROID_RELEASE_KEYSTORE_USER` / `ANDROID_RELEASE_KEYSTORE_PASS` (via secret store, not git/logs)
+
+Preset stub: `AndroidRelease` in `client/export_presets.cfg` (`custom_features=bash_release` → live-only client).
+
+## Install debug APK on phone
+
+```bash
+adb install -r build/BashLegends-debug.apk
+```
+
+Debug defaults to **mock** (offline play). Live: More → «Включить Live API» (needs reachable server URL in `client/data/net/client_config.json`).

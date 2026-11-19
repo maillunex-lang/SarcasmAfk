@@ -73,7 +73,9 @@
 | T-110 | P1 | **DONE** | Debug APK toolchain + build script | `build_debug_apk.sh` → `build/*.apk` | T-100 |
 | T-124 | P1 | **DONE** | CH01 vertical polish (L01/battle/dialog) | hub steps + CH02 gates | T-055 |
 | T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 vertical | T-122 |
-| T-114 | P3 | **TODO** | Phase 3 acceptance: no-mock release path | ROAD Фаза 3 | T-110 |
+| T-114 | P1 | **DONE** | Release defaults live (no silent mock); debug toggle | D-NET-05 + integration_live_slice | T-110 |
+| T-125 | P1 | **DONE** | CH01 Android vertical slice APK | home→map→L01→dialog→party→battle→ult→reward→save | T-124 |
+| T-126 | P1 | **BLOCKED** | Release APK signed | need ANDROID_RELEASE_KEYSTORE from owner | T-125 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -86,6 +88,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-031/T-124
+## Следующий конкретный шаг после T-125
 
-`T-114` release no-mock · owner art-approve atlases · release APK с keystore владельца · P3 guild live.
+`T-126` release APK (keystore) · owner final art approve · CH01 accepted → then P3 guild live. CH02 blocked.

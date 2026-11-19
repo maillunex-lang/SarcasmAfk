@@ -46,13 +46,17 @@ func _ready() -> void:
 	vbox.add_child(spacer)
 
 	if GameState.needs_dialogue():
-		var dialog_btn := DesignTokens.make_button("Диалог квеста", true)
+		var dialog_btn := DesignTokens.make_button("1 · Диалог квеста", true)
 		dialog_btn.pressed.connect(func() -> void: SceneNav.to_dialog(get_tree()))
 		vbox.add_child(dialog_btn)
 
 	var battle_id := GameState.active_battle_id
-	if battle_id != "":
-		var battle_btn := DesignTokens.make_button("В бой %s" % battle_id, not GameState.needs_dialogue())
+	var can_fight := battle_id != "" and not GameState.needs_dialogue()
+	if can_fight:
+		var party_btn := DesignTokens.make_button("2 · Собрать отряд", true)
+		party_btn.pressed.connect(func() -> void: SceneNav.to_party(get_tree()))
+		vbox.add_child(party_btn)
+		var battle_btn := DesignTokens.make_button("3 · В бой %s" % battle_id, false)
 		battle_btn.pressed.connect(func() -> void: SceneNav.to_battle(get_tree()))
 		vbox.add_child(battle_btn)
 	elif GameState.active_quest_id != "" and GameState.is_quest_completed(GameState.active_quest_id):
@@ -69,11 +73,11 @@ func _ready() -> void:
 
 func _step_hint() -> String:
 	if GameState.needs_dialogue():
-		return "Шаг 1/2 · сначала диалог, затем бой"
+		return "Цепочка: диалог → отряд → автобой"
 	if GameState.active_battle_id != "":
-		return "Шаг 2/2 · бой %s готов" % GameState.active_battle_id
+		return "Отряд → бой %s (ультимейт вручную)" % GameState.active_battle_id
 	if GameState.active_quest_id != "" and GameState.is_quest_completed(GameState.active_quest_id):
-		return "Квест закрыт · можно вернуться в кампанию"
+		return "Квест закрыт · следующий этап в кампании"
 	return "Выберите квест в кампании CH01"
 
 

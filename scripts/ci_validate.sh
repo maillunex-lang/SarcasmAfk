@@ -26,6 +26,10 @@ required = [
   "client/assets/locations/L10/loc_L10_mid.jpg",
   "client/assets/arenas/ARENA-L05/arena_L05_floor.jpg",
   "client/assets/arenas/ARENA-L10/arena_L10_floor.jpg",
+  "client/assets/combat/H01/H01_idle.png",
+  "client/assets/combat/H02/H02_idle.png",
+  "client/assets/combat/H03/H03_idle.png",
+  "client/assets/combat/E01/E01_idle.png",
 ]
 missing = [p for p in required if not pathlib.Path(p).is_file()]
 if missing:
@@ -68,9 +72,15 @@ if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_api.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_mvp.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_vertical.gd)
   echo "godot_smoke_ok"
 else
   echo "WARN: Godot not found; skipped smokes"
+fi
+
+if command -v go >/dev/null 2>&1; then
+  env -u DATABASE_URL -u REDIS_ADDR bash scripts/integration_live_slice.sh
+  echo "integration_live_slice_ok"
 fi
 
 echo "ci_validate_ok"

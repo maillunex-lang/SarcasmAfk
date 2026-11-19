@@ -29,7 +29,11 @@ func _ready() -> void:
 	for city in GameState.cities:
 		list.add_child(_city_row(city))
 
-	var camp := DesignTokens.make_button("Кампания Уфы (CH01)", true)
+	var enter := DesignTokens.make_button("Войти в Уфу · L01", true)
+	enter.pressed.connect(_enter_ufa_l01)
+	vbox.add_child(enter)
+
+	var camp := DesignTokens.make_button("Кампания Уфы (CH01)", false)
 	camp.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
 	vbox.add_child(camp)
 
@@ -37,6 +41,15 @@ func _ready() -> void:
 	pad.custom_minimum_size = Vector2(0, 120)
 	vbox.add_child(pad)
 	HubChrome.attach(self, get_tree(), "map")
+
+
+func _enter_ufa_l01() -> void:
+	# Vertical slice entry: ensure CH01-Q01 is active then open L01.
+	if GameState.active_quest_id == "" and not GameState.is_quest_completed("CH01-Q01"):
+		GameState.start_quest("CH01-Q01")
+	elif GameState.active_quest_id == "" and GameState.is_quest_available("CH01-Q01"):
+		GameState.start_quest("CH01-Q01")
+	SceneNav.to_location(get_tree())
 
 
 func _city_row(city: Dictionary) -> PanelContainer:

@@ -37,9 +37,14 @@ func _ready() -> void:
 	battle.pressed.connect(func() -> void:
 		if GameState.active_battle_id == "":
 			GameState.active_battle_id = "B01"
+		GameState.save_game()
 		SceneNav.to_battle(get_tree())
 	)
 	vbox.add_child(battle)
+
+	var loc := DesignTokens.make_button("К локации", false)
+	loc.pressed.connect(func() -> void: SceneNav.to_location(get_tree()))
+	vbox.add_child(loc)
 
 	var back := DesignTokens.make_button("К коллекции", false)
 	back.pressed.connect(func() -> void: SceneNav.to_heroes(get_tree()))
