@@ -52,3 +52,9 @@ Empty set at audit time.
 
 - Optional: change `location_layer` to fall back to `L_shared` **then** dedupe skies/far with JSON rewrites + Godot smoke (new TASK_QUEUE item).
 - Git LFS for large portraits (do not rewrite history without owner OK).
+
+## Final validator hardening (pre-merge)
+
+- `check_doc_links.py`: GitHub-style anchors with duplicate heading suffixes (`foo`, `foo-1`, `foo-2`).
+- `check_content_refs.py`: battle→`enemy_type`, sprite `res://` existence, dynamic combat/location paths (L01–L10), catalog asset fields.
+- Status single source remains [`../STATUS.md`](../STATUS.md#now).

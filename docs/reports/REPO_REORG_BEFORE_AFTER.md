@@ -40,3 +40,9 @@
 1. Protect backup branch against force-push/deletion.  
 2. Copy bundle from agent VM (`/home/ubuntu/repo-backups/…`) to private storage.  
 3. Review & merge PR #27 (no direct push to `main`).
+
+## Final hardening
+
+- Doc links: path + GitHub anchors (duplicate headings).
+- Content refs: battle→enemy_type, sprites, dynamic Godot paths.
+- CI must be green on post-hardening HEAD (not only `b085e16`).
