@@ -395,10 +395,16 @@
 - Не сделано: Postgres/Redis, admin, APK online
 - Следующий шаг: T-085
 
+### 2026-11-19 — Phase 2 live API T-086…T-089
+- Статус: ГОТОВО
+- Сделано: ApiClient HTTPClient live path, session+account JSON persist, finish requires start, `smoke_live_api.sh` (+ Godot live smoke)
+- Не сделано: Postgres/Redis, full battle sim, admin
+- Следующий шаг: T-085
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-060 / T-061 / T-081…T-084~~ — сделано.
-2. Далее: T-085 Postgres/Redis/verify **или** client live API; T-031 при Blender.
+1. ~~T-060 / T-061 / T-081…T-089~~ — сделано.
+2. Далее: T-085 Postgres/Redis/full battle sim; T-031 при Blender.
 3. Запреты: главы 02–12, rename.

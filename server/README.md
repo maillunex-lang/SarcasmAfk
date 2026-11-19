@@ -31,4 +31,12 @@ go run ./cmd/api -addr :8080 -content ../client/data
 | GET | `/v1/arena` | Bearer |
 | GET | `/v1/events` | no |
 
-Client Godot still defaults `ApiClient.USE_MOCK=true`; set false and point `BASE_URL` when integrating.
+Client Godot defaults `ApiClient.use_mock=true`. For live:
+
+```gdscript
+api.configure_live("http://127.0.0.1:8080/v1")
+api.auth_anonymous()
+```
+
+Integration smoke: `bash scripts/smoke_live_api.sh` (curl + optional Godot live).  
+Postgres/Redis — T-085 (not required for this stub).

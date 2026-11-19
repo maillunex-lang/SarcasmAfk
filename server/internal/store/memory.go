@@ -18,6 +18,7 @@ var (
 	ErrInvalidParty   = errors.New("INVALID_PARTY")
 	ErrValidation     = errors.New("VALIDATION_FAILED")
 	ErrNoTickets      = errors.New("NO_TICKETS")
+	ErrNoActiveBattle = errors.New("NO_ACTIVE_BATTLE")
 )
 
 const AFKMaxHours = 24
@@ -39,6 +40,11 @@ func NewMemory(persistPath string) *Memory {
 	return m
 }
 
+type persistDump struct {
+	Accounts map[string]*AccountProgress `json:"accounts"`
+	Sessions map[string]*Session         `json:"sessions"`
+}
+
 func (m *Memory) load() error {
 	if m.persist == "" {
 		return nil
@@ -47,14 +53,15 @@ func (m *Memory) load() error {
 	if err != nil {
 		return err
 	}
-	var dump struct {
-		Accounts map[string]*AccountProgress `json:"accounts"`
-	}
+	var dump persistDump
 	if err := json.Unmarshal(b, &dump); err != nil {
 		return err
 	}
 	if dump.Accounts != nil {
 		m.accounts = dump.Accounts
+	}
+	if dump.Sessions != nil {
+		m.sessions = dump.Sessions
 	}
 	return nil
 }
@@ -64,9 +71,7 @@ func (m *Memory) save() {
 		return
 	}
 	_ = os.MkdirAll(filepath.Dir(m.persist), 0o755)
-	dump := struct {
-		Accounts map[string]*AccountProgress `json:"accounts"`
-	}{Accounts: m.accounts}
+	dump := persistDump{Accounts: m.accounts, Sessions: m.sessions}
 	b, err := json.MarshalIndent(dump, "", "  ")
 	if err != nil {
 		return
@@ -254,9 +259,9 @@ func (m *Memory) FinishBattle(token, battleID string, victory bool) (*AccountPro
 		if battleID == "" {
 			return ErrValidation
 		}
-		// Stub trust: require matching active battle when set
-		if acc.ActiveBattleID != "" && acc.ActiveBattleID != battleID {
-			return ErrValidation
+		// Must have started this battle; blind finish rejected (T-088).
+		if acc.ActiveBattleID == "" || acc.ActiveBattleID != battleID {
+			return ErrNoActiveBattle
 		}
 		if victory {
 			acc.QuestFlags["battle:"+battleID] = true

@@ -25,10 +25,10 @@ func _run() -> void:
 		return
 
 	if not api.is_mock():
-		push_error("FAIL expected USE_MOCK=true")
+		push_error("FAIL expected use_mock=true (default offline smoke)")
 		failed = true
 	else:
-		print("OK USE_MOCK=", api.is_mock())
+		print("OK use_mock=", api.is_mock())
 
 	var heroes: Dictionary = api.get_heroes()
 	if not bool(heroes.get("ok", false)) or heroes.get("heroes", []).size() < 12:

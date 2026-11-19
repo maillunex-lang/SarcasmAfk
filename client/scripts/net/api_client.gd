@@ -1,34 +1,74 @@
 class_name ApiClient
 extends RefCounted
-## Thin Phase 0 API façade. USE_MOCK=true → local JSON / in-memory progress (X-Mock).
-## Real HTTP is stubbed; do not invent network until server exists.
+## Thin Phase 0/2 API façade.
+## use_mock=true → local JSON / in-memory progress (X-Mock).
+## use_mock=false → HTTP against Phase2 Go API (scripts/run_api.sh).
 
-## Flip USE_MOCK to false and point BASE_URL at local Phase2 API (`scripts/run_api.sh`).
-const USE_MOCK := true
-const BASE_URL := "http://127.0.0.1:8080/v1"
 const CLIENT_VERSION := "0.0.1-ch01"
 const HEADER_MOCK := "X-Mock: true"
+const DEFAULT_BASE := "http://127.0.0.1:8080/v1"
 
+## Default stays mock so headless CI smokes remain offline.
+var use_mock: bool = true
+var base_url: String = DEFAULT_BASE
+var auth_token: String = ""
 var last_log: Array = [] # recent {method, path, mock, ok}
+
+var _host: String = "127.0.0.1"
+var _port: int = 8080
+var _tls: bool = false
+var _prefix: String = "/v1"
 
 
 func is_mock() -> bool:
-	return USE_MOCK
+	return use_mock
+
+
+func configure_live(url: String = DEFAULT_BASE) -> void:
+	use_mock = false
+	base_url = url
+	_parse_base(url)
+
+
+func configure_mock() -> void:
+	use_mock = true
+	auth_token = ""
+
+
+func _parse_base(url: String) -> void:
+	_tls = url.begins_with("https://")
+	var rest := url
+	if rest.begins_with("https://"):
+		rest = rest.substr(8)
+	elif rest.begins_with("http://"):
+		rest = rest.substr(7)
+	var slash := rest.find("/")
+	var hostport := rest if slash < 0 else rest.substr(0, slash)
+	_prefix = "" if slash < 0 else rest.substr(slash)
+	if _prefix.ends_with("/"):
+		_prefix = _prefix.substr(0, _prefix.length() - 1)
+	var colon := hostport.rfind(":")
+	if colon > 0:
+		_host = hostport.substr(0, colon)
+		_port = int(hostport.substr(colon + 1))
+	else:
+		_host = hostport
+		_port = 443 if _tls else 80
 
 
 func _log(method: String, path: String, ok: bool) -> void:
 	var entry := {
 		"method": method,
 		"path": path,
-		"mock": USE_MOCK,
+		"mock": use_mock,
 		"ok": ok,
-		"source": "local_mock" if USE_MOCK else "http",
-		"header": HEADER_MOCK if USE_MOCK else "",
+		"source": "local_mock" if use_mock else "http",
+		"header": HEADER_MOCK if use_mock else "",
 	}
 	last_log.append(entry)
 	if last_log.size() > 40:
 		last_log.pop_front()
-	print("[ApiClient] %s %s mock=%s ok=%s" % [method, path, USE_MOCK, ok])
+	print("[ApiClient] %s %s mock=%s ok=%s" % [method, path, use_mock, ok])
 
 
 func _read_json(path: String) -> Dictionary:
@@ -41,28 +81,116 @@ func _read_json(path: String) -> Dictionary:
 	return {}
 
 
+func _http(method: String, path: String, body: Variant = null) -> Dictionary:
+	var http := HTTPClient.new()
+	var err: Error
+	if _tls:
+		err = http.connect_to_host(_host, _port, TLSOptions.client())
+	else:
+		err = http.connect_to_host(_host, _port)
+	if err != OK:
+		return {"ok": false, "error": "CONNECT_FAILED", "code": err, "mock": false}
+	var deadline := Time.get_ticks_msec() + 8000
+	while http.get_status() == HTTPClient.STATUS_CONNECTING or http.get_status() == HTTPClient.STATUS_RESOLVING:
+		http.poll()
+		OS.delay_msec(5)
+		if Time.get_ticks_msec() > deadline:
+			return {"ok": false, "error": "CONNECT_TIMEOUT", "mock": false}
+	if http.get_status() != HTTPClient.STATUS_CONNECTED:
+		return {"ok": false, "error": "CONNECT_STATUS_%d" % http.get_status(), "mock": false}
+
+	var headers: PackedStringArray = ["Content-Type: application/json", "Accept: application/json"]
+	if auth_token != "":
+		headers.append("Authorization: Bearer %s" % auth_token)
+	var payload := ""
+	if body != null:
+		payload = JSON.stringify(body)
+	var full_path := "%s%s" % [_prefix, path]
+	var verb := HTTPClient.METHOD_GET
+	match method:
+		"POST":
+			verb = HTTPClient.METHOD_POST
+		"PUT":
+			verb = HTTPClient.METHOD_PUT
+		"DELETE":
+			verb = HTTPClient.METHOD_DELETE
+		_:
+			verb = HTTPClient.METHOD_GET
+	err = http.request(verb, full_path, headers, payload)
+	if err != OK:
+		return {"ok": false, "error": "REQUEST_FAILED", "code": err, "mock": false}
+	deadline = Time.get_ticks_msec() + 8000
+	while http.get_status() == HTTPClient.STATUS_REQUESTING:
+		http.poll()
+		OS.delay_msec(5)
+		if Time.get_ticks_msec() > deadline:
+			return {"ok": false, "error": "REQUEST_TIMEOUT", "mock": false}
+	if http.get_status() != HTTPClient.STATUS_BODY and http.get_status() != HTTPClient.STATUS_CONNECTED:
+		return {"ok": false, "error": "BAD_STATUS_%d" % http.get_status(), "mock": false}
+
+	var chunks := PackedByteArray()
+	deadline = Time.get_ticks_msec() + 8000
+	while http.get_status() == HTTPClient.STATUS_BODY:
+		http.poll()
+		var chunk := http.read_response_body_chunk()
+		if chunk.size() > 0:
+			chunks.append_array(chunk)
+		else:
+			OS.delay_msec(2)
+		if Time.get_ticks_msec() > deadline:
+			break
+	var code := http.get_response_code()
+	http.close()
+	var text := chunks.get_string_from_utf8()
+	var parsed: Variant = JSON.parse_string(text) if text != "" else {}
+	var data: Dictionary = parsed if typeof(parsed) == TYPE_DICTIONARY else {"raw": text}
+	data["http_status"] = code
+	if not data.has("ok"):
+		data["ok"] = code >= 200 and code < 300
+	data["mock"] = false
+	return data
+
+
+func auth_anonymous() -> Dictionary:
+	## POST /auth/anonymous
+	var path := "/auth/anonymous"
+	if use_mock:
+		auth_token = "tok_local_mock"
+		_log("POST", path, true)
+		return {"ok": true, "token": auth_token, "mock": true}
+	var res := _http("POST", path)
+	var ok: bool = bool(res.get("ok", false)) and str(res.get("token", "")) != ""
+	if ok:
+		auth_token = str(res.get("token"))
+	_log("POST", path, ok)
+	return res
+
+
 # --- Content ---
 
 func get_heroes() -> Dictionary:
 	## GET /content/heroes
 	var path := "/content/heroes"
-	if not USE_MOCK:
-		_log("GET", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		var res := _http("GET", path)
+		var ok: bool = bool(res.get("ok", false)) and res.get("heroes", []) is Array
+		_log("GET", path, ok)
+		return res
 	var data := _read_json("res://data/heroes/roster_mvp.json")
 	if not data.has("heroes"):
 		data = _read_json("res://data/heroes/roster_v0.json")
-	var ok: bool = data.has("heroes")
-	_log("GET", path, ok)
-	return {"ok": ok, "heroes": data.get("heroes", []), "mock": true}
+	var ok_m: bool = data.has("heroes")
+	_log("GET", path, ok_m)
+	return {"ok": ok_m, "heroes": data.get("heroes", []), "mock": true}
 
 
 func get_battle(battle_id: String, catalog: CampaignCatalog = null) -> Dictionary:
 	## GET /content/battles/{id}
 	var path := "/content/battles/%s" % battle_id
-	if not USE_MOCK:
-		_log("GET", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		var res := _http("GET", path)
+		_log("GET", path, bool(res.get("ok", false)))
+		return res
 	var battle: Dictionary = {}
 	if catalog != null:
 		battle = catalog.get_battle(battle_id)
@@ -78,14 +206,14 @@ func get_battle(battle_id: String, catalog: CampaignCatalog = null) -> Dictionar
 func get_dialogue(quest_or_dialogue_id: String, catalog: CampaignCatalog = null) -> Dictionary:
 	## GET /content/dialogues/{id}
 	var path := "/content/dialogues/%s" % quest_or_dialogue_id
-	if not USE_MOCK:
-		_log("GET", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		var res := _http("GET", path)
+		_log("GET", path, bool(res.get("ok", false)))
+		return res
 	var file_path := ""
 	if catalog != null and str(quest_or_dialogue_id).begins_with("CH01-Q"):
 		file_path = catalog.dialogue_path(quest_or_dialogue_id)
 	else:
-		# Accept CH01-Q01 or ch01_q01
 		var id := quest_or_dialogue_id
 		if id.begins_with("CH01-Q"):
 			file_path = "res://data/dialogues/ch01_q%s.json" % id.replace("CH01-Q", "")
@@ -100,11 +228,19 @@ func get_dialogue(quest_or_dialogue_id: String, catalog: CampaignCatalog = null)
 
 
 func get_quests(catalog: CampaignCatalog) -> Dictionary:
-	## GET /content/quests (CH01 pack) — mock extension
+	## GET /content/quests (CH01 pack) — still catalog-local; server has no quests pack yet.
 	var path := "/content/quests"
-	if not USE_MOCK:
-		_log("GET", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		# Live mode still uses local catalog for quest list until T-085 content service expands.
+		var ok_live: bool = catalog != null and catalog.quest_list().size() > 0
+		_log("GET", path, ok_live)
+		return {
+			"ok": ok_live,
+			"chapter": catalog.chapter if catalog else {},
+			"quests": catalog.quest_list() if catalog else [],
+			"mock": false,
+			"note": "quests served from local catalog",
+		}
 	var ok: bool = catalog != null and catalog.quest_list().size() > 0
 	_log("GET", path, ok)
 	return {
@@ -120,9 +256,15 @@ func get_quests(catalog: CampaignCatalog) -> Dictionary:
 func get_progress(state: Node) -> Dictionary:
 	## GET /me/progress
 	var path := "/me/progress"
-	if not USE_MOCK:
-		_log("GET", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		if auth_token == "":
+			var auth := auth_anonymous()
+			if not bool(auth.get("ok", false)):
+				_log("GET", path, false)
+				return auth
+		var res := _http("GET", path)
+		_log("GET", path, bool(res.get("ok", false)))
+		return res
 	var payload := {
 		"account_id": "acc_local_mock",
 		"commander_xp": int(state.get("commander_xp")),
@@ -142,9 +284,16 @@ func get_progress(state: Node) -> Dictionary:
 func claim_reward(bundle_id: String, soft: int, xp: int, claimed_rewards: Dictionary) -> Dictionary:
 	## POST /rewards/claim — idempotent
 	var path := "/rewards/claim"
-	if not USE_MOCK:
-		_log("POST", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		if auth_token == "":
+			auth_anonymous()
+		var res := _http("POST", path, {
+			"bundle_id": bundle_id,
+			"soft": soft,
+			"commander_xp": xp,
+		})
+		_log("POST", path, bool(res.get("ok", false)))
+		return res
 	if bundle_id == "":
 		_log("POST", path, false)
 		return {"ok": false, "error": "VALIDATION_FAILED", "mock": true}
@@ -173,9 +322,15 @@ func claim_reward(bundle_id: String, soft: int, xp: int, claimed_rewards: Dictio
 func start_battle(battle_id: String, party_ids: Array) -> Dictionary:
 	## POST /battles/{id}/start
 	var path := "/battles/%s/start" % battle_id
-	if not USE_MOCK:
-		_log("POST", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		if auth_token == "":
+			auth_anonymous()
+		var res := _http("POST", path, {
+			"party_ids": party_ids,
+			"client_version": CLIENT_VERSION,
+		})
+		_log("POST", path, bool(res.get("ok", false)))
+		return res
 	var seed := int(Time.get_unix_time_from_system()) ^ battle_id.hash()
 	_log("POST", path, true)
 	return {
@@ -189,11 +344,17 @@ func start_battle(battle_id: String, party_ids: Array) -> Dictionary:
 
 
 func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Dictionary:
-	## POST /battles/{id}/finish — mock trusts client victory (server will not)
+	## POST /battles/{id}/finish
 	var path := "/battles/%s/finish" % battle_id
-	if not USE_MOCK:
-		_log("POST", path, false)
-		return _http_not_ready(path)
+	if not use_mock:
+		if auth_token == "":
+			auth_anonymous()
+		var res := _http("POST", path, {
+			"victory": victory,
+			"duration_ms": duration_ms,
+		})
+		_log("POST", path, bool(res.get("ok", false)))
+		return res
 	_log("POST", path, true)
 	return {
 		"ok": true,
@@ -202,15 +363,18 @@ func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Di
 		"duration_ms": duration_ms,
 		"rewards_claimed": false,
 		"mock": true,
-		"note": "client victory trusted only while USE_MOCK",
+		"note": "client victory trusted only while use_mock",
 	}
 
 
-func _http_not_ready(path: String) -> Dictionary:
-	return {
-		"ok": false,
-		"error": "HTTP_NOT_IMPLEMENTED",
-		"path": path,
-		"base_url": BASE_URL,
-		"mock": false,
-	}
+func put_party(party_ids: Array) -> Dictionary:
+	## PUT /me/party
+	var path := "/me/party"
+	if use_mock:
+		_log("PUT", path, true)
+		return {"ok": true, "party_ids": party_ids, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("PUT", path, {"party_ids": party_ids})
+	_log("PUT", path, bool(res.get("ok", false)))
+	return res
