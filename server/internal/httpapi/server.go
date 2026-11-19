@@ -31,6 +31,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/healthz", s.health)
 	mux.HandleFunc("/readyz", s.readyz)
 	mux.HandleFunc("/v1/admin/metrics", s.adminMetrics)
+	mux.HandleFunc("/v1/admin/audit", s.adminAudit)
 	mux.HandleFunc("/v1/auth/anonymous", s.authAnonymous)
 	mux.HandleFunc("/v1/me/progress", s.meProgress)
 	mux.HandleFunc("/v1/me/party", s.meParty)
@@ -91,20 +92,6 @@ func (s *Server) readyz(w http.ResponseWriter, _ *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"ok": true, "ready": true, "backend": s.Backend})
-}
-
-func (s *Server) adminMetrics(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		writeErr(w, http.StatusMethodNotAllowed, "METHOD")
-		return
-	}
-	snap := map[string]any{"ok": true, "backend": s.Backend, "heroes": len(s.Content.HeroIDs())}
-	if s.Metrics != nil {
-		for k, v := range s.Metrics.Snapshot() {
-			snap[k] = v
-		}
-	}
-	writeJSON(w, http.StatusOK, snap)
 }
 
 func (s *Server) authAnonymous(w http.ResponseWriter, r *http.Request) {
@@ -231,10 +218,54 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
 			return
 		}
+		party := body.PartyIDs
+		if len(party) == 0 {
+			if acc, e := s.Store.AccountByToken(bearer(r)); e == nil && acc != nil {
+				party = acc.PartyIDs
+			}
+		}
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok": true, "battle_id": battleID, "client_seed": seed,
-			"party_ids": body.PartyIDs, "client_version": body.ClientVersion,
-			"note": "server seed issued; full replay verify TBD",
+			"party_ids": party, "client_version": body.ClientVersion,
+			"balance_version": battleverify.BalanceVersion,
+			"auto_cast":      true,
+			"note":           "authoritative seed+balance; client victory ignored on finish",
+		})
+	case "command":
+		if r.Method != http.MethodPost {
+			writeErr(w, http.StatusMethodNotAllowed, "METHOD")
+			return
+		}
+		var body struct {
+			Op     string `json:"op"`
+			UnitID string `json:"unit_id"`
+			AtTick int    `json:"at_tick"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
+			return
+		}
+		prog, err := s.Store.AppendBattleCommand(bearer(r), battleID, store.BattleCommand{
+			Op: body.Op, UnitID: body.UnitID, AtTick: body.AtTick,
+		})
+		if err == store.ErrUnauthorized {
+			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
+			return
+		}
+		if err == store.ErrNoActiveBattle {
+			writeErr(w, http.StatusConflict, "NO_ACTIVE_BATTLE")
+			return
+		}
+		if err == store.ErrInvalidParty {
+			writeErr(w, http.StatusBadRequest, "INVALID_PARTY")
+			return
+		}
+		if err != nil {
+			writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok": true, "battle_id": battleID, "commands": prog.BattleCommands,
 		})
 	case "finish":
 		if r.Method != http.MethodPost {
@@ -242,9 +273,9 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		var body struct {
-			Victory     bool   `json:"victory"`
-			DurationMS  int    `json:"duration_ms"`
-			ActionsHash string `json:"actions_hash"`
+			DurationMS      int    `json:"duration_ms"`
+			BalanceVersion  string `json:"balance_version"`
+			ClientVictory   *bool  `json:"victory"` // ignored for authority; accepted for telemetry only
 		}
 		_ = json.NewDecoder(r.Body).Decode(&body)
 		tok := bearer(r)
@@ -279,13 +310,21 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 				heroUnits = append(heroUnits, h)
 			}
 		}
-		partyPower := battleverify.PowerFromUnits(heroUnits)
-		enemyPower := battleverify.PowerFromUnits(enemyUnits)
-		sim, errCode := battleverify.CheckFinishSim(acc.BattleSeed, body.DurationMS, heroUnits, enemyUnits, body.Victory)
+		cmds := make([]battleverify.Command, 0, len(acc.BattleCommands))
+		for _, c := range acc.BattleCommands {
+			cmds = append(cmds, battleverify.Command{Op: c.Op, UnitID: c.UnitID, AtTick: c.AtTick})
+		}
+		replayIn := battleverify.ReplayInput{
+			Seed: acc.BattleSeed, BalanceVersion: body.BalanceVersion,
+			PartyIDs: append([]string{}, acc.PartyIDs...), Heroes: heroUnits, Enemies: enemyUnits,
+			Commands: cmds, AutoCast: true, DurationMS: body.DurationMS,
+		}
+		sim, errCode := battleverify.CheckFinishReplay(replayIn)
 		if errCode != "" {
 			writeErr(w, http.StatusConflict, errCode)
 			return
 		}
+		// Authoritative: ignore client victory (D-COMBAT-05).
 		prog, err := s.Store.FinishBattle(tok, battleID, sim.Victory)
 		if err == store.ErrUnauthorized {
 			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
@@ -299,13 +338,36 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
 			return
 		}
+		reward := map[string]any{}
+		if sim.Victory && ok {
+			if fr, ok2 := battle["first_clear_reward"].(map[string]any); ok2 {
+				bundle, _ := fr["bundle_id"].(string)
+				soft := battleverify.AsIntPublic(fr["soft"])
+				xp := battleverify.AsIntPublic(fr["commander_xp"])
+				if bundle != "" {
+					sd, xd, already, cerr := s.Store.ClaimReward(tok, bundle, soft, xp)
+					if cerr == nil {
+						reward = map[string]any{
+							"bundle_id": bundle, "soft_delta": sd, "xp_delta": xd, "already_claimed": already,
+						}
+						if p2, e2 := s.Store.AccountByToken(tok); e2 == nil {
+							prog = p2
+						}
+					}
+				}
+			}
+		}
+		cv := any(nil)
+		if body.ClientVictory != nil {
+			cv = *body.ClientVictory
+		}
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok": true, "battle_id": battleID, "victory": sim.Victory,
-			"client_victory": body.Victory, "duration_ms": body.DurationMS,
-			"party_power": partyPower, "enemy_power": enemyPower,
-			"sim_ticks": sim.Ticks, "sim_note": sim.Note,
-			"rewards_claimed": false, "progress": prog,
-			"note": "server ATB tick-sim is source of truth",
+			"client_victory_ignored": cv, "duration_ms": body.DurationMS,
+			"balance_version": sim.BalanceVersion, "sim_ticks": sim.Ticks, "sim_note": sim.Note,
+			"party_ids": sim.PartyIDs, "commands": sim.Commands, "auto_cast": sim.AutoCast,
+			"reward": reward, "progress": prog,
+			"note": "server replay is source of truth for victory and rewards",
 		})
 	default:
 		writeErr(w, http.StatusNotFound, "NOT_FOUND")

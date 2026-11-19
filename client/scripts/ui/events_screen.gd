@@ -11,7 +11,7 @@ func _ready() -> void:
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 	vbox.add_child(DesignTokens.make_label("События", 40, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Юмор + региональный календарь (мок)", 22, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label("НЕДОСТУПНО live · каталог-заглушка до CH01 (D-SCOPE-01)", 22, DesignTokens.COLOR_DANGER_CORAL))
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(scroll)

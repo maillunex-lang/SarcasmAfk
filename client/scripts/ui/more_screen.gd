@@ -49,8 +49,10 @@ func _ready() -> void:
 		var want_live := GameState.api.is_mock()
 		var res: Dictionary = GameState.set_live_api(want_live)
 		mode_lbl.text = _api_mode_text()
+		if not bool(res.get("ok", false)):
+			mode_lbl.text = "Live недоступен: %s (режим не сменён)" % str(res.get("error", "?"))
 		toggle.text = "Включить Live API" if GameState.api.is_mock() else "Вернуть моки"
-		print("[More] api mode live=%s ok=%s" % [res.get("live"), res.get("ok")])
+		print("[More] api mode live=%s ok=%s err=%s" % [res.get("live"), res.get("ok"), res.get("error", "")])
 	)
 	vbox.add_child(toggle)
 

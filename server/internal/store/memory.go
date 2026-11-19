@@ -249,9 +249,41 @@ func (m *Memory) StartBattle(token, battleID string, party []string) (seed int64
 		seed = time.Now().UnixNano()
 		acc.ActiveBattleID = battleID
 		acc.BattleSeed = seed
+		acc.BalanceVersion = "2026.11.19-atb1"
+		acc.BattleCommands = nil
+		acc.BattleTickApprox = 0
 		return nil
 	})
 	return
+}
+
+func (m *Memory) AppendBattleCommand(token, battleID string, cmd BattleCommand) (*AccountProgress, error) {
+	if cmd.Op != "ultimate" || cmd.UnitID == "" {
+		return nil, ErrValidation
+	}
+	return m.mutate(token, func(acc *AccountProgress) error {
+		if acc.ActiveBattleID == "" || acc.ActiveBattleID != battleID {
+			return ErrNoActiveBattle
+		}
+		owned := false
+		for _, id := range acc.PartyIDs {
+			if id == cmd.UnitID {
+				owned = true
+				break
+			}
+		}
+		if !owned {
+			return ErrInvalidParty
+		}
+		if cmd.AtTick <= 0 {
+			acc.BattleTickApprox++
+			cmd.AtTick = acc.BattleTickApprox * 20 // coarse client tick estimate
+		} else if cmd.AtTick > acc.BattleTickApprox {
+			acc.BattleTickApprox = cmd.AtTick
+		}
+		acc.BattleCommands = append(acc.BattleCommands, cmd)
+		return nil
+	})
 }
 
 func (m *Memory) FinishBattle(token, battleID string, victory bool) (*AccountProgress, error) {
@@ -268,6 +300,9 @@ func (m *Memory) FinishBattle(token, battleID string, victory bool) (*AccountPro
 		}
 		acc.ActiveBattleID = ""
 		acc.BattleSeed = 0
+		acc.BalanceVersion = ""
+		acc.BattleCommands = nil
+		acc.BattleTickApprox = 0
 		return nil
 	})
 }

@@ -29,7 +29,7 @@ func TestPostgresRedisRoundTrip(t *testing.T) {
 	defer pg.Close()
 
 	_, file, _, _ := runtime.Caller(0)
-	mig := filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "migrations", "001_init.sql"))
+	mig := filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "migrations"))
 	if err := pg.Migrate(mig); err != nil {
 		t.Fatalf("migrate: %v", err)
 	}

@@ -8,6 +8,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/jackc/pgx/v5"
@@ -51,12 +53,34 @@ func (p *Postgres) Close() {
 }
 
 func (p *Postgres) Migrate(sqlPath string) error {
-	b, err := os.ReadFile(sqlPath)
+	info, err := os.Stat(sqlPath)
 	if err != nil {
 		return err
 	}
-	_, err = p.pool.Exec(p.ctx, string(b))
-	return err
+	var files []string
+	if info.IsDir() {
+		entries, err := os.ReadDir(sqlPath)
+		if err != nil {
+			return err
+		}
+		for _, e := range entries {
+			if !e.IsDir() && strings.HasSuffix(e.Name(), ".sql") {
+				files = append(files, filepath.Join(sqlPath, e.Name()))
+			}
+		}
+	} else {
+		files = []string{sqlPath}
+	}
+	for _, f := range files {
+		b, err := os.ReadFile(f)
+		if err != nil {
+			return err
+		}
+		if _, err := p.pool.Exec(p.ctx, string(b)); err != nil {
+			return fmt.Errorf("%s: %w", f, err)
+		}
+	}
+	return nil
 }
 
 func pgID(prefix string) string {
@@ -149,15 +173,17 @@ func (p *Postgres) resolveAccountID(token string) (string, error) {
 
 func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	var acc AccountProgress
-	var party, qf, cr, oh []byte
+	var party, qf, cr, oh, cmds []byte
 	var updated time.Time
 	err := p.pool.QueryRow(p.ctx, `
 		SELECT account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
 			party_ids, quest_flags, claimed_rewards, owned_heroes, afk_claimed_unix,
-			active_battle_id, battle_seed, updated_at
+			active_battle_id, battle_seed, COALESCE(balance_version,''), COALESCE(battle_commands,'[]'::jsonb),
+			COALESCE(battle_tick_approx,0), updated_at
 		FROM accounts WHERE account_id=$1`, accountID).Scan(
 		&acc.AccountID, &acc.CommanderXP, &acc.SoftCurrency, &acc.HardCurrency, &acc.SummonTickets,
-		&party, &qf, &cr, &oh, &acc.AFKClaimedUnix, &acc.ActiveBattleID, &acc.BattleSeed, &updated,
+		&party, &qf, &cr, &oh, &acc.AFKClaimedUnix, &acc.ActiveBattleID, &acc.BattleSeed,
+		&acc.BalanceVersion, &cmds, &acc.BattleTickApprox, &updated,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrUnauthorized
@@ -169,6 +195,7 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	_ = json.Unmarshal(qf, &acc.QuestFlags)
 	_ = json.Unmarshal(cr, &acc.ClaimedRewards)
 	_ = json.Unmarshal(oh, &acc.OwnedHeroes)
+	_ = json.Unmarshal(cmds, &acc.BattleCommands)
 	if acc.QuestFlags == nil {
 		acc.QuestFlags = map[string]bool{}
 	}
@@ -195,14 +222,20 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 	qf, _ := json.Marshal(acc.QuestFlags)
 	cr, _ := json.Marshal(acc.ClaimedRewards)
 	oh, _ := json.Marshal(acc.OwnedHeroes)
+	cmds, _ := json.Marshal(acc.BattleCommands)
+	if cmds == nil {
+		cmds = []byte("[]")
+	}
 	_, err := p.pool.Exec(p.ctx, `
 		UPDATE accounts SET
 			commander_xp=$2, soft_currency=$3, hard_currency=$4, summon_tickets=$5,
 			party_ids=$6::jsonb, quest_flags=$7::jsonb, claimed_rewards=$8::jsonb, owned_heroes=$9::jsonb,
-			afk_claimed_unix=$10, active_battle_id=$11, battle_seed=$12, updated_at=NOW()
+			afk_claimed_unix=$10, active_battle_id=$11, battle_seed=$12,
+			balance_version=$13, battle_commands=$14::jsonb, battle_tick_approx=$15, updated_at=NOW()
 		WHERE account_id=$1`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
 		party, qf, cr, oh, acc.AFKClaimedUnix, acc.ActiveBattleID, acc.BattleSeed,
+		acc.BalanceVersion, cmds, acc.BattleTickApprox,
 	)
 	return err
 }
@@ -337,9 +370,41 @@ func (p *Postgres) StartBattle(token, battleID string, party []string) (seed int
 		seed = time.Now().UnixNano()
 		acc.ActiveBattleID = battleID
 		acc.BattleSeed = seed
+		acc.BalanceVersion = "2026.11.19-atb1"
+		acc.BattleCommands = nil
+		acc.BattleTickApprox = 0
 		return nil
 	})
 	return
+}
+
+func (p *Postgres) AppendBattleCommand(token, battleID string, cmd BattleCommand) (*AccountProgress, error) {
+	if cmd.Op != "ultimate" || cmd.UnitID == "" {
+		return nil, ErrValidation
+	}
+	return p.mutate(token, func(acc *AccountProgress) error {
+		if acc.ActiveBattleID == "" || acc.ActiveBattleID != battleID {
+			return ErrNoActiveBattle
+		}
+		owned := false
+		for _, id := range acc.PartyIDs {
+			if id == cmd.UnitID {
+				owned = true
+				break
+			}
+		}
+		if !owned {
+			return ErrInvalidParty
+		}
+		if cmd.AtTick <= 0 {
+			acc.BattleTickApprox++
+			cmd.AtTick = acc.BattleTickApprox * 20
+		} else if cmd.AtTick > acc.BattleTickApprox {
+			acc.BattleTickApprox = cmd.AtTick
+		}
+		acc.BattleCommands = append(acc.BattleCommands, cmd)
+		return nil
+	})
 }
 
 func (p *Postgres) FinishBattle(token, battleID string, victory bool) (*AccountProgress, error) {
@@ -355,6 +420,9 @@ func (p *Postgres) FinishBattle(token, battleID string, victory bool) (*AccountP
 		}
 		acc.ActiveBattleID = ""
 		acc.BattleSeed = 0
+		acc.BalanceVersion = ""
+		acc.BattleCommands = nil
+		acc.BattleTickApprox = 0
 		return nil
 	})
 }

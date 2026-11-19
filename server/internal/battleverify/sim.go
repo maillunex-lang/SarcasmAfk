@@ -25,9 +25,12 @@ type SimResult struct {
 	Note    string `json:"note"`
 }
 
-// SimulateATB runs a seeded ATB sim mirroring client/scripts/battle/battle_engine.gd.
-// Hero ultimates auto-cast when energy is full (server baseline; client may delay — see PHASE2_AUDIT).
+// SimulateATB runs a seeded ATB sim with default auto-cast ultimates.
 func SimulateATB(seed int64, heroes, enemies []map[string]any) SimResult {
+	return simulateATB(seed, heroes, enemies, true, nil)
+}
+
+func simulateATB(seed int64, heroes, enemies []map[string]any, autoCast bool, cmds []Command) SimResult {
 	rng := rand.New(rand.NewSource(seed))
 	hs := make([]*unit, 0, len(heroes))
 	for _, h := range heroes {
@@ -43,8 +46,30 @@ func SimulateATB(seed int64, heroes, enemies []map[string]any) SimResult {
 	if len(es) == 0 {
 		return SimResult{Victory: true, Ticks: 0, Seed: seed, Note: "empty_enemies"}
 	}
+	cmdIdx := 0
 
 	for t := 1; t <= maxSimTicks; t++ {
+		// Apply due ultimate commands at this tick (validated player inputs).
+		for cmdIdx < len(cmds) && cmds[cmdIdx].AtTick <= t {
+			c := cmds[cmdIdx]
+			cmdIdx++
+			if c.Op != "ultimate" {
+				continue
+			}
+			for _, u := range hs {
+				if u.id == c.UnitID && u.alive && u.energy >= u.energyMax && u.ultimateID != "" {
+					castUltimate(u, hs, es, rng)
+					break
+				}
+			}
+		}
+		if !anyAlive(es) {
+			return SimResult{Victory: true, Ticks: t, Seed: seed, Note: "atb_replay"}
+		}
+		if !anyAlive(hs) {
+			return SimResult{Victory: false, Ticks: t, Seed: seed, Note: "atb_replay"}
+		}
+
 		for _, u := range append(hs, es...) {
 			if !u.alive {
 				continue
@@ -54,16 +79,15 @@ func SimulateATB(seed int64, heroes, enemies []map[string]any) SimResult {
 				continue
 			}
 			u.atb = 0
-			act(u, hs, es, rng)
+			act(u, hs, es, rng, autoCast)
 			if !anyAlive(es) {
-				return SimResult{Victory: true, Ticks: t, Seed: seed, Note: "atb_sim"}
+				return SimResult{Victory: true, Ticks: t, Seed: seed, Note: "atb_replay"}
 			}
 			if !anyAlive(hs) {
-				return SimResult{Victory: false, Ticks: t, Seed: seed, Note: "atb_sim"}
+				return SimResult{Victory: false, Ticks: t, Seed: seed, Note: "atb_replay"}
 			}
 		}
 	}
-	// Timeout: treat as defeat (anti-stall).
 	return SimResult{Victory: false, Ticks: maxSimTicks, Seed: seed, Note: "timeout"}
 }
 
@@ -101,7 +125,7 @@ func unitFromMap(m map[string]any, team string, rng *rand.Rand) *unit {
 	return u
 }
 
-func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
+func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand, autoCast bool) {
 	var pool []*unit
 	if actor.team == "hero" {
 		pool = enemies
@@ -123,7 +147,7 @@ func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
 		if actor.energy > actor.energyMax {
 			actor.energy = actor.energyMax
 		}
-		if actor.energy >= actor.energyMax && actor.ultimateID != "" {
+		if autoCast && actor.energy >= actor.energyMax && actor.ultimateID != "" {
 			castUltimate(actor, heroes, enemies, rng)
 		}
 	}

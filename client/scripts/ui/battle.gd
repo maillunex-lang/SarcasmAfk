@@ -8,6 +8,8 @@ var _unit_widgets: Dictionary = {} # id -> {panel, hp, energy, ult_btn}
 var _speed_btn: Button
 var _ended_panel: VBoxContainer
 var _running: bool = true
+var _started_msec: int = 0
+var _sim_tick: int = 0
 
 
 func _ready() -> void:
@@ -22,6 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _engine and _running and not _engine.finished:
 		_engine.tick(delta)
+		_sim_tick += 1
 
 
 func _load_battle() -> void:
@@ -48,11 +51,14 @@ func _start_engine() -> void:
 		# Keep within signed 32-bit for Godot RNG; server seed is int64.
 		seed_val = int(abs(int(start_res.get("client_seed"))) % 2147483647)
 	_engine.setup(GameState.get_party(), _battle_def.get("enemies", []), seed_val)
+	_started_msec = Time.get_ticks_msec()
+	_sim_tick = 0
 	for u in _engine.all_units():
 		_refresh_unit(u)
 	var seed_txt := str(start_res.get("client_seed", "?"))
-	_on_log("Бой %s начался. Автобой активен. seed=%s mock=%s" % [
-		battle_id, seed_txt, str(start_res.get("mock", true))
+	_on_log("Бой %s начался. Автобой активен. seed=%s mock=%s bal=%s" % [
+		battle_id, seed_txt, str(start_res.get("mock", GameState.api.is_mock())),
+		str(start_res.get("balance_version", "-"))
 	])
 
 
@@ -176,7 +182,7 @@ func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 		ult_btn.disabled = true
 		ult_btn.custom_minimum_size = Vector2(0, 72)
 		var uid := unit.id
-		ult_btn.pressed.connect(func() -> void: _engine.try_cast_ultimate(uid))
+		ult_btn.pressed.connect(func() -> void: _cast_ultimate(uid))
 		box.add_child(ult_btn)
 
 	_unit_widgets[unit.id] = {"panel": panel, "hp": hp, "energy": energy, "ult": ult_btn, "sprite": sprite}
@@ -219,24 +225,47 @@ func _toggle_speed() -> void:
 		_status.text = "Автобой ×1"
 
 
+func _cast_ultimate(unit_id: String) -> void:
+	if _engine == null:
+		return
+	if _engine.try_cast_ultimate(unit_id):
+		var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
+		GameState.api.send_battle_command(battle_id, "ultimate", unit_id, _sim_tick)
+
+
 func _on_battle_ended(result: Dictionary) -> void:
 	_running = false
-	var win := bool(result.get("victory", false))
+	var local_win := bool(result.get("victory", false))
+	var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
+	var duration_ms := maxi(0, Time.get_ticks_msec() - _started_msec)
+	var server_fin: Dictionary = GameState.set_battle_result({
+		"victory": local_win,
+		"battle_id": battle_id,
+		"duration_ms": duration_ms,
+	})
+	var win := local_win
+	if GameState.api != null and not GameState.api.is_mock():
+		# Authoritative server result
+		win = bool(server_fin.get("victory", false)) and bool(server_fin.get("ok", false))
+		_on_log("Сервер: victory=%s ticks=%s" % [win, str(server_fin.get("sim_ticks", "?"))])
 	_status.text = "Победа!" if win else "Поражение"
 	_on_log("--- Бой завершён ---")
 
-	var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
 	var progress: Dictionary = {}
 	if win:
-		progress = GameState.complete_battle(battle_id)
+		progress = GameState.complete_battle(battle_id, server_fin)
 		var reward: Dictionary = progress.get("reward", {})
 		if bool(progress.get("newly_completed", false)):
-			_on_log("Награда: +%d soft, +%d XP" % [int(reward.get("soft", 0)), int(reward.get("commander_xp", 0))])
+			_on_log("Награда: +%d soft, +%d XP" % [
+				int(reward.get("soft", reward.get("soft_delta", 0))),
+				int(reward.get("commander_xp", reward.get("xp_delta", 0)))
+			])
+		elif str(progress.get("error", "")) != "":
+			_on_log("Прогресс не принят: %s" % progress.get("error"))
 		else:
 			_on_log("Награда уже получена ранее.")
 		if bool(progress.get("quest_completed", false)):
 			_on_log("Квест завершён.")
-	GameState.set_battle_result({"victory": win, "battle_id": battle_id})
 
 	_ended_panel.visible = true
 	for c in _ended_panel.get_children():

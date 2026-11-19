@@ -3,6 +3,12 @@ package store
 import "time"
 
 // AccountProgress matches docs/PHASE0_SPEC.md §3.1 (extended for Phase 2 mocks).
+type BattleCommand struct {
+	Op     string `json:"op"`
+	UnitID string `json:"unit_id"`
+	AtTick int    `json:"at_tick"`
+}
+
 type AccountProgress struct {
 	AccountID       string          `json:"account_id"`
 	CommanderXP     int             `json:"commander_xp"`
@@ -16,6 +22,9 @@ type AccountProgress struct {
 	AFKClaimedUnix  int64           `json:"afk_claimed_unix"`
 	ActiveBattleID  string          `json:"active_battle_id,omitempty"`
 	BattleSeed      int64           `json:"battle_seed,omitempty"`
+	BalanceVersion  string          `json:"balance_version,omitempty"`
+	BattleCommands  []BattleCommand `json:"battle_commands,omitempty"`
+	BattleTickApprox int            `json:"battle_tick_approx,omitempty"`
 	UpdatedAt       string          `json:"updated_at"`
 }
 

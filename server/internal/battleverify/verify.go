@@ -73,3 +73,6 @@ func asInt(v any) int {
 		return 0
 	}
 }
+
+// AsIntPublic exposes asInt for HTTP reward parsing.
+func AsIntPublic(v any) int { return asInt(v) }

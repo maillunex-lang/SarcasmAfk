@@ -9,6 +9,7 @@ type Store interface {
 	ClaimAFK(token string, softPerHour, xpPerHour int) (hours float64, soft, xp int, err error)
 	Summon(token string, heroPool []string) (heroID string, newly bool, err error)
 	StartBattle(token, battleID string, party []string) (seed int64, err error)
+	AppendBattleCommand(token, battleID string, cmd BattleCommand) (*AccountProgress, error)
 	FinishBattle(token, battleID string, victory bool) (*AccountProgress, error)
 }
 

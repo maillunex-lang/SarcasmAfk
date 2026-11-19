@@ -28,7 +28,7 @@
 | T-020 | P2 | **DONE** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` | T-001 |
 | T-021 | P2 | **DONE** | Минимальный CI (JSON + Godot smoke) | `.github/workflows/ci.yml` | T-010 |
 | T-030 | P1 | **DONE** | **V0-B:** точечный арт только среза | `client/assets/` поэлементно + wire-in | T-010 |
-| T-031 | P1 | **BLOCKED** | Пилот Blender→atlas на H01 | нет Blender в среде; combat = still sprites | T-030 |
+| T-031 | P1 | **BLOCKED** | Blender→atlas pipeline scripts in repo | scripts ≠ final art; нет Blender в CI | T-030 |
 | T-040 | P1 | **DONE** | **V0-C:** playable demo-path | autofight B01 + GameState + rewards | T-030 |
 | T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-055 | P1 | **DONE** | **CH01 embed:** квесты/локации/бои/диалоги в клиент | `client/data/` + CampaignCatalog + campaign UI + `smoke_ch01.gd` | T-050 |
@@ -64,12 +64,17 @@
 | T-101 | P1 | **DONE** | Ultimates in server ATB sim | `battleverify` castUltimate | T-097 |
 | T-102 | P1 | **DONE** | Client battle uses server seed | `BattleEngine.setup(rng_seed)` | T-098 |
 | T-103 | P1 | **DONE** | Phase 2 audit + roadmap refresh | `PHASE2_AUDIT.md` | T-100 |
-| T-110 | P2 | **TODO** | Signed test APK / device online | SDK + templates + keystore | T-100 |
-| T-111 | P2 | **TODO** | Admin RBAC + lock metrics | Bearer admin / API key | T-093 |
-| T-112 | P2 | **TODO** | Guild/arena/events beyond stubs | persistence + rules | T-084 |
-| T-113 | P2 | **TODO** | Battle replay / actions_hash verify | parity with manual ults | T-101 |
+| T-111 | P0 | **DONE** | Admin RBAC lock + audit | `ADMIN_API_KEY` roles admin/viewer | T-093 |
+| T-113 | P0 | **DONE** | Battle replay + commands + auth finish | seed/balance/party/cmds | T-101 |
+| T-120 | P0 | **DONE** | Live probe; no silent mock fallback | `probe_live` + More UX | T-095 |
+| T-121 | P0 | **DONE** | Live rewards only from server finish | `complete_battle(server_finish)` | T-113 |
+| T-122 | P0 | **DONE** | Mark guild/arena/events unavailable | D-SCOPE-01 UI | T-084 |
+| T-123 | P0 | **TODO** | Persist/reconnect session resume | token restore + progress sync | T-087 |
+| T-110 | P1 | **TODO** | Debug APK + SDK/templates/keystore check | no new release key if exists | T-100 |
+| T-124 | P1 | **TODO** | CH01 vertical polish (L01/battle/dialog) | playable slice | T-055 |
+| T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 vertical | T-122 |
 | T-114 | P3 | **TODO** | Phase 3 acceptance: no-mock release path | ROAD Фаза 3 | T-110 |
-| T-090 | PX | **BLOCKED** | Детализация глав 02–12 | полные квесты/бои | Явное разрешение владельца |
+| T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
 
@@ -81,6 +86,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-103
+## Следующий конкретный шаг после T-121
 
-Владелец выбирает: `T-110` APK · `T-111` admin RBAC · `T-112` guild/arena live · `T-113` replay · `T-031` Blender · или снять PX с `T-090`.
+`T-123` session resume · затем `T-110` debug APK · `T-031` Blender pipeline scripts · `T-124` CH01 polish.
