@@ -20,9 +20,9 @@ type AccountProgress struct {
 }
 
 type Session struct {
-	Token     string
-	AccountID string
-	CreatedAt time.Time
+	Token     string    `json:"token"`
+	AccountID string    `json:"account_id"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type GuildStub struct {

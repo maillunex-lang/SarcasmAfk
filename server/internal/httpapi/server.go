@@ -217,6 +217,10 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
 			return
 		}
+		if err == store.ErrNoActiveBattle {
+			writeErr(w, http.StatusConflict, "NO_ACTIVE_BATTLE")
+			return
+		}
 		if err != nil {
 			writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
 			return
@@ -225,7 +229,7 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			"ok": true, "battle_id": battleID, "victory": body.Victory,
 			"duration_ms": body.DurationMS, "rewards_claimed": false,
 			"progress": prog,
-			"note":     "client victory accepted in Phase2 stub; server sim later",
+			"note":     "session-gated finish; full server sim still TBD (T-085)",
 		})
 	default:
 		writeErr(w, http.StatusNotFound, "NOT_FOUND")

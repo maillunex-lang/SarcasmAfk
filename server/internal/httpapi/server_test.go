@@ -123,6 +123,16 @@ func TestBattleStartFinishAndContent(t *testing.T) {
 	if rr.Code != 200 {
 		t.Fatalf("finish %d %s", rr.Code, rr.Body.String())
 	}
+
+	// Blind finish without start must fail
+	req = httptest.NewRequest(http.MethodPost, "/v1/battles/B01/finish", bytes.NewReader(fin))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	if rr.Code != 409 {
+		t.Fatalf("expected 409 NO_ACTIVE_BATTLE, got %d %s", rr.Code, rr.Body.String())
+	}
 }
 
 func TestGuildArenaEvents(t *testing.T) {

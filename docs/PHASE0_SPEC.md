@@ -17,7 +17,7 @@
 | `client/` | Godot 4.3 V0-C stub | Нет (local save) |
 | `client/data/*.json` | Контент/баланс-моки | Контент |
 | `docs/` | GDD/ROAD/VIS/API | Документы |
-| `server/` | — | **отсутствует** |
+| `server/` | Go Phase2 stub API | In-memory/file (PG/Redis → T-085) |
 | `.github/workflows/` | CI (T-021) | Проверки |
 
 ## 2. Идентификаторы (стабильные)
@@ -152,4 +152,4 @@ Auth: `Authorization: Bearer <token>` (после auth-модуля)
 1. ~~CI на JSON + Godot smoke (T-021).~~  
 2. ~~Тонкий `ApiClient` в Godot с переключателем `USE_MOCK=true`.~~ → `client/scripts/net/api_client.gd`  
 3. Не строить полный сервер, пока клиент MVP-экраны не стабилизированы (ROAD-002 A).  
-4. При `USE_MOCK=false` ответы пока `HTTP_NOT_IMPLEMENTED` (сервер отсутствует).
+4. При `use_mock=false` клиент ходит в локальный Go API (`scripts/run_api.sh` / `smoke_live_api.sh`).

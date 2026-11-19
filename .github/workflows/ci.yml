@@ -85,6 +85,8 @@ jobs:
       - name: Test server
         working-directory: server
         run: go test ./... -count=1
+      - name: Live API integration smoke
+        run: bash scripts/smoke_live_api.sh
 
   docs-presence:
     name: Required docs present
