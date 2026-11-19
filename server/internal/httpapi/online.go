@@ -193,7 +193,12 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		if g, role, ok := s.Guilds.ForAccount(acc.AccountID); ok {
 			pub := g.Public()
-			writeJSON(w, http.StatusOK, map[string]any{"ok": true, "guild": pub, "role": role, "list": s.Guilds.List()})
+			ch, _ := s.Guilds.ChatChannel(acc.AccountID)
+			writeJSON(w, http.StatusOK, map[string]any{
+				"ok": true, "guild": pub, "role": role, "chat_channel": ch,
+				"announcements": g.Announcements, "permissions": g.Permissions,
+				"list": s.Guilds.List(),
+			})
 			return
 		}
 		writeJSON(w, http.StatusOK, map[string]any{"ok": true, "guild": nil, "list": s.Guilds.List()})
@@ -204,6 +209,9 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 			Tag    string `json:"tag"`
 			Desc   string `json:"description"`
 			ID     string `json:"guild_id"`
+			Target string `json:"target_id"`
+			Role   string `json:"role"`
+			Text   string `json:"text"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
@@ -240,6 +248,18 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, http.StatusOK, map[string]any{"ok": true, "guild": g.Public()})
 		case "leave":
 			if err := s.Guilds.Leave(acc.AccountID); err != nil {
+				writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
+				return
+			}
+			writeJSON(w, http.StatusOK, map[string]any{"ok": true})
+		case "set_role":
+			if err := s.Guilds.SetRole(acc.AccountID, body.Target, body.Role); err != nil {
+				writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
+				return
+			}
+			writeJSON(w, http.StatusOK, map[string]any{"ok": true})
+		case "announce":
+			if err := s.Guilds.Announce(acc.AccountID, body.Text); err != nil {
 				writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
 				return
 			}

@@ -6,16 +6,16 @@
 
 ## NOW
 
-P1–P2 online foundation **в работе/срезано**: 36-hero Draft catalog, progression API, chat/guild/shop/VIP skeleton.  
-D-SCOPE-03: online systems unlocked without CH01 accept. CH02 + Stage E still blocked.
+P2 online systems slice: H13–H36 Draft lore, gacha pity (D-GACHA-01), TEST_PURCHASE shop, VIP 0–10, WS chat, guild roles.  
+CH02 + Stage E still blocked. CH01 not accepted.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
-| **Работает** | CH01 vertical; auth/battles/rewards; hero level-up/star-up API; global chat REST; guild create/join; simulated shop; VIP status Draft; roster 36 |
-| **Частично** | Gacha (tickets + crypto pick; pity/rates Draft); guild roles/quests; chat WS/DM moderation; progression awaken/skills; admin config UI |
-| **Заглушки** | Real payments OFF; paid gacha banners OFF; arena/events stubs; CH02 closed; TEMP art H13–H36 |
+| **Работает** | 36 heroes Draft; progression; gacha standard/advanced+pity; TEST_PURCHASE shop limits; VIP daily; REST+WS chat; guild create/join/roles/announce |
+| **Частично** | Chat moderation admin; PG chat persistence; guild quests/vault; awaken/skills depth |
+| **Заглушки** | Real payments OFF; paid gacha OFF; Mythic event-only; arena/events; CH02; GameBrain (docs only) |
 
 ## BLOCKED / ждёт владельца
 

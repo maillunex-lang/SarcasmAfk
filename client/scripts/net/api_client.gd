@@ -566,3 +566,38 @@ func vip_status() -> Dictionary:
 	var res := _http("GET", path)
 	_log("GET", path, bool(res.get("ok", false)))
 	return res
+
+
+func gacha_summon_banner(banner_id: String, count: int = 1) -> Dictionary:
+	var path := "/gacha/summon"
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "banner_id": banner_id, "results": [], "tickets": 0}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"banner_id": banner_id, "count": count})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func gacha_banners() -> Dictionary:
+	var path := "/gacha/banners"
+	if use_mock:
+		var data := _read_json("res://data/gacha/banners_approved_draft.json")
+		_log("GET", path, true)
+		return {"ok": true, "banners": data.get("banners", []), "mock": true}
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func vip_claim_daily() -> Dictionary:
+	var path := "/vip/claim-daily"
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "already": false, "granted_soft": 50, "granted_tickets": 0, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res

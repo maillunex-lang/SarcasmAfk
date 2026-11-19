@@ -59,6 +59,11 @@
 | D-SCOPE-01 | Guild / PvP arena / events live — после базового вертикального среза и CH01; stubs + явная «недоступно» |
 | D-SCOPE-02 | CH02+ не открывать игрокам, пока CH01 не завершён и не протестирован; контракты/закрытые переходы сохранить |
 | D-SCOPE-03 | **2026-11-19 owner unlock:** полноценная разработка chat / DM / guilds / gacha / 36 heroes / progression / shop / VIP **без** ожидания CH01 accepted. CH02 и Stage E Kaeron atlases по-прежнему blocked. TEMP art явно помечать. Платные баннеры и реальные платежи — только после утверждения чисел. |
+| D-SCOPE-04 | **2026-11-19:** H13–H36 Draft lore/abilities authorized for agent development; H01–H12 frozen; keep class/rarity/faction distribution; TEMP art only; mark Draft until final approve. |
+| D-GACHA-01 | Preliminary rates: Standard N50/R35/SR12/SSR3; Advanced R70/SR24/SSR5/UR1. Pity advanced: SR every 10, SSR every 80 (replaces pull). Mythic event-only. Paid banners OFF until final approve. Admin-editable. |
+| D-SHOP-01 | Shop live in TEST_PURCHASE mode: free grants with daily limits; show placeholder RUB prices + «Тестовый режим»; no payment provider; isolate from real revenue; architecture ready for real payments. |
+| D-VIP-01 | VIP levels 0–10 preliminary; daily rewards; AFK bonuses; cosmetic; shop offers; points via TEST_PURCHASE for testing; PvP power bonus cap ≤5%; admin-editable. |
+| D-AI-01 | Lunex GameBrain: architecture/docs only (`docs/LUNEX_GAMEBRAIN.md`); no VPS LLM install yet. |
 
 ## D-ADMIN — Админка / APK
 

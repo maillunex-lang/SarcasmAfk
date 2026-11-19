@@ -36,6 +36,12 @@ type AccountProgress struct {
 	VipPoints        int                      `json:"vip_points"`
 	VipLevel         int                      `json:"vip_level"`
 	PityCounters     map[string]int           `json:"pity_counters,omitempty"`
+	GachaHistory     []GachaHistoryEntry      `json:"gacha_history,omitempty"`
+	TestPurchaseDay  string                   `json:"test_purchase_day,omitempty"`
+	TestPurchasesDay int                      `json:"test_purchases_day,omitempty"`
+	TestHardDay      int                      `json:"test_hard_day,omitempty"`
+	TestVipDay       int                      `json:"test_vip_day,omitempty"`
+	VipDailyClaimed  string                   `json:"vip_daily_claimed,omitempty"`
 	GuildID          string                   `json:"guild_id,omitempty"`
 	AFKClaimedUnix   int64                    `json:"afk_claimed_unix"`
 	ActiveBattleID   string                   `json:"active_battle_id,omitempty"`

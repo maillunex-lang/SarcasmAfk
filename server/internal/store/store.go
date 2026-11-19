@@ -24,6 +24,9 @@ type Store interface {
 	EquipHero(token, heroID, slot, itemID string, base HeroBaseStats) (*AccountProgress, *HeroInstance, error)
 	ApplySimulatedPurchase(token, sku string, soft, hard, tickets int, inventory map[string]int) (*AccountProgress, bool, error)
 	SpendSoft(token string, amount int) (*AccountProgress, error)
+	SummonBanner(token, bannerID string, count int, poolByRarity map[string][]string) (*AccountProgress, []GachaPullResult, error)
+	TestPurchase(token, sku string, soft, hard, tickets, vipPoints int, inventory map[string]int) (*AccountProgress, map[string]any, error)
+	ClaimVIPDaily(token string, soft, tickets int) (*AccountProgress, bool, error)
 }
 
 // Ensure implementations satisfy the interface at compile time.

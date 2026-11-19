@@ -19,7 +19,10 @@ type Guild struct {
 	Level       int               `json:"level"`
 	XP          int               `json:"xp"`
 	LeaderID    string            `json:"leader_id"`
-	Members     map[string]string `json:"-"` // account -> role
+	Members     map[string]string `json:"-"` // account -> role: leader|officer|member
+	Permissions map[string]any    `json:"permissions,omitempty"`
+	Announcements []string        `json:"announcements,omitempty"`
+	Pinned      string            `json:"pinned,omitempty"`
 	Log         []GuildLogEntry   `json:"log,omitempty"`
 	CreatedAt   string            `json:"created_at"`
 }
@@ -128,6 +131,11 @@ func (h *GuildHub) Create(leaderID, name, tag, desc string) (*Guild, error) {
 		ID: id, Name: name, Tag: tag, Emblem: "lunex://guild/emblem/default",
 		Description: strings.TrimSpace(desc), JoinMode: "open", Level: 1, XP: 0,
 		LeaderID: leaderID, Members: map[string]string{leaderID: "leader"},
+		Permissions: map[string]any{
+			"leader":  []string{"invite", "kick", "announce", "pin", "transfer", "edit"},
+			"officer": []string{"invite", "kick", "announce"},
+			"member":  []string{"chat"},
+		},
 		CreatedAt: time.Now().UTC().Format(time.RFC3339),
 	}
 	g.Log = append(g.Log, GuildLogEntry{ActorID: leaderID, Action: "create", CreatedAt: g.CreatedAt})
@@ -183,4 +191,64 @@ func (h *GuildHub) Leave(accountID string) error {
 		delete(h.guilds, gid)
 	}
 	return nil
+}
+
+func (h *GuildHub) SetRole(actorID, targetID, role string) error {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	gid, ok := h.byAcc[actorID]
+	if !ok {
+		return ErrNotFound
+	}
+	g := h.guilds[gid]
+	if g.Members[actorID] != "leader" && g.Members[actorID] != "officer" {
+		return ErrValidation
+	}
+	if role != "officer" && role != "member" {
+		return ErrValidation
+	}
+	if _, ok := g.Members[targetID]; !ok {
+		return ErrNotFound
+	}
+	if targetID == g.LeaderID {
+		return ErrValidation
+	}
+	g.Members[targetID] = role
+	g.Log = append(g.Log, GuildLogEntry{
+		ActorID: actorID, Action: "set_role", Meta: targetID + "=" + role,
+		CreatedAt: time.Now().UTC().Format(time.RFC3339),
+	})
+	return nil
+}
+
+func (h *GuildHub) Announce(actorID, text string) error {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	gid, ok := h.byAcc[actorID]
+	if !ok {
+		return ErrNotFound
+	}
+	g := h.guilds[gid]
+	role := g.Members[actorID]
+	if role != "leader" && role != "officer" {
+		return ErrValidation
+	}
+	g.Announcements = append(g.Announcements, text)
+	if len(g.Announcements) > 20 {
+		g.Announcements = g.Announcements[len(g.Announcements)-20:]
+	}
+	g.Log = append(g.Log, GuildLogEntry{
+		ActorID: actorID, Action: "announce", CreatedAt: time.Now().UTC().Format(time.RFC3339),
+	})
+	return nil
+}
+
+func (h *GuildHub) ChatChannel(accountID string) (string, bool) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	gid, ok := h.byAcc[accountID]
+	if !ok {
+		return "", false
+	}
+	return "guild:" + gid, true
 }

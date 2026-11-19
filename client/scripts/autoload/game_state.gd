@@ -9,7 +9,7 @@ const ROSTER_MVP_FALLBACK := "res://data/heroes/roster_mvp.json"
 const AFK_CONFIG_PATH := "res://data/afk/afk_config.json"
 const EXPEDITIONS_PATH := "res://data/afk/expeditions_mvp.json"
 const EVENTS_PATH := "res://data/afk/events_mvp.json"
-const GACHA_PATH := "res://data/gacha/banners_mvp.json"
+const GACHA_PATH := "res://data/gacha/banners_approved_draft.json"
 const CITIES_PATH := "res://data/cities/mvp_cities.json"
 
 var soft_currency: int = 5000 # Draft starting grant (progression_draft.json)

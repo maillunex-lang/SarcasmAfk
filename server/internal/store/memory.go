@@ -7,6 +7,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -455,6 +456,154 @@ func (m *Memory) ApplySimulatedPurchase(token, sku string, soft, hard, tickets i
 		for k, v := range inventory {
 			acc.Inventory[k] += v
 		}
+		return nil
+	})
+	return prog, already, err
+}
+
+func (m *Memory) SummonBanner(token, bannerID string, count int, poolByRarity map[string][]string) (*AccountProgress, []GachaPullResult, error) {
+	if count != 1 && count != 10 {
+		return nil, nil, ErrValidation
+	}
+	rates := StandardRates
+	softEvery, hardEvery := 0, 0
+	pityKey := ""
+	switch bannerID {
+	case BannerStandard:
+		rates = StandardRates
+	case BannerAdvanced:
+		rates = AdvancedRates
+		softEvery, hardEvery = PitySoftSREvery, PityHardSSREvery
+		pityKey = "advanced"
+	default:
+		return nil, nil, ErrValidation
+	}
+	var results []GachaPullResult
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		need := count
+		if acc.SummonTickets < need {
+			return ErrNoTickets
+		}
+		acc.SummonTickets -= need
+		EnsureHeroInstances(acc)
+		if acc.PityCounters == nil {
+			acc.PityCounters = map[string]int{}
+		}
+		soft := acc.PityCounters[pityKey+"_soft"]
+		hard := acc.PityCounters[pityKey+"_hard"]
+		for i := 0; i < count; i++ {
+			rarity := RollRarity(rates)
+			forced := ""
+			if pityKey != "" {
+				rarity, forced, soft, hard = ApplyPity(rarity, soft, hard, softEvery, hardEvery)
+			}
+			heroID := PickHeroByRarity(poolByRarity, rarity)
+			if heroID == "" {
+				return ErrValidation
+			}
+			newly := !acc.OwnedHeroes[heroID]
+			acc.OwnedHeroes[heroID] = true
+			if newly {
+				acc.HeroInstances[heroID] = NewHeroInstance(heroID)
+			} else {
+				inst := acc.HeroInstances[heroID]
+				if inst == nil {
+					inst = NewHeroInstance(heroID)
+					acc.HeroInstances[heroID] = inst
+				}
+				inst.Fragments++
+				acc.SoftCurrency += DuplicateSoftRefund
+			}
+			results = append(results, GachaPullResult{HeroID: heroID, Rarity: rarity, NewlyOwned: newly, PityForced: forced})
+			acc.GachaHistory = append(acc.GachaHistory, GachaHistoryEntry{
+				BannerID: bannerID, HeroID: heroID, Rarity: rarity, NewlyOwned: newly, At: time.Now().UTC().Format(time.RFC3339),
+			})
+			if len(acc.GachaHistory) > 100 {
+				acc.GachaHistory = acc.GachaHistory[len(acc.GachaHistory)-100:]
+			}
+		}
+		if pityKey != "" {
+			acc.PityCounters[pityKey+"_soft"] = soft
+			acc.PityCounters[pityKey+"_hard"] = hard
+		}
+		return nil
+	})
+	return prog, results, err
+}
+
+const (
+	TestMaxPurchasesPerDay = 10
+	TestMaxHardPerDay      = 500
+	TestMaxVipPerDay       = 200
+)
+
+func (m *Memory) TestPurchase(token, sku string, soft, hard, tickets, vipPoints int, inventory map[string]int) (*AccountProgress, map[string]any, error) {
+	if sku == "" {
+		return nil, nil, ErrValidation
+	}
+	meta := map[string]any{}
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		day := time.Now().UTC().Format("2006-01-02")
+		if acc.TestPurchaseDay != day {
+			acc.TestPurchaseDay = day
+			acc.TestPurchasesDay = 0
+			acc.TestHardDay = 0
+			acc.TestVipDay = 0
+		}
+		if acc.TestPurchasesDay >= TestMaxPurchasesPerDay {
+			return ErrInsufficient
+		}
+		if acc.TestHardDay+hard > TestMaxHardPerDay {
+			return ErrInsufficient
+		}
+		if acc.TestVipDay+vipPoints > TestMaxVipPerDay {
+			return ErrInsufficient
+		}
+		acc.TestPurchasesDay++
+		acc.TestHardDay += hard
+		acc.TestVipDay += vipPoints
+		acc.SoftCurrency += soft
+		acc.HardCurrency += hard
+		acc.SummonTickets += tickets
+		acc.VipPoints += vipPoints
+		acc.VipLevel = ComputeVIPLevel(acc.VipPoints)
+		EnsureHeroInstances(acc)
+		for k, v := range inventory {
+			acc.Inventory[k] += v
+		}
+		key := "TEST_PURCHASE:" + sku + ":" + day + ":" + strconv.Itoa(acc.TestPurchasesDay)
+		acc.ClaimedRewards[key] = true
+		meta["transaction_type"] = "TEST_PURCHASE"
+		meta["sku"] = sku
+		meta["test_purchases_today"] = acc.TestPurchasesDay
+		meta["not_real_revenue"] = true
+		return nil
+	})
+	return prog, meta, err
+}
+
+func ComputeVIPLevel(points int) int {
+	thresholds := []int{0, 100, 300, 600, 1000, 1600, 2400, 3500, 5000, 7000, 10000}
+	lvl := 0
+	for i, t := range thresholds {
+		if points >= t {
+			lvl = i
+		}
+	}
+	return lvl
+}
+
+func (m *Memory) ClaimVIPDaily(token string, soft, tickets int) (*AccountProgress, bool, error) {
+	already := false
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		day := time.Now().UTC().Format("2006-01-02")
+		if acc.VipDailyClaimed == day {
+			already = true
+			return nil
+		}
+		acc.VipDailyClaimed = day
+		acc.SoftCurrency += soft
+		acc.SummonTickets += tickets
 		return nil
 	})
 	return prog, already, err

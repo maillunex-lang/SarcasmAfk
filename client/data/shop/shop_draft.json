@@ -1,69 +1,132 @@
 {
-  "version": 1,
-  "status": "draft_pending_owner_approval",
-  "purchase_mode_default": "simulated",
-  "note": "Real-money SKUs disabled until payment provider + prices approved. Soft purchases are simulated (free grant) for now.",
-  "categories": [
-    "diamonds",
-    "resource_packs",
-    "growth_packs",
-    "daily",
-    "weekly",
-    "monthly",
-    "cosmetic",
-    "events",
-    "vip"
-  ],
+  "version": 2,
+  "status": "test_purchase_mode",
+  "purchase_mode_default": "TEST_PURCHASE",
+  "test_mode": true,
+  "paid_provider": null,
+  "note": "All purchases are TEST_PURCHASE (free grants with daily limits). Prices are placeholders. Real payments not connected. Isolate test grants from real revenue.",
+  "test_limits": {
+    "max_test_purchases_per_day": 10,
+    "max_test_hard_per_day": 500,
+    "max_test_vip_points_per_day": 200
+  },
   "skus": [
+    {
+      "sku": "diamonds_60",
+      "category": "diamonds",
+      "title": "Алмазы ×60",
+      "price_display": "99 ₽",
+      "price_label": "Тестовый режим",
+      "price_soft": 0,
+      "price_hard": 0,
+      "real_money_cents_placeholder": 9900,
+      "grants": { "hard": 60, "vip_points": 10 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/diamonds_60"
+    },
+    {
+      "sku": "diamonds_300",
+      "category": "diamonds",
+      "title": "Алмазы ×300",
+      "price_display": "449 ₽",
+      "price_label": "Тестовый режим",
+      "real_money_cents_placeholder": 44900,
+      "grants": { "hard": 300, "vip_points": 50 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/diamonds_300"
+    },
+    {
+      "sku": "resource_pack_s",
+      "category": "resource_packs",
+      "title": "Набор ресурсов S",
+      "price_display": "149 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "soft": 5000, "inventory": { "mat_hero_exp": 100 }, "vip_points": 15 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/resource_pack_s"
+    },
+    {
+      "sku": "growth_pack_m",
+      "category": "growth_packs",
+      "title": "Набор развития M",
+      "price_display": "299 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "tickets": 5, "inventory": { "mat_awaken": 3 }, "vip_points": 30 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/growth_pack_m"
+    },
+    {
+      "sku": "daily_deal",
+      "category": "daily",
+      "title": "Ежедневное предложение",
+      "price_display": "49 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "soft": 1000, "tickets": 1, "vip_points": 5 },
+      "limit_daily": 1,
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/daily_deal"
+    },
+    {
+      "sku": "weekly_deal",
+      "category": "weekly",
+      "title": "Еженедельное предложение",
+      "price_display": "199 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "hard": 100, "tickets": 3, "vip_points": 25 },
+      "limit_daily": 1,
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/weekly_deal"
+    },
+    {
+      "sku": "monthly_deal",
+      "category": "monthly",
+      "title": "Месячное предложение",
+      "price_display": "799 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "hard": 500, "tickets": 10, "vip_points": 80 },
+      "limit_daily": 1,
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/monthly_deal"
+    },
+    {
+      "sku": "cosmetic_frame_cyan",
+      "category": "cosmetic",
+      "title": "Рамка «Циан талона»",
+      "price_display": "129 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "inventory": { "frame_cyan": 1 }, "vip_points": 8 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/cosmetic_frame_cyan"
+    },
+    {
+      "sku": "vip_starter",
+      "category": "vip",
+      "title": "VIP-старт (тестовые очки)",
+      "price_display": "99 ₽",
+      "price_label": "Тестовый режим",
+      "grants": { "vip_points": 100, "soft": 500 },
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/vip_starter"
+    },
     {
       "sku": "soft_pack_s",
       "category": "resource_packs",
-      "title": "Мешок золота (S)",
-      "price_soft": 0,
-      "price_hard": 0,
-      "real_money_cents": 0,
+      "title": "Мешок золота (S) — бесплатный лимит",
+      "price_display": "0 ₽",
+      "price_label": "Тестовый режим",
       "grants": { "soft": 1000 },
-      "limit_daily": 3,
-      "lunex_visual_id": "lunex://shop/soft_pack_s",
-      "purchase_mode": "simulated"
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/soft_pack_s"
     },
     {
       "sku": "ticket_pack_s",
       "category": "growth_packs",
       "title": "Билеты призыва ×5",
-      "price_soft": 0,
-      "price_hard": 0,
-      "real_money_cents": 0,
+      "price_display": "0 ₽",
+      "price_label": "Тестовый режим",
       "grants": { "tickets": 5 },
-      "limit_daily": 1,
-      "lunex_visual_id": "lunex://shop/ticket_pack_s",
-      "purchase_mode": "simulated"
-    },
-    {
-      "sku": "exp_mat_pack",
-      "category": "growth_packs",
-      "title": "Набор опыта героя",
-      "price_soft": 0,
-      "price_hard": 0,
-      "real_money_cents": 0,
-      "grants": { "inventory": { "mat_hero_exp": 100 } },
-      "limit_daily": 5,
-      "lunex_visual_id": "lunex://shop/exp_mat_pack",
-      "purchase_mode": "simulated"
-    },
-    {
-      "sku": "diamond_test_100",
-      "category": "diamonds",
-      "title": "Алмазы ×100 (ТЕСТ)",
-      "price_soft": 0,
-      "price_hard": 0,
-      "real_money_cents": 99,
-      "grants": { "hard": 100 },
-      "limit_daily": 0,
-      "lunex_visual_id": "lunex://shop/diamond_test_100",
-      "purchase_mode": "test_payment",
-      "enabled": false,
-      "note": "Disabled until payment provider wired; do not show as real success"
+      "purchase_mode": "TEST_PURCHASE",
+      "lunex_visual_id": "lunex://shop/ticket_pack_s"
     }
   ]
 }

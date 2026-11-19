@@ -15,6 +15,7 @@ type Server struct {
 	Content *content.Loader
 	Chat    *store.ChatHub
 	Guilds  *store.GuildHub
+	WS      *wsHub
 	Backend string
 	Metrics *Metrics
 }
@@ -22,7 +23,7 @@ type Server struct {
 func New(st store.Store, c *content.Loader) *Server {
 	return &Server{
 		Store: st, Content: c, Backend: "memory", Metrics: NewMetrics(),
-		Chat: store.NewChatHub(), Guilds: store.NewGuildHub(),
+		Chat: store.NewChatHub(), Guilds: store.NewGuildHub(), WS: newWSHub(),
 	}
 }
 
@@ -46,16 +47,21 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/battles/", s.battles)
 	mux.HandleFunc("/v1/rewards/claim", s.rewardsClaim)
 	mux.HandleFunc("/v1/afk/claim", s.afkClaim)
-	mux.HandleFunc("/v1/gacha/summon", s.gachaSummon)
+	mux.HandleFunc("/v1/gacha/summon", s.gachaSummonBanner) // body: banner_id, count
+	mux.HandleFunc("/v1/gacha/banners", s.gachaBanners)
+	mux.HandleFunc("/v1/gacha/history", s.gachaHistory)
 	mux.HandleFunc("/v1/guild", s.guildLive)
 	mux.HandleFunc("/v1/arena", s.arena)
 	mux.HandleFunc("/v1/events", s.events)
 	mux.HandleFunc("/v1/heroes/owned", s.heroesOwned)
 	mux.HandleFunc("/v1/heroes/", s.heroesMutate)
 	mux.HandleFunc("/v1/chat/", s.chatHandler)
-	mux.HandleFunc("/v1/shop/catalog", s.shopCatalog)
-	mux.HandleFunc("/v1/shop/purchase", s.shopPurchase)
-	mux.HandleFunc("/v1/vip/status", s.vipStatus)
+	mux.HandleFunc("/v1/ws/chat", s.chatWS)
+	mux.HandleFunc("/v1/shop/catalog", s.shopCatalogV2)
+	mux.HandleFunc("/v1/shop/purchase", s.shopPurchaseV2)
+	mux.HandleFunc("/v1/vip/status", s.vipStatusV2)
+	mux.HandleFunc("/v1/vip/claim-daily", s.vipClaimDaily)
+	mux.HandleFunc("/v1/admin/config", s.adminConfig)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 

@@ -45,7 +45,12 @@ Migrations: `migrations/*.sql` (directory auto-applied with `-migrate`). Set `AD
 | POST | `/v1/battles/{id}/finish` | Bearer (soft verify) |
 | POST | `/v1/rewards/claim` | Bearer |
 | POST | `/v1/afk/claim` | Bearer |
-| POST | `/v1/gacha/summon` | Bearer |
+| POST | `/v1/gacha/summon` | Bearer (`banner_id`, `count` 1\|10) |
+| GET | `/v1/gacha/banners` | no |
+| GET | `/v1/gacha/history` | Bearer |
+| GET | `/v1/ws/chat` | Bearer/token query (WebSocket) |
+| POST | `/v1/vip/claim-daily` | Bearer |
+| GET | `/v1/admin/config` | Admin |
 | GET/POST | `/v1/guild` | Bearer (list / create|join|leave) |
 | GET | `/v1/heroes/owned` | Bearer |
 | POST | `/v1/heroes/{id}/level-up` | Bearer |

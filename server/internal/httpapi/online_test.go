@@ -86,8 +86,8 @@ func TestLevelUpAndChatAndShop(t *testing.T) {
 	}
 	var shop map[string]any
 	_ = json.Unmarshal(rr.Body.Bytes(), &shop)
-	if shop["purchase_mode"] != "simulated" {
-		t.Fatalf("mode %v", shop["purchase_mode"])
+	if shop["transaction_type"] != "TEST_PURCHASE" {
+		t.Fatalf("tx type %v", shop["transaction_type"])
 	}
 
 	req = httptest.NewRequest(http.MethodGet, "/v1/vip/status", nil)

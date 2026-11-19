@@ -317,6 +317,15 @@
 
 ### Журнал 2026-11-19 — Online systems P1–P2 (T-140…T-144)
 
+### Журнал 2026-11-19 — Online P2 (T-145…T-150)
+
+- Owner approvals: H13–H36 Draft lore (D-SCOPE-04), gacha rates/pity (D-GACHA-01), TEST_PURCHASE shop (D-SHOP-01), VIP 0–10 (D-VIP-01).
+- GameBrain architecture only: `docs/LUNEX_GAMEBRAIN.md` (D-AI-01).
+- WS chat `/v1/ws/chat`, DM channels, guild roles/announce, gacha history/pity counters.
+- Shop TEST_PURCHASE with daily limits; VIP daily claim; admin `/v1/admin/config`.
+- Paid banners and real payments remain OFF.
+
+
 - Owner D-SCOPE-03: chat/guilds/gacha/heroes/shop/VIP без ожидания CH01 accepted.
 - Audit: `docs/reports/ONLINE_SYSTEMS_AUDIT.md`; contracts: `docs/ONLINE_SYSTEMS_SPEC.md`.
 - Catalog: `client/data/heroes/roster_release36.json` (12 approved + 24 Draft).
