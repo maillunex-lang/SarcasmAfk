@@ -112,6 +112,7 @@
 | T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
 | T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
 | T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
+| T-163 | P0 | **DEPRECATED** | AFK-shell rebuild rejected by owner; battle restored from archive backup | D-UI-SHELL-01 revoked · PR #32 rollback | owner reject |
 
 ## Правила исполнения
 
@@ -123,6 +124,6 @@
 
 ## Следующий конкретный шаг
 
-1. **Review/merge** T-159 CITY-HUB-001 PR (Ufa interactive city hub).  
+1. **Ship T-163 rollback** — archive battle restored; owner re-check APK.  
 2. Owner: device accept **T-128** / live URL **T-129** when ready.  
-3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore. Next polish: final city iso art (still TEMP).
+3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore.

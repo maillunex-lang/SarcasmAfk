@@ -1,13 +1,13 @@
 # STATUS.md — Verified project snapshot
 
-> Date: **2026-11-19** · Baseline `main` SHA **`76714b9`** · Active: `cursor/city-hub-stage-g-4106`  
+> Date: **2026-11-19** · Baseline `main` · Active: `cursor/afk-shell-rebuild-4106`  
 > **Single status source for agents.** Cold-start: [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · Queue: [`TASK_QUEUE.md`](TASK_QUEUE.md)  
 > Backup: [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) · Cleanup: [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md)
 
 ## NOW
 
-1. **Fullscreen + AFK battle layout** — `stretch/aspect=expand`; battle field (standing units + ULT bar), not card grid. Branch `cursor/battle-fullscreen-afk-4106`.  
-2. T-159 CITY-HUB-001 merged (`#30` → `main`).  
+1. **T-163 rollback** — owner rejected AFK-shell battle design; restore archive card-row battle. Branch `cursor/afk-shell-rebuild-4106`.  
+2. City hub (D-UI-CITY-01) + stretch `expand` kept.  
 3. Owner blockers unchanged: T-128 device accept, T-129 live URL, T-126 keystore, T-131 Stage E, T-153 payments.
 
 ## Subsystem matrix (evidence-based)
@@ -24,6 +24,7 @@
 | MONSTERS TEMP atlases/VFX/SFX | `PARTIAL` | assets + validator; Stage E `BLOCKED` |
 | Visual Overhaul 001 A–F | `DONE_VERIFIED` (TEMP art) | Theme.tres + H13–H36 busts + gallery; Stage E Kaeron still blocked |
 | CITY-HUB-001 Ufa interactive hub | `DONE_VERIFIED` (TEMP art) | D-UI-CITY-01; `home.gd` city + 10 hotspots + decor anims + `smoke_city_hub.gd` |
+| AFK-shell UI (battle L/R + hub chrome) | `DEPRECATED` (owner reject) | D-UI-SHELL-01 revoked; battle restored from `backup/main-pre-reorg-…` |
 | CH01 RPG Expansion A–E | `DONE_VERIFIED` (automation) | merged #28; device accept still T-128 |
 | Arena / events live | `BLOCKED` | D-SCOPE-01; T-112 |
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |

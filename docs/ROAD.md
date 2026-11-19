@@ -323,6 +323,13 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — T-163 AFK-shell → owner reject → archive battle restore
+
+- Owner rejected AFK-shell L/R battle design; **D-UI-SHELL-01 revoked**.
+- `battle.gd` restored from `backup/main-pre-reorg-20261119-1451-60ebe23` (card rows + combat log + VFX/ULT).
+- City hub chrome reverted to D-UI-CITY-01; stretch `expand` kept.
+- Game/repo not deleted (hard rule); only bad shell design rolled back.
+
 ### Журнал 2026-11-19 — T-159 CITY-HUB-001 (Stage 0 → Godot)
 
 - Owner approved Stage 0 Canvas «Уфа, столица Абсурда» → **D-UI-CITY-01**.

@@ -110,6 +110,7 @@
 | ID | Решение |
 |---|---|
 | D-UI-CITY-01 | **Stage 0 Canvas «Уфа, столица Абсурда» утверждён.** Home = интерактивный городской хаб (pan + 10 зданий + декор-анимации + тонкий resource bar + нижний nav «Город»), не dashboard из плиток. Перенос в Godot разрешён. Арена/events остаются locked stubs (D-SCOPE-01). TEMP-арт зданий/панорамы допустим до финальной генерации. Спека: `CITY_HUB_001.md` · задача T-159. |
+| D-UI-SHELL-01 | **ОТОЗВАНО владельцем (2026-11-19).** AFK-shell L/R battle + rails отклонены. Бой возвращён к архивной card-row системе (`backup/main-pre-reorg-…`). City hub остаётся D-UI-CITY-01. Stretch `expand` сохранён (анти-letterbox). |
 
 ## D-CONTENT — Статус контента (важно)
 
