@@ -1,5 +1,13 @@
 package store
 
+// HeroBaseStats are catalog stats used for power recalculation.
+type HeroBaseStats struct {
+	HP      int
+	Atk     int
+	Defense int
+	Speed   int
+}
+
 // Store is the account/progress backend (memory, postgres, …).
 type Store interface {
 	CreateAnonymous() (token string, progress AccountProgress)
@@ -11,6 +19,11 @@ type Store interface {
 	StartBattle(token, battleID string, party []string) (seed int64, err error)
 	AppendBattleCommand(token, battleID string, cmd BattleCommand) (*AccountProgress, error)
 	FinishBattle(token, battleID string, victory bool) (*AccountProgress, error)
+	LevelUpHero(token, heroID string, levels int, base HeroBaseStats) (*AccountProgress, *HeroInstance, error)
+	StarUpHero(token, heroID string, base HeroBaseStats) (*AccountProgress, *HeroInstance, error)
+	EquipHero(token, heroID, slot, itemID string, base HeroBaseStats) (*AccountProgress, *HeroInstance, error)
+	ApplySimulatedPurchase(token, sku string, soft, hard, tickets int, inventory map[string]int) (*AccountProgress, bool, error)
+	SpendSoft(token string, amount int) (*AccountProgress, error)
 }
 
 // Ensure implementations satisfy the interface at compile time.

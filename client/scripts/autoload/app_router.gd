@@ -20,6 +20,10 @@ const SCENE_INVENTORY := "res://scenes/inventory/inventory.tscn"
 const SCENE_GUILD := "res://scenes/guild/guild.tscn"
 const SCENE_ARENA := "res://scenes/arena/arena.tscn"
 const SCENE_MORE := "res://scenes/more/more.tscn"
+const SCENE_HERO_DETAIL := "res://scenes/heroes/hero_detail.tscn"
+const SCENE_CHAT := "res://scenes/chat/chat.tscn"
+const SCENE_SHOP := "res://scenes/shop/shop.tscn"
+const SCENE_VIP := "res://scenes/vip/vip.tscn"
 
 
 static func go(tree: SceneTree, path: String) -> void:
@@ -98,3 +102,20 @@ static func to_arena(tree: SceneTree) -> void:
 
 static func to_more(tree: SceneTree) -> void:
 	go(tree, SCENE_MORE)
+
+
+static func to_hero_detail(tree: SceneTree, hero_id: String) -> void:
+	GameState.set_meta("hero_detail_id", hero_id)
+	go(tree, SCENE_HERO_DETAIL)
+
+
+static func to_chat(tree: SceneTree) -> void:
+	go(tree, SCENE_CHAT)
+
+
+static func to_shop(tree: SceneTree) -> void:
+	go(tree, SCENE_SHOP)
+
+
+static func to_vip(tree: SceneTree) -> void:
+	go(tree, SCENE_VIP)

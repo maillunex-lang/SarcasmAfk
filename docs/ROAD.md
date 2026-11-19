@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (T-132 CH01 test report; owner Q answers).  
+> Актуализация: **2026-11-19** (T-140…T-144 online systems P1–P2 foundation; D-SCOPE-03).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -13,20 +13,22 @@
 | Debug APK | ГОТОВО | `scripts/build_debug_apk.sh` → `build/BashLegends-debug.apk` |
 | Release APK | ЗАБЛОКИРОВАНО | Нет действующего release keystore (T-126) |
 | Live API / auth / replay / rewards | ГОТОВО | Integration + CI; silent mock запрещён |
+| Heroes 36 + progression | ЧАСТИЧНО | H01–H12 MVP + H13–H36 Draft; level/star/equip API |
+| Chat / Guild / Shop / VIP | ЧАСТИЧНО | REST chat; guild create/join; simulated shop; VIP Draft |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
-| Guild / Arena / Events live | ЗАБЛОКИРОВАНО | Stubs до **CH01 accepted** (D-NET-06 / D-SCOPE-01) |
+| Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
-| Приёмка CH01 | НЕ ПРИНЯТО | Отчёт готов; ждём device/review владельца (T-128) |
+| Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |
 
 ### Открыто в очереди
 
 | ID | Статус | Что |
 |---|---|---|
+| T-145…T-149 | TODO | Chat WS · guild depth · gacha pity · shop provider · VIP grants |
 | T-126 | BLOCKED | Signed release APK |
-| T-127 | BLOCKED | Owner art-approve H01/H02/H03/E01 (+ объём анимаций) |
-| T-128 | BLOCKED | CH01 accepted (приёмка вертикального среза) |
+| T-127 / T-131 | BLOCKED | Art approve / Stage E |
+| T-128 | BLOCKED | CH01 accepted (не гейт online) |
 | T-129 | BLOCKED | Production/live API URL для телефонов |
-| T-112 | TODO→после T-128 | Guild/arena/events live |
 | T-090…T-092 | PX BLOCKED | CH02+, mass art, rename |
 
 ## 1. Неизменяемые решения о процессе
@@ -312,6 +314,17 @@
 8. Не плодить новые «источники истины» статуса: NOW только в `STATUS.md`, очередь только в `TASK_QUEUE.md`, решения только в `DECISIONS.md`.
 
 ## 8. Журнал прогресса
+
+### Журнал 2026-11-19 — Online systems P1–P2 (T-140…T-144)
+
+- Owner D-SCOPE-03: chat/guilds/gacha/heroes/shop/VIP без ожидания CH01 accepted.
+- Audit: `docs/reports/ONLINE_SYSTEMS_AUDIT.md`; contracts: `docs/ONLINE_SYSTEMS_SPEC.md`.
+- Catalog: `client/data/heroes/roster_release36.json` (12 approved + 24 Draft).
+- Migration `003_online_foundation.sql`; progression/chat/guild/shop/VIP APIs.
+- Client screens: hero detail, chat, shop, VIP; guild create/join live.
+- Tests: `go test ./...` green (progression + online HTTP).
+- Still Draft/blocked: gacha rates, real payments, CH02, Stage E atlases.
+
 
 ### 2026-11-19 — VIS / визуальная концепция и дизайн-система (пакет документов)
 - Статус: СПЕЦИФИКАЦИЯ СОГЛАСОВАНА (решения V0); реализация ассетов/клиента НЕ НАЧАТО

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "status": "draft_pending_owner_approval",
+  "note": "All numbers are Draft knobs. Do not treat as final monetization/balance.",
+  "level": {
+    "max_level_base": 60,
+    "max_level_per_awaken": [60, 70, 80, 90, 100],
+    "soft_cost_base": 100,
+    "soft_cost_per_level": 25,
+    "exp_item_id": "mat_hero_exp",
+    "exp_per_level_base": 50,
+    "exp_per_level_growth": 10
+  },
+  "stars": {
+    "max_stars": 6,
+    "fragments_per_star": [10, 20, 40, 80, 120, 200],
+    "stat_bonus_per_star": 0.08
+  },
+  "awaken": {
+    "max_rank": 4,
+    "material_id": "mat_awaken",
+    "cost_per_rank": [5, 10, 20, 40],
+    "stat_bonus_per_rank": 0.05
+  },
+  "skills": {
+    "max_level": 10,
+    "soft_cost_base": 200,
+    "soft_cost_growth": 50
+  },
+  "equipment_slots": ["weapon", "armor", "accessory", "relic"],
+  "power": {
+    "hp": 0.15,
+    "atk": 1.2,
+    "defense": 0.9,
+    "speed": 0.5,
+    "star_factor": 0.08,
+    "awaken_factor": 0.05,
+    "level_factor": 0.02
+  },
+  "starting_grants": {
+    "soft_currency": 5000,
+    "hard_currency": 0,
+    "summon_tickets": 10,
+    "owned_heroes": ["H01", "H02", "H03"],
+    "mat_hero_exp": 500,
+    "mat_awaken": 0
+  }
+}

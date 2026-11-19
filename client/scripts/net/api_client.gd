@@ -225,7 +225,9 @@ func get_heroes() -> Dictionary:
 		var ok: bool = bool(res.get("ok", false)) and res.get("heroes", []) is Array
 		_log("GET", path, ok)
 		return res
-	var data := _read_json("res://data/heroes/roster_mvp.json")
+	var data := _read_json("res://data/heroes/roster_release36.json")
+	if not data.has("heroes"):
+		data = _read_json("res://data/heroes/roster_mvp.json")
 	if not data.has("heroes"):
 		data = _read_json("res://data/heroes/roster_v0.json")
 	var ok_m: bool = data.has("heroes")
@@ -439,4 +441,128 @@ func put_party(party_ids: Array) -> Dictionary:
 		auth_anonymous()
 	var res := _http("PUT", path, {"party_ids": party_ids})
 	_log("PUT", path, bool(res.get("ok", false)))
+	return res
+
+
+func hero_level_up(hero_id: String, levels: int = 1) -> Dictionary:
+	var path := "/heroes/%s/level-up" % hero_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "hero": {"catalog_id": hero_id, "level": levels + 1}}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"levels": levels})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func hero_star_up(hero_id: String) -> Dictionary:
+	var path := "/heroes/%s/star-up" % hero_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func get_heroes_owned() -> Dictionary:
+	var path := "/heroes/owned"
+	if use_mock:
+		_log("GET", path, true)
+		return {"ok": true, "heroes": [], "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func chat_history(channel: String, limit: int = 50) -> Dictionary:
+	var path := "/chat/%s/history?limit=%d" % [channel, limit]
+	if use_mock:
+		_log("GET", path, true)
+		return {"ok": true, "messages": [], "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func chat_send(channel: String, text: String, display_name: String = "") -> Dictionary:
+	var path := "/chat/%s/send" % channel
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "message": {"body": text, "channel": channel}, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"text": text, "display_name": display_name})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func guild_action(action: String, payload: Dictionary = {}) -> Dictionary:
+	var path := "/guild"
+	var body := payload.duplicate()
+	body["action"] = action
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "action": action}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, body)
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func get_guild() -> Dictionary:
+	var path := "/guild"
+	if use_mock:
+		_log("GET", path, true)
+		return {"ok": true, "guild": null, "list": [], "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func shop_catalog() -> Dictionary:
+	var path := "/shop/catalog"
+	if use_mock:
+		var data := _read_json("res://data/shop/shop_draft.json")
+		_log("GET", path, true)
+		return {"ok": true, "skus": data.get("skus", []), "purchase_mode_default": "simulated", "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func shop_purchase(sku: String) -> Dictionary:
+	var path := "/shop/purchase"
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "sku": sku, "purchase_mode": "simulated", "mock": true, "note": "TEST/SIMULATED"}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"sku": sku})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func vip_status() -> Dictionary:
+	var path := "/vip/status"
+	if use_mock:
+		var data := _read_json("res://data/vip/vip_draft.json")
+		_log("GET", path, true)
+		return {"ok": true, "vip_points": 0, "vip_level": 0, "levels": data.get("levels", []), "mock": true, "status": "draft"}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
 	return res

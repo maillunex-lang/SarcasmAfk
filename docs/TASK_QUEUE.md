@@ -83,7 +83,17 @@
 | T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | drafts only; no new H01 model | T-125 |
 | T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | report ready; waiting device/review | T-132 |
 | T-129 | P1 | **BLOCKED** | Production/live API URL for devices | keep `127.0.0.1:8080/v1`; need owner URL | T-114 |
-| T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 accepted | T-128 |
+| T-140 | P1 | **DONE** | Online systems audit + D-SCOPE-03 unlock | `ONLINE_SYSTEMS_AUDIT.md` + DECISIONS | owner brief |
+| T-141 | P1 | **DONE** | 36-hero Draft catalog + progression config | `roster_release36.json` + `progression_draft.json` | T-140 |
+| T-142 | P1 | **DONE** | DB migration 003 + hero instances / economy hooks | `migrations/003_online_foundation.sql` | T-141 |
+| T-143 | P1 | **DONE** | Server progression + chat/guild/shop/VIP APIs | `store/*` + `httpapi/online.go` | T-142 |
+| T-144 | P2 | **DONE** | Client screens: hero detail / chat / shop / VIP / guild live | scenes + ApiClient | T-143 |
+| T-145 | P3 | **TODO** | Chat WebSocket + DM + moderation admin | WS `/v1/ws/chat` | T-144 |
+| T-146 | P4 | **TODO** | Guild roles/quests/vault/announcements | guild hub expand | T-144 |
+| T-147 | P5 | **TODO** | Gacha banners/pity/history (rates Draft until approve) | banners + summon | T-144 |
+| T-148 | P6 | **TODO** | Shop catalog polish + payment provider adapter | simulated→provider | owner rates |
+| T-149 | P7 | **TODO** | VIP grants/daily rewards admin | vip_draft → live | owner VIP |
+| T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -98,7 +108,6 @@
 
 ## Следующий конкретный шаг
 
-Независимый бэклог исчерпан до owner-гейтов: T-128 / T-129 / T-131 / T-126.  
-Опционально: More live-toggle UX, expedition polish, DEF docs.  
-Владелец: device review → T-128; grip → T-131; phone URL → T-129.  
-После T-128 → T-112. PX (T-090…092) без отдельного разрешения не трогать.
+T-145 (chat WS/DM) → T-146 guild depth → T-147 gacha pity.  
+Owner decisions needed: H13–H36 Draft names, gacha rates/pity, shop/VIP numbers.  
+CH02 (T-090) / Stage E (T-131) remain blocked.

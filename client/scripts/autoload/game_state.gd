@@ -4,16 +4,21 @@ extends Node
 signal progress_changed
 
 const SAVE_PATH := "user://bashlegends_v0_save.json"
-const ROSTER_PATH := "res://data/heroes/roster_mvp.json"
+const ROSTER_PATH := "res://data/heroes/roster_release36.json"
+const ROSTER_MVP_FALLBACK := "res://data/heroes/roster_mvp.json"
 const AFK_CONFIG_PATH := "res://data/afk/afk_config.json"
 const EXPEDITIONS_PATH := "res://data/afk/expeditions_mvp.json"
 const EVENTS_PATH := "res://data/afk/events_mvp.json"
 const GACHA_PATH := "res://data/gacha/banners_mvp.json"
 const CITIES_PATH := "res://data/cities/mvp_cities.json"
 
-var soft_currency: int = 0
+var soft_currency: int = 5000 # Draft starting grant (progression_draft.json)
 var hard_currency: int = 0
 var summon_tickets: int = 10
+var hero_stars: Dictionary = {} # id -> stars
+var hero_power: Dictionary = {} # id -> power
+var vip_points: int = 0
+var vip_level: int = 0
 var commander_xp: int = 0
 var party_ids: Array = ["H01", "H04", "H02", "H03", "H07"]
 var heroes_catalog: Array = []
@@ -220,8 +225,10 @@ func _read_json(path: String) -> Dictionary:
 
 
 func _load_heroes() -> void:
-	# Prefer local MVP roster (12 heroes); ApiClient still serves V0 path for smoke compat.
+	# Prefer release-36 catalog (H01–H12 approved + H13–H36 Draft); fallback MVP.
 	var data := _read_json(ROSTER_PATH)
+	if not data.has("heroes"):
+		data = _read_json(ROSTER_MVP_FALLBACK)
 	if data.has("heroes"):
 		heroes_catalog = data["heroes"]
 	else:
@@ -233,7 +240,7 @@ func _load_heroes() -> void:
 			owned_heroes[id] = true
 			hero_levels[id] = int(h.get("level", 1))
 		if not equipment.has(id):
-			equipment[id] = {"weapon": "", "armor": "", "accessory": ""}
+			equipment[id] = {"weapon": "", "armor": "", "accessory": "", "relic": ""}
 
 
 func get_hero(hero_id: String) -> Dictionary:
@@ -585,14 +592,68 @@ func summon_once() -> Dictionary:
 func level_up_hero(hero_id: String) -> bool:
 	if not bool(owned_heroes.get(hero_id, false)):
 		return false
-	var cost := 100 + int(hero_levels.get(hero_id, 1)) * 40
+	var lvl := int(hero_levels.get(hero_id, 1))
+	var cost := 100 + lvl * 25 # mirrors progression_draft SoftCost
 	if soft_currency < cost:
 		return false
+	if not api.use_mock:
+		var res: Dictionary = api.hero_level_up(hero_id, 1)
+		if not bool(res.get("ok", false)):
+			return false
+		var hero: Dictionary = res.get("hero", {})
+		if typeof(hero) == TYPE_DICTIONARY and not hero.is_empty():
+			hero_levels[hero_id] = int(hero.get("level", lvl + 1))
+			hero_stars[hero_id] = int(hero.get("stars", hero_stars.get(hero_id, 0)))
+			hero_power[hero_id] = int(hero.get("power", 0))
+		soft_currency = int(res.get("soft_currency", soft_currency))
+		save_game()
+		progress_changed.emit()
+		return true
 	soft_currency -= cost
-	hero_levels[hero_id] = int(hero_levels.get(hero_id, 1)) + 1
+	hero_levels[hero_id] = lvl + 1
+	_recalc_hero_power(hero_id)
 	save_game()
 	progress_changed.emit()
 	return true
+
+
+func star_up_hero(hero_id: String) -> bool:
+	if not bool(owned_heroes.get(hero_id, false)):
+		return false
+	if not api.use_mock:
+		var res: Dictionary = api.hero_star_up(hero_id)
+		if not bool(res.get("ok", false)):
+			return false
+		var hero: Dictionary = res.get("hero", {})
+		if typeof(hero) == TYPE_DICTIONARY and not hero.is_empty():
+			hero_stars[hero_id] = int(hero.get("stars", 0))
+			hero_power[hero_id] = int(hero.get("power", 0))
+		save_game()
+		progress_changed.emit()
+		return true
+	var stars := int(hero_stars.get(hero_id, 0))
+	if stars >= 6:
+		return false
+	hero_stars[hero_id] = stars + 1
+	_recalc_hero_power(hero_id)
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func _recalc_hero_power(hero_id: String) -> void:
+	var h := get_hero(hero_id)
+	if h.is_empty():
+		return
+	var level := int(hero_levels.get(hero_id, 1))
+	var stars := int(hero_stars.get(hero_id, 0))
+	var hp := float(h.get("hp", 1000))
+	var atk := float(h.get("atk", 100))
+	var defense := float(h.get("defense", 80))
+	var speed := float(h.get("speed", 100))
+	var raw := (hp * 0.15 + atk * 1.2 + defense * 0.9 + speed * 0.5)
+	raw *= (1.0 + 0.08 * stars) * (1.0 + 0.02 * float(level - 1))
+	hero_power[hero_id] = int(raw)
 
 
 func equip_item(hero_id: String, slot: String, item_id: String) -> bool:
@@ -684,13 +745,17 @@ func load_game() -> void:
 
 
 func reset_progress() -> void:
-	soft_currency = 0
+	soft_currency = 5000
 	hard_currency = 0
 	summon_tickets = 10
 	commander_xp = 0
+	vip_points = 0
+	vip_level = 0
 	party_ids = ["H01", "H04", "H02", "H03", "H07"]
 	owned_heroes = {"H01": true, "H02": true, "H03": true, "H04": true, "H07": true}
 	hero_levels = {"H01": 1, "H02": 1, "H03": 1, "H04": 1, "H07": 1}
+	hero_stars.clear()
+	hero_power.clear()
 	equipment.clear()
 	inventory = {"iron_scrap": 5, "arcane_ink": 3, "ticket_stub": 1}
 	completed_quests.clear()

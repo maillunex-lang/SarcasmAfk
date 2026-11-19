@@ -19,7 +19,7 @@ func _run() -> void:
 
 	gs.reset_progress()
 
-	if gs.heroes_catalog.size() != 12:
+	if gs.heroes_catalog.size() < 12:
 		push_error("FAIL roster size %s" % gs.heroes_catalog.size())
 		failed = true
 	else:

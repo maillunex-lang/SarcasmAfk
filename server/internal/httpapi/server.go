@@ -13,12 +13,17 @@ import (
 type Server struct {
 	Store   store.Store
 	Content *content.Loader
+	Chat    *store.ChatHub
+	Guilds  *store.GuildHub
 	Backend string
 	Metrics *Metrics
 }
 
 func New(st store.Store, c *content.Loader) *Server {
-	return &Server{Store: st, Content: c, Backend: "memory", Metrics: NewMetrics()}
+	return &Server{
+		Store: st, Content: c, Backend: "memory", Metrics: NewMetrics(),
+		Chat: store.NewChatHub(), Guilds: store.NewGuildHub(),
+	}
 }
 
 func (s *Server) WithBackend(name string) *Server {
@@ -42,9 +47,15 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/rewards/claim", s.rewardsClaim)
 	mux.HandleFunc("/v1/afk/claim", s.afkClaim)
 	mux.HandleFunc("/v1/gacha/summon", s.gachaSummon)
-	mux.HandleFunc("/v1/guild", s.guild)
+	mux.HandleFunc("/v1/guild", s.guildLive)
 	mux.HandleFunc("/v1/arena", s.arena)
 	mux.HandleFunc("/v1/events", s.events)
+	mux.HandleFunc("/v1/heroes/owned", s.heroesOwned)
+	mux.HandleFunc("/v1/heroes/", s.heroesMutate)
+	mux.HandleFunc("/v1/chat/", s.chatHandler)
+	mux.HandleFunc("/v1/shop/catalog", s.shopCatalog)
+	mux.HandleFunc("/v1/shop/purchase", s.shopPurchase)
+	mux.HandleFunc("/v1/vip/status", s.vipStatus)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 
@@ -452,21 +463,6 @@ func (s *Server) gachaSummon(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"ok": true, "hero_id": heroID, "newly_owned": newly,
-	})
-}
-
-func (s *Server) guild(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		writeErr(w, http.StatusMethodNotAllowed, "METHOD")
-		return
-	}
-	if _, err := s.Store.AccountByToken(bearer(r)); err != nil {
-		writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
-		return
-	}
-	writeJSON(w, http.StatusOK, map[string]any{
-		"ok": true,
-		"guild": store.GuildStub{ID: "g_queue13", Name: "Очередь №13", Role: "Рекрут", Members: 1, Cap: 30},
 	})
 }
 

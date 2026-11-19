@@ -1,36 +1,34 @@
 # STATUS.md — Единый снимок состояния проекта
 
-> Дата снимка: **2026-11-19** · Ветка: `cursor/ch01-game-polish-beaf`  
-> Отчёт CH01: [`reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`](reports/CH01_ACCEPTANCE_TEST_2026-11-19.md)  
-> Уточнения: [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md)
+> Дата снимка: **2026-11-19** · Ветка: `cursor/online-systems-p1-beaf`  
+> Аудит: [`reports/ONLINE_SYSTEMS_AUDIT.md`](reports/ONLINE_SYSTEMS_AUDIT.md) · Спека: [`ONLINE_SYSTEMS_SPEC.md`](ONLINE_SYSTEMS_SPEC.md)  
+> Отчёт CH01: [`reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`](reports/CH01_ACCEPTANCE_TEST_2026-11-19.md)
 
 ## NOW
 
-CH01 **не accepted**. T-133/T-134 DONE (баланс B02+, UX Heroes/Inventory/AFK/Gacha).  
-Ждём владельца: T-128 accept · T-131 grip/Stage E · T-129 phone URL · T-126 keystore.
+P1–P2 online foundation **в работе/срезано**: 36-hero Draft catalog, progression API, chat/guild/shop/VIP skeleton.  
+D-SCOPE-03: online systems unlocked without CH01 accept. CH02 + Stage E still blocked.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
-| **Работает** | CH01 цепочка (mock+live smokes); debug APK; live API localhost; ATB+replay; manual ULT↔auto_cast; Home continue; party portraits |
-| **Частично** | Combat H01–H03/E01 drafts; баланс pass-2 (B01–B30 HP floor); live URL только 127.0.0.1 |
-| **Заглушки / mock** | Debug → mock по умолчанию на устройстве без URL; guild/arena/events «НЕДОСТУПНО»; CH02+ закрыт |
+| **Работает** | CH01 vertical; auth/battles/rewards; hero level-up/star-up API; global chat REST; guild create/join; simulated shop; VIP status Draft; roster 36 |
+| **Частично** | Gacha (tickets + crypto pick; pity/rates Draft); guild roles/quests; chat WS/DM moderation; progression awaken/skills; admin config UI |
+| **Заглушки** | Real payments OFF; paid gacha banners OFF; arena/events stubs; CH02 closed; TEMP art H13–H36 |
 
 ## BLOCKED / ждёт владельца
 
 | ID | Что | Условие снятия |
 |---|---|---|
-| T-128 | CH01 accepted | Явное «принято» после device/review отчёта |
-| T-131 | H01 grip + Stage E | Owner Blender grip + Stage D confirm |
-| T-127 | Art approve | Accept / reject финального арта |
-| T-126 | Release APK | Keystore через secrets **или** оставить debug (сейчас debug) |
-| T-129 | Phone live URL | LAN/VPS/домен в `client_config` / secrets |
-| T-112 | Guild/arena/events live | После T-128 |
-| T-090…092 | CH02 / mass art / rename | Явное PX-разрешение |
+| T-128 | CH01 accepted | Device/review (не блокирует online systems) |
+| T-131 | H01 grip + Stage E | Owner Blender |
+| T-126 / T-129 | Release APK / phone URL | Keystore / LAN URL |
+| T-090 | CH02 | Отдельное разрешение |
+| Draft knobs | H13–H36 names, gacha rates, VIP/shop prices | Owner approval |
 
 ## Известные ограничения
 
-- Release keystore на агенте не найден; GH secrets не читаются (403).
-- Debug APK ~131MB.
-- `client_config.json` → `http://127.0.0.1:8080/v1` (телефоны без LAN/VPS URL остаются на mock).
+- Shop = `purchase_mode: simulated` only (не реальные платежи).
+- Chat hub in-memory until PG persistence wired end-to-end.
+- WebSocket chat — следующий срез (P3); сейчас REST history/send + rate limit.

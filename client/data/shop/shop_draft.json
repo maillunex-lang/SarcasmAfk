@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "status": "draft_pending_owner_approval",
+  "purchase_mode_default": "simulated",
+  "note": "Real-money SKUs disabled until payment provider + prices approved. Soft purchases are simulated (free grant) for now.",
+  "categories": [
+    "diamonds",
+    "resource_packs",
+    "growth_packs",
+    "daily",
+    "weekly",
+    "monthly",
+    "cosmetic",
+    "events",
+    "vip"
+  ],
+  "skus": [
+    {
+      "sku": "soft_pack_s",
+      "category": "resource_packs",
+      "title": "Мешок золота (S)",
+      "price_soft": 0,
+      "price_hard": 0,
+      "real_money_cents": 0,
+      "grants": { "soft": 1000 },
+      "limit_daily": 3,
+      "lunex_visual_id": "lunex://shop/soft_pack_s",
+      "purchase_mode": "simulated"
+    },
+    {
+      "sku": "ticket_pack_s",
+      "category": "growth_packs",
+      "title": "Билеты призыва ×5",
+      "price_soft": 0,
+      "price_hard": 0,
+      "real_money_cents": 0,
+      "grants": { "tickets": 5 },
+      "limit_daily": 1,
+      "lunex_visual_id": "lunex://shop/ticket_pack_s",
+      "purchase_mode": "simulated"
+    },
+    {
+      "sku": "exp_mat_pack",
+      "category": "growth_packs",
+      "title": "Набор опыта героя",
+      "price_soft": 0,
+      "price_hard": 0,
+      "real_money_cents": 0,
+      "grants": { "inventory": { "mat_hero_exp": 100 } },
+      "limit_daily": 5,
+      "lunex_visual_id": "lunex://shop/exp_mat_pack",
+      "purchase_mode": "simulated"
+    },
+    {
+      "sku": "diamond_test_100",
+      "category": "diamonds",
+      "title": "Алмазы ×100 (ТЕСТ)",
+      "price_soft": 0,
+      "price_hard": 0,
+      "real_money_cents": 99,
+      "grants": { "hard": 100 },
+      "limit_daily": 0,
+      "lunex_visual_id": "lunex://shop/diamond_test_100",
+      "purchase_mode": "test_payment",
+      "enabled": false,
+      "note": "Disabled until payment provider wired; do not show as real success"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "status": "draft_pending_owner_approval",
+  "note": "VIP levels/bonuses are Draft. No unbounded PvP advantage. Owner must approve before live monetization.",
+  "levels": [
+    { "level": 0, "points_required": 0, "daily_soft": 0, "exp_bonus_pct": 0, "afk_bonus_pct": 0, "lunex_visual_id": "lunex://vip/0" },
+    { "level": 1, "points_required": 100, "daily_soft": 50, "exp_bonus_pct": 2, "afk_bonus_pct": 2, "lunex_visual_id": "lunex://vip/1" },
+    { "level": 2, "points_required": 300, "daily_soft": 100, "exp_bonus_pct": 4, "afk_bonus_pct": 4, "lunex_visual_id": "lunex://vip/2" },
+    { "level": 3, "points_required": 700, "daily_soft": 150, "exp_bonus_pct": 6, "afk_bonus_pct": 6, "lunex_visual_id": "lunex://vip/3" },
+    { "level": 4, "points_required": 1500, "daily_soft": 200, "exp_bonus_pct": 8, "afk_bonus_pct": 8, "lunex_visual_id": "lunex://vip/4" },
+    { "level": 5, "points_required": 3000, "daily_soft": 300, "exp_bonus_pct": 10, "afk_bonus_pct": 10, "lunex_visual_id": "lunex://vip/5" }
+  ],
+  "pvp_cap_note": "VIP bonuses must not grant unlimited PvP power; combat power bonuses from VIP are capped and excluded from ranked matchmaking until rules approved."
+}

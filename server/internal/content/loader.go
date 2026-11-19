@@ -31,7 +31,7 @@ func (l *Loader) reload() {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	// heroes
-	for _, name := range []string{"roster_mvp.json", "roster_v0.json"} {
+	for _, name := range []string{"roster_release36.json", "roster_mvp.json", "roster_v0.json"} {
 		path := filepath.Join(l.root, "heroes", name)
 		var data struct {
 			Heroes []map[string]any `json:"heroes"`

@@ -17,7 +17,7 @@ func _ready() -> void:
 		if bool(GameState.owned_heroes.get(str(h.get("id", "")), false)):
 			owned_n += 1
 	vbox.add_child(DesignTokens.make_label(
-		"Открыто %d / %d · 4 класса · 6 редкостей" % [owned_n, GameState.heroes_catalog.size()],
+		"Открыто %d / %d · 4 класса · 6 редкостей · цель 36" % [owned_n, GameState.heroes_catalog.size()],
 		22,
 		DesignTokens.COLOR_TEXT_MUTED
 	))
@@ -94,6 +94,10 @@ func _hero_card(h: Dictionary) -> PanelContainer:
 		20,
 		DesignTokens.COLOR_SUCCESS_MINT if in_party else (DesignTokens.COLOR_ACCENT_CYAN if owned else DesignTokens.COLOR_DANGER_CORAL)
 	))
+	var open := DesignTokens.make_button("Карточка", false)
+	open.custom_minimum_size = Vector2(0, 72)
+	open.pressed.connect(func() -> void: SceneNav.to_hero_detail(get_tree(), id))
+	box.add_child(open)
 	if owned:
 		var up := DesignTokens.make_button("Уровень +", false)
 		up.custom_minimum_size = Vector2(0, 72)

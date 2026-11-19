@@ -58,6 +58,7 @@
 |---|---|
 | D-SCOPE-01 | Guild / PvP arena / events live — после базового вертикального среза и CH01; stubs + явная «недоступно» |
 | D-SCOPE-02 | CH02+ не открывать игрокам, пока CH01 не завершён и не протестирован; контракты/закрытые переходы сохранить |
+| D-SCOPE-03 | **2026-11-19 owner unlock:** полноценная разработка chat / DM / guilds / gacha / 36 heroes / progression / shop / VIP **без** ожидания CH01 accepted. CH02 и Stage E Kaeron atlases по-прежнему blocked. TEMP art явно помечать. Платные баннеры и реальные платежи — только после утверждения чисел. |
 
 ## D-ADMIN — Админка / APK
 
