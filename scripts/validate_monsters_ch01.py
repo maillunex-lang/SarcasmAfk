@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-"""Validate MONSTERS-CH01-001 catalog: 29 IDs, no E18/E19, battles link."""
+"""Validate MONSTERS-CH01-001 catalog: 29 IDs, atlases, battles link."""
 from __future__ import annotations
 import json, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+ANIMS = ("idle", "attack", "hit", "death", "special", "telegraph")
+MIN_FRAMES = 4
+FRAME = 256
+
 
 def fail(msg: str) -> None:
     print(f"FAIL: {msg}", file=sys.stderr)
     raise SystemExit(1)
+
 
 def main() -> None:
     cat = json.loads((ROOT / "client/data/enemies/enemy_catalog_ch01.json").read_text(encoding="utf-8"))
@@ -32,14 +37,38 @@ def main() -> None:
     unused = set(ids) - used
     if unused:
         fail(f"catalog types unused in battles {unused}")
-    for eid in ids:
-        path = ROOT / f"client/assets/enemies/{eid}/concept.jpg"
-        if not path.exists():
-            fail(f"missing concept {path}")
+    for e in enemies:
+        eid = e["id"]
+        concept = ROOT / f"client/assets/enemies/{eid}/concept.jpg"
+        if not concept.exists():
+            fail(f"missing concept {concept}")
         idle = ROOT / f"client/assets/enemies/{eid}/idle.jpg"
         if not idle.exists():
             fail(f"missing idle {idle}")
-    # uniqueness: no two types may share the same concept file bytes as another folder's legacy reuse — require own path
+        art = e.get("art", {})
+        atlases = art.get("atlases", {})
+        for anim in ANIMS:
+            ref = str(atlases.get(anim, "MISSING"))
+            if ref == "MISSING" or not ref:
+                fail(f"{eid} atlas {anim} is MISSING")
+            rel = ref.replace("res://", "")
+            img = ROOT / "client" / rel
+            if not img.exists():
+                fail(f"{eid} missing atlas image {img}")
+            meta = img.with_suffix(".json")
+            if not meta.exists():
+                fail(f"{eid} missing atlas meta {meta}")
+            mj = json.loads(meta.read_text(encoding="utf-8"))
+            if int(mj.get("frame_count", 0)) < MIN_FRAMES:
+                fail(f"{eid}/{anim} frame_count < {MIN_FRAMES}")
+            if int(mj.get("frame_w", 0)) != FRAME or int(mj.get("frame_h", 0)) != FRAME:
+                fail(f"{eid}/{anim} expected {FRAME}x{FRAME} cells")
+            if str(mj.get("image", "")) and str(mj.get("image")) != img.name:
+                fail(f"{eid}/{anim} meta image mismatch")
+        combat_idle = ROOT / f"client/assets/combat/{eid}/{eid}_idle.png"
+        if not combat_idle.exists():
+            fail(f"missing combat idle still {combat_idle}")
+    # uniqueness: no two types may share the same sprite path
     sprites = set()
     for e in json.loads((ROOT / "client/data/enemies/ch01_enemies.json").read_text(encoding="utf-8"))["enemies"]:
         sp = e.get("sprite", "")
@@ -48,8 +77,12 @@ def main() -> None:
         sprites.add(sp)
         if e["id"] not in sp:
             fail(f"sprite path should include id {e['id']}: {sp}")
+    reg = json.loads((ROOT / "client/data/enemies/enemy_art_registry.json").read_text(encoding="utf-8"))
+    if int(reg.get("count_temp_atlases", 0)) != 29:
+        fail("registry count_temp_atlases != 29")
     print("OK monsters-ch01 validation")
-    print(f"  enemies=29 battles_types={len(used)} unique_concepts={len(ids)}")
+    print(f"  enemies=29 battles_types={len(used)} atlases={len(ANIMS)} frames>={MIN_FRAMES}")
+
 
 if __name__ == "__main__":
     main()

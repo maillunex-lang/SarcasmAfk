@@ -55,6 +55,7 @@ func _start_engine() -> void:
 	_engine = BattleEngine.new()
 	_engine.log_line.connect(_on_log)
 	_engine.unit_updated.connect(_refresh_unit)
+	_engine.action_resolved.connect(_on_action_resolved)
 	_engine.battle_ended.connect(_on_battle_ended)
 	_engine.ultimate_ready.connect(_on_ult_ready)
 	var seed_val: int = -1
@@ -164,11 +165,17 @@ func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 	box.add_theme_constant_override("separation", 8)
 	panel.add_child(box)
 
-	var sprite := TextureRect.new()
-	sprite.texture = AssetPaths.tex(unit.sprite_path)
-	sprite.custom_minimum_size = Vector2(0, 140)
-	sprite.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	var sprite: TextureRect
+	if unit.team == "enemy" and unit.unit_type != "":
+		var anim_sprite := CombatSpriteRect.new()
+		anim_sprite.setup(unit.unit_type, unit.sprite_path)
+		sprite = anim_sprite
+	else:
+		sprite = TextureRect.new()
+		sprite.texture = AssetPaths.tex(unit.sprite_path)
+		sprite.custom_minimum_size = Vector2(0, 140)
+		sprite.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	box.add_child(sprite)
 
 	box.add_child(DesignTokens.make_label(unit.display_name, 22, DesignTokens.COLOR_TEXT_IVORY))
@@ -218,8 +225,24 @@ func _refresh_unit(unit: BattleUnit) -> void:
 		(w["energy"] as ProgressBar).value = unit.energy / maxf(unit.energy_max, 1.0)
 	if w["ult"] != null:
 		(w["ult"] as Button).disabled = not unit.can_ultimate()
+	var spr: TextureRect = w["sprite"]
 	if not unit.alive:
-		(w["sprite"] as TextureRect).modulate = Color(0.4, 0.4, 0.4, 0.7)
+		spr.modulate = Color(0.4, 0.4, 0.4, 0.7)
+		if spr is CombatSpriteRect:
+			(spr as CombatSpriteRect).play("death", false)
+	else:
+		spr.modulate = Color.WHITE
+
+
+func _on_action_resolved(actor: BattleUnit, target: BattleUnit) -> void:
+	var aw: Dictionary = _unit_widgets.get(actor.id, {})
+	var tw: Dictionary = _unit_widgets.get(target.id, {})
+	if aw.has("sprite") and aw["sprite"] is CombatSpriteRect:
+		(aw["sprite"] as CombatSpriteRect).play_once("attack")
+	if tw.has("sprite") and tw["sprite"] is CombatSpriteRect and target.alive:
+		(tw["sprite"] as CombatSpriteRect).play_once("hit")
+	elif tw.has("sprite") and tw["sprite"] is CombatSpriteRect and not target.alive:
+		(tw["sprite"] as CombatSpriteRect).play("death", false)
 
 
 func _on_log(text: String) -> void:

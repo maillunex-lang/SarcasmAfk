@@ -1,0 +1,80 @@
+{
+  "asset_id": "E13",
+  "animation": "special",
+  "frame_count": 8,
+  "frame_w": 256,
+  "frame_h": 256,
+  "atlas_w": 2048,
+  "atlas_h": 256,
+  "image": "special.jpg",
+  "transparent": false,
+  "opaque_pixels": 524288,
+  "frames": [
+    {
+      "name": "special_00",
+      "x": 0,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_00.jpg"
+    },
+    {
+      "name": "special_01",
+      "x": 256,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_01.jpg"
+    },
+    {
+      "name": "special_02",
+      "x": 512,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_02.jpg"
+    },
+    {
+      "name": "special_03",
+      "x": 768,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_03.jpg"
+    },
+    {
+      "name": "special_04",
+      "x": 1024,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_04.jpg"
+    },
+    {
+      "name": "special_05",
+      "x": 1280,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_05.jpg"
+    },
+    {
+      "name": "special_06",
+      "x": 1536,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_06.jpg"
+    },
+    {
+      "name": "special_07",
+      "x": 1792,
+      "y": 0,
+      "w": 256,
+      "h": 256,
+      "source": "proc_special_07.jpg"
+    }
+  ],
+  "status": "TEMP_ATLAS",
+  "note": "TEMP procedural JPEG atlas from concept.jpg — not Stage E (D-ART-06)"
+}

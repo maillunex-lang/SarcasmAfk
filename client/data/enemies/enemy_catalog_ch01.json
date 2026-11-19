@@ -2,7 +2,7 @@
   "version": 1,
   "balance_version": "MONSTERS-CH01-001-draft-1",
   "status": "draft",
-  "note": "Abilities Draft. Base HP/ATK/DEF/SPD preserved from ch01_enemies.json / battles. Art: TEMP concepts for pilots; others GENERATION_BLOCKED pending D-ART-06 owner ACK.",
+  "note": "Abilities Draft. TEMP multi-frame atlases for all 29 (procedural from concepts). Not Stage E / D-ART-06 final art.",
   "enemies": [
     {
       "id": "E01",
@@ -30,17 +30,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E01/concept.jpg",
         "portrait": "res://assets/enemies/E01/portrait.jpg",
-        "sprite": "res://assets/enemies/E01/concept.jpg",
+        "sprite": "res://assets/enemies/E01/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E01/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E01/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E01/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E01/atlases/hit.jpg",
+          "death": "res://assets/enemies/E01/atlases/death.jpg",
+          "special": "res://assets/enemies/E01/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E01/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -71,17 +71,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E02/concept.jpg",
         "portrait": "res://assets/enemies/E02/portrait.jpg",
-        "sprite": "res://assets/enemies/E02/concept.jpg",
+        "sprite": "res://assets/enemies/E02/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E02/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E02/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E02/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E02/atlases/hit.jpg",
+          "death": "res://assets/enemies/E02/atlases/death.jpg",
+          "special": "res://assets/enemies/E02/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E02/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -112,17 +112,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E03/concept.jpg",
         "portrait": "res://assets/enemies/E03/portrait.jpg",
-        "sprite": "res://assets/enemies/E03/concept.jpg",
+        "sprite": "res://assets/enemies/E03/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E03/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E03/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E03/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E03/atlases/hit.jpg",
+          "death": "res://assets/enemies/E03/atlases/death.jpg",
+          "special": "res://assets/enemies/E03/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E03/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -153,17 +153,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E04/concept.jpg",
         "portrait": "res://assets/enemies/E04/portrait.jpg",
-        "sprite": "res://assets/enemies/E04/concept.jpg",
+        "sprite": "res://assets/enemies/E04/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E04/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E04/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E04/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E04/atlases/hit.jpg",
+          "death": "res://assets/enemies/E04/atlases/death.jpg",
+          "special": "res://assets/enemies/E04/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E04/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -194,17 +194,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E05/concept.jpg",
         "portrait": "res://assets/enemies/E05/portrait.jpg",
-        "sprite": "res://assets/enemies/E05/concept.jpg",
+        "sprite": "res://assets/enemies/E05/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E05/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E05/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E05/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E05/atlases/hit.jpg",
+          "death": "res://assets/enemies/E05/atlases/death.jpg",
+          "special": "res://assets/enemies/E05/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E05/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -235,17 +235,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E06/concept.jpg",
         "portrait": "res://assets/enemies/E06/portrait.jpg",
-        "sprite": "res://assets/enemies/E06/concept.jpg",
+        "sprite": "res://assets/enemies/E06/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E06/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E06/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E06/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E06/atlases/hit.jpg",
+          "death": "res://assets/enemies/E06/atlases/death.jpg",
+          "special": "res://assets/enemies/E06/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E06/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -276,17 +276,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E07/concept.jpg",
         "portrait": "res://assets/enemies/E07/portrait.jpg",
-        "sprite": "res://assets/enemies/E07/concept.jpg",
+        "sprite": "res://assets/enemies/E07/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E07/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E07/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E07/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E07/atlases/hit.jpg",
+          "death": "res://assets/enemies/E07/atlases/death.jpg",
+          "special": "res://assets/enemies/E07/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E07/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -317,17 +317,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E08/concept.jpg",
         "portrait": "res://assets/enemies/E08/portrait.jpg",
-        "sprite": "res://assets/enemies/E08/concept.jpg",
+        "sprite": "res://assets/enemies/E08/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E08/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E08/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E08/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E08/atlases/hit.jpg",
+          "death": "res://assets/enemies/E08/atlases/death.jpg",
+          "special": "res://assets/enemies/E08/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E08/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -358,17 +358,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E09/concept.jpg",
         "portrait": "res://assets/enemies/E09/portrait.jpg",
-        "sprite": "res://assets/enemies/E09/concept.jpg",
+        "sprite": "res://assets/enemies/E09/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E09/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E09/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E09/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E09/atlases/hit.jpg",
+          "death": "res://assets/enemies/E09/atlases/death.jpg",
+          "special": "res://assets/enemies/E09/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E09/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -399,17 +399,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E10/concept.jpg",
         "portrait": "res://assets/enemies/E10/portrait.jpg",
-        "sprite": "res://assets/enemies/E10/concept.jpg",
+        "sprite": "res://assets/enemies/E10/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E10/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E10/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E10/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E10/atlases/hit.jpg",
+          "death": "res://assets/enemies/E10/atlases/death.jpg",
+          "special": "res://assets/enemies/E10/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E10/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -440,17 +440,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E11/concept.jpg",
         "portrait": "res://assets/enemies/E11/portrait.jpg",
-        "sprite": "res://assets/enemies/E11/concept.jpg",
+        "sprite": "res://assets/enemies/E11/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E11/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E11/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E11/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E11/atlases/hit.jpg",
+          "death": "res://assets/enemies/E11/atlases/death.jpg",
+          "special": "res://assets/enemies/E11/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E11/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -481,17 +481,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E12/concept.jpg",
         "portrait": "res://assets/enemies/E12/portrait.jpg",
-        "sprite": "res://assets/enemies/E12/concept.jpg",
+        "sprite": "res://assets/enemies/E12/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E12/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E12/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E12/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E12/atlases/hit.jpg",
+          "death": "res://assets/enemies/E12/atlases/death.jpg",
+          "special": "res://assets/enemies/E12/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E12/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -522,17 +522,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E13/concept.jpg",
         "portrait": "res://assets/enemies/E13/portrait.jpg",
-        "sprite": "res://assets/enemies/E13/concept.jpg",
+        "sprite": "res://assets/enemies/E13/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E13/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E13/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E13/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E13/atlases/hit.jpg",
+          "death": "res://assets/enemies/E13/atlases/death.jpg",
+          "special": "res://assets/enemies/E13/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E13/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -563,17 +563,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E14/concept.jpg",
         "portrait": "res://assets/enemies/E14/portrait.jpg",
-        "sprite": "res://assets/enemies/E14/concept.jpg",
+        "sprite": "res://assets/enemies/E14/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E14/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E14/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E14/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E14/atlases/hit.jpg",
+          "death": "res://assets/enemies/E14/atlases/death.jpg",
+          "special": "res://assets/enemies/E14/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E14/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -604,17 +604,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E15/concept.jpg",
         "portrait": "res://assets/enemies/E15/portrait.jpg",
-        "sprite": "res://assets/enemies/E15/concept.jpg",
+        "sprite": "res://assets/enemies/E15/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E15/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E15/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E15/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E15/atlases/hit.jpg",
+          "death": "res://assets/enemies/E15/atlases/death.jpg",
+          "special": "res://assets/enemies/E15/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E15/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -645,17 +645,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E16/concept.jpg",
         "portrait": "res://assets/enemies/E16/portrait.jpg",
-        "sprite": "res://assets/enemies/E16/concept.jpg",
+        "sprite": "res://assets/enemies/E16/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E16/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E16/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E16/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E16/atlases/hit.jpg",
+          "death": "res://assets/enemies/E16/atlases/death.jpg",
+          "special": "res://assets/enemies/E16/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E16/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -686,17 +686,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E17/concept.jpg",
         "portrait": "res://assets/enemies/E17/portrait.jpg",
-        "sprite": "res://assets/enemies/E17/concept.jpg",
+        "sprite": "res://assets/enemies/E17/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E17/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E17/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E17/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E17/atlases/hit.jpg",
+          "death": "res://assets/enemies/E17/atlases/death.jpg",
+          "special": "res://assets/enemies/E17/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E17/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -727,17 +727,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E20/concept.jpg",
         "portrait": "res://assets/enemies/E20/portrait.jpg",
-        "sprite": "res://assets/enemies/E20/concept.jpg",
+        "sprite": "res://assets/enemies/E20/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E20/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E20/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E20/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E20/atlases/hit.jpg",
+          "death": "res://assets/enemies/E20/atlases/death.jpg",
+          "special": "res://assets/enemies/E20/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E20/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -768,17 +768,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E21/concept.jpg",
         "portrait": "res://assets/enemies/E21/portrait.jpg",
-        "sprite": "res://assets/enemies/E21/concept.jpg",
+        "sprite": "res://assets/enemies/E21/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E21/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E21/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E21/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E21/atlases/hit.jpg",
+          "death": "res://assets/enemies/E21/atlases/death.jpg",
+          "special": "res://assets/enemies/E21/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E21/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -809,17 +809,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E22/concept.jpg",
         "portrait": "res://assets/enemies/E22/portrait.jpg",
-        "sprite": "res://assets/enemies/E22/concept.jpg",
+        "sprite": "res://assets/enemies/E22/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E22/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E22/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E22/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E22/atlases/hit.jpg",
+          "death": "res://assets/enemies/E22/atlases/death.jpg",
+          "special": "res://assets/enemies/E22/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E22/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -850,17 +850,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E23/concept.jpg",
         "portrait": "res://assets/enemies/E23/portrait.jpg",
-        "sprite": "res://assets/enemies/E23/concept.jpg",
+        "sprite": "res://assets/enemies/E23/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E23/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E23/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E23/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E23/atlases/hit.jpg",
+          "death": "res://assets/enemies/E23/atlases/death.jpg",
+          "special": "res://assets/enemies/E23/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E23/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -891,17 +891,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E24/concept.jpg",
         "portrait": "res://assets/enemies/E24/portrait.jpg",
-        "sprite": "res://assets/enemies/E24/concept.jpg",
+        "sprite": "res://assets/enemies/E24/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E24/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E24/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E24/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E24/atlases/hit.jpg",
+          "death": "res://assets/enemies/E24/atlases/death.jpg",
+          "special": "res://assets/enemies/E24/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E24/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -932,17 +932,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E25/concept.jpg",
         "portrait": "res://assets/enemies/E25/portrait.jpg",
-        "sprite": "res://assets/enemies/E25/concept.jpg",
+        "sprite": "res://assets/enemies/E25/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E25/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E25/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E25/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E25/atlases/hit.jpg",
+          "death": "res://assets/enemies/E25/atlases/death.jpg",
+          "special": "res://assets/enemies/E25/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E25/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -973,17 +973,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E26/concept.jpg",
         "portrait": "res://assets/enemies/E26/portrait.jpg",
-        "sprite": "res://assets/enemies/E26/concept.jpg",
+        "sprite": "res://assets/enemies/E26/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E26/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E26/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E26/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E26/atlases/hit.jpg",
+          "death": "res://assets/enemies/E26/atlases/death.jpg",
+          "special": "res://assets/enemies/E26/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E26/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1014,17 +1014,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E27/concept.jpg",
         "portrait": "res://assets/enemies/E27/portrait.jpg",
-        "sprite": "res://assets/enemies/E27/concept.jpg",
+        "sprite": "res://assets/enemies/E27/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E27/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E27/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E27/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E27/atlases/hit.jpg",
+          "death": "res://assets/enemies/E27/atlases/death.jpg",
+          "special": "res://assets/enemies/E27/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E27/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1055,17 +1055,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E28/concept.jpg",
         "portrait": "res://assets/enemies/E28/portrait.jpg",
-        "sprite": "res://assets/enemies/E28/concept.jpg",
+        "sprite": "res://assets/enemies/E28/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E28/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E28/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E28/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E28/atlases/hit.jpg",
+          "death": "res://assets/enemies/E28/atlases/death.jpg",
+          "special": "res://assets/enemies/E28/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E28/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1096,17 +1096,17 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E29/concept.jpg",
         "portrait": "res://assets/enemies/E29/portrait.jpg",
-        "sprite": "res://assets/enemies/E29/concept.jpg",
+        "sprite": "res://assets/enemies/E29/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E29/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E29/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E29/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E29/atlases/hit.jpg",
+          "death": "res://assets/enemies/E29/atlases/death.jpg",
+          "special": "res://assets/enemies/E29/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E29/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1137,17 +1137,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E29A/concept.jpg",
         "portrait": "res://assets/enemies/E29A/portrait.jpg",
-        "sprite": "res://assets/enemies/E29A/concept.jpg",
+        "sprite": "res://assets/enemies/E29A/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E29A/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E29A/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E29A/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E29A/atlases/hit.jpg",
+          "death": "res://assets/enemies/E29A/atlases/death.jpg",
+          "special": "res://assets/enemies/E29A/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E29A/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1178,17 +1178,17 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_CONCEPT",
+        "status": "TEMP_ATLAS",
         "concept": "res://assets/enemies/E30/concept.jpg",
         "portrait": "res://assets/enemies/E30/portrait.jpg",
-        "sprite": "res://assets/enemies/E30/concept.jpg",
+        "sprite": "res://assets/enemies/E30/atlases/idle.jpg",
         "atlases": {
-          "idle": "res://assets/enemies/E30/idle.jpg",
-          "attack": "MISSING",
-          "hit": "MISSING",
-          "death": "MISSING",
-          "special": "MISSING",
-          "telegraph": "MISSING"
+          "idle": "res://assets/enemies/E30/atlases/idle.jpg",
+          "attack": "res://assets/enemies/E30/atlases/attack.jpg",
+          "hit": "res://assets/enemies/E30/atlases/hit.jpg",
+          "death": "res://assets/enemies/E30/atlases/death.jpg",
+          "special": "res://assets/enemies/E30/atlases/special.jpg",
+          "telegraph": "res://assets/enemies/E30/atlases/telegraph.jpg"
         }
       },
       "bestiary_unlock": "first_encounter"

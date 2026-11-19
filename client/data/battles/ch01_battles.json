@@ -88,7 +88,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 90,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E02/E02_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -114,7 +114,7 @@
           "atk": 85,
           "defense": 110,
           "speed": 80,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E03/E03_idle.png"
         },
         {
           "id": "B03_E03_2",
@@ -125,7 +125,7 @@
           "atk": 85,
           "defense": 110,
           "speed": 81,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E03/E03_idle.png"
         },
         {
           "id": "B03_E03_3",
@@ -136,7 +136,7 @@
           "atk": 85,
           "defense": 110,
           "speed": 82,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E03/E03_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -162,7 +162,7 @@
           "atk": 60,
           "defense": 70,
           "speed": 85,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E04/E04_idle.png"
         },
         {
           "id": "B04_E01_1",
@@ -173,7 +173,7 @@
           "atk": 95,
           "defense": 25,
           "speed": 120,
-          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+          "sprite": "res://assets/combat/E01/E01_idle.png"
         },
         {
           "id": "B04_E01_2",
@@ -184,7 +184,7 @@
           "atk": 95,
           "defense": 25,
           "speed": 121,
-          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+          "sprite": "res://assets/combat/E01/E01_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -210,7 +210,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 100,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         },
         {
           "id": "B05_E05_2",
@@ -221,7 +221,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 101,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         },
         {
           "id": "B05_E05_3",
@@ -232,7 +232,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -258,7 +258,7 @@
           "atk": 110,
           "defense": 55,
           "speed": 105,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E06/E06_idle.png"
         },
         {
           "id": "B06_E06_2",
@@ -269,7 +269,7 @@
           "atk": 110,
           "defense": 55,
           "speed": 106,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E06/E06_idle.png"
         },
         {
           "id": "B06_E05_1",
@@ -280,7 +280,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 100,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         },
         {
           "id": "B06_E05_2",
@@ -291,7 +291,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 101,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -317,7 +317,7 @@
           "atk": 120,
           "defense": 140,
           "speed": 95,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E07/E07_idle.png"
         },
         {
           "id": "B07_E05_1",
@@ -328,7 +328,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 100,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         },
         {
           "id": "B07_E05_2",
@@ -339,7 +339,7 @@
           "atk": 80,
           "defense": 60,
           "speed": 101,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E05/E05_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -365,7 +365,7 @@
           "atk": 130,
           "defense": 30,
           "speed": 110,
-          "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg"
+          "sprite": "res://assets/combat/E08/E08_idle.png"
         },
         {
           "id": "B08_E08_2",
@@ -376,7 +376,7 @@
           "atk": 130,
           "defense": 30,
           "speed": 111,
-          "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg"
+          "sprite": "res://assets/combat/E08/E08_idle.png"
         },
         {
           "id": "B08_E08_3",
@@ -387,7 +387,7 @@
           "atk": 130,
           "defense": 30,
           "speed": 112,
-          "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg"
+          "sprite": "res://assets/combat/E08/E08_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -413,7 +413,7 @@
           "atk": 60,
           "defense": 70,
           "speed": 85,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E04/E04_idle.png"
         },
         {
           "id": "B09_E04_2",
@@ -424,7 +424,7 @@
           "atk": 60,
           "defense": 70,
           "speed": 86,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E04/E04_idle.png"
         },
         {
           "id": "B09_E02_1",
@@ -435,7 +435,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 90,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E02/E02_idle.png"
         },
         {
           "id": "B09_E02_2",
@@ -446,7 +446,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 91,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E02/E02_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -472,7 +472,7 @@
           "atk": 90,
           "defense": 90,
           "speed": 88,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E09/E09_idle.png"
         },
         {
           "id": "B10_E08_1",
@@ -483,7 +483,7 @@
           "atk": 130,
           "defense": 30,
           "speed": 110,
-          "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg"
+          "sprite": "res://assets/combat/E08/E08_idle.png"
         },
         {
           "id": "B10_E08_2",
@@ -494,7 +494,7 @@
           "atk": 130,
           "defense": 30,
           "speed": 111,
-          "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg"
+          "sprite": "res://assets/combat/E08/E08_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -520,7 +520,7 @@
           "atk": 140,
           "defense": 35,
           "speed": 100,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E10/E10_idle.png"
         },
         {
           "id": "B11_E10_2",
@@ -531,7 +531,7 @@
           "atk": 140,
           "defense": 35,
           "speed": 101,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E10/E10_idle.png"
         },
         {
           "id": "B11_E10_3",
@@ -542,7 +542,7 @@
           "atk": 140,
           "defense": 35,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E10/E10_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -568,7 +568,7 @@
           "atk": 75,
           "defense": 95,
           "speed": 92,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E11/E11_idle.png"
         },
         {
           "id": "B12_E11_2",
@@ -579,7 +579,7 @@
           "atk": 75,
           "defense": 95,
           "speed": 93,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E11/E11_idle.png"
         },
         {
           "id": "B12_E10_1",
@@ -590,7 +590,7 @@
           "atk": 140,
           "defense": 35,
           "speed": 100,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E10/E10_idle.png"
         },
         {
           "id": "B12_E10_2",
@@ -601,7 +601,7 @@
           "atk": 140,
           "defense": 35,
           "speed": 101,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E10/E10_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -627,7 +627,7 @@
           "atk": 160,
           "defense": 50,
           "speed": 98,
-          "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg"
+          "sprite": "res://assets/combat/E12/E12_idle.png"
         },
         {
           "id": "B13_E11_1",
@@ -638,7 +638,7 @@
           "atk": 75,
           "defense": 95,
           "speed": 92,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E11/E11_idle.png"
         },
         {
           "id": "B13_E11_2",
@@ -649,7 +649,7 @@
           "atk": 75,
           "defense": 95,
           "speed": 93,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E11/E11_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -675,7 +675,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B14_E13_2",
@@ -686,7 +686,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 103,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B14_E13_3",
@@ -697,7 +697,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 104,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -723,7 +723,7 @@
           "atk": 85,
           "defense": 20,
           "speed": 115,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E14/E14_idle.png"
         },
         {
           "id": "B15_E14_2",
@@ -734,7 +734,7 @@
           "atk": 85,
           "defense": 20,
           "speed": 116,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E14/E14_idle.png"
         },
         {
           "id": "B15_E14_3",
@@ -745,7 +745,7 @@
           "atk": 85,
           "defense": 20,
           "speed": 117,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E14/E14_idle.png"
         },
         {
           "id": "B15_E14_4",
@@ -756,7 +756,7 @@
           "atk": 85,
           "defense": 20,
           "speed": 118,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E14/E14_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -782,7 +782,7 @@
           "atk": 110,
           "defense": 85,
           "speed": 96,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E15/E15_idle.png"
         },
         {
           "id": "B16_E13_1",
@@ -793,7 +793,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B16_E13_2",
@@ -804,7 +804,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 103,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -830,7 +830,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B17_E13_2",
@@ -841,7 +841,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 103,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B17_E03_1",
@@ -852,7 +852,7 @@
           "atk": 85,
           "defense": 110,
           "speed": 80,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E03/E03_idle.png"
         },
         {
           "id": "B17_E03_2",
@@ -863,7 +863,7 @@
           "atk": 85,
           "defense": 110,
           "speed": 81,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E03/E03_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -889,7 +889,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 108,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         },
         {
           "id": "B18_E16_2",
@@ -900,7 +900,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 109,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         },
         {
           "id": "B18_E16_3",
@@ -911,7 +911,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 110,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -937,7 +937,7 @@
           "atk": 145,
           "defense": 75,
           "speed": 100,
-          "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg"
+          "sprite": "res://assets/combat/E17/E17_idle.png"
         },
         {
           "id": "B19_E16_1",
@@ -948,7 +948,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 108,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         },
         {
           "id": "B19_E16_2",
@@ -959,7 +959,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 109,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -985,7 +985,7 @@
           "atk": 160,
           "defense": 120,
           "speed": 90,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E20/E20_idle.png"
         },
         {
           "id": "B20_E13_1",
@@ -996,7 +996,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 102,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         },
         {
           "id": "B20_E13_2",
@@ -1007,7 +1007,7 @@
           "atk": 100,
           "defense": 70,
           "speed": 103,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E13/E13_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1033,7 +1033,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 85,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E21/E21_idle.png"
         },
         {
           "id": "B21_E21_2",
@@ -1044,7 +1044,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 86,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E21/E21_idle.png"
         },
         {
           "id": "B21_E21_3",
@@ -1055,7 +1055,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 87,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E21/E21_idle.png"
         },
         {
           "id": "B21_E22_1",
@@ -1066,7 +1066,7 @@
           "atk": 100,
           "defense": 130,
           "speed": 82,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E22/E22_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1092,7 +1092,7 @@
           "atk": 150,
           "defense": 70,
           "speed": 94,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E23/E23_idle.png"
         },
         {
           "id": "B22_E21_1",
@@ -1103,7 +1103,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 85,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E21/E21_idle.png"
         },
         {
           "id": "B22_E21_2",
@@ -1114,7 +1114,7 @@
           "atk": 70,
           "defense": 80,
           "speed": 86,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E21/E21_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1140,7 +1140,7 @@
           "atk": 80,
           "defense": 110,
           "speed": 88,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E24/E24_idle.png"
         },
         {
           "id": "B23_E24_2",
@@ -1151,7 +1151,7 @@
           "atk": 80,
           "defense": 110,
           "speed": 89,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E24/E24_idle.png"
         },
         {
           "id": "B23_E25_1",
@@ -1162,7 +1162,7 @@
           "atk": 135,
           "defense": 40,
           "speed": 105,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E25/E25_idle.png"
         },
         {
           "id": "B23_E25_2",
@@ -1173,7 +1173,7 @@
           "atk": 135,
           "defense": 40,
           "speed": 106,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E25/E25_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1199,7 +1199,7 @@
           "atk": 130,
           "defense": 150,
           "speed": 86,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E26/E26_idle.png"
         },
         {
           "id": "B24_E24_1",
@@ -1210,7 +1210,7 @@
           "atk": 80,
           "defense": 110,
           "speed": 88,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E24/E24_idle.png"
         },
         {
           "id": "B24_E24_2",
@@ -1221,7 +1221,7 @@
           "atk": 80,
           "defense": 110,
           "speed": 89,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E24/E24_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1247,7 +1247,7 @@
           "atk": 100,
           "defense": 130,
           "speed": 82,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E22/E22_idle.png"
         },
         {
           "id": "B25_E22_2",
@@ -1258,7 +1258,7 @@
           "atk": 100,
           "defense": 130,
           "speed": 83,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E22/E22_idle.png"
         },
         {
           "id": "B25_E16_1",
@@ -1269,7 +1269,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 108,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         },
         {
           "id": "B25_E16_2",
@@ -1280,7 +1280,7 @@
           "atk": 95,
           "defense": 50,
           "speed": 109,
-          "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg"
+          "sprite": "res://assets/combat/E16/E16_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1306,7 +1306,7 @@
           "atk": 170,
           "defense": 60,
           "speed": 97,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E27/E27_idle.png"
         },
         {
           "id": "B26_E22_1",
@@ -1317,7 +1317,7 @@
           "atk": 100,
           "defense": 130,
           "speed": 82,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E22/E22_idle.png"
         },
         {
           "id": "B26_E22_2",
@@ -1328,7 +1328,7 @@
           "atk": 100,
           "defense": 130,
           "speed": 83,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E22/E22_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1354,7 +1354,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 100,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         },
         {
           "id": "B27_E28_2",
@@ -1365,7 +1365,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 101,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         },
         {
           "id": "B27_E28_3",
@@ -1376,7 +1376,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 102,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1402,7 +1402,7 @@
           "atk": 110,
           "defense": 75,
           "speed": 103,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E29/E29_idle.png"
         },
         {
           "id": "B28_E29_2",
@@ -1413,7 +1413,7 @@
           "atk": 110,
           "defense": 75,
           "speed": 104,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E29/E29_idle.png"
         },
         {
           "id": "B28_E28_1",
@@ -1424,7 +1424,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 100,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         },
         {
           "id": "B28_E28_2",
@@ -1435,7 +1435,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 101,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1461,7 +1461,7 @@
           "atk": 100,
           "defense": 90,
           "speed": 95,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E29A/E29A_idle.png"
         },
         {
           "id": "B29_E28_1",
@@ -1472,7 +1472,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 100,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         },
         {
           "id": "B29_E28_2",
@@ -1483,7 +1483,7 @@
           "atk": 125,
           "defense": 70,
           "speed": 101,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E28/E28_idle.png"
         }
       ],
       "first_clear_reward": {
@@ -1509,7 +1509,7 @@
           "atk": 200,
           "defense": 160,
           "speed": 92,
-          "sprite": "res://assets/enemies/E28/E28_inspector.jpg"
+          "sprite": "res://assets/combat/E30/E30_idle.png"
         }
       ],
       "first_clear_reward": {

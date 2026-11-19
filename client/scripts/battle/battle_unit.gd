@@ -16,6 +16,7 @@ var atb: float = 0.0
 var ultimate_id: String = ""
 var ultimate_name: String = ""
 var sprite_path: String = ""
+var unit_type: String = "" # hero id or enemy_type (E01…)
 var alive: bool = true
 
 
@@ -33,6 +34,7 @@ static func from_hero(data: Dictionary) -> BattleUnit:
 	u.energy_max = float(data.get("energy_max", 100))
 	u.ultimate_id = str(data.get("ultimate_id", ""))
 	u.ultimate_name = str(data.get("ultimate_name", "Ультимейт"))
+	u.unit_type = u.id
 	u.sprite_path = str(data.get("sprite", ""))
 	return u
 
@@ -48,7 +50,12 @@ static func from_enemy(data: Dictionary) -> BattleUnit:
 	u.atk = int(data.get("atk", 10))
 	u.defense = int(data.get("defense", 0))
 	u.speed = int(data.get("speed", 100))
-	u.sprite_path = str(data.get("sprite", ""))
+	u.unit_type = str(data.get("enemy_type", data.get("type", "")))
+	var sprite := str(data.get("sprite", ""))
+	if u.unit_type != "":
+		# Single-frame still for fallback TextureRect; CombatSpriteRect loads atlases by unit_type.
+		sprite = AssetPaths.enemy_sprite_for_type(u.unit_type)
+	u.sprite_path = sprite
 	return u
 
 

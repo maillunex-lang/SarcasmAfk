@@ -1,241 +1,455 @@
 {
   "version": 1,
   "balance_version": "MONSTERS-CH01-001-draft-1",
-  "policy": "TEMP concepts for all 29. Multi-frame atlases still MISSING. D-ART-06: not FINAL.",
+  "policy": "TEMP multi-frame atlases for all 29 (procedural). D-ART-06: not FINAL Stage E.",
   "count_temp_concepts": 29,
+  "count_temp_atlases": 29,
   "count_unique": 29,
+  "anims": [
+    "idle",
+    "attack",
+    "hit",
+    "death",
+    "special",
+    "telegraph"
+  ],
+  "frame_count": 8,
+  "frame_size": 256,
   "assets": [
     {
       "id": "E01",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E01/concept.jpg",
       "portrait": "res://assets/enemies/E01/portrait.jpg",
       "idle": "res://assets/enemies/E01/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E01/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E01/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E01/atlases/hit.jpg",
+        "death": "res://assets/enemies/E01/atlases/death.jpg",
+        "special": "res://assets/enemies/E01/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E01/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E02",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E02/concept.jpg",
       "portrait": "res://assets/enemies/E02/portrait.jpg",
       "idle": "res://assets/enemies/E02/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E02/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E02/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E02/atlases/hit.jpg",
+        "death": "res://assets/enemies/E02/atlases/death.jpg",
+        "special": "res://assets/enemies/E02/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E02/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E03",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E03/concept.jpg",
       "portrait": "res://assets/enemies/E03/portrait.jpg",
       "idle": "res://assets/enemies/E03/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E03/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E03/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E03/atlases/hit.jpg",
+        "death": "res://assets/enemies/E03/atlases/death.jpg",
+        "special": "res://assets/enemies/E03/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E03/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E04",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E04/concept.jpg",
       "portrait": "res://assets/enemies/E04/portrait.jpg",
       "idle": "res://assets/enemies/E04/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E04/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E04/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E04/atlases/hit.jpg",
+        "death": "res://assets/enemies/E04/atlases/death.jpg",
+        "special": "res://assets/enemies/E04/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E04/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E05",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E05/concept.jpg",
       "portrait": "res://assets/enemies/E05/portrait.jpg",
       "idle": "res://assets/enemies/E05/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E05/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E05/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E05/atlases/hit.jpg",
+        "death": "res://assets/enemies/E05/atlases/death.jpg",
+        "special": "res://assets/enemies/E05/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E05/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E06",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E06/concept.jpg",
       "portrait": "res://assets/enemies/E06/portrait.jpg",
       "idle": "res://assets/enemies/E06/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E06/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E06/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E06/atlases/hit.jpg",
+        "death": "res://assets/enemies/E06/atlases/death.jpg",
+        "special": "res://assets/enemies/E06/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E06/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E07",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E07/concept.jpg",
       "portrait": "res://assets/enemies/E07/portrait.jpg",
       "idle": "res://assets/enemies/E07/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E07/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E07/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E07/atlases/hit.jpg",
+        "death": "res://assets/enemies/E07/atlases/death.jpg",
+        "special": "res://assets/enemies/E07/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E07/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E08",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E08/concept.jpg",
       "portrait": "res://assets/enemies/E08/portrait.jpg",
       "idle": "res://assets/enemies/E08/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E08/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E08/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E08/atlases/hit.jpg",
+        "death": "res://assets/enemies/E08/atlases/death.jpg",
+        "special": "res://assets/enemies/E08/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E08/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E09",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E09/concept.jpg",
       "portrait": "res://assets/enemies/E09/portrait.jpg",
       "idle": "res://assets/enemies/E09/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E09/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E09/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E09/atlases/hit.jpg",
+        "death": "res://assets/enemies/E09/atlases/death.jpg",
+        "special": "res://assets/enemies/E09/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E09/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E10",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E10/concept.jpg",
       "portrait": "res://assets/enemies/E10/portrait.jpg",
       "idle": "res://assets/enemies/E10/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E10/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E10/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E10/atlases/hit.jpg",
+        "death": "res://assets/enemies/E10/atlases/death.jpg",
+        "special": "res://assets/enemies/E10/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E10/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E11",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E11/concept.jpg",
       "portrait": "res://assets/enemies/E11/portrait.jpg",
       "idle": "res://assets/enemies/E11/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E11/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E11/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E11/atlases/hit.jpg",
+        "death": "res://assets/enemies/E11/atlases/death.jpg",
+        "special": "res://assets/enemies/E11/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E11/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E12",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E12/concept.jpg",
       "portrait": "res://assets/enemies/E12/portrait.jpg",
       "idle": "res://assets/enemies/E12/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E12/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E12/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E12/atlases/hit.jpg",
+        "death": "res://assets/enemies/E12/atlases/death.jpg",
+        "special": "res://assets/enemies/E12/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E12/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E13",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E13/concept.jpg",
       "portrait": "res://assets/enemies/E13/portrait.jpg",
       "idle": "res://assets/enemies/E13/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E13/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E13/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E13/atlases/hit.jpg",
+        "death": "res://assets/enemies/E13/atlases/death.jpg",
+        "special": "res://assets/enemies/E13/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E13/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E14",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E14/concept.jpg",
       "portrait": "res://assets/enemies/E14/portrait.jpg",
       "idle": "res://assets/enemies/E14/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E14/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E14/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E14/atlases/hit.jpg",
+        "death": "res://assets/enemies/E14/atlases/death.jpg",
+        "special": "res://assets/enemies/E14/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E14/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E15",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E15/concept.jpg",
       "portrait": "res://assets/enemies/E15/portrait.jpg",
       "idle": "res://assets/enemies/E15/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E15/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E15/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E15/atlases/hit.jpg",
+        "death": "res://assets/enemies/E15/atlases/death.jpg",
+        "special": "res://assets/enemies/E15/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E15/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E16",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E16/concept.jpg",
       "portrait": "res://assets/enemies/E16/portrait.jpg",
       "idle": "res://assets/enemies/E16/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E16/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E16/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E16/atlases/hit.jpg",
+        "death": "res://assets/enemies/E16/atlases/death.jpg",
+        "special": "res://assets/enemies/E16/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E16/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E17",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E17/concept.jpg",
       "portrait": "res://assets/enemies/E17/portrait.jpg",
       "idle": "res://assets/enemies/E17/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E17/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E17/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E17/atlases/hit.jpg",
+        "death": "res://assets/enemies/E17/atlases/death.jpg",
+        "special": "res://assets/enemies/E17/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E17/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E20",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E20/concept.jpg",
       "portrait": "res://assets/enemies/E20/portrait.jpg",
       "idle": "res://assets/enemies/E20/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E20/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E20/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E20/atlases/hit.jpg",
+        "death": "res://assets/enemies/E20/atlases/death.jpg",
+        "special": "res://assets/enemies/E20/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E20/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E21",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E21/concept.jpg",
       "portrait": "res://assets/enemies/E21/portrait.jpg",
       "idle": "res://assets/enemies/E21/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E21/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E21/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E21/atlases/hit.jpg",
+        "death": "res://assets/enemies/E21/atlases/death.jpg",
+        "special": "res://assets/enemies/E21/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E21/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E22",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E22/concept.jpg",
       "portrait": "res://assets/enemies/E22/portrait.jpg",
       "idle": "res://assets/enemies/E22/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E22/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E22/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E22/atlases/hit.jpg",
+        "death": "res://assets/enemies/E22/atlases/death.jpg",
+        "special": "res://assets/enemies/E22/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E22/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E23",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E23/concept.jpg",
       "portrait": "res://assets/enemies/E23/portrait.jpg",
       "idle": "res://assets/enemies/E23/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E23/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E23/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E23/atlases/hit.jpg",
+        "death": "res://assets/enemies/E23/atlases/death.jpg",
+        "special": "res://assets/enemies/E23/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E23/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E24",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E24/concept.jpg",
       "portrait": "res://assets/enemies/E24/portrait.jpg",
       "idle": "res://assets/enemies/E24/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E24/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E24/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E24/atlases/hit.jpg",
+        "death": "res://assets/enemies/E24/atlases/death.jpg",
+        "special": "res://assets/enemies/E24/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E24/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E25",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E25/concept.jpg",
       "portrait": "res://assets/enemies/E25/portrait.jpg",
       "idle": "res://assets/enemies/E25/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E25/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E25/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E25/atlases/hit.jpg",
+        "death": "res://assets/enemies/E25/atlases/death.jpg",
+        "special": "res://assets/enemies/E25/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E25/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E26",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E26/concept.jpg",
       "portrait": "res://assets/enemies/E26/portrait.jpg",
       "idle": "res://assets/enemies/E26/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E26/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E26/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E26/atlases/hit.jpg",
+        "death": "res://assets/enemies/E26/atlases/death.jpg",
+        "special": "res://assets/enemies/E26/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E26/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E27",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E27/concept.jpg",
       "portrait": "res://assets/enemies/E27/portrait.jpg",
       "idle": "res://assets/enemies/E27/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E27/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E27/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E27/atlases/hit.jpg",
+        "death": "res://assets/enemies/E27/atlases/death.jpg",
+        "special": "res://assets/enemies/E27/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E27/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E28",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E28/concept.jpg",
       "portrait": "res://assets/enemies/E28/portrait.jpg",
       "idle": "res://assets/enemies/E28/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E28/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E28/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E28/atlases/hit.jpg",
+        "death": "res://assets/enemies/E28/atlases/death.jpg",
+        "special": "res://assets/enemies/E28/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E28/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E29",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E29/concept.jpg",
       "portrait": "res://assets/enemies/E29/portrait.jpg",
       "idle": "res://assets/enemies/E29/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E29/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E29/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E29/atlases/hit.jpg",
+        "death": "res://assets/enemies/E29/atlases/death.jpg",
+        "special": "res://assets/enemies/E29/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E29/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E29A",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E29A/concept.jpg",
       "portrait": "res://assets/enemies/E29A/portrait.jpg",
       "idle": "res://assets/enemies/E29A/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E29A/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E29A/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E29A/atlases/hit.jpg",
+        "death": "res://assets/enemies/E29A/atlases/death.jpg",
+        "special": "res://assets/enemies/E29A/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E29A/atlases/telegraph.jpg"
+      }
     },
     {
       "id": "E30",
-      "status": "TEMP_CONCEPT",
+      "status": "TEMP_ATLAS",
       "concept": "res://assets/enemies/E30/concept.jpg",
       "portrait": "res://assets/enemies/E30/portrait.jpg",
       "idle": "res://assets/enemies/E30/idle.jpg",
-      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+      "atlases": {
+        "idle": "res://assets/enemies/E30/atlases/idle.jpg",
+        "attack": "res://assets/enemies/E30/atlases/attack.jpg",
+        "hit": "res://assets/enemies/E30/atlases/hit.jpg",
+        "death": "res://assets/enemies/E30/atlases/death.jpg",
+        "special": "res://assets/enemies/E30/atlases/special.jpg",
+        "telegraph": "res://assets/enemies/E30/atlases/telegraph.jpg"
+      }
     }
   ]
 }

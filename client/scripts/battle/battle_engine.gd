@@ -4,6 +4,7 @@ extends RefCounted
 
 signal log_line(text: String)
 signal unit_updated(unit: BattleUnit)
+signal action_resolved(actor: BattleUnit, target: BattleUnit)
 signal battle_ended(result: Dictionary)
 signal ultimate_ready(unit: BattleUnit)
 
@@ -85,6 +86,7 @@ func _act(actor: BattleUnit) -> void:
 		var dealt: int = target.take_damage(_compute_damage(actor, target))
 		actor.energy = mini(actor.energy_max, actor.energy + ENERGY_PER_HIT)
 		log_line.emit("%s бьёт %s на %d" % [actor.display_name, target.display_name, dealt])
+		action_resolved.emit(actor, target)
 		unit_updated.emit(actor)
 		unit_updated.emit(target)
 		if actor.can_ultimate():
@@ -95,6 +97,7 @@ func _act(actor: BattleUnit) -> void:
 			return
 		var dealt_e: int = hero_target.take_damage(_compute_damage(actor, hero_target))
 		log_line.emit("%s бьёт %s на %d" % [actor.display_name, hero_target.display_name, dealt_e])
+		action_resolved.emit(actor, hero_target)
 		unit_updated.emit(actor)
 		unit_updated.emit(hero_target)
 	_check_end()

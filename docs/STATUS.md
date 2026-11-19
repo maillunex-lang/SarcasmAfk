@@ -1,13 +1,13 @@
 # STATUS.md — Единый снимок состояния проекта
 
-> Дата снимка: **2026-11-19** · Ветка: `main` (+ UI art `cursor/ui-art-shop-home-beaf`)  
+> Дата снимка: **2026-11-19** · Ветка: `cursor/ch01-monsters-atlases-beaf`  
 > Аудит: [`reports/ONLINE_SYSTEMS_AUDIT.md`](reports/ONLINE_SYSTEMS_AUDIT.md) · Спека: [`ONLINE_SYSTEMS_SPEC.md`](ONLINE_SYSTEMS_SPEC.md)  
 > Отчёт CH01: [`reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`](reports/CH01_ACCEPTANCE_TEST_2026-11-19.md)
 
 ## NOW
 
-MONSTERS-CH01-001: 29 уникальных TEMP-концептов, серверные умения/фазы, Бестиарий.  
-Мультифрейм-атласы/VFX ещё MISSING. Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
+MONSTERS-CH01-001: 29 TEMP-концептов + мультифрейм-атласы (idle/attack/hit/death/special/telegraph), бой проигрывает анимации, Бестиарий.  
+VFX/SFX ещё MISSING. Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
 
 ## Работает / частично / заглушки
 

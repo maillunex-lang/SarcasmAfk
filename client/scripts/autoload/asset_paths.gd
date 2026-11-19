@@ -164,7 +164,25 @@ static func enemy_concept(enemy_type: String) -> String:
 	return ""
 
 
+static func enemy_atlas(enemy_type: String, anim: String = "idle") -> String:
+	var path := "res://assets/enemies/%s/atlases/%s.jpg" % [enemy_type, anim]
+	if ResourceLoader.exists(path):
+		return path
+	path = "res://assets/enemies/%s/atlases/%s.png" % [enemy_type, anim]
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
+static func enemy_atlas_meta(enemy_type: String, anim: String = "idle") -> String:
+	var path := "res://assets/enemies/%s/atlases/%s.json" % [enemy_type, anim]
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
 static func enemy_sprite_for_type(enemy_type: String) -> String:
+	# Prefer a single-frame still for TextureRect / bestiary (not the full atlas strip).
 	var combat := combat_idle(enemy_type)
 	if combat != "":
 		return combat
