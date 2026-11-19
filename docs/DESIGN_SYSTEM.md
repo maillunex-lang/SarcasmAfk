@@ -1,8 +1,9 @@
 # DESIGN_SYSTEM.md — UI Design System
 
-> Версия: 1.0 · 2026-11-19 · Статус: **проект для согласования**
+> Версия: 1.1 · 2026-11-19 · Статус: **V0 UI-решения утверждены; ассеты не произведены**
 > Направление: Premium Fantasy Mobile UI · Ориентация: 9:16 · Движок: Godot 4
 > Зависимости: `ART_DIRECTION.md`, GDD VIS-002 C / VIS-003 A, ROAD этап 04
+> Документация не является игровым прототипом.
 
 ## 0. Назначение
 
@@ -130,9 +131,15 @@
 
 ## 7. Вертикальный срез: главный экран `UI-HOME-V0`
 
-### Композиция первого вьюпорта (одна сцена, не дашборд)
+### Заставка `UI-SPLASH-V0`
 
-1. Бренд / рабочее название (hero-level, не только в навбаре).
+- Wordmark **«БашЛегенды: Эпоха Абсурда»** по центру / верхней трети.
+- Короткий fade-in; без геймплейных кнопок.
+- Репозиторий и package ID не отражаются в брендинге как «SarcasmAfk» для игрока.
+
+### Композиция первого вьюпорта Home (одна сцена, не дашборд)
+
+1. Бренд / рабочее название (hero-level, **обязательно** на Home V0).
 2. Один короткий слоган.
 3. Одна группа CTA: «В кампанию» (primary) + «AFK» (secondary/FAB).
 4. Доминантный визуал: H01 Каэрон на фоне намёка на Площадь талонов (full-bleed фон, не inset-карточка).
@@ -152,13 +159,15 @@ Nav bar 128
 [ Safe bottom 48 ]
 ```
 
-## 8. Диалоговое окно (STORY-003 D)
+## 8. Диалоговое окно (STORY-003 D + решение V0)
 
 - Имя говорящего (gold).
 - Текст реплики (ivory), typewriter optional (отключаемо).
 - Кнопки: Далее | Пропуск.
 - Журнал: список реплик без повторной выдачи наград.
-- Портрет: опционален; V0 без обязательного портрета.
+- **Портрет: статичный bust/portrait говорящего** (H01/H02/H03/NPC-система).
+- Запрещено в V0: lipsync, морфы лица, анимированные кат-сцены.
+- Смена говорящего = смена статичного портрета + имя; лёгкий fade 100–180 ms допустим.
 
 ## 9. Промпты генерации UI
 
@@ -177,9 +186,10 @@ high-end AFK idle RPG --ar 9:16
 
 ```
 Fantasy mobile RPG dialogue panel overlay, vertical 9:16,
-speaker name in gold, soft ivory body text, midnight navy panel,
-continue and skip buttons, subtle text reveal, no mandatory portrait,
-clean premium UI, readable on small phone --ar 9:16
+static character bust portrait on the side, speaker name in gold,
+soft ivory body text, midnight navy panel, continue and skip buttons,
+subtle text reveal, no lipsync, no animated face, clean premium UI,
+readable on small phone --ar 9:16
 ```
 
 ### P-UI-03 — Карточка героя SR
@@ -195,8 +205,9 @@ portrait orientation component on dark navy --ar 3:4
 
 | ID | Ассет | Примечание |
 |---|---|---|
+| UI-SPLASH-BG | Фон заставки | Специфицирован |
 | UI-HOME-BG | Фон главного экрана (L01 tone) | Специфицирован |
-| UI-LOGO-TMP | Временный wordmark | Только после ок названия |
+| UI-LOGO-WORDMARK | Wordmark «БашЛегенды: Эпоха Абсурда» | Утверждён к показу на splash/home |
 | UI-BTN-PRIMARY | 9-slice кнопка gold | Специфицирован |
 | UI-BTN-SECONDARY | 9-slice secondary | Специфицирован |
 | UI-PANEL-DIALOG | 9-slice диалог | Специфицирован |

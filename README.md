@@ -19,5 +19,8 @@
 | [docs/CHARACTER_STYLE_GUIDE.md](docs/CHARACTER_STYLE_GUIDE.md) | Герои, враги, анимации, VFX |
 | [docs/ASSET_PIPELINE.md](docs/ASSET_PIPELINE.md) | Пайплайн и оптимизация ассетов |
 | [docs/VISUAL_ROADMAP.md](docs/VISUAL_ROADMAP.md) | Порядок визуальных работ + аудит |
+| [docs/V0_IMPLEMENTATION_PLAN.md](docs/V0_IMPLEMENTATION_PLAN.md) | План вертикального среза V0 |
 
-Статус реализации кода: репозиторий на старте; игровые модули **не** считать готовыми.
+**V0 (утверждено):** название на splash/home · статичные портреты в диалогах · Blender→2D atlas→Godot 4.
+
+Статус: документация и план — не игровой прототип; код клиента и ассеты **не** готовы. Массовая генерация и главы 02–12 не начаты.

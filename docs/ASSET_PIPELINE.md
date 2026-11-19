@@ -1,7 +1,8 @@
 # ASSET_PIPELINE.md — Создание и оптимизация ассетов
 
-> Версия: 1.0 · 2026-11-19 · Статус: **проект для согласования**
-> Стек: Godot 4 · Android · VIS-001 C гибрид · пресеты Low/Med/High · ≥6 ГБ ОЗУ цель
+> Версия: 1.1 · 2026-11-19 · Статус: **пайплайн V0 утверждён; массовая генерация не начата**
+> Стек: Godot 4 · Android · VIS-001 C → Blender bake-атласы · пресеты Low/Med/High · ≥6 ГБ ОЗУ
+> Документация ≠ готовый прототип.
 
 ## 0. Принципы
 
@@ -44,26 +45,30 @@ Godot-проект (будущий): `res://assets/...` с импорт-прес
 | UI 9-slice | PNG | import Godot | Safe margins |
 | Портрет | PNG 1024² → 512² | WebP | Мип-карты |
 | Боевой атлас | PNG atlas / `.tres` SpriteFrames | сжатие | Max atlas 2048² Low |
-| Скелет 2D | Spine/.skel или Godot Skeleton2D | — | Один выбор на MVP |
-| Bake из 3D | FBX/Blender → орто рендер → atlas | — | Опциональный путь |
+| Диалоговый портрет | PNG 512–1024 bust, static | WebP | Без анимации лица |
+| Blender source | `.blend` (+ экспорты) | не в APK | Source / LFS |
+| Bake из 3D | Blender anim → transparent PNG sequence → atlas | Godot SpriteFrames | **Канон V0 для героев/врагов** |
 | VFX | spritesheet + `.tscn` particles | — | Отключаемые ноды |
 | Шрифты | OFL/лицензированные TTF | dynamic / MSDF | Проверить лицензию |
 
-## 3. Пайплайн героя (end-to-end)
+## 3. Пайплайн героя / врага (end-to-end, утверждено V0)
 
 ```
-HEROES.md карточка
+HEROES.md / enemy card
   → промпт/бриф (CHARACTER_STYLE_GUIDE)
   → концепт full body (утверждение силуэта)
-  → портрет UI
-  → боевой риг или sprite sheet
-  → анимации idle/attack/ult/hit/win/defeat
-  → VFX sockets
-  → Godot import + LOD/VFX preset hooks
-  → тест на арене L01 в 9:16
+  → портрет UI + статичный диалоговый bust
+  → Blender: моделирование (stylized, low-mid poly)
+  → Blender: анимации idle/attack/ult/hit/win/defeat
+  → Render: прозрачные кадры (ortho/fixed cam, no BG)
+  → Pack: 2D atlas (кратность 4, бюджет по пресету)
+  → Godot 4: SpriteFrames / AnimatedSprite2D + VFX sockets
+  → LOD/VFX preset hooks (Low/Med/High)
+  → тест на ARENA-L01 в 9:16
   → чеклист приёмки
 ```
 
+**Запрет runtime:** полноценный 3D viewport персонажа на Android в V0.  
 Статусы файла: `spec` → `draft` → `review` → `approved` → `imported` → `verified`.
 
 ## 4. Пайплайн локации
@@ -166,8 +171,8 @@ clean premium stylized look, annotation-friendly --ar 16:9
 
 | Фаза | Работа с ассетами |
 |---|---|
-| Сейчас | Документы + спецификация V0, **без** массовой генерации |
-| После утверждения V0 | Генерация среза, paintover, import в будущий Godot-клиент |
+| Сейчас | Документы + утверждённые решения V0 + план реализации; **без** массовой генерации |
+| После плана V0 | Точечная подготовка только ассетов среза (не главы 02–12) |
 | Фаза 1 ROAD | Полный клиентский арт MVP по VISUAL_ROADMAP |
 | Фаза 2+ | Оптимизация по профилированию, сезонные скины |
 
