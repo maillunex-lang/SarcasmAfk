@@ -1,3 +1,10 @@
 server/.data/
 *.exe
 .DS_Store
+tools/android/
+build/
+*.apk
+*.aab
+*.keystore
+!docs/**
+client/.godot/

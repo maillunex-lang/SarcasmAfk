@@ -440,11 +440,17 @@
 - Не сделано: APK, Blender scripts
 - Следующий шаг: T-110
 
+### 2026-11-19 — T-110 debug APK
+- Статус: ГОТОВО (debug)
+- Сделано: SDK+templates+debug keystore inventory; `check_android_toolchain.sh`; `build_debug_apk.sh`; APK собран локально; `docs/ANDROID_BUILD.md`
+- Не сделано: release signing (ключ владельца); CI APK artifact (тяжёлый SDK)
+- Следующий шаг: T-031 / T-124
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~P0 auth battle/live/admin + T-123 session resume~~ — сделано.
-2. Далее: T-110 debug APK · T-031 pipeline · T-124 CH01.
+1. ~~P0 + T-123 + T-110 debug APK toolchain~~ — сделано.
+2. Далее: T-031 Blender scripts · T-124 CH01 polish · release APK с keystore владельца.
 3. P3: guild/arena/events live. Запреты: CH02+ игрокам, rename, mass art как финал.
 4. Решения: `DECISIONS.md` D-COMBAT / D-NET / D-ART / D-SCOPE / D-ADMIN (2026-11-19).

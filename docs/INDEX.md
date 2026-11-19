@@ -50,6 +50,7 @@
 | [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | CI |
 | [`../scripts/ci_validate.sh`](../scripts/ci_validate.sh) | Локальный CI |
 | [`../docker-compose.yml`](../docker-compose.yml) | Postgres + Redis |
+| [`ANDROID_BUILD.md`](ANDROID_BUILD.md) | Debug APK toolchain (T-110) |
 
 ## 5. Код и ассеты
 
