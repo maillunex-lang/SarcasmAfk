@@ -388,6 +388,9 @@ html, body {
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
+.end[hidden] {
+  display: none !important;
+}
 #end-title {
   margin: 0;
   font-family: var(--display);
