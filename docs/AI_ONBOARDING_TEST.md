@@ -18,7 +18,7 @@ Optional 6th: one domain spec from the router row (not the whole docs tree).
 
 1. **What is the game?** Android Godot idle RPG “БашЛегенды”; repo `SarcasmAfk`.
 2. **Where is code?** `client/` + `server/`.
-3. **What is NOW?** PR #27 REPO-REORG ready for review; after merge next product task **T-157**. Status only in `STATUS.md`.
+3. **What is NOW?** T-157 Expansion E verified on PR branch; REORG #27 on `main`. Status only in `STATUS.md`.
 4. **What is blocked?** T-090 CH02, T-131 Stage E, T-126 keystore, T-153 real payments, T-128 owner accept.
 5. **How to verify?** `bash scripts/ci_validate.sh` (or router commands for the subsystem).
 

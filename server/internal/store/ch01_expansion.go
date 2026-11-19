@@ -98,10 +98,11 @@ func ApplySidequestStart(acc *AccountProgress, questID string, requiredMainQuest
 }
 
 // ApplyPOIInteract records a POI action / sidequest step. For sequence puzzles, wrong order resets buffer only.
-func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (resetPuzzle bool, err error) {
+// When rewardBundle is non-nil and not yet claimed, grants it once after a successful (non-reset) interact.
+func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool, rewardBundle *ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (resetPuzzle bool, granted map[string]any, err error) {
 	EnsureExpansion(acc)
 	if poiID == "" || actionID == "" {
-		return false, ErrValidation
+		return false, nil, ErrValidation
 	}
 	poi := acc.POIProgress[poiID]
 	if poi == nil {
@@ -109,10 +110,15 @@ func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID
 		acc.POIProgress[poiID] = poi
 	}
 	if oneTime && poi.State == "completed" {
-		return false, nil
+		return false, nil, nil
 	}
 	if hasStep(poi.CompletedActions, actionID) && stepID == "" {
-		return false, nil
+		// Re-interact without a step (e.g. POI-09 retry) may still need one-time reward.
+		if rewardBundle != nil && rewardBundle.BundleID != "" && !acc.ClaimedRewards[rewardBundle.BundleID] {
+			g, gerr := grantExpansionBundle(acc, *rewardBundle, equipmentDefs)
+			return false, g, gerr
+		}
+		return false, nil, nil
 	}
 
 	if len(sequence) > 0 && stepID != "" && sidequestID != "" {
@@ -123,7 +129,7 @@ func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID
 			acc.Sidequests[sidequestID] = sq
 		}
 		if sq.State == "completed" {
-			return false, nil
+			return false, nil, nil
 		}
 		expectIdx := len(sq.SequenceBuffer)
 		if expectIdx >= len(sequence) {
@@ -133,7 +139,7 @@ func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID
 		if sequence[expectIdx] != stepID {
 			sq.SequenceBuffer = nil
 			sq.UpdatedAt = nowRFC3339()
-			return true, nil
+			return true, nil, nil
 		}
 		sq.SequenceBuffer = append(sq.SequenceBuffer, stepID)
 		if !hasStep(sq.CompletedStepIDs, stepID) {
@@ -171,7 +177,57 @@ func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID
 		acc.JournalFlags[completionFlag] = true
 		acc.QuestFlags[completionFlag] = true
 	}
-	return false, nil
+	if rewardBundle != nil && rewardBundle.BundleID != "" && !acc.ClaimedRewards[rewardBundle.BundleID] {
+		g, gerr := grantExpansionBundle(acc, *rewardBundle, equipmentDefs)
+		return false, g, gerr
+	}
+	return false, nil, nil
+}
+
+func grantExpansionBundle(acc *AccountProgress, bundle ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (map[string]any, error) {
+	EnsureExpansion(acc)
+	if bundle.BundleID == "" {
+		return nil, ErrValidation
+	}
+	if acc.ClaimedRewards[bundle.BundleID] {
+		return map[string]any{}, nil
+	}
+	if bundle.PremiumCurrency != 0 {
+		return nil, ErrValidation
+	}
+	granted := map[string]any{}
+	if bundle.Soft > 0 {
+		acc.SoftCurrency += bundle.Soft
+		granted["soft"] = bundle.Soft
+	}
+	invGranted := map[string]int{}
+	for k, v := range bundle.Inventory {
+		if v <= 0 {
+			continue
+		}
+		acc.Inventory[k] += v
+		invGranted[k] = v
+	}
+	if len(invGranted) > 0 {
+		granted["inventory"] = invGranted
+	}
+	eqGranted := []string{}
+	for _, itemID := range bundle.Equipment {
+		def, ok := equipmentDefs[itemID]
+		if !ok {
+			return nil, ErrNotFound
+		}
+		if def.AccountUnique && acc.Inventory[itemID] > 0 {
+			continue
+		}
+		acc.Inventory[itemID]++
+		eqGranted = append(eqGranted, itemID)
+	}
+	if len(eqGranted) > 0 {
+		granted["equipment"] = eqGranted
+	}
+	acc.ClaimedRewards[bundle.BundleID] = true
+	return granted, nil
 }
 
 // ApplySidequestClaim grants a bundle once when all required steps are done.

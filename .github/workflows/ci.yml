@@ -133,6 +133,11 @@ jobs:
           DATABASE_URL: ""
           REDIS_ADDR: ""
         run: bash scripts/smoke_session_resume.sh
+      - name: CH01 expansion live smoke
+        env:
+          DATABASE_URL: ""
+          REDIS_ADDR: ""
+        run: bash scripts/smoke_ch01_expansion_live.sh
       - name: Live API smoke (postgres+redis)
         working-directory: server
         run: |

@@ -645,14 +645,16 @@ func (m *Memory) StartSidequest(token, questID, requiredMain string) (*AccountPr
 	})
 }
 
-func (m *Memory) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (*AccountProgress, bool, error) {
+func (m *Memory) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool, rewardBundle *ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
 	reset := false
+	var granted map[string]any
 	prog, err := m.mutate(token, func(acc *AccountProgress) error {
-		r, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime)
+		r, g, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime, rewardBundle, equipmentDefs)
 		reset = r
+		granted = g
 		return e
 	})
-	return prog, reset, err
+	return prog, reset, granted, err
 }
 
 func (m *Memory) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, bool, map[string]any, error) {

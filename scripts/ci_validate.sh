@@ -72,6 +72,8 @@ if command -v go >/dev/null 2>&1; then
   echo "load_smoke_ok"
   env -u DATABASE_URL -u REDIS_ADDR bash scripts/smoke_session_resume.sh
   echo "session_resume_ok"
+  env -u DATABASE_URL -u REDIS_ADDR bash scripts/smoke_ch01_expansion_live.sh
+  echo "ch01_expansion_live_ok"
 else
   echo "WARN: go not found; skipped API tests"
 fi

@@ -1,6 +1,6 @@
 # CH01 RPG Expansion — реализация
 
-> Статус: **в работе** · Срез A (контент/схема) · SHA базы: `3717cfb` (`main`)  
+> Статус: **Slice E DONE_VERIFIED** (T-157) · база `main` после REORG · отчёт `docs/reports/CH01_EXPANSION_E2E_2026-11-19.md`  
 > Авторское ТЗ: владелец · Числовые награды = **Draft test balance**, не shop/VIP/gacha.
 
 ## Цель
@@ -23,7 +23,7 @@
 | B | Go API + PG migration + idempotent claims + skill-up/equip DEF | DONE |
 | C | Godot UI POI / журнал / sidequests + ApiClient mock/live | DONE |
 | D | RPG tutorial inserts EX-01…06 + skill/equip combat stats API | DONE (battle sim unit inject — follow-up) |
-| E | E2E + debug APK + STATUS/ROAD | частичнo (docs/STATUS updated; APK optional) |
+| E | E2E + debug APK + STATUS/ROAD | DONE_VERIFIED — mock+live smokes + debug APK + owner report |
 
 ### Срез B — API
 
@@ -96,9 +96,22 @@ Tests: `store/ch01_expansion_test.go`, `httpapi/ch01_campaign_test.go`
 python3 scripts/validate_ch01_expansion.py
 ```
 
-## Что не сделано в срезе A
+## Срез E — доказательства
 
-- Backend endpoints / миграции
-- Godot POI UI
-- Боевые эффекты skill level / armor DEF на сервере
-- Debug APK / E2E полный прогон
+```bash
+python3 scripts/validate_ch01_expansion.py
+# Godot
+godot4 --headless --path client -s res://scripts/tools/smoke_ch01_expansion.gd
+# Live API
+bash scripts/smoke_ch01_expansion_live.sh
+# Debug APK (toolchain required)
+bash scripts/build_debug_apk.sh
+```
+
+Отчёт: [`reports/CH01_EXPANSION_E2E_2026-11-19.md`](reports/CH01_EXPANSION_E2E_2026-11-19.md)
+
+## Residual follow-ups (не блок Slice E)
+
+- Device/owner accept (T-128)
+- Battle-sim unit inject skill/equip flats (noted earlier)
+- Production live URL (T-129)

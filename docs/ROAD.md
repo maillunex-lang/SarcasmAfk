@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (online stack merged to `main`; UI TEMP art pass T-155; D-SCOPE-03).  
+> Актуализация: **2026-11-19** (T-157 CH01 Expansion E E2E; REORG #27 on `main`).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -10,6 +10,7 @@
 |---|---|---|
 | Документы / GDD каркас | ГОТОВО | Концепт утверждён; детали баланса/лора открыты |
 | Клиент Godot 4.3 CH01 vertical | ГОТОВО (debug) | Home→Map→L01→Dialog→Party→Battle(+ULT)→Reward→Save→Next |
+| CH01 RPG Expansion A–E | ГОТОВО (automation) | SQ/POI/EX + mock/live E2E + debug APK; device accept = T-128 |
 | Debug APK | ГОТОВО | `scripts/build_debug_apk.sh` → `build/BashLegends-debug.apk` |
 | Release APK | ЗАБЛОКИРОВАНО | Нет действующего release keystore (T-126) |
 | Live API / auth / replay / rewards | ГОТОВО | Integration + CI; silent mock запрещён |
@@ -319,6 +320,13 @@
 8. Не плодить новые «источники истины» статуса: NOW только в `STATUS.md`, очередь только в `TASK_QUEUE.md`, решения только в `DECISIONS.md`.
 
 ## 8. Журнал прогресса
+
+### Журнал 2026-11-19 — T-157 CH01 Expansion E (E2E)
+
+- Full mock smoke SQ01–SQ05 + POI journal/EX + POI-09 reward; live shell `smoke_ch01_expansion_live.sh`.
+- Server grants one-time POI reward bundles on interact; mock claim/puzzle_reset hardened.
+- Debug APK rebuilt; owner report `docs/reports/CH01_EXPANSION_E2E_2026-11-19.md`.
+- Device accept / live phone URL / release keystore remain owner-blocked.
 
 ### Журнал 2026-11-19 — MONSTERS-CH01-001 TEMP VFX/SFX
 
