@@ -1,7 +1,33 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Дата: 2026-11-19. Это план разработки, **не отчёт о выполненном коде**.
-> Концептуальный GDD: 15/15 этапов утверждены. Реализация: **не проверялась**.
+> Актуализация: **2026-11-19** (после T-125 / PR #14).  
+> Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
+> §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
+
+## 0. Снимок состояния (актуально)
+
+| Область | Статус | Комментарий |
+|---|---|---|
+| Документы / GDD каркас | ГОТОВО | Концепт утверждён; детали баланса/лора открыты |
+| Клиент Godot 4.3 CH01 vertical | ГОТОВО (debug) | Home→Map→L01→Dialog→Party→Battle(+ULT)→Reward→Save→Next |
+| Debug APK | ГОТОВО | `scripts/build_debug_apk.sh` → `build/BashLegends-debug.apk` |
+| Release APK | ЗАБЛОКИРОВАНО | Нет действующего release keystore (T-126) |
+| Live API / auth / replay / rewards | ГОТОВО | Integration + CI; silent mock запрещён |
+| Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
+| Guild / Arena / Events live | ЗАБЛОКИРОВАНО | Stubs до **CH01 accepted** (D-NET-06 / D-SCOPE-01) |
+| CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
+| Приёмка CH01 | НА ПРОВЕРКЕ у владельца | Нужен явный «CH01 accepted» |
+
+### Открыто в очереди
+
+| ID | Статус | Что |
+|---|---|---|
+| T-126 | BLOCKED | Signed release APK |
+| T-127 | BLOCKED | Owner art-approve H01/H02/H03/E01 (+ объём анимаций) |
+| T-128 | BLOCKED | CH01 accepted (приёмка вертикального среза) |
+| T-129 | BLOCKED | Production/live API URL для телефонов |
+| T-112 | TODO→после T-128 | Guild/arena/events live |
+| T-090…T-092 | PX BLOCKED | CH02+, mass art, rename |
 
 ## 1. Неизменяемые решения о процессе
 
@@ -62,25 +88,29 @@
 - [x] Кампания, текстовые диалоги, юмористические события, AFK и экспедиции. *(мок T-074)*
 - [x] RPG-прогрессия, экипировка, экономика, гача на моках. *(мок T-075)*
 - [x] Клиентские экраны гильдий, арены, региональных событий и нескольких городов. *(мок T-076)*
-- [x] Клиентская демонстрация end-to-end, тесты, аудит, APK. *(smoke+audit T-077; APK — у владельца)*
+- [x] Клиентская демонстрация end-to-end, тесты, аудит. *(smoke+audit T-077)*
+- [x] Debug APK toolchain + CH01 slice. *(T-110/T-125; release — T-126)*
 
 ### Фаза 2. Сервер и замена моков
 - [x] Go API, авторизация anonymous, модели прогресса *(memory + Postgres/Redis T-085)*.
 - [x] Серверные награды, лимит AFK 24 часа, экономика, гача и защита от дублей *(T-082)*.
-- [x] Старт/финиш боёв + ATB tick-sim verify *(T-083/T-088/T-097/T-098)*.
-- [x] Гильдии, арена, события — клиентские API stubs *(T-084)*.
-- [x] Админка stub: `/readyz`, `/v1/admin/metrics`, request logging, `backup_db.sh` *(T-093…T-096; RBAC later)*.
-- [x] Нагрузочный smoke *(T-099)*; Android export preset example *(T-100)*.
-- [x] Ultimates в server sim + client seed sync *(T-101/T-102)*; аудит [`PHASE2_AUDIT.md`](PHASE2_AUDIT.md).
-- [ ] Подписанный тестовый APK / online (нужны SDK + templates) *(T-110)*.
-- [ ] Admin RBAC · guild/arena live · battle replay *(T-111…T-113)*.
+- [x] Старт/финиш боёв + ATB tick-sim + replay/commands *(T-083/T-088/T-097/T-098/T-113)*.
+- [x] Гильдии, арена, события — API stubs + UI «НЕДОСТУПНО» *(T-084/T-122)*.
+- [x] Админка: health/metrics + RBAC/`ADMIN_API_KEY` + audit *(T-093…T-096/T-111)*.
+- [x] Нагрузочный smoke *(T-099)*; debug APK toolchain *(T-110)*; session resume *(T-123)*.
+- [x] Ultimates в server sim + client seed sync *(T-101/T-102)*; live probe без silent mock *(T-120)*.
+- [ ] **Signed release APK** *(T-126 — нужен keystore владельца)*.
+- [ ] Guild/arena/events **live** *(T-112 — после CH01 accepted)*.
 
-### Фаза 3. Приёмка расширенного MVP
-- [ ] Все обязательные сценарии MVP работают без моков в релизном режиме *(T-114)*.
-- [ ] Данные сохраняются после перезапуска и разрыва соединения.
-- [ ] Нет критических ошибок экономики, наград, платежей и авторизации.
-- [ ] Пройдены регрессия, аудит, Android-профилирование и проверка подписанного APK.
-- [ ] ROAD.md актуален; известные ограничения перечислены.
+### Фаза 3. Приёмка
+- [x] Release-сборки: live по умолчанию, без silent mock *(T-114 / D-NET-05)*; debug — явный mock/live.
+- [x] Сохранение/resume сессии *(T-123)*; idempotent награды проверены (CI).
+- [ ] **CH01 accepted** владельцем *(T-128)*.
+- [ ] Signed release APK на устройстве *(T-126)*.
+- [ ] Прод live URL в клиенте *(T-129)*.
+- [ ] Нет критических ошибок экономики/наград/авторизации на устройстве (ручная приёмка).
+- [ ] Android-профилирование (Low/Med/High) на целевых телефонах.
+- [x] ROAD/STATUS/TASK_QUEUE актуализированы *(этот документ)*.
 
 ### Фаза 4. После MVP
 - [ ] Расширение коллекции до 36 героев к полноценному релизу.
@@ -459,11 +489,37 @@
 - Не сделано: release signing; финальный арт; P3 live; CH02
 - Следующий шаг: T-126 keystore владельца · CH01 accepted
 
-## 9. Текущий следующий шаг
+### 2026-11-19 — Roadmap refresh
+- Статус: ГОТОВО (docs)
+- Сделано: ROAD §0/§4/§9 актуализированы под факт кода; `OWNER_CLARIFICATIONS.md`; T-127…T-129 в очереди; STATUS/INDEX
+- Не сделано: ответы владельца
+- Следующий шаг: Q1–Q4 в OWNER_CLARIFICATIONS
 
-> Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
+## 9. Текущий следующий шаг + уточнения владельца
 
-1. ~~P0…T-125 CH01 Android debug slice + T-114~~ — сделано.
-2. Далее: T-126 release APK (keystore владельца) · owner final art · CH01 accepted.
-3. P3 guild/arena/events live — только после CH01 accepted. Запреты: CH02+, rename, mass art.
-4. Решения: D-ART-04/05/06, D-NET-05/06, D-ADMIN-03 (2026-11-19).
+> Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md) + [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md).
+
+1. ~~P0…T-125 + T-114~~ — сделано (CI green, в `main`).
+2. **Сейчас ждём ответы владельца** по блокерам T-126…T-129 (см. ниже и `OWNER_CLARIFICATIONS.md`).
+3. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
+4. PX до отдельного разрешения: CH02+ (T-090), mass art (T-091), rename (T-092).
+
+### Что уже верно (не требует уточнения)
+
+- Вертикальный срез CH01 на debug APK + автотесты.
+- Сервер авторитетен для боя/наград; silent mock запрещён.
+- Guild/Arena/Events — stubs «НЕДОСТУПНО» до приёмки CH01.
+- Sample-атлас ≠ финальный арт; H01–H03/E01 — pipeline drafts.
+
+### Этапы / задачи, которые требуют вашего уточнения
+
+| # | ID | Тема | Что нужно от вас |
+|---|---|---|---|
+| 1 | **T-126** | Release APK | Путь/наличие действующего keystore (или «keystore нет — оставить debug»). Alias + пароли **только** через secrets/env, не в чат. Не создавать новый, если существует. |
+| 2 | **T-127** | Арт H01/H02/H03/E01 | Accept drafts / reject / правки силуэта·цвета·реквизита; нужен ли полный набор idle/atk/ult/hit/win/lose сейчас или только idle для CH01. |
+| 3 | **T-128** | CH01 accepted | Явное «принято» / «не принято» + список дефектов для доработки перед P3. |
+| 4 | **T-129** | Live URL | Базовый URL API для телефонов (LAN/VPS/домен). Без этого release live на устройстве не к чему подключаться. |
+| 5 | *(опц.)* | Баланс B01 | Оставить placeholder ATB или зафиксировать числа энергии/урона для ультимейтов. |
+| 6 | *(опц.)* | Админ prod | Значение `ADMIN_API_KEY` только в secrets; роли admin/viewer ок? |
+| 7 | *(позже)* | T-112 | После T-128: объём live guild/arena/events (MVP-минимум vs полный ROAD). |
+| 8 | *(PX)* | T-090/091/092 | Не трогаем, пока не дадите явное разрешение. |
