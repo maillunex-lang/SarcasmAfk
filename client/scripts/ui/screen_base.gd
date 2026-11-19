@@ -7,6 +7,17 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 
+func _set_bg_texture(path: String) -> void:
+	var bg := TextureRect.new()
+	bg.texture = AssetPaths.tex(path)
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_SCALE
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(bg)
+	move_child(bg, 0)
+
+
 func _make_root_vbox(bg: Color) -> VBoxContainer:
 	var background := ColorRect.new()
 	background.color = bg

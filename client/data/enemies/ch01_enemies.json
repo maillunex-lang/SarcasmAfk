@@ -20,7 +20,7 @@
       "atk": 70,
       "defense": 80,
       "speed": 90,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -31,7 +31,7 @@
       "atk": 85,
       "defense": 110,
       "speed": 80,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -42,7 +42,7 @@
       "atk": 60,
       "defense": 70,
       "speed": 85,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -53,7 +53,7 @@
       "atk": 80,
       "defense": 60,
       "speed": 100,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -64,7 +64,7 @@
       "atk": 110,
       "defense": 55,
       "speed": 105,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -75,7 +75,7 @@
       "atk": 120,
       "defense": 140,
       "speed": 95,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -86,7 +86,7 @@
       "atk": 130,
       "defense": 30,
       "speed": 110,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -97,7 +97,7 @@
       "atk": 90,
       "defense": 90,
       "speed": 88,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -108,7 +108,7 @@
       "atk": 140,
       "defense": 35,
       "speed": 100,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -119,7 +119,7 @@
       "atk": 75,
       "defense": 95,
       "speed": 92,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -130,7 +130,7 @@
       "atk": 160,
       "defense": 50,
       "speed": 98,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -141,7 +141,7 @@
       "atk": 100,
       "defense": 70,
       "speed": 102,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -152,7 +152,7 @@
       "atk": 85,
       "defense": 20,
       "speed": 115,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -163,7 +163,7 @@
       "atk": 110,
       "defense": 85,
       "speed": 96,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -174,7 +174,7 @@
       "atk": 95,
       "defense": 50,
       "speed": 108,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -185,7 +185,7 @@
       "atk": 145,
       "defense": 75,
       "speed": 100,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -196,7 +196,7 @@
       "atk": 160,
       "defense": 120,
       "speed": 90,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -207,7 +207,7 @@
       "atk": 70,
       "defense": 80,
       "speed": 85,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -218,7 +218,7 @@
       "atk": 100,
       "defense": 130,
       "speed": 82,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -229,7 +229,7 @@
       "atk": 150,
       "defense": 70,
       "speed": 94,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -240,7 +240,7 @@
       "atk": 80,
       "defense": 110,
       "speed": 88,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -251,7 +251,7 @@
       "atk": 135,
       "defense": 40,
       "speed": 105,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -262,7 +262,7 @@
       "atk": 130,
       "defense": 150,
       "speed": 86,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -273,7 +273,7 @@
       "atk": 170,
       "defense": 60,
       "speed": 97,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -284,7 +284,7 @@
       "atk": 125,
       "defense": 70,
       "speed": 100,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -295,7 +295,7 @@
       "atk": 110,
       "defense": 75,
       "speed": 103,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -306,7 +306,7 @@
       "atk": 100,
       "defense": 90,
       "speed": 95,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     },
     {
@@ -317,7 +317,7 @@
       "atk": 200,
       "defense": 160,
       "speed": 92,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
       "note": "Placeholder sprite until unique art"
     }
   ]

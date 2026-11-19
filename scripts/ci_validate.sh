@@ -12,6 +12,22 @@ for path in files:
     json.load(path.open())
     print("OK", path)
 print("json_ok", len(files))
+required = [
+  "client/assets/branding/bg_map.jpg",
+  "client/assets/branding/bg_afk.jpg",
+  "client/assets/branding/bg_gacha.jpg",
+  "client/assets/ui/icons/ui_icon_map.jpg",
+  "client/assets/ui/icons/ui_icon_heroes.jpg",
+  "client/assets/characters/H04/H04_portrait.jpg",
+  "client/assets/characters/H12/H12_full.jpg",
+  "client/assets/enemies/E02/E02_paper_guard.jpg",
+  "client/assets/enemies/E28/E28_inspector.jpg",
+]
+missing = [p for p in required if not pathlib.Path(p).is_file()]
+if missing:
+    print("MISSING ASSETS", missing, file=sys.stderr)
+    sys.exit(1)
+print("assets_ok", len(required))
 PY
 
 for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/V0_REVIEW.md client/project.godot; do

@@ -16,7 +16,22 @@ func _ready() -> void:
 
 	vbox.add_child(DesignTokens.make_label(DesignTokens.DISPLAY_NAME, 40, DesignTokens.COLOR_ACCENT_GOLD))
 	vbox.add_child(DesignTokens.make_label(DesignTokens.SLOGAN, 22, DesignTokens.COLOR_TEXT_MUTED))
-	vbox.add_child(DesignTokens.make_label(GameState.currency_line(), 22, DesignTokens.COLOR_ACCENT_CYAN))
+	var cur_row := HBoxContainer.new()
+	cur_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	cur_row.add_theme_constant_override("separation", 12)
+	vbox.add_child(cur_row)
+	for pair in [
+		[AssetPaths.ICON_SOFT, str(GameState.soft_currency)],
+		[AssetPaths.ICON_HARD, str(GameState.hard_currency)],
+		[AssetPaths.ICON_TICKET, str(GameState.summon_tickets)],
+	]:
+		var ic := TextureRect.new()
+		ic.texture = AssetPaths.tex(str(pair[0]))
+		ic.custom_minimum_size = Vector2(48, 48)
+		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		cur_row.add_child(ic)
+		cur_row.add_child(DesignTokens.make_label(str(pair[1]), 22, DesignTokens.COLOR_ACCENT_CYAN))
 
 	var stage := PanelContainer.new()
 	stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -26,7 +41,7 @@ func _ready() -> void:
 	stage_box.alignment = BoxContainer.ALIGNMENT_CENTER
 	stage.add_child(stage_box)
 	var hero := TextureRect.new()
-	hero.texture = AssetPaths.tex(AssetPaths.H01_FULL)
+	hero.texture = AssetPaths.tex(AssetPaths.hero_full("H01"))
 	hero.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	hero.custom_minimum_size = Vector2(0, 520)

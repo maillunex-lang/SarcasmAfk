@@ -33,7 +33,8 @@
 | T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-055 | P1 | **DONE** | **CH01 embed:** квесты/локации/бои/диалоги в клиент | `client/data/` + CampaignCatalog + campaign UI + `smoke_ch01.gd` | T-050 |
 | T-056 | P1 | **DONE** | Тонкий `ApiClient` + `USE_MOCK` | `client/scripts/net/api_client.gd` + `smoke_api.gd` | T-020, T-055 |
-| T-060 | P3 | **TODO** | Расширение арта CH01 (L02–L10) | по LOCATION/CAMPAIGN | T-050 |
+| T-060 | P3 | **TODO** | Уникальные локации L02–L10 слои | LOCATION/CAMPAIGN | T-050 |
+| T-061 | P1 | **DONE** | Art-fill: иконки/BG/H04–H12/враги-архетипы | `client/assets/` + AssetPaths wire | T-077 |
 | T-070 | P1 | **DONE** | Клиент MVP экраны (ROAD Фаза 1) | 12 экранов на моках | T-050, T-020 |
 | T-071 | P1 | **DONE** | Ф1.1 Оболочка / nav / карта | HubChrome + Map + More | T-070 |
 | T-072 | P1 | **DONE** | Ф1.2 Коллекция 12 героев | `roster_mvp.json` + Heroes | T-071 |

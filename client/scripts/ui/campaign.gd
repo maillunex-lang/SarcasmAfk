@@ -4,7 +4,7 @@ extends "res://scripts/ui/screen_base.gd"
 
 func _ready() -> void:
 	super._ready()
-	_set_background(AssetPaths.BG_HOME)
+	_set_background(AssetPaths.BG_CAMPAIGN)
 
 	var dim := ColorRect.new()
 	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.55)

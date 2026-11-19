@@ -3,7 +3,13 @@ extends "res://scripts/ui/screen_base.gd"
 
 func _ready() -> void:
 	super._ready()
-	var vbox := _make_root_vbox(DesignTokens.COLOR_BG_NAVY)
+	_set_bg_texture(AssetPaths.BG_HEROES)
+	var dim := ColorRect.new()
+	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.55)
+	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(dim)
+	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 	vbox.add_child(DesignTokens.make_label("Инвентарь / экипировка", 36, DesignTokens.COLOR_ACCENT_GOLD))
 	vbox.add_child(DesignTokens.make_label("RPG-мок: материалы и слоты оружия/брони/аксессуара", 20, DesignTokens.COLOR_TEXT_MUTED))
 	vbox.add_child(DesignTokens.make_label(GameState.currency_line(), 20, DesignTokens.COLOR_ACCENT_CYAN))
