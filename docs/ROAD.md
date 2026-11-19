@@ -323,12 +323,22 @@
 - Блокеры: нет
 - Следующий конкретный шаг: T-010 V0-A
 
+### 2026-11-19 — V0-A / Godot client skeleton (T-010)
+- Статус: ГОТОВО (каркас; не полный прототип)
+- Что планировалось: Godot 4 9:16, Splash/Home/L01/Dialog/Battle stubs, тема, мок CH01-Q01.
+- Что фактически сделано: каталог `client/` (Godot 4.3), навигация SceneNav, DesignTokens, JSON диалог 10 реплик, headless smoke EXIT 0.
+- Что не сделано: арт, атласы, Android export, CI, сервер.
+- Согласованная спецификация: `V0_IMPLEMENTATION_PLAN` фаза V0-A; `DECISIONS` D-V0-*
+- Коммит / PR: ветка `cursor/phase0-design-docs-beaf` → `main`
+- Тесты: `godot --headless --path client -s res://scripts/tools/smoke_v0a.gd`
+- Аудит: название на splash; static portrait placeholder; без lipsync; repo/package не переименованы
+- Блокеры: нет
+- Следующий конкретный шаг: T-030 или T-020
+
 ## 9. Текущий следующий шаг
 
-> Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md). Ниже — краткий указатель.
+> Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~Merge PR #1~~ — сделано.
-2. ~~Дефрагментация docs для ИИ (T-007)~~ — пакет `AGENTS`/`STATUS`/`TASK_QUEUE`/`DECISIONS`/`INDEX`.
-3. **T-010 V0-A:** Godot 9:16 skeleton по `V0_IMPLEMENTATION_PLAN.md`.
-4. Параллельно **T-020:** Phase 0 API/data contracts.
-5. Запреты: главы 02–12, массовые ассеты, rename — см. `DECISIONS.md` / очередь `PX`.
+1. ~~T-007 AI docs~~ / ~~T-010 V0-A~~ — сделано (`client/`).
+2. Далее: **T-030** V0-B точечный арт **или** **T-020** Phase 0 API (параллельно допустимо).
+3. Запреты: главы 02–12, массовые ассеты, rename — `DECISIONS.md` / `PX`.

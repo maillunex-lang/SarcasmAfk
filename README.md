@@ -18,9 +18,16 @@
 
 ## Быстрый статус (см. актуальный STATUS.md)
 
-- Сделано: GDD/ROAD/контент-проекты, визуальная спека, решения V0, план V0, merge в `main`.
-- Дальше: **T-010 V0-A** — каркас Godot 9:16.
+- Сделано: docs + V0 decisions + **`client/` Godot 4.3 V0-A skeleton** (Splash→Home→L01→Dialog→Battle).
+- Дальше: **T-030** точечный арт V0-B и/или **T-020** Phase 0 API.
 - Запрещено сейчас: массовые ассеты, главы 02–12, rename.
+
+```bash
+godot4 --path client
+# smoke:
+godot4 --headless --path client -s res://scripts/tools/smoke_v0a.gd
+```
+
 
 ## Ветки
 

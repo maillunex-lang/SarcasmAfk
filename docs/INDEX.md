@@ -41,14 +41,15 @@
 | Файл | Роль |
 |---|---|
 | [`V0_IMPLEMENTATION_PLAN.md`](V0_IMPLEMENTATION_PLAN.md) | Фазы V0-A…D |
+| [`../client/README.md`](../client/README.md) | Как запустить клиент |
 | `PHASE0_SPEC.md` | **Ещё нет** — создать в задаче T-020 |
 
-## 5. Код и ассеты (ожидаемые пути)
+## 5. Код и ассеты
 
 | Путь | Сейчас |
 |---|---|
-| `project.godot` / клиент | отсутствует |
-| `assets/` | отсутствует |
+| [`../client/`](../client/) | **V0-A skeleton** (Godot 4.3) |
+| `client/assets/` | только placeholders / нет финального арта |
 | `.github/workflows/` | отсутствует |
 | `server/` | отсутствует |
 
