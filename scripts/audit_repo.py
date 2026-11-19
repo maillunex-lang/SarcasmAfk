@@ -114,6 +114,10 @@ def file_sha256(path: pathlib.Path, limit: int = 64 * 1024 * 1024) -> str | None
 
 
 def main() -> int:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--json-only', action='store_true', help='Refresh JSON inventory only; do not rewrite markdown reports')
+    args, _ = ap.parse_known_args()
     sha = run(["git", "rev-parse", "HEAD"])
     branch = run(["git", "rev-parse", "--abbrev-ref", "HEAD"])
     files = run(["git", "ls-tree", "-r", "--name-only", "HEAD"]).splitlines()
@@ -293,7 +297,8 @@ def main() -> int:
         "3. Owner-approved cleanup only from delete-candidates list.",
         "",
     ]
-    OUT_MD.write_text("\n".join(lines), encoding="utf-8")
+    if not args.json_only:
+        OUT_MD.write_text("\n".join(lines), encoding="utf-8")
 
     # Separate deletion candidates doc for owner confirmation
     dlines = [
@@ -344,7 +349,8 @@ def main() -> int:
         "```",
         "",
     ]
-    OUT_DELETE.write_text("\n".join(dlines), encoding="utf-8")
+    if not args.json_only:
+        OUT_DELETE.write_text("\n".join(dlines), encoding="utf-8")
 
     print("OK audit_repo")
     print("tracked", len(files))
@@ -352,8 +358,9 @@ def main() -> int:
     print("delete_candidates", len(delete_candidates))
     print("duplicates", len(duplicates))
     print("wrote", OUT_JSON.relative_to(ROOT))
-    print("wrote", OUT_MD.relative_to(ROOT))
-    print("wrote", OUT_DELETE.relative_to(ROOT))
+    if not args.json_only:
+        print("wrote", OUT_MD.relative_to(ROOT))
+        print("wrote", OUT_DELETE.relative_to(ROOT))
     return 0
 
 
