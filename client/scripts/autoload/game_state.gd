@@ -551,6 +551,8 @@ func interact_poi(poi_id: String, action_id: String) -> Dictionary:
 		return res
 	if api.is_mock():
 		_mock_apply_poi(poi_id, action_id, bool(res.get("puzzle_reset", false)))
+		if not bool(res.get("puzzle_reset", false)):
+			_mock_grant_poi_reward(poi_id)
 	else:
 		_apply_expansion_progress(res.get("progress", {}))
 	save_game()
@@ -572,6 +574,7 @@ func claim_sidequest(quest_id: String) -> Dictionary:
 			inventory[str(k)] = int(inventory.get(str(k), 0)) + int(inv[k])
 		for eq in bundle.get("equipment", []):
 			inventory[str(eq)] = int(inventory.get(str(eq), 0)) + 1
+			_ensure_instance_for_template(str(eq))
 		claimed_rewards[bundle_id] = true
 		sidequest_progress[quest_id] = {
 			"state": "completed",
@@ -583,6 +586,27 @@ func claim_sidequest(quest_id: String) -> Dictionary:
 	save_game()
 	progress_changed.emit()
 	return res
+
+
+func _mock_grant_poi_reward(poi_id: String) -> void:
+	var poi: Dictionary = catalog.get_poi(poi_id)
+	var bundle_id := str(poi.get("reward_bundle_id", ""))
+	if bundle_id == "" or bundle_id == "<null>" or bundle_id == "null":
+		return
+	if bool(claimed_rewards.get(bundle_id, false)):
+		return
+	# one_time_reward default true when bundle present
+	var bundle: Dictionary = catalog.get_reward_bundle(bundle_id)
+	if bundle.is_empty():
+		return
+	soft_currency += int(bundle.get("soft_currency", 0))
+	var inv: Dictionary = bundle.get("inventory", {})
+	for k in inv.keys():
+		inventory[str(k)] = int(inventory.get(str(k), 0)) + int(inv[k])
+	for eq in bundle.get("equipment", []):
+		inventory[str(eq)] = int(inventory.get(str(eq), 0)) + 1
+		_ensure_instance_for_template(str(eq))
+	claimed_rewards[bundle_id] = true
 
 
 func _mock_apply_poi(poi_id: String, action_id: String, puzzle_reset: bool) -> void:

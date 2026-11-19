@@ -815,14 +815,16 @@ func (p *Postgres) StartSidequest(token, questID, requiredMain string) (*Account
 	})
 }
 
-func (p *Postgres) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (*AccountProgress, bool, error) {
+func (p *Postgres) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool, rewardBundle *ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
 	reset := false
+	var granted map[string]any
 	prog, err := p.mutate(token, func(acc *AccountProgress) error {
-		r, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime)
+		r, g, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime, rewardBundle, equipmentDefs)
 		reset = r
+		granted = g
 		return e
 	})
-	return prog, reset, err
+	return prog, reset, granted, err
 }
 
 func (p *Postgres) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, bool, map[string]any, error) {

@@ -1,6 +1,6 @@
 # PROJECT_CONTEXT.md — БашЛегенды: Эпоха Абсурда
 
-> Snapshot: **2026-11-19** · SHA `7b820a1` (reorg work) / baseline `main` `60ebe23`  
+> Snapshot: **2026-11-19** · baseline `main` `2b1aef7` (REORG #27) · product: T-157 Expansion E  
 > Entry: [`../AGENTS.md`](../AGENTS.md) → this file → [`STATUS.md`](STATUS.md) → [`TASK_QUEUE.md`](TASK_QUEUE.md)
 
 ## What it is
@@ -31,7 +31,7 @@ docker-compose.yml        Local PG/Redis
 
 ## Current milestone
 
-Post–Visual Overhaul 001 merge (`#26` → `main`). Online systems Draft live; EQUIPMENT-001 + MONSTERS TEMP on main. **CH02 / real payments / Stage E Kaeron atlases blocked.**
+Post–Visual Overhaul 001 (`#26`) + REPO-REORG (`#27`) on `main`. CH01 Expansion A–E automation verified (T-157). Online systems Draft live; EQUIPMENT-001 + MONSTERS TEMP on main. **CH02 / real payments / Stage E Kaeron atlases blocked.**
 
 ## Hard constraints
 

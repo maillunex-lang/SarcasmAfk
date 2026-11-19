@@ -631,6 +631,17 @@ func ch01_sidequest_start(quest_id: String) -> Dictionary:
 func ch01_sidequest_claim(quest_id: String) -> Dictionary:
 	var path := "/campaign/ch01/sidequests/%s/claim" % quest_id
 	if use_mock:
+		var sq: Dictionary = GameState.catalog.get_sidequest(quest_id)
+		var bundle_id := str(sq.get("reward_bundle_id", ""))
+		if bundle_id != "" and bool(GameState.claimed_rewards.get(bundle_id, false)):
+			_log("POST", path, true)
+			return {"ok": true, "already": true, "mock": true, "quest_id": quest_id}
+		var st: Dictionary = GameState.sidequest_progress.get(quest_id, {})
+		var done: Array = st.get("completed_step_ids", [])
+		for step in sq.get("step_ids", []):
+			if not done.has(str(step)):
+				_log("POST", path, false)
+				return {"ok": false, "error": "INCOMPLETE_STEPS", "mock": true, "quest_id": quest_id}
 		_log("POST", path, true)
 		return {"ok": true, "already": false, "mock": true, "quest_id": quest_id}
 	if auth_token == "":
@@ -644,7 +655,22 @@ func ch01_poi_interact(poi_id: String, action_id: String) -> Dictionary:
 	var path := "/campaign/ch01/poi/%s/interact" % poi_id
 	if use_mock:
 		var puzzle_reset := false
-		# Client GameState applies sequence rules; mock flags wrong SQ02 order via GameState.
+		var poi: Dictionary = GameState.catalog.get_poi(poi_id)
+		var sq_id := str(poi.get("sidequest_id", ""))
+		var step_id := ""
+		for a in poi.get("actions", []):
+			if str(a.get("action_id", "")) == action_id:
+				step_id = str(a.get("step_id", ""))
+				break
+		if sq_id != "" and step_id != "":
+			var sq: Dictionary = GameState.catalog.get_sidequest(sq_id)
+			var seq: Array = sq.get("step_sequence", [])
+			if not bool(sq.get("steps_any_order", true)) and not seq.is_empty():
+				var sq_st: Dictionary = GameState.sidequest_progress.get(sq_id, {})
+				var buf: Array = sq_st.get("sequence_buffer", [])
+				var expect_idx: int = buf.size()
+				if expect_idx >= seq.size() or str(seq[expect_idx]) != step_id:
+					puzzle_reset = true
 		_log("POST", path, true)
 		return {"ok": true, "mock": true, "poi_id": poi_id, "action_id": action_id, "puzzle_reset": puzzle_reset}
 	if auth_token == "":

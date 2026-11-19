@@ -106,7 +106,7 @@
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация **финального** арта / Stage E | D-ART-06 | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
-| T-157 | P1 | **NOT_STARTED** | CH01 Expansion E: full E2E + debug APK + owner report | smoke + APK | T-156 |
+| T-157 | P1 | **DONE_VERIFIED** | CH01 Expansion E: full E2E + debug APK + owner report | `smoke_ch01_expansion.gd` + `smoke_ch01_expansion_live.sh` + `docs/reports/CH01_EXPANSION_E2E_2026-11-19.md` + debug APK | T-156 |
 | T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
 | T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
 | T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
@@ -121,6 +121,6 @@
 
 ## Следующий конкретный шаг
 
-1. **Review/merge** PR #27 (REPO-REORG-001) — do not push straight to `main`.  
-2. Next product: **T-157** (CH01 Expansion E2E + debug APK + owner report).  
-3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore.
+1. **Review/merge** T-157 PR (CH01 Expansion E2E) — do not push straight to `main`.  
+2. Owner: device accept **T-128** / live URL **T-129** when ready.  
+3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore. Parallel: Visual Overhaul Stage F.

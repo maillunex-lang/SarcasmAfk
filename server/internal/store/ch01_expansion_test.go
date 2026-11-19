@@ -15,7 +15,7 @@ func TestSidequestSQ01AnyOrderIdempotentClaim(t *testing.T) {
 
 	steps := []string{"sq01_doc_1", "sq01_doc_3", "sq01_doc_2"}
 	for _, step := range steps {
-		_, reset, err := m.InteractPOI(tok, "POI-02", step, step, "CH01-SQ01", nil, "", false)
+		_, reset, _, err := m.InteractPOI(tok, "POI-02", step, step, "CH01-SQ01", nil, "", false, nil, nil)
 		if err != nil || reset {
 			t.Fatalf("step %s err=%v reset=%v", step, err, reset)
 		}
@@ -49,12 +49,12 @@ func TestSQ02SequenceResetAndEquipDEF(t *testing.T) {
 	_, _ = m.StartSidequest(tok, "CH01-SQ02", "CH01-Q03")
 	seq := []string{"sq02_seal_blue", "sq02_seal_gold", "sq02_seal_empty"}
 
-	_, reset, err := m.InteractPOI(tok, "POI-04", "sq02_seal_gold", "sq02_seal_gold", "CH01-SQ02", seq, "", false)
+	_, reset, _, err := m.InteractPOI(tok, "POI-04", "sq02_seal_gold", "sq02_seal_gold", "CH01-SQ02", seq, "", false, nil, nil)
 	if err != nil || !reset {
 		t.Fatalf("wrong order should reset err=%v reset=%v", err, reset)
 	}
 	for _, step := range seq {
-		_, reset, err = m.InteractPOI(tok, "POI-04", step, step, "CH01-SQ02", seq, "", false)
+		_, reset, _, err = m.InteractPOI(tok, "POI-04", step, step, "CH01-SQ02", seq, "", false, nil, nil)
 		if err != nil || reset {
 			t.Fatalf("good step %s err=%v reset=%v", step, err, reset)
 		}
@@ -96,6 +96,46 @@ func TestSQ02SequenceResetAndEquipDEF(t *testing.T) {
 	acc2, _ := m.AccountByToken(tok)
 	if acc2.HeroInstances["H01"].Equipment["armor"] == "eq_ch01_clerk_coat" {
 		t.Fatalf("coat should have moved off H01")
+	}
+}
+
+func TestPOI09RewardIdempotent(t *testing.T) {
+	m := store.NewMemory("")
+	tok, _ := m.CreateAnonymous()
+	acc, _ := m.AccountByToken(tok)
+	acc.QuestFlags["CH01-Q09"] = true
+	bundle := store.ExpansionRewardBundle{
+		BundleID:  "CH01-POI-09-FIRST",
+		Soft:      50,
+		Inventory: map[string]int{"mat_hero_exp": 20},
+	}
+	soft0 := acc.SoftCurrency
+	prog, reset, granted, err := m.InteractPOI(tok, "POI-09", "stop_erase", "", "", nil, "poi_vanishing_sign", false, &bundle, nil)
+	if err != nil || reset {
+		t.Fatalf("poi09 err=%v reset=%v", err, reset)
+	}
+	if granted["soft"] != 50 {
+		t.Fatalf("granted=%v", granted)
+	}
+	if prog.SoftCurrency != soft0+50 {
+		t.Fatalf("soft=%d", prog.SoftCurrency)
+	}
+	if !prog.ClaimedRewards["CH01-POI-09-FIRST"] {
+		t.Fatal("not claimed")
+	}
+	if !prog.JournalFlags["poi_vanishing_sign"] {
+		t.Fatal("missing journal flag")
+	}
+	soft1 := prog.SoftCurrency
+	prog2, _, granted2, err := m.InteractPOI(tok, "POI-09", "stop_erase", "", "", nil, "poi_vanishing_sign", false, &bundle, nil)
+	if err != nil {
+		t.Fatalf("retry %v", err)
+	}
+	if prog2.SoftCurrency != soft1 {
+		t.Fatalf("double grant soft %d->%d", soft1, prog2.SoftCurrency)
+	}
+	if len(granted2) != 0 && granted2["soft"] != nil {
+		t.Fatalf("second grant should be empty got=%v", granted2)
 	}
 }
 

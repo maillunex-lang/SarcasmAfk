@@ -251,7 +251,7 @@ func TestSQ02GrantsUniqueInstance(t *testing.T) {
 	_, _ = m.StartSidequest(tok, "CH01-SQ02", "CH01-Q03")
 	seq := []string{"sq02_seal_blue", "sq02_seal_gold", "sq02_seal_empty"}
 	for _, step := range seq {
-		_, _, _ = m.InteractPOI(tok, "POI-04", step, step, "CH01-SQ02", seq, "", false)
+		_, _, _, _ = m.InteractPOI(tok, "POI-04", step, step, "CH01-SQ02", seq, "", false, nil, nil)
 	}
 	tpl := testTemplates()
 	bal := testBalance()

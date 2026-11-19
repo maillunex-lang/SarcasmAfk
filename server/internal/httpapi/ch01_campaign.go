@@ -145,7 +145,14 @@ func (s *Server) ch01InteractPOI(w http.ResponseWriter, r *http.Request, tok, po
 			sequence = sq.StepSequence
 		}
 	}
-	prog, reset, err := s.Store.InteractPOI(tok, poiID, body.ActionID, stepID, def.SidequestID, sequence, def.CompletionFlag, def.OneTime)
+	var rewardPtr *store.ExpansionRewardBundle
+	if bid, ok := def.RewardBundleID.(string); ok && bid != "" {
+		if bundle, ok := s.Content.RewardBundle(bid); ok {
+			cp := bundle
+			rewardPtr = &cp
+		}
+	}
+	prog, reset, granted, err := s.Store.InteractPOI(tok, poiID, body.ActionID, stepID, def.SidequestID, sequence, def.CompletionFlag, def.OneTime, rewardPtr, s.Content.EquipmentDefs())
 	if err != nil {
 		writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
 		return
@@ -162,6 +169,7 @@ func (s *Server) ch01InteractPOI(w http.ResponseWriter, r *http.Request, tok, po
 		"poi_progress":  prog.POIProgress[poiID],
 		"sidequest":     side,
 		"journal_flags": prog.JournalFlags,
+		"granted":       granted,
 		"progress":      prog,
 	})
 }

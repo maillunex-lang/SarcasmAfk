@@ -1,14 +1,14 @@
 # STATUS.md — Verified project snapshot
 
-> Date: **2026-11-19** · Baseline `main` SHA **`60ebe23`** · Reorg branch `cursor/chore-repo-reorg-001-beaf`  
+> Date: **2026-11-19** · Baseline `main` SHA **`2b1aef7`** · Active: `cursor/t157-ch01-expansion-e2e-4106`  
 > **Single status source for agents.** Cold-start: [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · Queue: [`TASK_QUEUE.md`](TASK_QUEUE.md)  
 > Backup: [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) · Cleanup: [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md)
 
 ## NOW
 
-1. **REPO-REORG-001** ready for review — PR [#27](https://github.com/maillunex-lang/SarcasmAfk/pull/27): backup verified, AI canon, validators, **no tracked deletes** (see cleanup decisions).  
-2. Next product work after merge: **T-157** (CH01 expansion E2E/APK report).  
-3. Visual Overhaul 001 on `main` (PR #26); Stage F (Theme/gallery/APK) still open.
+1. **T-157** CH01 Expansion E (E2E + debug APK + owner report) — **DONE_VERIFIED** on PR branch; report [`reports/CH01_EXPANSION_E2E_2026-11-19.md`](reports/CH01_EXPANSION_E2E_2026-11-19.md).  
+2. REPO-REORG-001 merged (`#27` → `main`).  
+3. Next open product: Stage F visual polish / owner device accept (T-128) / still-blocked payments & Stage E.
 
 ## Subsystem matrix (evidence-based)
 
@@ -23,10 +23,11 @@
 | EQUIPMENT-001 | `PARTIAL` | catalog/UI/combat flats; TEMP icons; no random drop |
 | MONSTERS TEMP atlases/VFX/SFX | `PARTIAL` | assets + `validate_monsters_ch01.py`; Stage E `BLOCKED` |
 | Visual Overhaul 001 A–E slice | `PARTIAL` | merged fonts/BGs/guild/map/gacha frames; Theme.tres / H13–H36 busts / gallery open |
+| CH01 RPG Expansion A–E | `DONE_VERIFIED` (automation) | data + API + POI UI + `smoke_ch01_expansion.gd` + `smoke_ch01_expansion_live.sh` + debug APK + E2E report; device accept still T-128 |
 | Arena / events live | `BLOCKED` | UI stubs D-SCOPE-01; T-112 |
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |
 | Release signed APK | `BLOCKED` | T-126 keystore |
-| REPO-REORG-001 docs/validators | `DONE_VERIFIED` (pending PR merge) | PR #27; cleanup decisions: no safe tracked deletes |
+| REPO-REORG-001 docs/validators | `DONE_VERIFIED` | merged PR #27 |
 | REPO-REORG tracked file deletes | `DEPRECATED` | Identical media kept (dynamic paths); see cleanup decisions |
 
 ## BLOCKED (owner)

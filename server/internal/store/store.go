@@ -25,7 +25,7 @@ type Store interface {
 	SkillUpHero(token, heroID, skillID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error)
 	EquipHeroUnique(token, heroID, slot, itemID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error)
 	StartSidequest(token, questID, requiredMain string) (*AccountProgress, error)
-	InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (*AccountProgress, bool, error)
+	InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool, rewardBundle *ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error)
 	ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, bool, map[string]any, error)
 	EquipInstance(token, instanceID, heroID, slot string, confirmTransfer bool, expectedVersion int, requestID string, base HeroBaseStats, heroClass string, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, map[string]any, error)
 	UnequipInstance(token, instanceID string, expectedVersion int, requestID string) (*AccountProgress, *EquipmentInstance, error)
