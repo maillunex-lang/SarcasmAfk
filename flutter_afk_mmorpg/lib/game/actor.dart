@@ -9,9 +9,9 @@ enum ActorPose { idle, run, attack }
 
 class Actor extends PositionComponent {
   Actor({
-    required this.idle,
-    required this.run,
-    required this.attack,
+    required this.idleAnim,
+    required this.runAnim,
+    required this.attackAnim,
     required Vector2 home,
     required this.faceRight,
     required this.displaySize,
@@ -21,15 +21,21 @@ class Actor extends PositionComponent {
     anchor = Anchor.bottomCenter;
   }
 
-  final Sprite idle;
-  final Sprite run;
-  final Sprite attack;
+  final SpriteAnimation idleAnim;
+  final SpriteAnimation runAnim;
+  final SpriteAnimation attackAnim;
   final Vector2 homePosition;
   final bool faceRight;
   final Vector2 displaySize;
 
-  late final SpriteComponent body = SpriteComponent(
-    sprite: idle,
+  late final SpriteAnimationGroupComponent<ActorPose> body =
+      SpriteAnimationGroupComponent<ActorPose>(
+    animations: {
+      ActorPose.idle: idleAnim,
+      ActorPose.run: runAnim,
+      ActorPose.attack: attackAnim,
+    },
+    current: ActorPose.idle,
     size: displaySize.clone(),
     anchor: Anchor.bottomCenter,
     position: Vector2(displaySize.x / 2, displaySize.y),
@@ -44,16 +50,14 @@ class Actor extends PositionComponent {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    if (!faceRight && body.scale.x > 0) {
-      body.flipHorizontally();
-    }
+    body.scale.setValues(faceRight ? 1 : -1, 1);
     await add(body);
   }
 
   void resetVisual() {
     dead = false;
     pose = ActorPose.idle;
-    body.sprite = idle;
+    body.current = ActorPose.idle;
     body.opacity = 1;
     body.angle = 0;
     body.scale.setValues(faceRight ? 1 : -1, 1);
@@ -65,11 +69,7 @@ class Actor extends PositionComponent {
   void setPose(ActorPose next) {
     if (dead || pose == next) return;
     pose = next;
-    body.sprite = switch (next) {
-      ActorPose.idle => idle,
-      ActorPose.run => run,
-      ActorPose.attack => attack,
-    };
+    body.current = next;
   }
 
   void setBobbing(bool on) {

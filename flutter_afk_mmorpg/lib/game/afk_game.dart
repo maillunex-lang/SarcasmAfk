@@ -7,40 +7,47 @@ import 'package:flutter/painting.dart';
 
 import 'actor.dart';
 import 'projectiles.dart';
+import 'roster.dart';
 
 typedef ToastCallback = void Function(String text);
 typedef FinishedCallback = void Function(bool won);
 
 class AfkGame extends FlameGame {
   AfkGame({
+    required this.heroKit,
+    required this.enemyKit,
     required this.onToast,
     required this.onFinished,
   });
 
+  final FighterKit heroKit;
+  final FighterKit enemyKit;
   final ToastCallback onToast;
   final FinishedCallback onFinished;
 
   late Actor hero;
-  late Actor wolf;
+  late Actor foe;
   late Sprite iceSprite;
   late Sprite fireSprite;
   late Sprite boomSprite;
 
   double speed = 1;
   double elapsed = 0;
-  double nextIce = 999;
-  double nextWolf = 999;
-  double fireCd = 0;
+  double nextHeroAtk = 999;
+  double nextEnemyAtk = 999;
+  double ultCd = 0;
   bool done = false;
   bool fighting = false;
   bool busy = false;
 
   double heroHp = 120;
-  double wolfHp = 140;
+  double foeHp = 140;
   final double heroMax = 120;
-  final double wolfMax = 140;
+  final double foeMax = 140;
 
   final _rng = math.Random();
+
+  bool get heroIsMage => !heroKit.melee;
 
   @override
   Color backgroundColor() => const Color(0xFF0A0810);
@@ -49,12 +56,6 @@ class AfkGame extends FlameGame {
   Future<void> onLoad() async {
     await images.loadAll([
       'arena_bg.jpg',
-      'hero_idle.png',
-      'hero_run.png',
-      'hero_cast.png',
-      'wolf_idle.png',
-      'wolf_run.png',
-      'wolf_attack.png',
       'ice_icicle.png',
       'fireball.png',
       'explosion.png',
@@ -73,25 +74,32 @@ class AfkGame extends FlameGame {
     boomSprite = Sprite(images.fromCache('explosion.png'));
 
     final groundY = size.y * 0.78;
+    final heroIdle = await loadAnim(heroKit.idle);
+    final heroRun = await loadAnim(heroKit.run);
+    final heroAtk = await loadAnim(heroKit.attack);
+    final foeIdle = await loadAnim(enemyKit.idle);
+    final foeRun = await loadAnim(enemyKit.run);
+    final foeAtk = await loadAnim(enemyKit.attack);
+
     hero = Actor(
-      idle: Sprite(images.fromCache('hero_idle.png')),
-      run: Sprite(images.fromCache('hero_run.png')),
-      attack: Sprite(images.fromCache('hero_cast.png')),
+      idleAnim: heroIdle,
+      runAnim: heroRun,
+      attackAnim: heroAtk,
       home: Vector2(size.x * 0.28, groundY),
       faceRight: true,
-      displaySize: Vector2(150, 200),
+      displaySize: heroKit.displaySize.clone(),
     )..priority = 10;
 
-    wolf = Actor(
-      idle: Sprite(images.fromCache('wolf_idle.png')),
-      run: Sprite(images.fromCache('wolf_run.png')),
-      attack: Sprite(images.fromCache('wolf_attack.png')),
+    foe = Actor(
+      idleAnim: foeIdle,
+      runAnim: foeRun,
+      attackAnim: foeAtk,
       home: Vector2(size.x * 0.72, groundY),
       faceRight: false,
-      displaySize: Vector2(170, 150),
+      displaySize: enemyKit.displaySize.clone(),
     )..priority = 10;
 
-    await addAll([hero, wolf]);
+    await addAll([hero, foe]);
     await add(AfkHud()..priority = 80);
     await _startRound();
   }
@@ -101,26 +109,26 @@ class AfkGame extends FlameGame {
     fighting = false;
     busy = true;
     elapsed = 0;
-    fireCd = 0;
+    ultCd = 0;
     heroHp = heroMax;
-    wolfHp = wolfMax;
-    nextIce = 999;
-    nextWolf = 999;
+    foeHp = foeMax;
+    nextHeroAtk = 999;
+    nextEnemyAtk = 999;
     onToast('Сближение…');
 
     hero.resetVisual();
-    wolf.resetVisual();
+    foe.resetVisual();
 
     await Future.wait([
       hero.enterFromOffscreen(duration: 1.1 / speed),
-      wolf.enterFromOffscreen(duration: 1.1 / speed),
+      foe.enterFromOffscreen(duration: 1.1 / speed),
     ]);
 
     fighting = true;
     busy = false;
-    nextIce = 0.7;
-    nextWolf = 1.2;
-    fireCd = 2.5;
+    nextHeroAtk = 0.7;
+    nextEnemyAtk = 1.2;
+    ultCd = 2.5;
     onToast('Автобой · AFK');
   }
 
@@ -132,14 +140,18 @@ class AfkGame extends FlameGame {
 
   void setSpeed(double s) => speed = s;
 
-  void castFireball() {
+  void castUlt() {
     if (!fighting || done || busy) return;
-    if (fireCd > 0) {
-      onToast('Огненный шар · ${fireCd.toStringAsFixed(1)}с');
+    if (ultCd > 0) {
+      onToast('Ульт · ${ultCd.toStringAsFixed(1)}с');
       return;
     }
     // ignore: discarded_futures
-    _heroFireball();
+    if (heroIsMage) {
+      _heroFireball();
+    } else {
+      _heroHeavySlash();
+    }
   }
 
   @override
@@ -150,29 +162,36 @@ class AfkGame extends FlameGame {
     elapsed += t;
     if (!fighting || busy) return;
 
-    fireCd = math.max(0, fireCd - t);
-    nextIce -= t;
-    nextWolf -= t;
+    ultCd = math.max(0, ultCd - t);
+    nextHeroAtk -= t;
+    nextEnemyAtk -= t;
 
-    if (nextIce <= 0) {
-      nextIce = 1.15 + _rng.nextDouble() * 0.4;
+    if (nextHeroAtk <= 0) {
+      nextHeroAtk = 1.15 + _rng.nextDouble() * 0.4;
       // ignore: discarded_futures
-      _heroIce();
-    } else if (nextWolf <= 0) {
-      nextWolf = 1.35 + _rng.nextDouble() * 0.45;
+      if (heroIsMage) {
+        _heroIce();
+      } else {
+        _heroSlash();
+      }
+    } else if (nextEnemyAtk <= 0) {
+      nextEnemyAtk = 1.35 + _rng.nextDouble() * 0.45;
       // ignore: discarded_futures
-      _wolfBite();
+      _enemyBite();
     }
 
-    // AFK auto fireball when ready
-    if (fireCd <= 0 && !busy && _rng.nextDouble() < 0.012) {
+    if (ultCd <= 0 && !busy && _rng.nextDouble() < 0.012) {
       // ignore: discarded_futures
-      _heroFireball();
+      if (heroIsMage) {
+        _heroFireball();
+      } else {
+        _heroHeavySlash();
+      }
     }
   }
 
   Future<void> _heroIce() async {
-    if (done || busy || !fighting || hero.dead || wolf.dead) return;
+    if (done || busy || !fighting || hero.dead || foe.dead) return;
     busy = true;
     // ignore: unawaited_futures
     hero.playCast(duration: 0.42 / speed);
@@ -184,7 +203,7 @@ class AfkGame extends FlameGame {
     }
 
     final start = hero.position + Vector2(40, -110);
-    final target = wolf.position + Vector2(-20, -70);
+    final target = foe.position + Vector2(-20, -70);
     await add(
       IceIcicle(
         sprite: iceSprite,
@@ -192,9 +211,9 @@ class AfkGame extends FlameGame {
         target: target,
         onHit: (at) {
           add(IceShatter(at: at));
-          _damageWolf(14 + _rng.nextDouble() * 8, 'Сосулька');
+          _damageFoe(14 + _rng.nextDouble() * 8, 'Сосулька');
           // ignore: discarded_futures
-          wolf.playHurt(duration: 0.32 / speed);
+          foe.playHurt(duration: 0.32 / speed);
           _shake();
         },
       ),
@@ -205,9 +224,9 @@ class AfkGame extends FlameGame {
   }
 
   Future<void> _heroFireball() async {
-    if (done || busy || !fighting || hero.dead || wolf.dead) return;
+    if (done || busy || !fighting || hero.dead || foe.dead) return;
     busy = true;
-    fireCd = 5.5;
+    ultCd = 5.5;
     onToast('Огненный шар!');
     // ignore: unawaited_futures
     hero.playCast(duration: 0.5 / speed);
@@ -219,7 +238,7 @@ class AfkGame extends FlameGame {
     }
 
     final start = hero.position + Vector2(30, -120);
-    final target = wolf.position + Vector2(-10, -80);
+    final target = foe.position + Vector2(-10, -80);
     await add(
       Fireball(
         sprite: fireSprite,
@@ -227,9 +246,9 @@ class AfkGame extends FlameGame {
         target: target,
         onHit: (at) {
           add(ExplosionBurst(sprite: boomSprite, at: at));
-          _damageWolf(28 + _rng.nextDouble() * 12, 'Огненный шар');
+          _damageFoe(28 + _rng.nextDouble() * 12, 'Огненный шар');
           // ignore: discarded_futures
-          wolf.playHurt(duration: 0.4 / speed);
+          foe.playHurt(duration: 0.4 / speed);
           _shake(strong: true);
         },
       ),
@@ -239,11 +258,55 @@ class AfkGame extends FlameGame {
     busy = false;
   }
 
-  Future<void> _wolfBite() async {
-    if (done || busy || !fighting || hero.dead || wolf.dead) return;
+  Future<void> _heroSlash() async {
+    if (done || busy || !fighting || hero.dead || foe.dead) return;
     busy = true;
     // ignore: unawaited_futures
-    wolf.playMeleeLunge(duration: 0.48 / speed);
+    hero.playMeleeLunge(duration: 0.48 / speed);
+
+    await Future<void>.delayed(Duration(milliseconds: (170 / speed).round()));
+    if (done) {
+      busy = false;
+      return;
+    }
+
+    _damageFoe(16 + _rng.nextDouble() * 8, 'Удар');
+    // ignore: discarded_futures
+    foe.playHurt(duration: 0.32 / speed);
+    _shake();
+
+    await Future<void>.delayed(Duration(milliseconds: (320 / speed).round()));
+    busy = false;
+  }
+
+  Future<void> _heroHeavySlash() async {
+    if (done || busy || !fighting || hero.dead || foe.dead) return;
+    busy = true;
+    ultCd = 5.5;
+    onToast('Мощный удар!');
+    // ignore: unawaited_futures
+    hero.playMeleeLunge(duration: 0.55 / speed);
+
+    await Future<void>.delayed(Duration(milliseconds: (200 / speed).round()));
+    if (done) {
+      busy = false;
+      return;
+    }
+
+    _damageFoe(30 + _rng.nextDouble() * 12, 'Мощный удар');
+    // ignore: discarded_futures
+    foe.playHurt(duration: 0.4 / speed);
+    _shake(strong: true);
+
+    await Future<void>.delayed(Duration(milliseconds: (380 / speed).round()));
+    busy = false;
+  }
+
+  Future<void> _enemyBite() async {
+    if (done || busy || !fighting || hero.dead || foe.dead) return;
+    busy = true;
+    // ignore: unawaited_futures
+    foe.playMeleeLunge(duration: 0.48 / speed);
 
     await Future<void>.delayed(Duration(milliseconds: (180 / speed).round()));
     if (done) {
@@ -253,7 +316,7 @@ class AfkGame extends FlameGame {
 
     final dmg = 9 + _rng.nextDouble() * 7;
     heroHp = math.max(0, heroHp - dmg);
-    onToast('Волк кусает · −${dmg.round()}');
+    onToast('${enemyKit.name} бьёт · −${dmg.round()}');
     // ignore: unawaited_futures
     hero.playHurt(duration: 0.34 / speed);
     _shake();
@@ -271,16 +334,16 @@ class AfkGame extends FlameGame {
     busy = false;
   }
 
-  void _damageWolf(double dmg, String label) {
+  void _damageFoe(double dmg, String label) {
     if (done) return;
-    wolfHp = math.max(0, wolfHp - dmg);
+    foeHp = math.max(0, foeHp - dmg);
     onToast('$label · −${dmg.round()}');
-    if (wolfHp <= 0 && !done) {
+    if (foeHp <= 0 && !done) {
       done = true;
       fighting = false;
       // ignore: discarded_futures
       () async {
-        await wolf.playDeath(duration: 0.85 / speed);
+        await foe.playDeath(duration: 0.85 / speed);
         onFinished(true);
         busy = false;
       }();
@@ -312,7 +375,7 @@ class AfkHud extends PositionComponent with HasGameReference<AfkGame> {
     _bar(
       canvas,
       Rect.fromLTWH(12, 16, size.x * 0.36, 44),
-      'Маг',
+      g.heroKit.name,
       g.heroHp / g.heroMax,
       const Color(0xFF6EC8FF),
       alignRight: false,
@@ -320,8 +383,8 @@ class AfkHud extends PositionComponent with HasGameReference<AfkGame> {
     _bar(
       canvas,
       Rect.fromLTWH(size.x - 12 - size.x * 0.36, 16, size.x * 0.36, 44),
-      'Волк',
-      g.wolfHp / g.wolfMax,
+      g.enemyKit.name,
+      g.foeHp / g.foeMax,
       const Color(0xFFE35D6A),
       alignRight: true,
     );
@@ -353,8 +416,7 @@ class AfkHud extends PositionComponent with HasGameReference<AfkGame> {
     );
     tp.paint(canvas, Offset(size.x / 2 - tp.width / 2, 34 - tp.height / 2));
 
-    // fireball CD pip
-    final cd = g.fireCd;
+    final cd = g.ultCd;
     final cdText = cd <= 0 ? 'ULT готов' : 'ULT ${cd.toStringAsFixed(1)}с';
     final cdp = TextPainter(
       text: TextSpan(

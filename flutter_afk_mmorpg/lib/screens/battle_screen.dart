@@ -2,15 +2,25 @@ import 'package:flame/game.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../game/afk_game.dart';
+import '../game/roster.dart';
 
 class BattleScreen extends StatefulWidget {
-  const BattleScreen({super.key});
+  const BattleScreen({
+    super.key,
+    required this.heroId,
+    required this.enemyId,
+  });
+
+  final String heroId;
+  final String enemyId;
 
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
 
 class _BattleScreenState extends State<BattleScreen> {
+  late final FighterKit heroKit;
+  late final FighterKit enemyKit;
   late final AfkGame game;
   String toast = 'Автобой';
   bool finished = false;
@@ -20,7 +30,11 @@ class _BattleScreenState extends State<BattleScreen> {
   @override
   void initState() {
     super.initState();
+    heroKit = heroById(widget.heroId);
+    enemyKit = enemyById(widget.enemyId);
     game = AfkGame(
+      heroKit: heroKit,
+      enemyKit: enemyKit,
       onToast: (t) {
         if (mounted) setState(() => toast = t);
       },
@@ -29,7 +43,9 @@ class _BattleScreenState extends State<BattleScreen> {
         setState(() {
           finished = true;
           won = didWin;
-          toast = didWin ? 'Волк повержен' : 'Маг пал…';
+          toast = didWin
+              ? '${enemyKit.name} повержен'
+              : '${heroKit.name} пал…';
         });
       },
     );
@@ -40,6 +56,8 @@ class _BattleScreenState extends State<BattleScreen> {
     game.pauseEngine();
     super.dispose();
   }
+
+  String get ultLabel => heroKit.melee ? 'Мощный удар' : 'Огненный шар';
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +92,9 @@ class _BattleScreenState extends State<BattleScreen> {
                             Expanded(
                               flex: 6,
                               child: _Btn(
-                                label: 'Огненный шар',
+                                label: ultLabel,
                                 hot: true,
-                                onPressed: () => game.castFireball(),
+                                onPressed: () => game.castUlt(),
                               ),
                             ),
                             const SizedBox(width: 8),

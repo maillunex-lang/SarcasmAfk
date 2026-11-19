@@ -22,3 +22,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/roster/mage/
+    - assets/images/roster/swordsman/
+    - assets/images/roster/knight/
+    - assets/images/roster/wolf/
+    - assets/images/roster/skeleton/
+    - assets/images/roster/goblin/
+    - assets/images/roster/forest/
+    - assets/images/roster/CREDITS.md

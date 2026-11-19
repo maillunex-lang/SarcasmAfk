@@ -6,7 +6,7 @@
 
 ## NOW
 
-1. **Flutter AFK MMORPG demo** — 2.5D vertical маг vs волк (`flutter_afk_mmorpg/`); ice icicle + fireball. Branch `cursor/flutter-afk-mmorpg-4106`.  
+1. **Flutter AFK MMORPG demo** — roster select: 3 heroes + 4 enemies (`flutter_afk_mmorpg/`); OGA sprite anims + mage ice/fireball. Branch `cursor/flutter-afk-mmorpg-4106`.  
 2. City hub (D-UI-CITY-01) + stretch `expand` kept; AFK-shell battle design rejected (archive restore on `main`).  
 3. Owner blockers unchanged: T-128 device accept, T-129 live URL, T-126 keystore, T-131 Stage E, T-153 payments.
 
@@ -30,7 +30,7 @@
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |
 | Release signed APK | `BLOCKED` | T-126 keystore |
 | REPO-REORG-001 | `DONE_VERIFIED` | merged #27 |
-| Flutter AFK MMORPG demo | `PARTIAL` (demo) | `flutter_afk_mmorpg/` 2.5D маг vs волк; ice/fireball VFX |
+| Flutter AFK MMORPG demo | `PARTIAL` (demo) | roster picker 3 heroes/4 foes; OGA strips + mage VFX |
 
 ## BLOCKED (owner)
 
