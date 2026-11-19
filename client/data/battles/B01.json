@@ -1,0 +1,47 @@
+{
+  "battle_id": "B01",
+  "quest_id": "CH01-Q01",
+  "location_id": "L01",
+  "title": "Живые талоны",
+  "tutorial": "basic_autobattle",
+  "enemies": [
+    {
+      "id": "E01_a",
+      "enemy_type": "E01",
+      "name": "Живой талон",
+      "row": "front",
+      "hp": 420,
+      "atk": 95,
+      "defense": 30,
+      "speed": 120,
+      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+    },
+    {
+      "id": "E01_b",
+      "enemy_type": "E01",
+      "name": "Живой талон",
+      "row": "front",
+      "hp": 420,
+      "atk": 95,
+      "defense": 30,
+      "speed": 115,
+      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+    },
+    {
+      "id": "E01_c",
+      "enemy_type": "E01",
+      "name": "Живой талон",
+      "row": "back",
+      "hp": 380,
+      "atk": 110,
+      "defense": 25,
+      "speed": 130,
+      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+    }
+  ],
+  "first_clear_reward": {
+    "soft": 500,
+    "commander_xp": 50,
+    "bundle_id": "CH01-Q01-B01-FIRST_CLEAR"
+  }
+}

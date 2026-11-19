@@ -342,10 +342,17 @@
 - Доказательства: `client/assets/ASSET_MANIFEST.md`
 - Следующий шаг: T-031 или review арта
 
+### 2026-11-19 — V0-C / playable autofight stub (T-040)
+- Статус: ГОТОВО (stub, не MVP)
+- Сделано: GameState, BattleEngine ATB, B01.json, roster_v0, ручные ULT, speed, first-clear reward idempotent, quest CH01-Q01 flag; smoke_v0c EXIT 0
+- Не сделано: Blender atlases (T-031 blocked), баланс, сервер
+- Доказательства: `client/scripts/battle/`, `client/data/battles/B01.json`
+- Следующий шаг: T-050 / T-020
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-010 / T-030~~ — сделано (каркас + draft-ассеты по элементам).
-2. Далее: **T-031** Blender→atlas **или** review V0-B; параллельно **T-020** API.
+1. ~~T-010 / T-030 / T-040~~ — playable stub готов.
+2. Далее: **T-050** review или **T-020** API; **T-031** при наличии Blender.
 3. Запреты: главы 02–12, массовые ассеты вне очереди, rename.

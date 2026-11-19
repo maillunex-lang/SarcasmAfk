@@ -14,14 +14,14 @@ func _ready() -> void:
 	add_child(dim)
 
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("L01 · Площадь талонов", 42, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Уфа · слои sky / far / mid", 24, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label("L01 · Площадь талонов", 40, DesignTokens.COLOR_ACCENT_GOLD))
+	vbox.add_child(DesignTokens.make_label("Точка задания CH01-Q01", 24, DesignTokens.COLOR_TEXT_MUTED))
 
 	var prop := TextureRect.new()
 	prop.texture = AssetPaths.tex(AssetPaths.L01_TERMINAL)
 	prop.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	prop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	prop.custom_minimum_size = Vector2(0, 420)
+	prop.custom_minimum_size = Vector2(0, 400)
 	prop.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	vbox.add_child(prop)
 
@@ -29,9 +29,14 @@ func _ready() -> void:
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(spacer)
 
-	var dialog_btn := DesignTokens.make_button("Открыть диалог CH01-Q01", true)
+	var dialog_btn := DesignTokens.make_button("Говорить с терминалом", true)
 	dialog_btn.pressed.connect(func() -> void: SceneNav.to_dialog(get_tree()))
 	vbox.add_child(dialog_btn)
+
+	# Allow skipping straight to battle after first visit / for retries
+	var battle_btn := DesignTokens.make_button("В бой B01", false)
+	battle_btn.pressed.connect(func() -> void: SceneNav.to_battle(get_tree()))
+	vbox.add_child(battle_btn)
 
 	var back := DesignTokens.make_button("На главную", false)
 	back.pressed.connect(func() -> void: SceneNav.to_home(get_tree()))
