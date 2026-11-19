@@ -10,6 +10,7 @@
 | [`STATUS.md`](STATUS.md) | Снимок: сделано / не сделано / NOW |
 | [`TASK_QUEUE.md`](TASK_QUEUE.md) | Очерёдность задач |
 | [`DECISIONS.md`](DECISIONS.md) | Утверждённые решения |
+| [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) | Открытые вопросы к владельцу (T-126…T-129) |
 
 ## 1. Продукт и процесс
 
