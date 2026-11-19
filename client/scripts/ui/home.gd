@@ -13,9 +13,16 @@ func _ready() -> void:
 
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 
-	var brand := DesignTokens.make_label(DesignTokens.DISPLAY_NAME, 44, DesignTokens.COLOR_ACCENT_GOLD)
+	var brand := DesignTokens.make_label(DesignTokens.DISPLAY_NAME, 42, DesignTokens.COLOR_ACCENT_GOLD)
 	vbox.add_child(brand)
-	vbox.add_child(DesignTokens.make_label(DesignTokens.SLOGAN, 26, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label(DesignTokens.SLOGAN, 24, DesignTokens.COLOR_TEXT_MUTED))
+
+	var resources := DesignTokens.make_label(
+		"Soft: %d   ·   XP: %d" % [GameState.soft_currency, GameState.commander_xp],
+		26,
+		DesignTokens.COLOR_ACCENT_CYAN
+	)
+	vbox.add_child(resources)
 
 	var stage := PanelContainer.new()
 	stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -30,12 +37,20 @@ func _ready() -> void:
 	hero.texture = AssetPaths.tex(AssetPaths.H01_FULL)
 	hero.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	hero.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	hero.custom_minimum_size = Vector2(0, 720)
+	hero.custom_minimum_size = Vector2(0, 640)
 	hero.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	stage_box.add_child(hero)
-	stage_box.add_child(DesignTokens.make_label("H01 · Каэрон", 36, DesignTokens.COLOR_TEXT_IVORY))
+	stage_box.add_child(DesignTokens.make_label("H01 · Каэрон", 34, DesignTokens.COLOR_TEXT_IVORY))
 
-	var campaign := DesignTokens.make_button("В кампанию", true)
+	var quest_done := GameState.is_quest_done("CH01-Q01")
+	var quest_label := DesignTokens.make_label(
+		"CH01-Q01: завершён" if quest_done else "CH01-Q01: Талон в неизвестность",
+		24,
+		DesignTokens.COLOR_SUCCESS_MINT if quest_done else DesignTokens.COLOR_TEXT_MUTED
+	)
+	vbox.add_child(quest_label)
+
+	var campaign := DesignTokens.make_button("В кампанию" if not quest_done else "В кампанию (повтор)", true)
 	campaign.pressed.connect(func() -> void: SceneNav.to_l01(get_tree()))
 	vbox.add_child(campaign)
 
@@ -45,11 +60,11 @@ func _ready() -> void:
 	vbox.add_child(afk_row)
 	var afk_icon := TextureRect.new()
 	afk_icon.texture = AssetPaths.tex(AssetPaths.ICON_AFK)
-	afk_icon.custom_minimum_size = Vector2(96, 96)
+	afk_icon.custom_minimum_size = Vector2(88, 88)
 	afk_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	afk_icon.stretch_mode = TextureRect.STRETCH_SCALE
 	afk_row.add_child(afk_icon)
-	var afk := DesignTokens.make_button("AFK (заглушка)", false)
+	var afk := DesignTokens.make_button("AFK (скоро)", false)
 	afk.disabled = true
 	afk_row.add_child(afk)
 

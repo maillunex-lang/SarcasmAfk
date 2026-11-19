@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "note": "Placeholder combat stats for V0 — not final balance",
+  "heroes": [
+    {
+      "id": "H01",
+      "name": "Каэрон",
+      "class": "warrior",
+      "rarity": "SR",
+      "row": "front",
+      "hp": 1200,
+      "atk": 180,
+      "defense": 90,
+      "speed": 110,
+      "energy_max": 100,
+      "ultimate_id": "rulebreak",
+      "ultimate_name": "Прорыв регламента",
+      "sprite": "res://assets/characters/H01/H01_full.jpg",
+      "portrait": "res://assets/characters/H01/H01_portrait.jpg"
+    },
+    {
+      "id": "H02",
+      "name": "Вейриса",
+      "class": "support",
+      "rarity": "SR",
+      "row": "back",
+      "hp": 900,
+      "atk": 120,
+      "defense": 70,
+      "speed": 100,
+      "energy_max": 100,
+      "ultimate_id": "emergency_repair",
+      "ultimate_name": "Аварийный ремонт",
+      "sprite": "res://assets/characters/H02/H02_full.jpg",
+      "portrait": "res://assets/characters/H02/H02_portrait.jpg"
+    },
+    {
+      "id": "H03",
+      "name": "Эльдарион",
+      "class": "mage",
+      "rarity": "SSR",
+      "row": "back",
+      "hp": 850,
+      "atk": 210,
+      "defense": 55,
+      "speed": 95,
+      "energy_max": 100,
+      "ultimate_id": "paragraph_oblivion",
+      "ultimate_name": "Параграф забвения",
+      "sprite": "res://assets/characters/H03/H03_full.jpg",
+      "portrait": "res://assets/characters/H03/H03_portrait.jpg"
+    }
+  ]
+}

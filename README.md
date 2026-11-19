@@ -18,14 +18,14 @@
 
 ## Быстрый статус (см. актуальный STATUS.md)
 
-- Сделано: docs + V0 decisions + **`client/` Godot 4.3 V0-A skeleton** (Splash→Home→L01→Dialog→Battle).
-- Дальше: **T-030** точечный арт V0-B и/или **T-020** Phase 0 API.
-- Запрещено сейчас: массовые ассеты, главы 02–12, rename.
+- Сделано: docs + draft-арт + **играбельный V0-C stub** (Splash→Home→L01→Dialog→autofight B01→награда).
+- Дальше: review / Phase 0 API / Blender-атласы когда доступны.
+- Запрещено: массовые ассеты вне очереди, главы 02–12, rename.
 
 ```bash
 godot4 --path client
-# smoke:
 godot4 --headless --path client -s res://scripts/tools/smoke_v0a.gd
+godot4 --headless --path client -s res://scripts/tools/smoke_v0c.gd
 ```
 
 

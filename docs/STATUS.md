@@ -1,58 +1,48 @@
 # STATUS.md — Единый снимок состояния проекта
 
 > **Канон для ИИ и людей.** Обновлять в конце каждого значимого шага.  
-> Дата снимка: **2026-11-19** · Ветка работы: `cursor/phase0-design-docs-beaf` · сливать в `main`  
-> Документы ≠ полный прототип. V0-A каркас клиента: **есть** (`client/`).
+> Дата снимка: **2026-11-19** · Ветка: `cursor/phase0-design-docs-beaf` → `main`  
+> Играбельный stub V0-C есть; это **не** полный MVP.
 
 ## NOW (текущий фокус)
 
-**Текущая / следующая:** `T-031` пилот Blender→atlas **или** review арта V0-B; параллельно `T-020` API.  
-**Только что:** `T-030` — точечные ассеты V0 сгенерированы по одному и подключены в `client/`.  
-**Не делать:** массовая генерация вне V0; главы 02–12; rename; объявление MVP готовым.
+**Следующее:** review V0 (`T-050`) / `T-020` API / подготовка T-031 когда появится Blender.  
+**Сделано только что:** `T-040` V0-C — autofight B01, GameState, награды, quest flag.  
+**Не делать:** главы 02–12; массовые ассеты вне очереди; rename; объявлять MVP готовым.
 
-Полная очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md).
+Очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
 ## Сводка статусов
 
 | Область | Статус | Доказательство |
 |---|---|---|
-| GDD каркас | СПЕЦИФИКАЦИЯ КАРКАСА УТВЕРЖДЕНА | `GDD.md` |
-| ROAD / журнал | ВЕДЁТСЯ | `ROAD.md` |
-| Навигация для ИИ | ГОТОВО | `AGENTS.md`, STATUS, TASK_QUEUE, DECISIONS, INDEX |
-| Решения V0 | УТВЕРЖДЕНО | `DECISIONS.md` |
-| План V0 | ГОТОВ | `V0_IMPLEMENTATION_PLAN.md` |
-| **Godot-клиент V0-A** | **ГОТОВО (каркас)** | `client/project.godot`, сцены, smoke OK |
-| **Ассеты V0-B (draft)** | **ГОТОВО (draft, по элементам)** | `client/assets/` + `ASSET_MANIFEST.md` |
-| Combat atlases Blender | НЕ НАЧАТО | T-031 |
-| Backend Go/API | НЕ НАЧАТО | — |
-| CI GitHub Actions | НЕ НАЧАТО | — |
-| Главы 02–12 | НЕ НАЧАТО | — |
+| Docs / VIS / V0 decisions | ГОТОВО (спека) | `docs/` |
+| Godot V0-A skeleton | ГОТОВО | `client/` scenes |
+| Draft art V0-B | ГОТОВО (draft) | `client/assets/` |
+| **Playable V0-C** | **ГОТОВО (stub)** | GameState + BattleEngine + B01 |
+| Blender atlases T-031 | BLOCKED | нет Blender в среде |
+| Backend / CI | НЕ НАЧАТО | — |
 
 ## Что сделано (факты)
 
-1. Документы дизайна + AI handoff в `main`.
-2. Решения V0 утверждены.
-3. **V0-A:** Godot 4.3 каркас `client/`.
-4. **V0-B:** отдельные draft-ассеты (UI, фоны, L01 слои, арена, H01–H03, E01, диалоговые портреты) в `client/assets/`; подключены к экранам; smoke OK.
-5. Манифест: `client/assets/ASSET_MANIFEST.md`.
+1. Документы + AI handoff + draft-арт.
+2. Клиент: Splash→Home→L01→Dialog→**autofight B01**→награда→Home.
+3. `GameState` save/load, idempotent first-clear reward.
+4. Ручные ультимейты + скорость ×1/×2.
+5. Smoke: `smoke_v0a.gd`, `smoke_v0c.gd` EXIT 0.
 
 ## Чего нет
 
-- Нет финального paintover / прозрачных combat-атласов (T-031).
-- Нет реального автобоя / RPG-цифр / APK / сервера / CI.
-- Draft-арт **не** равен утверждённому финалу (нужен review T-050).
-- Это **не** готовый MVP.
+- Финальный баланс / 5 героев всегда / полный CH01.
+- Blender combat atlases.
+- Сервер, CI, APK.
+- AFK экономика.
 
-## Очерёдность верхнего уровня
+## Очерёдность
 
 ```
-DONE: docs + V0-A + V0-B draft assets (поэлементно)
- → T-031 Blender→atlas пилот H01
- → T-040 / T-050 review
- → T-020 API параллельно
- → далее ROAD Фаза 1; НЕ главы 02–12
+DONE: … → T-040 V0-C playable stub
+ → T-050 review / T-020 API
+ → T-031 когда есть Blender
+ → ROAD Фаза 1 (не главы 02–12)
 ```
-
-## Как обновлять этот файл
-
-После каждой задачи: сдвинуть NOW → обновить таблицу → `TASK_QUEUE` → журнал `ROAD.md` §8 → commit/push → merge в `main`.

@@ -28,8 +28,8 @@
 | T-020 | P2 | **TODO** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` (создать) | T-001 |
 | T-021 | P2 | **TODO** | Минимальный CI (docs/lint или Godot check) | `.github/workflows/…` | T-010 желательно |
 | T-030 | P1 | **DONE** | **V0-B:** точечный арт только среза | `client/assets/` поэлементно + wire-in | T-010 |
-| T-031 | P1 | **TODO** | Пилот Blender→atlas на H01 | один bake + import Godot | T-030 |
-| T-040 | P1 | **TODO** | **V0-C:** demo-path в Godot | Splash→Home→L01→Dialog→Battle→Home | T-030, T-031 |
+| T-031 | P1 | **BLOCKED** | Пилот Blender→atlas на H01 | нет Blender в среде; combat = still sprites | T-030 |
+| T-040 | P1 | **DONE** | **V0-C:** playable demo-path | autofight B01 + GameState + rewards | T-030 |
 | T-050 | P1 | **TODO** | **V0-D:** review владельца + стоп-линия | список правок V0 only | T-040 |
 | T-060 | P3 | **TODO** | Расширение арта CH01 (L02–L10) | по LOCATION/CAMPAIGN | T-050 |
 | T-070 | P3 | **TODO** | Клиент MVP экраны (ROAD Фаза 1) | 12 экранов на моках | T-050, T-020 |
@@ -46,6 +46,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-030
+## Следующий конкретный шаг после T-040
 
-**T-031** Blender→atlas пилот H01, затем **T-040** сборка; или review владельца по draft-арту. `T-020` API — параллельно.
+**T-050** review владельца; параллельно **T-020** Phase 0 API. **T-031** — когда доступен Blender.
