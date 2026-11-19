@@ -8,7 +8,7 @@ if [[ -n "${DATABASE_URL:-}" ]]; then
   if [[ -n "${REDIS_ADDR:-}" ]]; then
     ARGS+=(-redis "$REDIS_ADDR")
   fi
-  ARGS+=(-migrate "$ROOT/server/migrations/001_init.sql")
+  ARGS+=(-migrate "$ROOT/server/migrations")
 else
   ARGS+=(-persist "${PERSIST:-$ROOT/server/.data/accounts.json}")
 fi

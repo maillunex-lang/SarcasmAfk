@@ -47,12 +47,18 @@ func auth(t *testing.T, h http.Handler) string {
 
 func TestHealthReadyMetrics(t *testing.T) {
 	h := newTestServer(t)
-	for _, path := range []string{"/healthz", "/readyz", "/v1/admin/metrics"} {
+	for _, path := range []string{"/healthz", "/readyz"} {
 		rr := httptest.NewRecorder()
 		h.ServeHTTP(rr, httptest.NewRequest(http.MethodGet, path, nil))
 		if rr.Code != 200 {
 			t.Fatalf("%s => %d %s", path, rr.Code, rr.Body.String())
 		}
+	}
+	// Admin locked without ADMIN_API_KEY
+	rr := httptest.NewRecorder()
+	h.ServeHTTP(rr, httptest.NewRequest(http.MethodGet, "/v1/admin/metrics", nil))
+	if rr.Code != 503 && rr.Code != 401 {
+		t.Fatalf("admin metrics expected locked, got %d %s", rr.Code, rr.Body.String())
 	}
 }
 

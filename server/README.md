@@ -24,7 +24,7 @@ export REDIS_ADDR=127.0.0.1:6379
 ../scripts/run_api.sh
 ```
 
-Migration: `migrations/001_init.sql` (auto-applied on start with `-migrate`).
+Migrations: `migrations/*.sql` (directory auto-applied with `-migrate`). Set `ADMIN_API_KEY` to unlock `/v1/admin/*`.
 
 ## Endpoints
 
@@ -32,7 +32,9 @@ Migration: `migrations/001_init.sql` (auto-applied on start with `-migrate`).
 |---|---|---|
 | GET | `/healthz` | no |
 | GET | `/readyz` | no |
-| GET | `/v1/admin/metrics` | no (stub; lock down later) |
+| GET | `/v1/admin/metrics` | `ADMIN_API_KEY` (viewer+) |
+| GET | `/v1/admin/audit` | `ADMIN_API_KEY` (admin) |
+| POST | `/v1/battles/{id}/command` | Bearer (ultimate) |
 | POST | `/v1/auth/anonymous` | no |
 | GET | `/v1/me/progress` | Bearer |
 | PUT | `/v1/me/party` | Bearer |

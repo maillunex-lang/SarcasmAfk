@@ -70,19 +70,34 @@ func _apply_api_mode() -> void:
 
 
 func set_live_api(enabled: bool, url: String = "") -> Dictionary:
-	prefer_live_api = enabled
 	if url != "":
 		live_api_url = url
-	_apply_api_mode()
+	if enabled:
+		var probe: Dictionary = api.probe_live(live_api_url)
+		if not bool(probe.get("ok", false)):
+			# D-NET-04: do not silently switch to mock; keep previous mode
+			return {
+				"ok": false,
+				"error": str(probe.get("error", "LIVE_FAILED")),
+				"live": not api.is_mock(),
+				"mock": api.is_mock(),
+				"detail": probe,
+			}
+		prefer_live_api = true
+		save_game()
+		progress_changed.emit()
+		return {
+			"ok": true,
+			"live": true,
+			"mock": false,
+			"token": api.auth_token,
+			"base_url": api.base_url,
+		}
+	prefer_live_api = false
+	api.configure_mock()
 	save_game()
 	progress_changed.emit()
-	return {
-		"ok": true,
-		"live": prefer_live_api,
-		"mock": api.is_mock(),
-		"token": api.auth_token,
-		"base_url": api.base_url,
-	}
+	return {"ok": true, "live": false, "mock": true, "base_url": api.base_url}
 
 
 func _load_content_packs() -> void:
@@ -224,8 +239,41 @@ func needs_dialogue() -> bool:
 	return pending_dialogue_quest_id != "" and pending_dialogue_quest_id == active_quest_id
 
 
-func complete_battle(battle_id: String) -> Dictionary:
-	var info := {"newly_completed": false, "quest_completed": false, "next_battle_id": "", "reward": {}}
+func complete_battle(battle_id: String, server_finish: Dictionary = {}) -> Dictionary:
+	var info := {"newly_completed": false, "quest_completed": false, "next_battle_id": "", "reward": {}, "server_authoritative": false}
+	# Live: only apply progress if server confirmed victory (D-COMBAT-05).
+	if api != null and not api.is_mock():
+		info["server_authoritative"] = true
+		if not bool(server_finish.get("ok", false)) or not bool(server_finish.get("victory", false)):
+			info["error"] = str(server_finish.get("error", "SERVER_NO_VICTORY"))
+			return info
+		if is_battle_completed(battle_id):
+			info["next_battle_id"] = _next_incomplete_battle()
+			return info
+		completed_battles[battle_id] = true
+		info["newly_completed"] = true
+		var srew: Dictionary = server_finish.get("reward", {})
+		if typeof(srew) == TYPE_DICTIONARY and not srew.is_empty():
+			soft_currency += int(srew.get("soft_delta", 0))
+			commander_xp += int(srew.get("xp_delta", 0))
+			var bid := str(srew.get("bundle_id", ""))
+			if bid != "":
+				claimed_rewards[bid] = true
+			info["reward"] = srew
+		var next_id := _next_incomplete_battle()
+		info["next_battle_id"] = next_id
+		active_battle_id = next_id
+		if next_id == "":
+			var qid := active_quest_id
+			if qid != "" and not is_quest_completed(qid):
+				completed_quests[qid] = true
+				info["quest_completed"] = true
+				active_quest_id = ""
+				active_battle_id = ""
+		progress_changed.emit()
+		save_game()
+		return info
+
 	if is_battle_completed(battle_id):
 		info["next_battle_id"] = _next_incomplete_battle()
 		return info
@@ -236,14 +284,14 @@ func complete_battle(battle_id: String) -> Dictionary:
 	var bundle := str(reward.get("bundle_id", battle_id + "-FIRST"))
 	claim_reward(bundle, int(reward.get("soft", 0)), int(reward.get("commander_xp", 0)))
 	info["reward"] = reward
-	var next_id := _next_incomplete_battle()
-	info["next_battle_id"] = next_id
-	active_battle_id = next_id
-	if next_id == "":
-		var qid := active_quest_id
-		if qid != "" and not is_quest_completed(qid):
-			completed_quests[qid] = true
-			var qrew_bundle := str(catalog.get_quest(qid).get("reward_bundle_id", qid + "-FIRST_CLEAR"))
+	var next_id2 := _next_incomplete_battle()
+	info["next_battle_id"] = next_id2
+	active_battle_id = next_id2
+	if next_id2 == "":
+		var qid2 := active_quest_id
+		if qid2 != "" and not is_quest_completed(qid2):
+			completed_quests[qid2] = true
+			var qrew_bundle := str(catalog.get_quest(qid2).get("reward_bundle_id", qid2 + "-FIRST_CLEAR"))
 			claim_reward(qrew_bundle, 300, 40)
 			info["quest_completed"] = true
 			active_quest_id = ""
@@ -279,10 +327,17 @@ func export_progress() -> Dictionary:
 	return api.get_progress(self)
 
 
-func set_battle_result(result: Dictionary) -> void:
+func set_battle_result(result: Dictionary) -> Dictionary:
 	last_battle_result = result
-	if api and result.has("battle_id"):
-		api.finish_battle(str(result.get("battle_id", "")), bool(result.get("victory", false)))
+	if api == null or not result.has("battle_id"):
+		return {"ok": true, "skipped": true}
+	var fin: Dictionary = api.finish_battle(
+		str(result.get("battle_id", "")),
+		bool(result.get("victory", false)),
+		int(result.get("duration_ms", 1500))
+	)
+	last_battle_result["server_finish"] = fin
+	return fin
 
 
 func is_quest_done(quest_id: String) -> bool:

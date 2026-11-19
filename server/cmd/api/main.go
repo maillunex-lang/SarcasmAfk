@@ -45,9 +45,9 @@ func main() {
 		mig := *migrate
 		if mig == "" {
 			wd, _ := os.Getwd()
-			cand := filepath.Join(wd, "migrations", "001_init.sql")
+			cand := filepath.Join(wd, "migrations")
 			if _, err := os.Stat(cand); err != nil {
-				cand = filepath.Join(wd, "..", "migrations", "001_init.sql")
+				cand = filepath.Join(wd, "..", "migrations")
 			}
 			mig = cand
 		}

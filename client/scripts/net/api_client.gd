@@ -35,6 +35,35 @@ func configure_mock() -> void:
 	auth_token = ""
 
 
+## Probe live server (health + anonymous auth). Never silently falls back to mock (D-NET-04).
+func probe_live(url: String = DEFAULT_BASE) -> Dictionary:
+	var prev_mock := use_mock
+	var prev_url := base_url
+	var prev_token := auth_token
+	configure_live(url)
+	# healthz is outside /v1 prefix
+	var health_path := "/healthz"
+	var saved_prefix := _prefix
+	_prefix = ""
+	var health := _http("GET", health_path)
+	_prefix = saved_prefix
+	if not bool(health.get("ok", false)):
+		# restore previous mode — do not force mock
+		use_mock = prev_mock
+		base_url = prev_url
+		auth_token = prev_token
+		_parse_base(prev_url)
+		return {"ok": false, "error": "LIVE_UNREACHABLE", "detail": health, "mock": use_mock}
+	var auth := auth_anonymous()
+	if not bool(auth.get("ok", false)):
+		use_mock = prev_mock
+		base_url = prev_url
+		auth_token = prev_token
+		_parse_base(prev_url)
+		return {"ok": false, "error": "LIVE_AUTH_FAILED", "detail": auth, "mock": use_mock}
+	return {"ok": true, "token": auth_token, "base_url": base_url, "mock": false, "health": health}
+
+
 func _parse_base(url: String) -> void:
 	_tls = url.begins_with("https://")
 	var rest := url
@@ -344,7 +373,7 @@ func start_battle(battle_id: String, party_ids: Array) -> Dictionary:
 
 
 func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Dictionary:
-	## POST /battles/{id}/finish
+	## POST /battles/{id}/finish — live: server victory authoritative
 	var path := "/battles/%s/finish" % battle_id
 	if not use_mock:
 		if auth_token == "":
@@ -352,6 +381,7 @@ func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Di
 		var res := _http("POST", path, {
 			"victory": victory,
 			"duration_ms": duration_ms,
+			"balance_version": "2026.11.19-atb1",
 		})
 		_log("POST", path, bool(res.get("ok", false)))
 		return res
@@ -365,6 +395,18 @@ func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Di
 		"mock": true,
 		"note": "client victory trusted only while use_mock",
 	}
+
+
+func send_battle_command(battle_id: String, op: String, unit_id: String, at_tick: int = 0) -> Dictionary:
+	var path := "/battles/%s/command" % battle_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "op": op, "unit_id": unit_id}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"op": op, "unit_id": unit_id, "at_tick": at_tick})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
 
 
 func put_party(party_ids: Array) -> Dictionary:
