@@ -32,6 +32,9 @@ func _ready() -> void:
 		18,
 		DesignTokens.COLOR_TEXT_MUTED
 	))
+	var poi_btn := DesignTokens.make_button("Точки интереса / побочные", true)
+	poi_btn.pressed.connect(func() -> void: SceneNav.to_poi(get_tree()))
+	vbox.add_child(poi_btn)
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL

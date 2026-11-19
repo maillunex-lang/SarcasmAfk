@@ -601,3 +601,84 @@ func vip_claim_daily() -> Dictionary:
 	var res := _http("POST", path, {})
 	_log("POST", path, bool(res.get("ok", false)))
 	return res
+
+
+func ch01_sidequests() -> Dictionary:
+	var path := "/campaign/ch01/sidequests"
+	if use_mock:
+		var data := _read_json("res://data/quests/ch01_sidequests.json")
+		_log("GET", path, true)
+		return {"ok": true, "sidequests": data.get("sidequests", []), "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func ch01_sidequest_start(quest_id: String) -> Dictionary:
+	var path := "/campaign/ch01/sidequests/%s/start" % quest_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "quest_id": quest_id}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func ch01_sidequest_claim(quest_id: String) -> Dictionary:
+	var path := "/campaign/ch01/sidequests/%s/claim" % quest_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "already": false, "mock": true, "quest_id": quest_id}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func ch01_poi_interact(poi_id: String, action_id: String) -> Dictionary:
+	var path := "/campaign/ch01/poi/%s/interact" % poi_id
+	if use_mock:
+		var puzzle_reset := false
+		# Client GameState applies sequence rules; mock flags wrong SQ02 order via GameState.
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "poi_id": poi_id, "action_id": action_id, "puzzle_reset": puzzle_reset}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"action_id": action_id})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func ch01_journal() -> Dictionary:
+	var path := "/campaign/ch01/journal"
+	if use_mock:
+		_log("GET", path, true)
+		return {
+			"ok": true,
+			"mock": true,
+			"journal_flags": GameState.journal_flags,
+			"sidequests": GameState.sidequest_progress,
+			"poi_progress": GameState.poi_progress,
+		}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func hero_skill_up(hero_id: String, skill_id: String) -> Dictionary:
+	var path := "/heroes/%s/skill-up" % hero_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": true, "mock": true, "hero_id": hero_id, "skill_id": skill_id}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"skill_id": skill_id})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res

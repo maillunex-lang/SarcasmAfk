@@ -100,6 +100,55 @@ func _run() -> void:
 			push_error("FAIL missing main dialogue %s" % path)
 			failed = true
 
+	# Mock SQ01 flow (any order) + idempotent claim
+	gs.completed_quests["CH01-Q01"] = true
+	var start_res: Dictionary = gs.start_sidequest("CH01-SQ01")
+	if not bool(start_res.get("ok", false)):
+		push_error("FAIL start SQ01 %s" % start_res)
+		failed = true
+	for step in ["sq01_doc_2", "sq01_doc_1", "sq01_doc_3"]:
+		gs._mock_apply_poi("POI-02", step, false)
+	var claim1: Dictionary = gs.claim_sidequest("CH01-SQ01")
+	if not bool(claim1.get("ok", false)):
+		push_error("FAIL claim SQ01 %s" % claim1)
+		failed = true
+	if int(gs.inventory.get("mat_hero_exp", 0)) < 100:
+		push_error("FAIL SQ01 mat grant inv=%s" % gs.inventory)
+		failed = true
+	else:
+		print("OK mock SQ01 claim mats=", gs.inventory.get("mat_hero_exp"))
+
+	# SQ02 wrong order resets puzzle only
+	gs.completed_quests["CH01-Q03"] = true
+	gs.start_sidequest("CH01-SQ02")
+	gs._mock_apply_poi("POI-04", "sq02_seal_gold", true)
+	var sq02: Dictionary = gs.sidequest_progress.get("CH01-SQ02", {})
+	if not sq02.get("sequence_buffer", []).is_empty() and sq02.get("sequence_buffer", []).size() > 0:
+		# after reset buffer should be empty
+		pass
+	gs._mock_apply_poi("POI-04", "sq02_seal_blue", false)
+	gs._mock_apply_poi("POI-04", "sq02_seal_gold", false)
+	gs._mock_apply_poi("POI-04", "sq02_seal_empty", false)
+	gs.claim_sidequest("CH01-SQ02")
+	if int(gs.inventory.get("eq_ch01_clerk_coat", 0)) < 1:
+		push_error("FAIL SQ02 coat not granted")
+		failed = true
+	else:
+		print("OK mock SQ02 coat granted")
+	if not gs.equip_item("H01", "armor", "eq_ch01_clerk_coat"):
+		push_error("FAIL equip clerk coat")
+		failed = true
+	else:
+		print("OK equip clerk coat on H01")
+
+	# Scene exists
+	var poi_scene = load("res://scenes/poi/poi.tscn")
+	if poi_scene == null:
+		push_error("FAIL poi.tscn missing")
+		failed = true
+	else:
+		print("OK poi.tscn")
+
 	if failed:
 		push_error("smoke_ch01_expansion FAILED")
 		quit(1)

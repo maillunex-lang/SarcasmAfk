@@ -98,6 +98,8 @@
 | T-152 | P4 | **DONE** | Guild quests/vault/member board (+ war/boss hooks empty) | donate + quests + migration 005 | T-146 |
 | T-154 | P3 | **DONE** | Persist chat hub to Postgres (`PostgresChat`) | migration 006 + main wire | T-151 |
 | T-155 | P1 | **DONE** | UI TEMP art: home/shop/VIP + H13–H36 portraits/fulls + AssetPaths | `client/assets` + home/shop/vip screens | owner art request |
+| T-156 | P1 | **DONE** | CH01 RPG Expansion A–C: sidequests/POI data + campaign API + POI UI | `CH01_RPG_EXPANSION.md` + migration 007 | owner TZ |
+| T-157 | P1 | **TODO** | CH01 Expansion E: full E2E + debug APK + owner report | smoke + APK | T-156 |
 | T-153 | P6 | **TODO** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
 | T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |

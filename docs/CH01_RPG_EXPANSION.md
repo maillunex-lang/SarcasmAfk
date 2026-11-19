@@ -21,9 +21,9 @@
 |---|---|---|
 | A | Data: sidequests, POI, dialogues, rewards, equipment + validation | DONE |
 | B | Go API + PG migration + idempotent claims + skill-up/equip DEF | DONE |
-| C | Godot UI POI / журнал / sidequests | следующий |
-| D | RPG tutorial + server skill/equip combat effects in battle sim | частичнo (skill ATK/equip DEF API) |
-| E | E2E + debug APK + STATUS/ROAD | следующий |
+| C | Godot UI POI / журнал / sidequests + ApiClient mock/live | DONE |
+| D | RPG tutorial inserts EX-01…06 + skill/equip combat stats API | DONE (battle sim unit inject — follow-up) |
+| E | E2E + debug APK + STATUS/ROAD | частичнo (docs/STATUS updated; APK optional) |
 
 ### Срез B — API
 
