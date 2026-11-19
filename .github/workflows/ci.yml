@@ -117,12 +117,13 @@ jobs:
           REDIS_ADDR: ""
         run: bash scripts/smoke_live_api.sh
       - name: Live API smoke (postgres+redis)
+        working-directory: server
         run: |
           set -euo pipefail
-          go build -o /tmp/bashlegends-api ./server/cmd/api
-          /tmp/bashlegends-api -addr :8081 -content client/data \
+          go build -o /tmp/bashlegends-api ./cmd/api
+          /tmp/bashlegends-api -addr :8081 -content ../client/data \
             -database-url "$DATABASE_URL" -redis "$REDIS_ADDR" \
-            -migrate server/migrations/001_init.sql &
+            -migrate migrations/001_init.sql &
           PID=$!
           trap 'kill $PID' EXIT
           for i in $(seq 1 40); do curl -fsS http://127.0.0.1:8081/healthz && break; sleep 0.15; done
