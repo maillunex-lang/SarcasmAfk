@@ -48,7 +48,8 @@ Migration: `migrations/001_init.sql` (auto-applied on start with `-migrate`).
 | GET | `/v1/arena` | Bearer |
 | GET | `/v1/events` | no |
 
-Battle finish: requires active session, `duration_ms >= 300`, soft power/seed check (`RESULT_MISMATCH` / `BATTLE_TOO_FAST`).
+Battle finish: requires active session, `duration_ms >= 300`, then **ATB tick-sim** (`RESULT_MISMATCH` / `BATTLE_TOO_FAST`).  
+Load smoke: `bash scripts/load_smoke.sh`.
 
 Client Godot defaults `ApiClient.use_mock=true`. Live:
 

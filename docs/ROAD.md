@@ -67,10 +67,11 @@
 ### Фаза 2. Сервер и замена моков
 - [x] Go API, авторизация anonymous, модели прогресса *(memory + Postgres/Redis T-085)*.
 - [x] Серверные награды, лимит AFK 24 часа, экономика, гача и защита от дублей *(T-082)*.
-- [x] Старт/финиш боёв + soft power/seed verify *(T-083/T-088/T-085; full tick-sim later)*.
+- [x] Старт/финиш боёв + ATB tick-sim verify *(T-083/T-088/T-097/T-098)*.
 - [x] Гильдии, арена, события — клиентские API stubs *(T-084)*.
 - [x] Админка stub: `/readyz`, `/v1/admin/metrics`, request logging, `backup_db.sh` *(T-093…T-096; RBAC later)*.
-- [ ] Интеграционные тесты, нагрузочные проверки, тестовый онлайн и APK.
+- [x] Нагрузочный smoke *(T-099)*; Android export preset example *(T-100)*.
+- [ ] Подписанный тестовый APK / online (нужны SDK + templates).
 
 ### Фаза 3. Приёмка расширенного MVP
 - [ ] Все обязательные сценарии MVP работают без моков в релизном режиме.
@@ -413,10 +414,16 @@
 - Не сделано: RBAC admin, full tick-sim, APK
 - Следующий шаг: tick-sim / load / APK
 
+### 2026-11-19 — Phase 2 tick-sim + load T-097…T-100
+- Статус: ГОТОВО
+- Сделано: ATB tick-sim, finish uses sim, `load_smoke.sh`, `export_presets.cfg.example`
+- Не сделано: signed APK, ultimates auto-cast on server
+- Следующий шаг: APK / ultimates-in-sim / T-031
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-060 / T-061 / T-081…T-089 / T-085 / T-093…T-096~~ — сделано.
-2. Далее: tick-sim / load / APK online; T-031 при Blender.
+1. ~~T-060…T-100 Phase2 stubs~~ — сделано.
+2. Далее: signed APK / ultimates-in-sim; T-031 при Blender.
 3. Запреты: главы 02–12, rename.
