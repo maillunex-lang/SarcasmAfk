@@ -6,8 +6,8 @@
 
 ## NOW
 
-MONSTERS-CH01-001: 29 TEMP-концептов + мультифрейм-атласы (idle/attack/hit/death/special/telegraph), бой проигрывает анимации, Бестиарий.  
-VFX/SFX ещё MISSING. Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
+MONSTERS-CH01-001: 29 TEMP-концептов + атласы + shared VFX/SFX, бой с анимациями/FX, Бестиарий.  
+Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
 
 ## Работает / частично / заглушки
 

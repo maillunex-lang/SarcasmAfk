@@ -2,7 +2,7 @@
   "version": 1,
   "balance_version": "MONSTERS-CH01-001-draft-1",
   "status": "draft",
-  "note": "Abilities Draft. TEMP multi-frame atlases for all 29 (procedural from concepts). Not Stage E / D-ART-06 final art.",
+  "note": "Abilities Draft. TEMP atlases + shared TEMP VFX/SFX for all 29. Not Stage E / D-ART-06 final art.",
   "enemies": [
     {
       "id": "E01",
@@ -30,7 +30,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E01/concept.jpg",
         "portrait": "res://assets/enemies/E01/portrait.jpg",
         "sprite": "res://assets/enemies/E01/atlases/idle.jpg",
@@ -41,6 +41,18 @@
           "death": "res://assets/enemies/E01/atlases/death.jpg",
           "special": "res://assets/enemies/E01/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E01/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -71,7 +83,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E02/concept.jpg",
         "portrait": "res://assets/enemies/E02/portrait.jpg",
         "sprite": "res://assets/enemies/E02/atlases/idle.jpg",
@@ -82,6 +94,18 @@
           "death": "res://assets/enemies/E02/atlases/death.jpg",
           "special": "res://assets/enemies/E02/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E02/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/weaken.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -112,7 +136,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E03/concept.jpg",
         "portrait": "res://assets/enemies/E03/portrait.jpg",
         "sprite": "res://assets/enemies/E03/atlases/idle.jpg",
@@ -123,6 +147,18 @@
           "death": "res://assets/enemies/E03/atlases/death.jpg",
           "special": "res://assets/enemies/E03/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E03/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -153,7 +189,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E04/concept.jpg",
         "portrait": "res://assets/enemies/E04/portrait.jpg",
         "sprite": "res://assets/enemies/E04/atlases/idle.jpg",
@@ -164,6 +200,18 @@
           "death": "res://assets/enemies/E04/atlases/death.jpg",
           "special": "res://assets/enemies/E04/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E04/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -194,7 +242,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E05/concept.jpg",
         "portrait": "res://assets/enemies/E05/portrait.jpg",
         "sprite": "res://assets/enemies/E05/atlases/idle.jpg",
@@ -205,6 +253,18 @@
           "death": "res://assets/enemies/E05/atlases/death.jpg",
           "special": "res://assets/enemies/E05/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E05/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/slow.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -235,7 +295,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E06/concept.jpg",
         "portrait": "res://assets/enemies/E06/portrait.jpg",
         "sprite": "res://assets/enemies/E06/atlases/idle.jpg",
@@ -246,6 +306,18 @@
           "death": "res://assets/enemies/E06/atlases/death.jpg",
           "special": "res://assets/enemies/E06/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E06/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/disrupt.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -276,7 +348,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E07/concept.jpg",
         "portrait": "res://assets/enemies/E07/portrait.jpg",
         "sprite": "res://assets/enemies/E07/atlases/idle.jpg",
@@ -287,6 +359,18 @@
           "death": "res://assets/enemies/E07/atlases/death.jpg",
           "special": "res://assets/enemies/E07/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E07/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -317,7 +401,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E08/concept.jpg",
         "portrait": "res://assets/enemies/E08/portrait.jpg",
         "sprite": "res://assets/enemies/E08/atlases/idle.jpg",
@@ -328,6 +412,18 @@
           "death": "res://assets/enemies/E08/atlases/death.jpg",
           "special": "res://assets/enemies/E08/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E08/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -358,7 +454,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E09/concept.jpg",
         "portrait": "res://assets/enemies/E09/portrait.jpg",
         "sprite": "res://assets/enemies/E09/atlases/idle.jpg",
@@ -369,6 +465,18 @@
           "death": "res://assets/enemies/E09/atlases/death.jpg",
           "special": "res://assets/enemies/E09/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E09/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -399,7 +507,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E10/concept.jpg",
         "portrait": "res://assets/enemies/E10/portrait.jpg",
         "sprite": "res://assets/enemies/E10/atlases/idle.jpg",
@@ -410,6 +518,18 @@
           "death": "res://assets/enemies/E10/atlases/death.jpg",
           "special": "res://assets/enemies/E10/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E10/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/slow.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -440,7 +560,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E11/concept.jpg",
         "portrait": "res://assets/enemies/E11/portrait.jpg",
         "sprite": "res://assets/enemies/E11/atlases/idle.jpg",
@@ -451,6 +571,18 @@
           "death": "res://assets/enemies/E11/atlases/death.jpg",
           "special": "res://assets/enemies/E11/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E11/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -481,7 +613,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E12/concept.jpg",
         "portrait": "res://assets/enemies/E12/portrait.jpg",
         "sprite": "res://assets/enemies/E12/atlases/idle.jpg",
@@ -492,6 +624,18 @@
           "death": "res://assets/enemies/E12/atlases/death.jpg",
           "special": "res://assets/enemies/E12/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E12/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -522,7 +666,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E13/concept.jpg",
         "portrait": "res://assets/enemies/E13/portrait.jpg",
         "sprite": "res://assets/enemies/E13/atlases/idle.jpg",
@@ -533,6 +677,18 @@
           "death": "res://assets/enemies/E13/atlases/death.jpg",
           "special": "res://assets/enemies/E13/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E13/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/weaken.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -563,7 +719,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E14/concept.jpg",
         "portrait": "res://assets/enemies/E14/portrait.jpg",
         "sprite": "res://assets/enemies/E14/atlases/idle.jpg",
@@ -574,6 +730,18 @@
           "death": "res://assets/enemies/E14/atlases/death.jpg",
           "special": "res://assets/enemies/E14/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E14/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -604,7 +772,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E15/concept.jpg",
         "portrait": "res://assets/enemies/E15/portrait.jpg",
         "sprite": "res://assets/enemies/E15/atlases/idle.jpg",
@@ -615,6 +783,18 @@
           "death": "res://assets/enemies/E15/atlases/death.jpg",
           "special": "res://assets/enemies/E15/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E15/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/weaken.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -645,7 +825,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E16/concept.jpg",
         "portrait": "res://assets/enemies/E16/portrait.jpg",
         "sprite": "res://assets/enemies/E16/atlases/idle.jpg",
@@ -656,6 +836,18 @@
           "death": "res://assets/enemies/E16/atlases/death.jpg",
           "special": "res://assets/enemies/E16/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E16/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/burn.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -686,7 +878,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E17/concept.jpg",
         "portrait": "res://assets/enemies/E17/portrait.jpg",
         "sprite": "res://assets/enemies/E17/atlases/idle.jpg",
@@ -697,6 +889,18 @@
           "death": "res://assets/enemies/E17/atlases/death.jpg",
           "special": "res://assets/enemies/E17/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E17/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -727,7 +931,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E20/concept.jpg",
         "portrait": "res://assets/enemies/E20/portrait.jpg",
         "sprite": "res://assets/enemies/E20/atlases/idle.jpg",
@@ -738,6 +942,18 @@
           "death": "res://assets/enemies/E20/atlases/death.jpg",
           "special": "res://assets/enemies/E20/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E20/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/boss_burst.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -768,7 +984,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E21/concept.jpg",
         "portrait": "res://assets/enemies/E21/portrait.jpg",
         "sprite": "res://assets/enemies/E21/atlases/idle.jpg",
@@ -779,6 +995,18 @@
           "death": "res://assets/enemies/E21/atlases/death.jpg",
           "special": "res://assets/enemies/E21/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E21/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/heal.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/heal.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -809,7 +1037,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E22/concept.jpg",
         "portrait": "res://assets/enemies/E22/portrait.jpg",
         "sprite": "res://assets/enemies/E22/atlases/idle.jpg",
@@ -820,6 +1048,18 @@
           "death": "res://assets/enemies/E22/atlases/death.jpg",
           "special": "res://assets/enemies/E22/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E22/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -850,7 +1090,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E23/concept.jpg",
         "portrait": "res://assets/enemies/E23/portrait.jpg",
         "sprite": "res://assets/enemies/E23/atlases/idle.jpg",
@@ -861,6 +1101,18 @@
           "death": "res://assets/enemies/E23/atlases/death.jpg",
           "special": "res://assets/enemies/E23/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E23/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/disrupt.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -891,7 +1143,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E24/concept.jpg",
         "portrait": "res://assets/enemies/E24/portrait.jpg",
         "sprite": "res://assets/enemies/E24/atlases/idle.jpg",
@@ -902,6 +1154,18 @@
           "death": "res://assets/enemies/E24/atlases/death.jpg",
           "special": "res://assets/enemies/E24/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E24/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -932,7 +1196,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E25/concept.jpg",
         "portrait": "res://assets/enemies/E25/portrait.jpg",
         "sprite": "res://assets/enemies/E25/atlases/idle.jpg",
@@ -943,6 +1207,18 @@
           "death": "res://assets/enemies/E25/atlases/death.jpg",
           "special": "res://assets/enemies/E25/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E25/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -973,7 +1249,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E26/concept.jpg",
         "portrait": "res://assets/enemies/E26/portrait.jpg",
         "sprite": "res://assets/enemies/E26/atlases/idle.jpg",
@@ -984,6 +1260,18 @@
           "death": "res://assets/enemies/E26/atlases/death.jpg",
           "special": "res://assets/enemies/E26/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E26/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1014,7 +1302,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E27/concept.jpg",
         "portrait": "res://assets/enemies/E27/portrait.jpg",
         "sprite": "res://assets/enemies/E27/atlases/idle.jpg",
@@ -1025,6 +1313,18 @@
           "death": "res://assets/enemies/E27/atlases/death.jpg",
           "special": "res://assets/enemies/E27/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E27/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/mark.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1055,7 +1355,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E28/concept.jpg",
         "portrait": "res://assets/enemies/E28/portrait.jpg",
         "sprite": "res://assets/enemies/E28/atlases/idle.jpg",
@@ -1066,6 +1366,18 @@
           "death": "res://assets/enemies/E28/atlases/death.jpg",
           "special": "res://assets/enemies/E28/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E28/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/shield.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1096,7 +1408,7 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E29/concept.jpg",
         "portrait": "res://assets/enemies/E29/portrait.jpg",
         "sprite": "res://assets/enemies/E29/atlases/idle.jpg",
@@ -1107,6 +1419,18 @@
           "death": "res://assets/enemies/E29/atlases/death.jpg",
           "special": "res://assets/enemies/E29/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E29/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/slow.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1137,7 +1461,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E29A/concept.jpg",
         "portrait": "res://assets/enemies/E29A/portrait.jpg",
         "sprite": "res://assets/enemies/E29A/atlases/idle.jpg",
@@ -1148,6 +1472,18 @@
           "death": "res://assets/enemies/E29A/atlases/death.jpg",
           "special": "res://assets/enemies/E29A/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E29A/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/mark.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/shield.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"
@@ -1178,7 +1514,7 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "TEMP_ATLAS",
+        "status": "TEMP_ATLAS_VFX",
         "concept": "res://assets/enemies/E30/concept.jpg",
         "portrait": "res://assets/enemies/E30/portrait.jpg",
         "sprite": "res://assets/enemies/E30/atlases/idle.jpg",
@@ -1189,6 +1525,18 @@
           "death": "res://assets/enemies/E30/atlases/death.jpg",
           "special": "res://assets/enemies/E30/atlases/special.jpg",
           "telegraph": "res://assets/enemies/E30/atlases/telegraph.jpg"
+        },
+        "vfx": {
+          "hit": "res://assets/vfx/shared/hit.png",
+          "death": "res://assets/vfx/shared/death_burst.png",
+          "special": "res://assets/vfx/shared/boss_burst.png",
+          "telegraph": "res://assets/vfx/shared/telegraph.png"
+        },
+        "sfx": {
+          "attack": "res://assets/sfx/shared/attack.ogg",
+          "hit": "res://assets/sfx/shared/hit.ogg",
+          "death": "res://assets/sfx/shared/death.ogg",
+          "special": "res://assets/sfx/shared/special.ogg"
         }
       },
       "bestiary_unlock": "first_encounter"

@@ -1,0 +1,57 @@
+{
+  "asset_id": "vfx_shield",
+  "animation": "shield",
+  "frame_count": 6,
+  "frame_w": 128,
+  "frame_h": 128,
+  "atlas_w": 768,
+  "atlas_h": 128,
+  "image": "shield.png",
+  "transparent": true,
+  "status": "TEMP_VFX",
+  "note": "TEMP procedural shared VFX — not Stage E (D-ART-06)",
+  "frames": [
+    {
+      "name": "shield_00",
+      "x": 0,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    },
+    {
+      "name": "shield_01",
+      "x": 128,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    },
+    {
+      "name": "shield_02",
+      "x": 256,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    },
+    {
+      "name": "shield_03",
+      "x": 384,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    },
+    {
+      "name": "shield_04",
+      "x": 512,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    },
+    {
+      "name": "shield_05",
+      "x": 640,
+      "y": 0,
+      "w": 128,
+      "h": 128
+    }
+  ]
+}

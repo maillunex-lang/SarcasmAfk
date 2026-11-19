@@ -165,6 +165,11 @@ func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 	box.add_theme_constant_override("separation", 8)
 	panel.add_child(box)
 
+	var sprite_host := Control.new()
+	sprite_host.custom_minimum_size = Vector2(0, 140)
+	sprite_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.add_child(sprite_host)
+
 	var sprite: TextureRect
 	if unit.team == "enemy" and unit.unit_type != "":
 		var anim_sprite := CombatSpriteRect.new()
@@ -173,10 +178,13 @@ func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 	else:
 		sprite = TextureRect.new()
 		sprite.texture = AssetPaths.tex(unit.sprite_path)
-		sprite.custom_minimum_size = Vector2(0, 140)
 		sprite.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	box.add_child(sprite)
+	sprite.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	sprite_host.add_child(sprite)
+
+	var fx := CombatFxOverlay.new()
+	sprite_host.add_child(fx)
 
 	box.add_child(DesignTokens.make_label(unit.display_name, 22, DesignTokens.COLOR_TEXT_IVORY))
 
@@ -212,7 +220,16 @@ func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 		ult_btn.pressed.connect(func() -> void: _cast_ultimate(uid))
 		box.add_child(ult_btn)
 
-	_unit_widgets[unit.id] = {"panel": panel, "hp": hp, "energy": energy, "ult": ult_btn, "sprite": sprite}
+	_unit_widgets[unit.id] = {
+		"panel": panel,
+		"hp": hp,
+		"energy": energy,
+		"ult": ult_btn,
+		"sprite": sprite,
+		"fx": fx,
+		"unit_type": unit.unit_type,
+		"team": unit.team,
+	}
 	return panel
 
 
@@ -245,6 +262,37 @@ func _on_action_resolved(actor: BattleUnit, target: BattleUnit) -> void:
 		(tw["sprite"] as CombatSpriteRect).play_once("hit")
 	elif tw.has("sprite") and tw["sprite"] is CombatSpriteRect and not target.alive:
 		(tw["sprite"] as CombatSpriteRect).play("death", false)
+	_play_combat_fx(actor, target)
+
+
+func _play_combat_fx(actor: BattleUnit, target: BattleUnit) -> void:
+	var aw: Dictionary = _unit_widgets.get(actor.id, {}) as Dictionary
+	var tw: Dictionary = _unit_widgets.get(target.id, {}) as Dictionary
+	var actor_fx: CombatFxOverlay = aw.get("fx", null) as CombatFxOverlay
+	var target_fx: CombatFxOverlay = tw.get("fx", null) as CombatFxOverlay
+	var entry: Dictionary = {}
+	if actor.team == "enemy" and actor.unit_type != "":
+		entry = AssetPaths.enemy_fx_entry(actor.unit_type)
+	elif target.team == "enemy" and target.unit_type != "":
+		entry = AssetPaths.enemy_fx_entry(target.unit_type)
+	var attack_sfx := str(entry.get("attack_sfx", AssetPaths.shared_sfx("attack")))
+	var hit_vfx := str(entry.get("hit_vfx", AssetPaths.shared_vfx("hit")))
+	var hit_sfx := str(entry.get("hit_sfx", AssetPaths.shared_sfx("hit")))
+	var death_vfx := str(entry.get("death_vfx", AssetPaths.shared_vfx("death_burst")))
+	var death_sfx := str(entry.get("death_sfx", AssetPaths.shared_sfx("death")))
+	var special_vfx := str(entry.get("special_vfx", AssetPaths.shared_vfx("special_burst")))
+	var special_sfx := str(entry.get("special_sfx", AssetPaths.shared_sfx("special")))
+	if actor_fx != null:
+		# Attack cue on actor; special flash if enemy special kind is non-basic.
+		actor_fx.play_sfx(attack_sfx)
+		if actor.team == "enemy":
+			actor_fx.play_vfx(special_vfx)
+			actor_fx.play_sfx(special_sfx)
+	if target_fx != null:
+		if target.alive:
+			target_fx.play_pair(hit_vfx, hit_sfx)
+		else:
+			target_fx.play_pair(death_vfx, death_sfx)
 
 
 func _on_log(text: String) -> void:

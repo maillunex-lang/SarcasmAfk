@@ -18,7 +18,7 @@
 | UI арт (home/shop/VIP) | ЧАСТИЧНО | TEMP BG/icons/banner/badges wired (T-155); Stage E blocked |
 | EQUIPMENT-001 | ЧАСТИЧНО | Catalog 32 + unique instances + API + TEMP icons + arsenal UI; random drop OFF; Draft balance |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
-| MONSTERS-CH01 atlases | ЧАСТИЧНО | TEMP 8-frame JPEG strips ×29; VFX/SFX MISSING; не Stage E |
+| MONSTERS-CH01 atlases/VFX | ЧАСТИЧНО | TEMP atlases ×29 + shared TEMP VFX/SFX; не Stage E |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
 | Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |
@@ -319,12 +319,19 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — MONSTERS-CH01-001 TEMP VFX/SFX
+
+- Shared TEMP VFX sheets (12) + procedural OGG SFX (10); registry maps special.kind → FX.
+- Battle `CombatFxOverlay` plays hit/special/death VFX+SFX on `action_resolved`.
+- Generator `scripts/generate_temp_enemy_vfx_sfx.py`; validator covers vfx/sfx paths.
+- Labeled TEMP not FINAL Stage E (D-ART-06).
+
 ### Журнал 2026-11-19 — MONSTERS-CH01-001 TEMP multi-frame atlases
 
 - Procedural TEMP atlases for all 29: idle/attack/hit/death/special/telegraph (8×256 JPEG + JSON).
 - Generator `scripts/generate_temp_enemy_atlases.py`; validator checks atlases + combat idle stills.
 - Battle: `CombatSpriteRect` + `action_resolved` plays attack/hit/death; catalog/registry/battles wired.
-- VFX/SFX still MISSING; labeled TEMP not FINAL Stage E (D-ART-06).
+- VFX/SFX followed in later journal entry; labeled TEMP not FINAL Stage E (D-ART-06).
 
 ### Журнал 2026-11-19 — MONSTERS-CH01-001 Stage D TEMP art
 

@@ -194,3 +194,39 @@ static func enemy_sprite_for_type(enemy_type: String) -> String:
 		return concept
 	# Last-resort legacy placeholders (should not hit after MONSTERS-CH01-001).
 	return "res://assets/enemies/E01/E01_living_ticket.jpg"
+
+
+static func shared_vfx(vfx_id: String) -> String:
+	var path := "res://assets/vfx/shared/%s.png" % vfx_id
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
+static func shared_sfx(sfx_id: String) -> String:
+	var path := "res://assets/sfx/shared/%s.ogg" % sfx_id
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
+static func enemy_fx_registry() -> Dictionary:
+	var path := "res://data/enemies/enemy_vfx_sfx_registry.json"
+	if not ResourceLoader.exists(path):
+		return {}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {}
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	file.close()
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return {}
+	return parsed
+
+
+static func enemy_fx_entry(enemy_type: String) -> Dictionary:
+	var reg := enemy_fx_registry()
+	var enemies: Dictionary = reg.get("enemies", {}) as Dictionary
+	if enemies.has(enemy_type):
+		return enemies[enemy_type] as Dictionary
+	return {}

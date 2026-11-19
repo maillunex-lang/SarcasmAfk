@@ -80,8 +80,37 @@ def main() -> None:
     reg = json.loads((ROOT / "client/data/enemies/enemy_art_registry.json").read_text(encoding="utf-8"))
     if int(reg.get("count_temp_atlases", 0)) != 29:
         fail("registry count_temp_atlases != 29")
+    fxreg_path = ROOT / "client/data/enemies/enemy_vfx_sfx_registry.json"
+    if not fxreg_path.exists():
+        fail("missing enemy_vfx_sfx_registry.json")
+    fxreg = json.loads(fxreg_path.read_text(encoding="utf-8"))
+    if int(fxreg.get("count_enemies", 0)) != 29:
+        fail("vfx/sfx registry count_enemies != 29")
+    for vfx_id, ref in (fxreg.get("vfx") or {}).items():
+        rel = str(ref).replace("res://", "")
+        png = ROOT / "client" / rel
+        if not png.exists():
+            fail(f"missing shared vfx {png}")
+        meta = png.with_suffix(".json")
+        if not meta.exists():
+            fail(f"missing vfx meta {meta}")
+    for sfx_id, ref in (fxreg.get("sfx") or {}).items():
+        rel = str(ref).replace("res://", "")
+        ogg = ROOT / "client" / rel
+        if not ogg.exists():
+            fail(f"missing shared sfx {ogg}")
+    for e in enemies:
+        art = e.get("art", {})
+        for bucket in ("vfx", "sfx"):
+            block = art.get(bucket, {})
+            if not isinstance(block, dict) or not block:
+                fail(f"{e['id']} missing art.{bucket}")
+            for _k, ref in block.items():
+                rel = str(ref).replace("res://", "")
+                if not (ROOT / "client" / rel).exists():
+                    fail(f"{e['id']} missing {bucket} file {rel}")
     print("OK monsters-ch01 validation")
-    print(f"  enemies=29 battles_types={len(used)} atlases={len(ANIMS)} frames>={MIN_FRAMES}")
+    print(f"  enemies=29 battles_types={len(used)} atlases={len(ANIMS)} frames>={MIN_FRAMES} vfx_sfx=TEMP")
 
 
 if __name__ == "__main__":

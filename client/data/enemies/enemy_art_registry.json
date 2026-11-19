@@ -1,9 +1,11 @@
 {
   "version": 1,
   "balance_version": "MONSTERS-CH01-001-draft-1",
-  "policy": "TEMP multi-frame atlases for all 29 (procedural). D-ART-06: not FINAL Stage E.",
+  "policy": "TEMP multi-frame atlases + shared TEMP VFX/SFX for all 29. D-ART-06: not FINAL Stage E.",
   "count_temp_concepts": 29,
   "count_temp_atlases": 29,
+  "count_temp_vfx_sfx": 1,
+  "vfx_sfx_registry": "res://data/enemies/enemy_vfx_sfx_registry.json",
   "count_unique": 29,
   "anims": [
     "idle",
