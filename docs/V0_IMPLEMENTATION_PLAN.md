@@ -96,14 +96,16 @@
 
 ## 5. Критерии успеха V0 (Definition of Done)
 
-- [ ] Splash и Home показывают рабочее название.
-- [ ] L01 и ARENA-L01 в едином стиле, 9:16.
-- [ ] H01–H03 и E01 имеют концепт + static dialog/UI portrait + боевой атлас (или явно помеченный placeholder с планом bake).
-- [ ] Диалог CH01-Q01 с портретами, skip/next, без lipsync.
-- [ ] Пайплайн Blender→atlas задокументирован на одном пилотном герое.
-- [ ] Пресеты Low/Med/High описаны и хотя бы Low проверен на срезе.
-- [ ] ROAD.md обновлён фактическим статусом.
-- [ ] Нет заявлений, что MVP/игра «готовы».
+См. актуальный разбор: [`V0_REVIEW.md`](V0_REVIEW.md).
+
+- [x] Splash и Home показывают рабочее название.
+- [x] L01 и ARENA-L01 в едином стиле, 9:16 (draft).
+- [x] H01–H03 и E01: concept/portrait; combat atlas — placeholder (T-031 blocked).
+- [x] Диалог CH01-Q01 с портретами, skip/next, без lipsync.
+- [ ] Пайплайн Blender→atlas пилот H01 — blocked без Blender.
+- [~] Пресеты Low/Med/High описаны; runtime toggle нет.
+- [x] ROAD.md обновлён фактическим статусом.
+- [x] Нет заявлений, что MVP/игра «готовы».
 
 ## 6. Оценка объёма ассетов (лимит V0)
 

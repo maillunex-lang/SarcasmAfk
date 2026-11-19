@@ -349,10 +349,18 @@
 - Доказательства: `client/scripts/battle/`, `client/data/battles/B01.json`
 - Следующий шаг: T-050 / T-020
 
+### 2026-11-19 — T-050 / T-020 / T-021 подряд
+- Статус: ГОТОВО (документы + CI workflow)
+- T-050: `docs/V0_REVIEW.md` — DoD, дефекты, стоп-линия
+- T-020: `docs/PHASE0_SPEC.md` — модели, HTTP, соответствие клиенту
+- T-021: `.github/workflows/ci.yml` + `scripts/ci_validate.sh` (JSON + Godot smoke)
+- Не сделано: owner visual sign-off; Go server; Blender atlases
+- Следующий шаг: CH01 B02+ или ApiClient mock
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-010 / T-030 / T-040~~ — playable stub готов.
-2. Далее: **T-050** review или **T-020** API; **T-031** при наличии Blender.
+1. ~~T-040 / T-050 / T-020 / T-021~~ — сделано.
+2. Далее: CH01 контент на моках **или** `ApiClient`; T-031 при Blender.
 3. Запреты: главы 02–12, массовые ассеты вне очереди, rename.

@@ -25,12 +25,12 @@
 | T-006 | P0 | **DONE** | Merge документов в `main` | PR #1 merged | T-005 |
 | T-007 | P0 | **DONE** | Дефрагментация docs для ИИ | `AGENTS.md`, `STATUS`, `INDEX`, `TASK_QUEUE`, `DECISIONS` | T-006 |
 | T-010 | P1 | **DONE** | **V0-A:** Godot 4 skeleton 9:16 | `client/` Splash/Home/L01/Dialog/Battle + smoke | T-007 |
-| T-020 | P2 | **TODO** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` (создать) | T-001 |
-| T-021 | P2 | **TODO** | Минимальный CI (docs/lint или Godot check) | `.github/workflows/…` | T-010 желательно |
+| T-020 | P2 | **DONE** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` | T-001 |
+| T-021 | P2 | **DONE** | Минимальный CI (JSON + Godot smoke) | `.github/workflows/ci.yml` | T-010 |
 | T-030 | P1 | **DONE** | **V0-B:** точечный арт только среза | `client/assets/` поэлементно + wire-in | T-010 |
 | T-031 | P1 | **BLOCKED** | Пилот Blender→atlas на H01 | нет Blender в среде; combat = still sprites | T-030 |
 | T-040 | P1 | **DONE** | **V0-C:** playable demo-path | autofight B01 + GameState + rewards | T-030 |
-| T-050 | P1 | **TODO** | **V0-D:** review владельца + стоп-линия | список правок V0 only | T-040 |
+| T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-060 | P3 | **TODO** | Расширение арта CH01 (L02–L10) | по LOCATION/CAMPAIGN | T-050 |
 | T-070 | P3 | **TODO** | Клиент MVP экраны (ROAD Фаза 1) | 12 экранов на моках | T-050, T-020 |
 | T-080 | P3 | **TODO** | Сервер Go + замена моков (Фаза 2) | TECH-001 | T-070 |
@@ -46,6 +46,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-040
+## Следующий конкретный шаг после T-050 / T-020 / T-021
 
-**T-050** review владельца; параллельно **T-020** Phase 0 API. **T-031** — когда доступен Blender.
+Расширять **CH01** (B02+) на моках **или** добавить Godot `ApiClient` (USE_MOCK). **T-031** — при Blender. Владельцу: визуальный sign-off по `V0_REVIEW.md`.

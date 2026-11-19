@@ -41,8 +41,11 @@
 | Файл | Роль |
 |---|---|
 | [`V0_IMPLEMENTATION_PLAN.md`](V0_IMPLEMENTATION_PLAN.md) | Фазы V0-A…D |
+| [`V0_REVIEW.md`](V0_REVIEW.md) | Review + стоп-линия T-050 |
+| [`PHASE0_SPEC.md`](PHASE0_SPEC.md) | API/data contracts T-020 |
 | [`../client/README.md`](../client/README.md) | Как запустить клиент |
-| `PHASE0_SPEC.md` | **Ещё нет** — создать в задаче T-020 |
+| [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | CI T-021 |
+| [`../scripts/ci_validate.sh`](../scripts/ci_validate.sh) | Локальный CI |
 
 ## 5. Код и ассеты
 
