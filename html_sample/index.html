@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>БашЛегенды — HTML-образец</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stage">
+    <header class="stage-head">
+      <p class="eyebrow">HTML-образец · 9:16</p>
+      <h1>БашЛегенды</h1>
+      <p class="lede">Интерактивный макет оболочки. Кликай экраны на «телефоне» — это не Godot, а то, как UI может выглядеть в HTML.</p>
+    </header>
+
+    <div class="phone-wrap">
+      <div class="phone" id="phone" aria-label="Макет игры">
+        <div class="phone-notch" aria-hidden="true"></div>
+
+        <!-- SPLASH -->
+        <section class="screen" data-screen="splash" id="screen-splash">
+          <div class="splash-bg"></div>
+          <div class="splash-copy">
+            <p class="brand-mark">БашЛегенды</p>
+            <h2>Эпоха Абсурда</h2>
+            <p>Idle AFK · кампания · город Уфа</p>
+            <button class="btn primary" data-go="home">Играть</button>
+          </div>
+        </section>
+
+        <!-- HOME / CITY -->
+        <section class="screen" data-screen="home" id="screen-home" hidden>
+          <div class="city-bg">
+            <div class="city-sky"></div>
+            <div class="city-mid"></div>
+            <div class="city-road"></div>
+            <div class="building b1" data-go="campaign" title="Кампания"></div>
+            <div class="building b2" data-go="heroes" title="Герои"></div>
+            <div class="building b3" data-go="afk" title="AFK"></div>
+            <div class="building b4" data-go="battle" title="Арена боя"></div>
+          </div>
+
+          <header class="top-bar">
+            <div class="avatar" aria-hidden="true"></div>
+            <div class="top-meta">
+              <strong>Командир</strong>
+              <span>Ур.<b id="lvl">3</b> · Сила <b id="power">6280</b></span>
+            </div>
+            <div class="currencies">
+              <span class="chip soft" id="soft">1240</span>
+              <span class="chip hard" id="hard">48</span>
+            </div>
+          </header>
+
+          <aside class="rail left">
+            <button data-go="campaign">Квесты</button>
+            <button data-go="heroes">Герои</button>
+          </aside>
+          <aside class="rail right">
+            <button data-go="afk">AFK</button>
+            <button data-go="battle">Бой</button>
+          </aside>
+
+          <div class="city-title">
+            <p class="brand-inline">БашЛегенды</p>
+            <h2>Уфа</h2>
+            <p>столица Абсурда</p>
+          </div>
+
+          <p class="tip">Тяни взгляд по городу · жми здание</p>
+          <nav class="bottom-nav">
+            <button class="active" data-go="home">Город</button>
+            <button data-go="campaign">Кампания</button>
+            <button data-go="heroes">Герои</button>
+            <button data-go="afk">AFK</button>
+          </nav>
+        </section>
+
+        <!-- CAMPAIGN -->
+        <section class="screen panel-screen" data-screen="campaign" id="screen-campaign" hidden>
+          <header class="panel-head">
+            <button class="back" data-go="home">←</button>
+            <div>
+              <p class="brand-inline">БашЛегенды</p>
+              <h2>Кампания</h2>
+            </div>
+          </header>
+          <div class="panel-body" id="stage-list"></div>
+          <nav class="bottom-nav">
+            <button data-go="home">Город</button>
+            <button class="active" data-go="campaign">Кампания</button>
+            <button data-go="heroes">Герои</button>
+            <button data-go="afk">AFK</button>
+          </nav>
+        </section>
+
+        <!-- HEROES -->
+        <section class="screen panel-screen" data-screen="heroes" id="screen-heroes" hidden>
+          <header class="panel-head">
+            <button class="back" data-go="home">←</button>
+            <div>
+              <p class="brand-inline">БашЛегенды</p>
+              <h2>Герои</h2>
+            </div>
+          </header>
+          <div class="panel-body" id="hero-list"></div>
+          <nav class="bottom-nav">
+            <button data-go="home">Город</button>
+            <button data-go="campaign">Кампания</button>
+            <button class="active" data-go="heroes">Герои</button>
+            <button data-go="afk">AFK</button>
+          </nav>
+        </section>
+
+        <!-- AFK -->
+        <section class="screen panel-screen" data-screen="afk" id="screen-afk" hidden>
+          <header class="panel-head">
+            <button class="back" data-go="home">←</button>
+            <div>
+              <p class="brand-inline">БашЛегенды</p>
+              <h2>AFK</h2>
+            </div>
+          </header>
+          <div class="panel-body afk-body">
+            <div class="afk-meter">
+              <div class="afk-fill" id="afk-fill"></div>
+            </div>
+            <p class="afk-hours" id="afk-hours">Накоплено 2.4 ч / 8 ч</p>
+            <p class="afk-reward" id="afk-reward">+216 soft</p>
+            <button class="btn primary" id="claim-afk">Забрать</button>
+            <p class="muted">Офлайн-награды копятся, пока ты в бюрократическом отпуске.</p>
+          </div>
+          <nav class="bottom-nav">
+            <button data-go="home">Город</button>
+            <button data-go="campaign">Кампания</button>
+            <button data-go="heroes">Герои</button>
+            <button class="active" data-go="afk">AFK</button>
+          </nav>
+        </section>
+
+        <!-- BATTLE -->
+        <section class="screen" data-screen="battle" id="screen-battle" hidden>
+          <div class="battle-bg"></div>
+          <div class="battle-top">
+            <div class="timer" id="timer">00:00</div>
+            <div class="chapter" id="chapter">Глава 1 · Площадь талонов</div>
+          </div>
+
+          <div class="battlefield" id="battlefield">
+            <div class="side heroes" id="side-heroes"></div>
+            <div class="side enemies" id="side-enemies"></div>
+          </div>
+
+          <div class="battle-tray">
+            <p class="toast" id="toast">Автобой</p>
+            <div class="tray-row">
+              <div class="portraits" id="portraits"></div>
+              <button class="tray-btn primary" id="auto-btn">АВТО</button>
+              <button class="tray-btn" id="speed-btn">×1</button>
+            </div>
+            <div class="battle-end" id="battle-end" hidden>
+              <p id="end-title">Победа</p>
+              <p id="end-reward"></p>
+              <button class="btn primary" data-go="home">В город</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h3>Что это</h3>
+      <ul>
+        <li>Образец UI на HTML/CSS/JS — геометрия как у idle AFK-арены.</li>
+        <li>Бренд <strong>БашЛегенды</strong>, без копирования чужих ассетов.</li>
+        <li>Бой: герои слева, враги справа, таймер, портреты, АВТО/×2.</li>
+      </ul>
+      <p class="muted">Открой <code>html_sample/index.html</code> или превью-ссылку из PR. Если ок — перенесём в Godot или оставим HTML-клиент.</p>
+    </aside>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
