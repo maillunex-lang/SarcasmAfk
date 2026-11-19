@@ -31,7 +31,7 @@ func _run() -> void:
 		print("OK USE_MOCK=", api.is_mock())
 
 	var heroes: Dictionary = api.get_heroes()
-	if not bool(heroes.get("ok", false)) or heroes.get("heroes", []).size() < 3:
+	if not bool(heroes.get("ok", false)) or heroes.get("heroes", []).size() < 12:
 		push_error("FAIL get_heroes")
 		failed = true
 	else:

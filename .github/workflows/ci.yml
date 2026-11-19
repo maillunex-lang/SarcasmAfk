@@ -69,6 +69,10 @@ jobs:
         working-directory: client
         run: |
           /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_api.gd
+      - name: Smoke Phase1 MVP
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_mvp.gd
 
   docs-presence:
     name: Required docs present
