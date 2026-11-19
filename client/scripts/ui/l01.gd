@@ -1,16 +1,15 @@
 extends "res://scripts/ui/screen_base.gd"
-## Location hub for the active CH01 quest (L01 art reused as placeholder).
+## Location hub with parallax layers for CH01 L01–L10.
 
 
 func _ready() -> void:
 	super._ready()
 	var loc: Dictionary = GameState.current_location()
 	if loc.is_empty() and GameState.active_quest_id == "":
-		# Fallback: show L01 if opened without active quest
 		loc = GameState.catalog.get_location("L01")
 
 	var loc_id := str(loc.get("location_id", "L01"))
-	_add_location_layers(loc_id)
+	_add_location_layers(loc_id, loc)
 
 	var dim := ColorRect.new()
 	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.35)
@@ -29,8 +28,12 @@ func _ready() -> void:
 	vbox.add_child(DesignTokens.make_label(quest_line, 24, DesignTokens.COLOR_TEXT_MUTED))
 	vbox.add_child(DesignTokens.make_label(str(loc.get("description", "")), 20, DesignTokens.COLOR_TEXT_MUTED))
 
+	# Prop: L01 terminal; other locs show mid crop hint via icon quest
 	var prop := TextureRect.new()
-	prop.texture = AssetPaths.tex(AssetPaths.L01_TERMINAL)
+	if loc_id == "L01":
+		prop.texture = AssetPaths.tex(AssetPaths.L01_TERMINAL)
+	else:
+		prop.texture = AssetPaths.tex(AssetPaths.location_layer(loc_id, "mid"))
 	prop.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	prop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	prop.custom_minimum_size = Vector2(0, 360)
@@ -53,9 +56,6 @@ func _ready() -> void:
 		vbox.add_child(battle_btn)
 	elif GameState.active_quest_id != "" and GameState.is_quest_completed(GameState.active_quest_id):
 		vbox.add_child(DesignTokens.make_label("Квест уже завершён — можно повторить бой из кампании.", 20, DesignTokens.COLOR_SUCCESS_MINT))
-	elif GameState.active_quest_id != "":
-		# Completed all battles but status lag — offer campaign
-		pass
 
 	var camp := DesignTokens.make_button("К списку квестов", false)
 	camp.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
@@ -66,14 +66,20 @@ func _ready() -> void:
 	vbox.add_child(back)
 
 
-func _add_location_layers(loc_id: String) -> void:
-	# Full parallax only for L01 drafts; others use mid/hint as single plane.
+func _add_location_layers(loc_id: String, loc: Dictionary) -> void:
+	var layers: Dictionary = loc.get("layers", {})
+	if typeof(layers) == TYPE_DICTIONARY and not layers.is_empty():
+		_add_layer(str(layers.get("sky", AssetPaths.location_layer(loc_id, "sky"))), 0)
+		_add_layer(str(layers.get("far", AssetPaths.location_layer(loc_id, "far"))), 1)
+		_add_layer(str(layers.get("mid", AssetPaths.location_layer(loc_id, "mid"))), 2)
+		return
+	# Fallback L01 classic
 	if loc_id == "L01":
 		_add_layer(AssetPaths.L01_SKY, 0)
 		_add_layer(AssetPaths.L01_FAR, 1)
 		_add_layer(AssetPaths.L01_MID, 2)
 		return
-	var hint := str(GameState.catalog.get_location(loc_id).get("bg_hint", AssetPaths.L01_MID))
+	var hint := str(loc.get("bg_hint", AssetPaths.L01_MID))
 	_add_layer(hint if hint != "" else AssetPaths.L01_MID, 0)
 
 

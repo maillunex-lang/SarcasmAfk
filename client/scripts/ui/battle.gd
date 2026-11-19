@@ -12,8 +12,9 @@ var _running: bool = true
 
 func _ready() -> void:
 	super._ready()
-	_set_background(AssetPaths.ARENA_FLOOR)
 	_load_battle()
+	var loc_id := str(_battle_def.get("location_id", "L01"))
+	_set_background(AssetPaths.arena_floor_for(loc_id))
 	_build_ui()
 	_start_engine()
 

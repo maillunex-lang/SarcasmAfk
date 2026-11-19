@@ -11,7 +11,13 @@
       ],
       "description": "Стартовая площадь с магическими терминалами и летающими талонами.",
       "bg_hint": "res://assets/locations/L01/loc_L01_mid.jpg",
-      "unlock_after_quest": null
+      "unlock_after_quest": null,
+      "layers": {
+        "sky": "res://assets/locations/L01/loc_L01_sky.jpg",
+        "far": "res://assets/locations/L01/loc_L01_far.jpg",
+        "mid": "res://assets/locations/L01/loc_L01_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L01/arena_L01_floor.jpg"
     },
     {
       "location_id": "L02",
@@ -21,8 +27,14 @@
         "CH01-Q03"
       ],
       "description": "Улица, где дорожные знаки запрещают движение и мысли.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q02"
+      "bg_hint": "res://assets/locations/L02/loc_L02_mid.jpg",
+      "unlock_after_quest": "CH01-Q02",
+      "layers": {
+        "sky": "res://assets/locations/L02/loc_L02_sky.jpg",
+        "far": "res://assets/locations/L02/loc_L02_far.jpg",
+        "mid": "res://assets/locations/L02/loc_L02_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L02/arena_L02_floor.jpg"
     },
     {
       "location_id": "L03",
@@ -32,8 +44,14 @@
         "CH01-Q04"
       ],
       "description": "Светлый зал обслуживания, превращённый в лабиринт формуляров.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q03"
+      "bg_hint": "res://assets/locations/L03/loc_L03_mid.jpg",
+      "unlock_after_quest": "CH01-Q03",
+      "layers": {
+        "sky": "res://assets/locations/L03/loc_L03_sky.jpg",
+        "far": "res://assets/locations/L03/loc_L03_far.jpg",
+        "mid": "res://assets/locations/L03/loc_L03_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L03/arena_L03_floor.jpg"
     },
     {
       "location_id": "L04",
@@ -43,8 +61,14 @@
         "CH01-Q05"
       ],
       "description": "Полки с летающими книгами, шкафы, древние руны.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q04"
+      "bg_hint": "res://assets/locations/L04/loc_L04_mid.jpg",
+      "unlock_after_quest": "CH01-Q04",
+      "layers": {
+        "sky": "res://assets/locations/L04/loc_L04_sky.jpg",
+        "far": "res://assets/locations/L04/loc_L04_far.jpg",
+        "mid": "res://assets/locations/L04/loc_L04_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L04/arena_L04_floor.jpg"
     },
     {
       "location_id": "L05",
@@ -55,8 +79,14 @@
         "CH01-Q07"
       ],
       "description": "Магические печати, весы подлинности и зеркала документов.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q05"
+      "bg_hint": "res://assets/locations/L05/loc_L05_mid.jpg",
+      "unlock_after_quest": "CH01-Q05",
+      "layers": {
+        "sky": "res://assets/locations/L05/loc_L05_sky.jpg",
+        "far": "res://assets/locations/L05/loc_L05_far.jpg",
+        "mid": "res://assets/locations/L05/loc_L05_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L05/arena_L05_floor.jpg"
     },
     {
       "location_id": "L06",
@@ -66,8 +96,14 @@
         "CH01-Q08"
       ],
       "description": "Подземные коммуникации и автономные магические генераторы.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q07"
+      "bg_hint": "res://assets/locations/L06/loc_L06_mid.jpg",
+      "unlock_after_quest": "CH01-Q07",
+      "layers": {
+        "sky": "res://assets/locations/L06/loc_L06_sky.jpg",
+        "far": "res://assets/locations/L06/loc_L06_far.jpg",
+        "mid": "res://assets/locations/L06/loc_L06_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L06/arena_L06_floor.jpg"
     },
     {
       "location_id": "L07",
@@ -77,8 +113,14 @@
         "CH01-Q09"
       ],
       "description": "Подземный зал с парящим фрагментом артефакта.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q08"
+      "bg_hint": "res://assets/locations/L07/loc_L07_mid.jpg",
+      "unlock_after_quest": "CH01-Q08",
+      "layers": {
+        "sky": "res://assets/locations/L07/loc_L07_sky.jpg",
+        "far": "res://assets/locations/L07/loc_L07_far.jpg",
+        "mid": "res://assets/locations/L07/loc_L07_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L07/arena_L07_floor.jpg"
     },
     {
       "location_id": "L08",
@@ -88,8 +130,14 @@
         "CH01-Q10"
       ],
       "description": "Улицы стираются, оставляя белые пустоты.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q09"
+      "bg_hint": "res://assets/locations/L08/loc_L08_mid.jpg",
+      "unlock_after_quest": "CH01-Q09",
+      "layers": {
+        "sky": "res://assets/locations/L08/loc_L08_sky.jpg",
+        "far": "res://assets/locations/L08/loc_L08_far.jpg",
+        "mid": "res://assets/locations/L08/loc_L08_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L08/arena_L08_floor.jpg"
     },
     {
       "location_id": "L09",
@@ -99,8 +147,14 @@
         "CH01-Q11"
       ],
       "description": "Вертикальная башня с запретным лифтом.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q10"
+      "bg_hint": "res://assets/locations/L09/loc_L09_mid.jpg",
+      "unlock_after_quest": "CH01-Q10",
+      "layers": {
+        "sky": "res://assets/locations/L09/loc_L09_sky.jpg",
+        "far": "res://assets/locations/L09/loc_L09_far.jpg",
+        "mid": "res://assets/locations/L09/loc_L09_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L09/arena_L09_floor.jpg"
     },
     {
       "location_id": "L10",
@@ -110,8 +164,14 @@
         "CH01-Q12"
       ],
       "description": "Платформа над городом, купол из печатей.",
-      "bg_hint": "",
-      "unlock_after_quest": "CH01-Q11"
+      "bg_hint": "res://assets/locations/L10/loc_L10_mid.jpg",
+      "unlock_after_quest": "CH01-Q11",
+      "layers": {
+        "sky": "res://assets/locations/L10/loc_L10_sky.jpg",
+        "far": "res://assets/locations/L10/loc_L10_far.jpg",
+        "mid": "res://assets/locations/L10/loc_L10_mid.jpg"
+      },
+      "arena_floor": "res://assets/arenas/ARENA-L10/arena_L10_floor.jpg"
     },
     {
       "location_id": "L11",
@@ -119,7 +179,7 @@
       "region": "Стерлитамак",
       "quest_ids": [],
       "description": "Тизер CH02; в CH01 недоступна.",
-      "bg_hint": "",
+      "bg_hint": "res://assets/locations/L01/loc_L01_mid.jpg",
       "unlock_after_quest": "CH01-Q12",
       "locked_in_ch01": true
     }

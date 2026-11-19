@@ -22,6 +22,10 @@ required = [
   "client/assets/characters/H12/H12_full.jpg",
   "client/assets/enemies/E02/E02_paper_guard.jpg",
   "client/assets/enemies/E28/E28_inspector.jpg",
+  "client/assets/locations/L02/loc_L02_mid.jpg",
+  "client/assets/locations/L10/loc_L10_mid.jpg",
+  "client/assets/arenas/ARENA-L05/arena_L05_floor.jpg",
+  "client/assets/arenas/ARENA-L10/arena_L10_floor.jpg",
 ]
 missing = [p for p in required if not pathlib.Path(p).is_file()]
 if missing:

@@ -62,6 +62,17 @@ static func tex(path: String) -> Texture2D:
 	return null
 
 
+static func location_layer(loc_id: String, layer: String) -> String:
+	return "res://assets/locations/%s/loc_%s_%s.jpg" % [loc_id, loc_id, layer]
+
+
+static func arena_floor_for(loc_id: String) -> String:
+	var path := "res://assets/arenas/ARENA-%s/arena_%s_floor.jpg" % [loc_id, loc_id]
+	if ResourceLoader.exists(path):
+		return path
+	return ARENA_FLOOR
+
+
 static func hero_portrait(hero_id: String) -> String:
 	return "res://assets/characters/%s/%s_portrait.jpg" % [hero_id, hero_id]
 

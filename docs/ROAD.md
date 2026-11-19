@@ -383,10 +383,16 @@
 - Не сделано: L02–L10 layers, unique per-enemy, Blender atlases
 - Следующий шаг: T-060 или T-080
 
+### 2026-11-19 — T-060 L02–L10 locations + arenas
+- Статус: ГОТОВО (draft layers)
+- Сделано: sky/far/mid для L02–L10, ARENA-L02–L10 floors, JSON layers + battle arena switch
+- Не сделано: props/near/fx per loc, L11 playable, Blender atlases
+- Следующий шаг: T-080 или T-031
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~Фаза 1 + art-fill (T-071…T-077, T-061)~~ — сделано.
-2. Далее: T-060 уникальные L02–L10 **или** T-080 сервер; T-031 при Blender.
+1. ~~T-060 / T-061~~ — сделано.
+2. Далее: T-080 сервер **или** T-031 Blender; paintover по желанию.
 3. Запреты: главы 02–12, rename.

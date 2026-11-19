@@ -33,7 +33,7 @@
 | T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-055 | P1 | **DONE** | **CH01 embed:** квесты/локации/бои/диалоги в клиент | `client/data/` + CampaignCatalog + campaign UI + `smoke_ch01.gd` | T-050 |
 | T-056 | P1 | **DONE** | Тонкий `ApiClient` + `USE_MOCK` | `client/scripts/net/api_client.gd` + `smoke_api.gd` | T-020, T-055 |
-| T-060 | P3 | **TODO** | Уникальные локации L02–L10 слои | LOCATION/CAMPAIGN | T-050 |
+| T-060 | P1 | **DONE** | Уникальные локации L02–L10 слои + арены | `locations/L02–L10` + `ARENA-L02–L10` | T-050 |
 | T-061 | P1 | **DONE** | Art-fill: иконки/BG/H04–H12/враги-архетипы | `client/assets/` + AssetPaths wire | T-077 |
 | T-070 | P1 | **DONE** | Клиент MVP экраны (ROAD Фаза 1) | 12 экранов на моках | T-050, T-020 |
 | T-071 | P1 | **DONE** | Ф1.1 Оболочка / nav / карта | HubChrome + Map + More | T-070 |
@@ -56,6 +56,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-077
+## Следующий конкретный шаг после T-060 / T-061
 
-Арт `T-060` (L02–L10) **или** сервер `T-080` (Фаза 2). **T-031** — при Blender. Владельцу: визуальный sign-off по `V0_REVIEW.md`.
+Сервер `T-080` (Фаза 2) **или** paintover/уникальные враги. **T-031** — при Blender. Владельцу: визуальный sign-off.

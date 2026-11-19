@@ -39,8 +39,13 @@ Dialog: `dialogs/dialog_portrait_Hxx.jpg`
 | `enemies/E08/E08_form_phantom.jpg` | E08/phantoms |
 | `enemies/E28/E28_inspector.jpg` | boss-tier |
 
+## Locations L01–L10
+
+Each `locations/Lxx/` has `sky` / `far` / `mid`.  
+Arenas: `arenas/ARENA-Lxx/arena_Lxx_floor.jpg` for L01–L10.
+
 ## Still open
 
-- L02–L10 unique location layers (T-060)
 - Transparent combat atlases (T-031 Blender)
 - Per-enemy unique art beyond archetypes
+- L11 Sterlitamak playable art (CH02)
