@@ -1,13 +1,13 @@
 # STATUS.md — Verified project snapshot
 
-> Date: **2026-11-19** · Baseline `main` · Active: `cursor/afk-shell-rebuild-4106`  
+> Date: **2026-11-19** · Baseline `main` · Active: `cursor/flutter-flame-demo-4106`  
 > **Single status source for agents.** Cold-start: [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · Queue: [`TASK_QUEUE.md`](TASK_QUEUE.md)  
 > Backup: [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) · Cleanup: [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md)
 
 ## NOW
 
-1. **T-163 rollback** — owner rejected AFK-shell battle design; restore archive card-row battle. Branch `cursor/afk-shell-rebuild-4106`.  
-2. City hub (D-UI-CITY-01) + stretch `expand` kept.  
+1. **Flutter+Flame demo** — experimental menu + 1×1 arena in `flutter_flame/` (branch `cursor/flutter-flame-demo-4106`); parallel to Godot/`html_sample`.  
+2. City hub (D-UI-CITY-01) + stretch `expand` kept; AFK-shell battle design rejected (archive restore already on `main`).  
 3. Owner blockers unchanged: T-128 device accept, T-129 live URL, T-126 keystore, T-131 Stage E, T-153 payments.
 
 ## Subsystem matrix (evidence-based)
@@ -30,6 +30,8 @@
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |
 | Release signed APK | `BLOCKED` | T-126 keystore |
 | REPO-REORG-001 | `DONE_VERIFIED` | merged #27 |
+| HTML shell sample | `PARTIAL` (demo) | `html_sample/` + live `bashlegends-shell`; arena anim fix #34 |
+| Flutter+Flame demo | `PARTIAL` (demo) | `flutter_flame/` menu + Flame 1×1; not product client |
 
 ## BLOCKED (owner)
 
