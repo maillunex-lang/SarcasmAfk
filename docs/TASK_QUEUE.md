@@ -53,6 +53,10 @@
 | T-087 | P1 | **DONE** | File persist sessions/accounts | `store` JSON persist reload | T-084 |
 | T-088 | P1 | **DONE** | Battle finish session gate | `NO_ACTIVE_BATTLE` | T-083 |
 | T-089 | P1 | **DONE** | Integration smoke curl+Godot live | `scripts/smoke_live_api.sh` | T-086 |
+| T-093 | P1 | **DONE** | Admin health/metrics/readyz | `/readyz` `/v1/admin/metrics` | T-085 |
+| T-094 | P1 | **DONE** | Request logging + counters | httpapi middleware | T-093 |
+| T-095 | P1 | **DONE** | Client UI live API toggle | More + GameState.set_live_api | T-086 |
+| T-096 | P1 | **DONE** | Postgres backup script | `scripts/backup_db.sh` | T-085 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 | полные квесты/бои | Явное разрешение владельца |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -65,6 +69,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-085
+## Следующий конкретный шаг после T-096
 
-Админка/мониторинг (Фаза 2) **или** UI live-toggle в клиенте **или** полный tick-sim боёв. **T-031** — при Blender.
+Полный tick-sim боёв **или** нагрузочные тесты/APK online. **T-031** — при Blender.

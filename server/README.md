@@ -31,6 +31,8 @@ Migration: `migrations/001_init.sql` (auto-applied on start with `-migrate`).
 | Method | Path | Auth |
 |---|---|---|
 | GET | `/healthz` | no |
+| GET | `/readyz` | no |
+| GET | `/v1/admin/metrics` | no (stub; lock down later) |
 | POST | `/v1/auth/anonymous` | no |
 | GET | `/v1/me/progress` | Bearer |
 | PUT | `/v1/me/party` | Bearer |

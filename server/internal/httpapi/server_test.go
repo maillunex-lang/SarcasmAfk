@@ -45,6 +45,17 @@ func auth(t *testing.T, h http.Handler) string {
 	return tok
 }
 
+func TestHealthReadyMetrics(t *testing.T) {
+	h := newTestServer(t)
+	for _, path := range []string{"/healthz", "/readyz", "/v1/admin/metrics"} {
+		rr := httptest.NewRecorder()
+		h.ServeHTTP(rr, httptest.NewRequest(http.MethodGet, path, nil))
+		if rr.Code != 200 {
+			t.Fatalf("%s => %d %s", path, rr.Code, rr.Body.String())
+		}
+	}
+}
+
 func TestHealthAndAuthProgress(t *testing.T) {
 	h := newTestServer(t)
 	rr := httptest.NewRecorder()
