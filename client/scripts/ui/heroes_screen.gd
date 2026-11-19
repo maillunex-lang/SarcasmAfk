@@ -10,7 +10,7 @@ func _ready() -> void:
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Коллекция героев", 40, DesignTokens.COLOR_ACCENT_GOLD))
+	vbox.add_child(DesignTokens.make_display_label("Коллекция героев", 44))
 
 	var owned_n := 0
 	for h in GameState.heroes_catalog:
@@ -56,10 +56,14 @@ func _hero_card(h: Dictionary) -> PanelContainer:
 	var id := str(h.get("id", ""))
 	var owned := bool(GameState.owned_heroes.get(id, false))
 	var in_party := owned and _in_party(id)
+	var rarity := str(h.get("rarity", "N"))
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(440, 420)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.add_theme_stylebox_override("panel", DesignTokens.make_panel_style(DesignTokens.COLOR_BG_DEEP, 16))
+	var style := DesignTokens.make_panel_style(DesignTokens.COLOR_BG_DEEP, 16)
+	style.border_color = Color(DesignTokens.rarity_color(rarity), 0.85 if owned else 0.35)
+	style.set_border_width_all(3)
+	panel.add_theme_stylebox_override("panel", style)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 8)
 	panel.add_child(box)
@@ -75,12 +79,12 @@ func _hero_card(h: Dictionary) -> PanelContainer:
 	box.add_child(DesignTokens.make_label(
 		"%s · %s · %s · %s" % [
 			str(h.get("class", "")),
-			str(h.get("rarity", "")),
+			rarity,
 			str(h.get("row", "")),
 			str(h.get("faction", "")),
 		],
 		18,
-		DesignTokens.COLOR_TEXT_MUTED
+		DesignTokens.rarity_color(rarity)
 	))
 	var ult_name := str(h.get("ultimate_name", h.get("ultimate_id", "")))
 	if ult_name != "":

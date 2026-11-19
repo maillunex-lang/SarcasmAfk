@@ -12,8 +12,8 @@ Bring all screens to a coherent **Premium Clean Stylized Anime Fantasy 2.5D + Pr
 |-------|--------|-------|
 | A Audit | DONE (this PR) | 23 scenes inventoried; registry JSON+MD |
 | B Design system | IN PROGRESS | OFL fonts + expanded DesignTokens |
-| C Core path | IN PROGRESS | Splash/Home/Gacha/Inventory polish |
-| D RPG screens | TODO | Heroes/detail/party/AFK/expedition |
+| C Core path | IN PROGRESS | Splash/Home/Dialog/Battle + Gacha/Inventory |
+| D RPG screens | IN PROGRESS | Heroes rarity frames; Party/Bestiary BGs |
 | E Online systems | TODO | Shop/VIP/guild/chat deepen |
 | F Polish | TODO | Animations, APK, before/after shots |
 
@@ -30,9 +30,11 @@ Bring all screens to a coherent **Premium Clean Stylized Anime Fantasy 2.5D + Pr
 - `client/data/visual/asset_registry.json`
 - `scripts/audit_visual_assets.py`
 - Fonts Manrope/Cinzel (OFL)
-- New art: `bg_inventory.jpg`, `gacha_portal.jpg`, `ui_empty_state.jpg`
+- New art: `bg_inventory.jpg`, `gacha_portal.jpg`, `ui_empty_state.jpg`, `bg_party.jpg`, `bg_bestiary.jpg`, `bg_dialog.jpg`
 - Splash fade-in; Home display type; Gacha portal; Inventory BG
+- Party/Bestiary/Dialog TEMP BGs; Heroes rarity frames; Battle victory display chrome
+- `smoke_visual_screens.gd` headless screen/asset gate in `ci_validate.sh`
 
 ## Next PR
 
-Stage C continuation: battle reward chrome, dialog contrast, map marker polish + more generated icons.
+Stage D/E deepen: map marker polish, Theme.tres, dialog busts H13–H36, guild/shop icons, before/after gallery + APK.

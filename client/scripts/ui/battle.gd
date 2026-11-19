@@ -401,26 +401,29 @@ func _on_battle_ended(result: Dictionary) -> void:
 	for c2 in _reward_panel.get_children():
 		c2.queue_free()
 
-	var msg_text := "Победа!" if win else "Поражение. Попробуйте снова."
+	var msg_text := "Победа!" if win else "Поражение"
 	if win and bool(progress.get("quest_completed", false)):
-		msg_text = "Квест закрыт. Город ещё стоит."
+		msg_text = "Квест закрыт"
 	elif win and str(progress.get("next_battle_id", "")) != "":
-		msg_text = "Победа! Дальше — %s" % str(progress.get("next_battle_id", ""))
-	var msg := DesignTokens.make_label(
+		msg_text = "Победа · дальше %s" % str(progress.get("next_battle_id", ""))
+	var msg := DesignTokens.make_display_label(
 		msg_text,
-		28,
-		DesignTokens.COLOR_ACCENT_GOLD if win else DesignTokens.COLOR_DANGER_CORAL
+		40
 	)
+	if not win:
+		msg.add_theme_color_override("font_color", DesignTokens.COLOR_DANGER_CORAL)
 	_ended_panel.add_child(msg)
+	if not win:
+		_ended_panel.add_child(DesignTokens.make_label("Попробуйте снова.", 22, DesignTokens.COLOR_TEXT_MUTED))
 
 	if win:
 		var soft_gained := int(reward.get("soft", reward.get("soft_delta", 0)))
 		var xp_gained := int(reward.get("commander_xp", reward.get("xp_delta", 0)))
 		if bool(progress.get("newly_completed", false)):
-			_reward_panel.add_child(DesignTokens.make_label("Награда", 26, DesignTokens.COLOR_ACCENT_CYAN))
+			_reward_panel.add_child(DesignTokens.make_display_label("Награда", 32))
 			_reward_panel.add_child(DesignTokens.make_label(
 				"+%d soft · +%d XP" % [soft_gained, xp_gained],
-				32,
+				34,
 				DesignTokens.COLOR_ACCENT_GOLD
 			))
 		else:
@@ -431,6 +434,9 @@ func _on_battle_ended(result: Dictionary) -> void:
 			))
 		if _manual_ult_used:
 			_reward_panel.add_child(DesignTokens.make_label("Ручной ULT: да", 20, DesignTokens.COLOR_SUCCESS_MINT))
+	_ended_panel.modulate = Color(1, 1, 1, 0)
+	var end_tw := create_tween()
+	end_tw.tween_property(_ended_panel, "modulate:a", 1.0, 0.35).set_trans(Tween.TRANS_SINE)
 
 	if win:
 		var next_id := str(progress.get("next_battle_id", ""))

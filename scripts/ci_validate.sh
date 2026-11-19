@@ -31,6 +31,9 @@ required = [
   "client/assets/combat/H03/H03_idle.png",
   "client/assets/combat/E01/E01_idle.png",
   "client/assets/branding/bg_inventory.jpg",
+  "client/assets/branding/bg_party.jpg",
+  "client/assets/branding/bg_bestiary.jpg",
+  "client/assets/branding/bg_dialog.jpg",
   "client/assets/branding/gacha_portal.jpg",
   "client/assets/fonts/Manrope-Regular.ttf",
   "client/assets/fonts/Cinzel-SemiBold.ttf",
@@ -75,6 +78,7 @@ fi
 
 if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0a.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_visual_screens.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd)

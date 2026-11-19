@@ -1,8 +1,8 @@
 # ASSET_REGISTRY.md
 
-> Auto from `scripts/audit_visual_assets.py` · 2026-11-19T14:37:17.838127+00:00
+> Auto from `scripts/audit_visual_assets.py` · 2026-11-19T14:41:06.210947+00:00
 
-Total media files under `client/assets`: **543**
+Total media files under `client/assets`: **546**
 
 See `client/data/visual/asset_registry.json` for full machine-readable catalog.
 
@@ -23,6 +23,9 @@ See `client/data/visual/asset_registry.json` for full machine-readable catalog.
 | `BG_VIP` | `res://assets/branding/bg_vip.jpg` | yes |
 | `BG_CHAT` | `res://assets/branding/bg_chat.jpg` | yes |
 | `BG_INVENTORY` | `res://assets/branding/bg_inventory.jpg` | yes |
+| `BG_PARTY` | `res://assets/branding/bg_party.jpg` | yes |
+| `BG_BESTIARY` | `res://assets/branding/bg_bestiary.jpg` | yes |
+| `BG_DIALOG` | `res://assets/branding/bg_dialog.jpg` | yes |
 | `GACHA_PORTAL` | `res://assets/branding/gacha_portal.jpg` | yes |
 | `UI_EMPTY_STATE` | `res://assets/ui/panels/ui_empty_state.jpg` | yes |
 | `LOGO` | `res://assets/branding/ui_logo_wordmark.jpg` | yes |

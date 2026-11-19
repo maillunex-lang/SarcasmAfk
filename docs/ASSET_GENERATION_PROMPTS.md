@@ -27,12 +27,13 @@ in navy and gold with soft cyan glow, clean stylized fantasy, no text no logos
 ```
 → `client/assets/ui/panels/ui_empty_state.jpg` (TEMP)
 
+### VO-BG-PARTY / BESTIARY / DIALOG
+Done TEMP → `bg_party.jpg`, `bg_bestiary.jpg`, `bg_dialog.jpg`.
+
 ## PENDING (next PRs)
 
 | ID | Need | Prompt gist |
 |----|------|-------------|
-| VO-BG-PARTY | Dedicated party BG | navy/gold party hall, no UI text |
-| VO-BG-BESTIARY | Bestiary BG | archive shelves + cyan seals |
 | VO-ICON-GUILD | Guild nav/icon set | crest + vault + board icons 512 |
 | VO-DIALOG-H13+ | Dialog busts H13–H36 | per HEROES_DRAFT; TEMP ok |
 | VO-MAP-UFA | Map art pack | stylized Ufa campaign map 9:16 |

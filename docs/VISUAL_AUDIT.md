@@ -1,12 +1,12 @@
 # VISUAL_AUDIT.md — BashLegends Visual Overhaul 001
 
-> Generated: 2026-11-19T14:37:17.838127+00:00
-> Assets: **543** · Scenes: **23** · Broken AssetPaths: **0**
+> Generated: 2026-11-19T14:41:06.210947+00:00
+> Assets: **546** · Scenes: **23** · Broken AssetPaths: **0**
 
 ## Summary counts
 
-- By extension: `{'.jpg': 482, '.png': 48, '.ttf': 3, '.ogg': 10}`
-- By status heuristic: `{'PRESENT': 344, 'TEMP': 196, 'FINAL_FONT_OFL': 3}`
+- By extension: `{'.jpg': 485, '.png': 48, '.ttf': 3, '.ogg': 10}`
+- By status heuristic: `{'PRESENT': 347, 'TEMP': 196, 'FINAL_FONT_OFL': 3}`
 
 ## Screens (23)
 

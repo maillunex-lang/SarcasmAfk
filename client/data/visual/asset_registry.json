@@ -1,20 +1,20 @@
 {
   "version": 1,
-  "generated_at": "2026-11-19T14:37:17.838127+00:00",
+  "generated_at": "2026-11-19T14:41:06.210947+00:00",
   "project": "BashLegends Visual Overhaul 001",
   "counts": {
-    "assets": 543,
+    "assets": 546,
     "scenes": 23,
-    "assetpaths_constants": 67,
+    "assetpaths_constants": 70,
     "broken_constants": 0,
     "by_ext": {
-      ".jpg": 482,
+      ".jpg": 485,
       ".png": 48,
       ".ttf": 3,
       ".ogg": 10
     },
     "by_status": {
-      "PRESENT": 344,
+      "PRESENT": 347,
       "TEMP": 196,
       "FINAL_FONT_OFL": 3
     }
@@ -304,6 +304,24 @@
     {
       "id": "BG_INVENTORY",
       "path": "res://assets/branding/bg_inventory.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_PARTY",
+      "path": "res://assets/branding/bg_party.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_BESTIARY",
+      "path": "res://assets/branding/bg_bestiary.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_DIALOG",
+      "path": "res://assets/branding/bg_dialog.jpg",
       "exists": true,
       "status": "OK"
     },
@@ -718,6 +736,13 @@
       "status": "PRESENT"
     },
     {
+      "id": "assets_branding_bg_bestiary_jpg",
+      "path": "res://assets/branding/bg_bestiary.jpg",
+      "bytes": 273550,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
       "id": "assets_branding_bg_campaign_jpg",
       "path": "res://assets/branding/bg_campaign.jpg",
       "bytes": 381263,
@@ -728,6 +753,13 @@
       "id": "assets_branding_bg_chat_jpg",
       "path": "res://assets/branding/bg_chat.jpg",
       "bytes": 389021,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_dialog_jpg",
+      "path": "res://assets/branding/bg_dialog.jpg",
+      "bytes": 303120,
       "ext": ".jpg",
       "status": "PRESENT"
     },
@@ -770,6 +802,13 @@
       "id": "assets_branding_bg_map_jpg",
       "path": "res://assets/branding/bg_map.jpg",
       "bytes": 384476,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_party_jpg",
+      "path": "res://assets/branding/bg_party.jpg",
+      "bytes": 301746,
       "ext": ".jpg",
       "status": "PRESENT"
     },
