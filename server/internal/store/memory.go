@@ -271,7 +271,7 @@ func (m *Memory) StartBattle(token, battleID string, party []string) (seed int64
 		seed = time.Now().UnixNano()
 		acc.ActiveBattleID = battleID
 		acc.BattleSeed = seed
-		acc.BalanceVersion = "2026.11.19-atb1"
+		acc.BalanceVersion = "2026.11.19-monsters1"
 		acc.BattleCommands = nil
 		acc.BattleTickApprox = 0
 		return nil

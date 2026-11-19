@@ -328,7 +328,7 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			if enemies, ok2 := battle["enemies"].([]any); ok2 {
 				for _, e := range enemies {
 					if m, ok3 := e.(map[string]any); ok3 {
-						enemyUnits = append(enemyUnits, m)
+						enemyUnits = append(enemyUnits, s.Content.EnrichEnemyUnit(m))
 					}
 				}
 			}

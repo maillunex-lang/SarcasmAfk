@@ -318,6 +318,13 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — MONSTERS-CH01-001 (A–C + server E)
+
+- Audit: 29 types; E21–E30 shared E28 JPG; battleverify had no statuses.
+- Catalog + art registry; EnrichEnemyUnit on battle finish; balance `2026.11.19-monsters1`.
+- Pilot TEMP concepts: E01 E03 E05 E10 E13 E20 E22 E28 E30 — **await owner ACK** before mass art (D-ART-06).
+- Bestiary screen; battles/quests/rewards untouched.
+
 ### Журнал 2026-11-19 — EQUIPMENT-001 (EQ-P1…P5)
 
 - Catalog 32 templates + 4 sets; validator `scripts/validate_equipment_001.py`.

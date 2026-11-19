@@ -25,6 +25,7 @@ const SCENE_CHAT := "res://scenes/chat/chat.tscn"
 const SCENE_SHOP := "res://scenes/shop/shop.tscn"
 const SCENE_VIP := "res://scenes/vip/vip.tscn"
 const SCENE_POI := "res://scenes/poi/poi.tscn"
+const SCENE_BESTIARY := "res://scenes/bestiary/bestiary.tscn"
 
 
 static func go(tree: SceneTree, path: String) -> void:
@@ -124,3 +125,7 @@ static func to_vip(tree: SceneTree) -> void:
 
 static func to_poi(tree: SceneTree) -> void:
 	go(tree, SCENE_POI)
+
+
+static func to_bestiary(tree: SceneTree) -> void:
+	go(tree, SCENE_BESTIARY)

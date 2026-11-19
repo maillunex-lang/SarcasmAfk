@@ -1,0 +1,1197 @@
+{
+  "version": 1,
+  "balance_version": "MONSTERS-CH01-001-draft-1",
+  "status": "draft",
+  "note": "Abilities Draft. Base HP/ATK/DEF/SPD preserved from ch01_enemies.json / battles. Art: TEMP concepts for pilots; others GENERATION_BLOCKED pending D-ART-06 owner ACK.",
+  "enemies": [
+    {
+      "id": "E01",
+      "name": "Живой талон",
+      "archetype": "SWARM",
+      "role": "skirmisher",
+      "hp": 380,
+      "atk": 95,
+      "defense": 25,
+      "speed": 120,
+      "lore": "Парящий плотный билет с латунными зубцами и циановым ядром.",
+      "quote": "Ваш номер уже прошёл.",
+      "basic": {
+        "id": "E01_basic",
+        "name": "Рывок очереди",
+        "kind": "atk_front",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E01_special",
+        "name": "Перенос номера",
+        "kind": "MARK",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E01/concept.jpg",
+        "portrait": "res://assets/enemies/E01/portrait.jpg",
+        "sprite": "res://assets/enemies/E01/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E02",
+      "name": "Бумажный страж",
+      "archetype": "GUARDIAN",
+      "role": "defender",
+      "hp": 520,
+      "atk": 70,
+      "defense": 80,
+      "speed": 90,
+      "lore": "Двуногий щит из стопок бумаг.",
+      "quote": "Пропуск предъявите щиту.",
+      "basic": {
+        "id": "E02_basic",
+        "name": "Бумажный заслон",
+        "kind": "GUARD_SELF",
+        "multiplier": 0
+      },
+      "special": {
+        "id": "E02_special",
+        "name": "Скрепочный удар",
+        "kind": "ATK_WEAKEN",
+        "value": 1.0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E03",
+      "name": "Бумажный голем",
+      "archetype": "GUARDIAN",
+      "role": "tank",
+      "hp": 700,
+      "atk": 85,
+      "defense": 110,
+      "speed": 80,
+      "lore": "Громоздкий голем из папок и пергамента.",
+      "quote": "Документы тяжелее доводов.",
+      "basic": {
+        "id": "E03_basic",
+        "name": "Тяжесть регламента",
+        "kind": "atk_front",
+        "multiplier": 1.2
+      },
+      "special": {
+        "id": "E03_special",
+        "name": "Сшивка дел",
+        "kind": "SHIELD_SELF",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E03/concept.jpg",
+        "portrait": "res://assets/enemies/E03/portrait.jpg",
+        "sprite": "res://assets/enemies/E03/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E04",
+      "name": "Голем-печатник",
+      "archetype": "SUPPORT",
+      "role": "support",
+      "hp": 480,
+      "atk": 60,
+      "defense": 70,
+      "speed": 85,
+      "lore": "Трёхногий автомат с резиновой печатью.",
+      "quote": "Одобрено без рассмотрения.",
+      "basic": {
+        "id": "E04_basic",
+        "name": "Штамп одобрения",
+        "kind": "atk",
+        "multiplier": 1.0
+      },
+      "special": {
+        "id": "E04_special",
+        "name": "Заверено",
+        "kind": "SHIELD_ALLY_LOWEST",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E05",
+      "name": "Знак-страж",
+      "archetype": "GUARDIAN",
+      "role": "controller",
+      "hp": 450,
+      "atk": 80,
+      "defense": 60,
+      "speed": 100,
+      "lore": "Живой дорожный знак на шарнирных ногах.",
+      "quote": "Движение мысли запрещено.",
+      "basic": {
+        "id": "E05_basic",
+        "name": "Запрет движения",
+        "kind": "atk_front",
+        "multiplier": 1.0
+      },
+      "special": {
+        "id": "E05_special",
+        "name": "Стоять!",
+        "kind": "SLOW",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E05/concept.jpg",
+        "portrait": "res://assets/enemies/E05/portrait.jpg",
+        "sprite": "res://assets/enemies/E05/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E06",
+      "name": "Контролёр движения",
+      "archetype": "CONTROL",
+      "role": "warrior",
+      "hp": 500,
+      "atk": 110,
+      "defense": 55,
+      "speed": 105,
+      "lore": "Жезл регулировщика с парящими стрелками.",
+      "quote": "Ваш маршрут не согласован.",
+      "basic": {
+        "id": "E06_basic",
+        "name": "Перекрытие",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E06_special",
+        "name": "Красный сигнал",
+        "kind": "DISRUPT",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E07",
+      "name": "Элитный указатель",
+      "archetype": "ELITE",
+      "role": "elite_tank",
+      "hp": 900,
+      "atk": 120,
+      "defense": 140,
+      "speed": 95,
+      "lore": "Многострелочный столб с компасом.",
+      "quote": "Вы идёте не туда. Куда нельзя.",
+      "basic": {
+        "id": "E07_basic",
+        "name": "Ложный маршрут",
+        "kind": "atk",
+        "multiplier": 1.15
+      },
+      "special": {
+        "id": "E07_special",
+        "name": "Поворот запрещён",
+        "kind": "MARK_THEN_STRIKE",
+        "value": 1.0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E08",
+      "name": "Бланковый фантом",
+      "archetype": "ARTILLERY",
+      "role": "mage",
+      "hp": 360,
+      "atk": 130,
+      "defense": 30,
+      "speed": 110,
+      "lore": "Призрачная форма заявления.",
+      "quote": "Заполните пустоту собой.",
+      "basic": {
+        "id": "E08_basic",
+        "name": "Пустая графа",
+        "kind": "atk_back",
+        "multiplier": 1.15
+      },
+      "special": {
+        "id": "E08_special",
+        "name": "Недостающая подпись",
+        "kind": "MARK",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E09",
+      "name": "Старший регистратор",
+      "archetype": "ELITE",
+      "role": "elite_support",
+      "hp": 650,
+      "atk": 90,
+      "defense": 90,
+      "speed": 88,
+      "lore": "Летающая картотека с золотыми замками.",
+      "quote": "Ваше дело потеряно успешно.",
+      "basic": {
+        "id": "E09_basic",
+        "name": "Реестр отказов",
+        "kind": "atk",
+        "multiplier": 1.1
+      },
+      "special": {
+        "id": "E09_special",
+        "name": "Повторная подача",
+        "kind": "SHIELD_ALLY_WEAKEN_FRONT",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E10",
+      "name": "Архивный дух",
+      "archetype": "ARTILLERY",
+      "role": "mage",
+      "hp": 400,
+      "atk": 140,
+      "defense": 35,
+      "speed": 100,
+      "lore": "Лазурный книжный призрак.",
+      "quote": "Вас нет в каталоге.",
+      "basic": {
+        "id": "E10_basic",
+        "name": "Шёпот полок",
+        "kind": "atk",
+        "multiplier": 1.15
+      },
+      "special": {
+        "id": "E10_special",
+        "name": "Забытый абзац",
+        "kind": "SLOW_BACK",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E10/concept.jpg",
+        "portrait": "res://assets/enemies/E10/portrait.jpg",
+        "sprite": "res://assets/enemies/E10/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E11",
+      "name": "Печатный страж",
+      "archetype": "GUARDIAN",
+      "role": "defender",
+      "hp": 560,
+      "atk": 75,
+      "defense": 95,
+      "speed": 92,
+      "lore": "Страж из книг и восковых печатей.",
+      "quote": "Архив закрыт навсегда.",
+      "basic": {
+        "id": "E11_basic",
+        "name": "Переплёт",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E11_special",
+        "name": "Запечатано",
+        "kind": "GUARD_SELF",
+        "value": 0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E12",
+      "name": "Элитный архивный дух",
+      "archetype": "ELITE",
+      "role": "elite_mage",
+      "hp": 720,
+      "atk": 160,
+      "defense": 50,
+      "speed": 98,
+      "lore": "Дух-свиток с тремя книгами.",
+      "quote": "Срок хранения вечен.",
+      "basic": {
+        "id": "E12_basic",
+        "name": "Древняя сноска",
+        "kind": "atk",
+        "multiplier": 1.25
+      },
+      "special": {
+        "id": "E12_special",
+        "name": "Забыть всё",
+        "kind": "MARK_AND_SLOW_SPLIT",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E13",
+      "name": "Инспектор подлинности",
+      "archetype": "CONTROL",
+      "role": "controller",
+      "hp": 480,
+      "atk": 100,
+      "defense": 70,
+      "speed": 102,
+      "lore": "Парящий монокль с крыльями бланков.",
+      "quote": "Подлинность под сомнением.",
+      "basic": {
+        "id": "E13_basic",
+        "name": "Экспертиза",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E13_special",
+        "name": "Сомнение",
+        "kind": "WEAKEN",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E13/concept.jpg",
+        "portrait": "res://assets/enemies/E13/portrait.jpg",
+        "sprite": "res://assets/enemies/E13/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E14",
+      "name": "Копия документа",
+      "archetype": "SWARM",
+      "role": "summon",
+      "hp": 300,
+      "atk": 85,
+      "defense": 20,
+      "speed": 115,
+      "lore": "Два зеркальных листа-оригами.",
+      "quote": "Копия вернее оригинала.",
+      "basic": {
+        "id": "E14_basic",
+        "name": "Дублирование",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E14_special",
+        "name": "Ложная копия",
+        "kind": "MARK",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E15",
+      "name": "Старший проверяющий",
+      "archetype": "ELITE",
+      "role": "elite_controller",
+      "hp": 680,
+      "atk": 110,
+      "defense": 85,
+      "speed": 96,
+      "lore": "Механический штамп в бронзовой оболочке.",
+      "quote": "Нарушение выявлено заранее.",
+      "basic": {
+        "id": "E15_basic",
+        "name": "Контрольная сверка",
+        "kind": "atk",
+        "multiplier": 1.15
+      },
+      "special": {
+        "id": "E15_special",
+        "name": "Предписание",
+        "kind": "WEAKEN_TWO",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E16",
+      "name": "Контролёр штрафов",
+      "archetype": "CONTROL",
+      "role": "debuffer",
+      "hp": 440,
+      "atk": 95,
+      "defense": 50,
+      "speed": 108,
+      "lore": "Летающий кассовый счётчик.",
+      "quote": "Штраф за сопротивление штрафу.",
+      "basic": {
+        "id": "E16_basic",
+        "name": "Начисление",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E16_special",
+        "name": "Пеня",
+        "kind": "BURN",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E17",
+      "name": "Элитный проверяющий",
+      "archetype": "ELITE",
+      "role": "elite_warrior",
+      "hp": 750,
+      "atk": 145,
+      "defense": 75,
+      "speed": 100,
+      "lore": "Бронзовый ревизионный механизм.",
+      "quote": "Проверка длится до победы.",
+      "basic": {
+        "id": "E17_basic",
+        "name": "Сверхпроверка",
+        "kind": "atk",
+        "multiplier": 1.3
+      },
+      "special": {
+        "id": "E17_special",
+        "name": "Внеплановый аудит",
+        "kind": "MARK_EMPOWER",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E20",
+      "name": "Инспектор Неправильных Заявлений",
+      "archetype": "BOSS",
+      "role": "mini_boss",
+      "hp": 1800,
+      "atk": 160,
+      "defense": 120,
+      "speed": 90,
+      "lore": "Монументальная фигура с печатью-молотом.",
+      "quote": "Ваша победа заполнена неверно.",
+      "basic": {
+        "id": "E20_basic",
+        "name": "Отказать",
+        "kind": "atk_front",
+        "multiplier": 1.2
+      },
+      "special": {
+        "id": "E20_special",
+        "name": "Неверная форма",
+        "kind": "BOSS_E20",
+        "value": 0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E20/concept.jpg",
+        "portrait": "res://assets/enemies/E20/portrait.jpg",
+        "sprite": "res://assets/enemies/E20/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E21",
+      "name": "Ремонтный автомат",
+      "archetype": "SUPPORT",
+      "role": "support",
+      "hp": 500,
+      "atk": 70,
+      "defense": 80,
+      "speed": 85,
+      "lore": "Шестиногий латунный ремонтник.",
+      "quote": "Неисправность устранена неисправностью.",
+      "basic": {
+        "id": "E21_basic",
+        "name": "Технический укол",
+        "kind": "atk",
+        "multiplier": 1.0
+      },
+      "special": {
+        "id": "E21_special",
+        "name": "Сервисный протокол",
+        "kind": "HEAL_ALLY_LOWEST",
+        "value": 0.1,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E22",
+      "name": "Терминальный страж",
+      "archetype": "GUARDIAN",
+      "role": "tank",
+      "hp": 800,
+      "atk": 100,
+      "defense": 130,
+      "speed": 82,
+      "lore": "Серверный обелиск на опорах.",
+      "quote": "Доступ запрещён успешно.",
+      "basic": {
+        "id": "E22_basic",
+        "name": "Системный разряд",
+        "kind": "atk",
+        "multiplier": 1.1
+      },
+      "special": {
+        "id": "E22_special",
+        "name": "Защитный экран",
+        "kind": "SHIELD_SELF",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E22/concept.jpg",
+        "portrait": "res://assets/enemies/E22/portrait.jpg",
+        "sprite": "res://assets/enemies/E22/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E23",
+      "name": "Энергетический контролёр",
+      "archetype": "ELITE",
+      "role": "elite_mage",
+      "hp": 900,
+      "atk": 150,
+      "defense": 70,
+      "speed": 94,
+      "lore": "Парящий кольцевой генератор.",
+      "quote": "Питание отключено от отключения.",
+      "basic": {
+        "id": "E23_basic",
+        "name": "Перегрузка",
+        "kind": "atk",
+        "multiplier": 1.25
+      },
+      "special": {
+        "id": "E23_special",
+        "name": "Сброс напряжения",
+        "kind": "DISRUPT_EMPOWER",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E24",
+      "name": "Страж собственности",
+      "archetype": "GUARDIAN",
+      "role": "defender",
+      "hp": 620,
+      "atk": 80,
+      "defense": 110,
+      "speed": 88,
+      "lore": "Каменный сейф на двух ногах.",
+      "quote": "Вы принадлежите описи.",
+      "basic": {
+        "id": "E24_basic",
+        "name": "Право владения",
+        "kind": "atk",
+        "multiplier": 1.05
+      },
+      "special": {
+        "id": "E24_special",
+        "name": "Закрытый доступ",
+        "kind": "GUARD_SELF",
+        "value": 0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E25",
+      "name": "Магический протокол",
+      "archetype": "ARTILLERY",
+      "role": "mage",
+      "hp": 420,
+      "atk": 135,
+      "defense": 40,
+      "speed": 105,
+      "lore": "Плавающая книга с цепями света.",
+      "quote": "Согласие получено молчанием.",
+      "basic": {
+        "id": "E25_basic",
+        "name": "Пункт договора",
+        "kind": "atk_back",
+        "multiplier": 1.2
+      },
+      "special": {
+        "id": "E25_special",
+        "name": "Мелкий шрифт",
+        "kind": "MARK",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E26",
+      "name": "Хранитель артефакта",
+      "archetype": "ELITE",
+      "role": "elite_tank",
+      "hp": 1100,
+      "atk": 130,
+      "defense": 150,
+      "speed": 86,
+      "lore": "Каменно-кристаллический страж.",
+      "quote": "Артефакт выдаче не подлежит.",
+      "basic": {
+        "id": "E26_basic",
+        "name": "Охрана узла",
+        "kind": "atk",
+        "multiplier": 1.25
+      },
+      "special": {
+        "id": "E26_special",
+        "name": "Резонанс Печати",
+        "kind": "SHIELD_THEN_STRIKE",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E27",
+      "name": "Протокол аннулирования",
+      "archetype": "ELITE",
+      "role": "elite_mage",
+      "hp": 1000,
+      "atk": 170,
+      "defense": 60,
+      "speed": 97,
+      "lore": "Разорванный свиток с пустотами.",
+      "quote": "Город признан опечаткой.",
+      "basic": {
+        "id": "E27_basic",
+        "name": "Стирание",
+        "kind": "atk",
+        "multiplier": 1.35
+      },
+      "special": {
+        "id": "E27_special",
+        "name": "Отмена существования",
+        "kind": "MARK_DELAYED_STRIKE",
+        "value": 1.4,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E28",
+      "name": "Гвардеец Окошка",
+      "archetype": "GUARDIAN",
+      "role": "warrior",
+      "hp": 600,
+      "atk": 125,
+      "defense": 70,
+      "speed": 100,
+      "lore": "Рыцарь-автомат с решёткой-щитом.",
+      "quote": "Приходите после вечности.",
+      "basic": {
+        "id": "E28_basic",
+        "name": "Закрыть окошко",
+        "kind": "atk",
+        "multiplier": 1.15
+      },
+      "special": {
+        "id": "E28_special",
+        "name": "Приём окончен",
+        "kind": "GUARD_SELF",
+        "value": 0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E28/concept.jpg",
+        "portrait": "res://assets/enemies/E28/portrait.jpg",
+        "sprite": "res://assets/enemies/E28/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E29",
+      "name": "Контролёр башни",
+      "archetype": "CONTROL",
+      "role": "controller",
+      "hp": 550,
+      "atk": 110,
+      "defense": 75,
+      "speed": 103,
+      "lore": "Летающий лифтовый пульт.",
+      "quote": "Этаж не существует.",
+      "basic": {
+        "id": "E29_basic",
+        "name": "Вызов лифта",
+        "kind": "atk",
+        "multiplier": 1.1
+      },
+      "special": {
+        "id": "E29_special",
+        "name": "Не тот этаж",
+        "kind": "SLOW_TWO",
+        "value": 0.2,
+        "cooldown_actions": 3,
+        "proc_chance": 0.25
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E29A",
+      "name": "Элитный секретарь",
+      "archetype": "ELITE",
+      "role": "elite_support",
+      "hp": 700,
+      "atk": 100,
+      "defense": 90,
+      "speed": 95,
+      "lore": "Позолоченная конторка с перьевыми клинками.",
+      "quote": "Вы записаны на вчера.",
+      "basic": {
+        "id": "E29A_basic",
+        "name": "Срочная резолюция",
+        "kind": "atk",
+        "multiplier": 1.2
+      },
+      "special": {
+        "id": "E29A_special",
+        "name": "Без очереди",
+        "kind": "SHIELD_E28_MARK",
+        "value": 0.12,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "GENERATION_BLOCKED",
+        "concept": "",
+        "portrait": "",
+        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    },
+    {
+      "id": "E30",
+      "name": "Начальник Последнего Окошка",
+      "archetype": "BOSS",
+      "role": "final_boss",
+      "hp": 3200,
+      "atk": 200,
+      "defense": 160,
+      "speed": 92,
+      "lore": "Механический бюрократ-аватар на троне документов.",
+      "quote": "Окно закрывается. Жалобы не принимаются.",
+      "basic": {
+        "id": "E30_basic",
+        "name": "Последняя подпись",
+        "kind": "atk_front",
+        "multiplier": 1.3
+      },
+      "special": {
+        "id": "E30_special",
+        "name": "Приказ №∞",
+        "kind": "BOSS_E30",
+        "value": 0,
+        "cooldown_actions": 3,
+        "proc_chance": 0.35
+      },
+      "art": {
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E30/concept.jpg",
+        "portrait": "res://assets/enemies/E30/portrait.jpg",
+        "sprite": "res://assets/enemies/E30/concept.jpg",
+        "atlases": {
+          "idle": "MISSING",
+          "attack": "MISSING",
+          "hit": "MISSING",
+          "death": "MISSING",
+          "special": "MISSING",
+          "telegraph": "MISSING"
+        }
+      },
+      "bestiary_unlock": "first_encounter"
+    }
+  ]
+}

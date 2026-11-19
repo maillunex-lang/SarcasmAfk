@@ -1,7 +1,7 @@
 package battleverify
 
 // BalanceVersion pins content/sim formula for replays (bump when combat math changes).
-const BalanceVersion = "2026.11.19-atb1"
+const BalanceVersion = "2026.11.19-monsters1"
 
 // Command is a validated player input in a battle replay.
 type Command struct {

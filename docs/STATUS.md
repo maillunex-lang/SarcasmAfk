@@ -6,8 +6,8 @@
 
 ## NOW
 
-EQUIPMENT-001 на ветке `cursor/equipment-001-beaf`: каталог 32, unique instances, equip/upgrade/salvage/sets, CH01 rewards, TEMP icons, Godot arsenal UI.  
-CH02 + Stage E blocked. CH01 **не** accepted. Баланс Draft.
+MONSTERS-CH01-001: каталог 29, серверные статусы/умения/фазы B20·B30, Бестиарий, **9 TEMP контрольных концептов** ждут ACK владельца.  
+Массовый финальный арт **BLOCKED** (D-ART-06). CH02 + Stage E blocked. CH01 **не** accepted.
 
 ## Работает / частично / заглушки
 

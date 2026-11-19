@@ -154,10 +154,24 @@ static func combat_idle(unit_id: String) -> String:
 	return ""
 
 
+static func enemy_concept(enemy_type: String) -> String:
+	var path := "res://assets/enemies/%s/concept.jpg" % enemy_type
+	if ResourceLoader.exists(path):
+		return path
+	path = "res://assets/enemies/%s/portrait.jpg" % enemy_type
+	if ResourceLoader.exists(path):
+		return path
+	return ""
+
+
 static func enemy_sprite_for_type(enemy_type: String) -> String:
 	var combat := combat_idle(enemy_type)
 	if combat != "":
 		return combat
+	var concept := enemy_concept(enemy_type)
+	if concept != "":
+		return concept
+	# Legacy placeholders only until per-type TEMP/FINAL art lands (D-ART-06).
 	match enemy_type:
 		"E01":
 			return "res://assets/enemies/E01/E01_living_ticket.jpg"

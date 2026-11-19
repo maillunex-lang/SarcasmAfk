@@ -9,8 +9,9 @@
       "atk": 95,
       "defense": 25,
       "speed": 120,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E01/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E01/portrait.jpg"
     },
     {
       "id": "E02",
@@ -21,7 +22,7 @@
       "defense": 80,
       "speed": 90,
       "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E03",
@@ -31,8 +32,9 @@
       "atk": 85,
       "defense": 110,
       "speed": 80,
-      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E03/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E03/portrait.jpg"
     },
     {
       "id": "E04",
@@ -43,7 +45,7 @@
       "defense": 70,
       "speed": 85,
       "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E05",
@@ -53,8 +55,9 @@
       "atk": 80,
       "defense": 60,
       "speed": 100,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E05/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E05/portrait.jpg"
     },
     {
       "id": "E06",
@@ -65,7 +68,7 @@
       "defense": 55,
       "speed": 105,
       "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E07",
@@ -76,7 +79,7 @@
       "defense": 140,
       "speed": 95,
       "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E08",
@@ -87,7 +90,7 @@
       "defense": 30,
       "speed": 110,
       "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E09",
@@ -98,7 +101,7 @@
       "defense": 90,
       "speed": 88,
       "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E10",
@@ -108,8 +111,9 @@
       "atk": 140,
       "defense": 35,
       "speed": 100,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E10/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E10/portrait.jpg"
     },
     {
       "id": "E11",
@@ -120,7 +124,7 @@
       "defense": 95,
       "speed": 92,
       "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E12",
@@ -131,7 +135,7 @@
       "defense": 50,
       "speed": 98,
       "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E13",
@@ -141,8 +145,9 @@
       "atk": 100,
       "defense": 70,
       "speed": 102,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E13/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E13/portrait.jpg"
     },
     {
       "id": "E14",
@@ -153,7 +158,7 @@
       "defense": 20,
       "speed": 115,
       "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E15",
@@ -164,7 +169,7 @@
       "defense": 85,
       "speed": 96,
       "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E16",
@@ -175,7 +180,7 @@
       "defense": 50,
       "speed": 108,
       "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E17",
@@ -186,7 +191,7 @@
       "defense": 75,
       "speed": 100,
       "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E20",
@@ -196,8 +201,9 @@
       "atk": 160,
       "defense": 120,
       "speed": 90,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E20/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E20/portrait.jpg"
     },
     {
       "id": "E21",
@@ -208,7 +214,7 @@
       "defense": 80,
       "speed": 85,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E22",
@@ -218,8 +224,9 @@
       "atk": 100,
       "defense": 130,
       "speed": 82,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E22/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E22/portrait.jpg"
     },
     {
       "id": "E23",
@@ -230,7 +237,7 @@
       "defense": 70,
       "speed": 94,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E24",
@@ -241,7 +248,7 @@
       "defense": 110,
       "speed": 88,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E25",
@@ -252,7 +259,7 @@
       "defense": 40,
       "speed": 105,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E26",
@@ -263,7 +270,7 @@
       "defense": 150,
       "speed": 86,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E27",
@@ -274,7 +281,7 @@
       "defense": 60,
       "speed": 97,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E28",
@@ -284,8 +291,9 @@
       "atk": 125,
       "defense": 70,
       "speed": 100,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E28/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E28/portrait.jpg"
     },
     {
       "id": "E29",
@@ -296,7 +304,7 @@
       "defense": 75,
       "speed": 103,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E29A",
@@ -307,7 +315,7 @@
       "defense": 90,
       "speed": 95,
       "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
     },
     {
       "id": "E30",
@@ -317,8 +325,10 @@
       "atk": 200,
       "defense": 160,
       "speed": 92,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "Placeholder sprite until unique art"
+      "sprite": "res://assets/enemies/E30/concept.jpg",
+      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
+      "portrait": "res://assets/enemies/E30/portrait.jpg"
     }
-  ]
+  ],
+  "note": "Sprites: pilots use TEMP concepts; others still share placeholders until art pack approved."
 }

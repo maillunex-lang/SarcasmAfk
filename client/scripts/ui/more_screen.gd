@@ -26,6 +26,7 @@ func _ready() -> void:
 		["Арена", AssetPaths.ICON_ARENA, func() -> void: SceneNav.to_arena(get_tree())],
 		["Экспедиции", AssetPaths.ICON_EXPEDITION, func() -> void: SceneNav.to_expedition(get_tree())],
 		["Кампания", AssetPaths.ICON_QUEST, func() -> void: SceneNav.to_campaign(get_tree())],
+		["Бестиарий", AssetPaths.ICON_BATTLE, func() -> void: SceneNav.to_bestiary(get_tree())],
 	]
 	for item in links:
 		var row := HBoxContainer.new()
