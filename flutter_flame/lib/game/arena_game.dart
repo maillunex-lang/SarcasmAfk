@@ -85,8 +85,7 @@ class ArenaGame extends FlameGame {
       home: Vector2(size.x * 0.72, groundY),
       faceRight: false,
     )..priority = 5;
-    add(hero);
-    add(enemy);
+    await addAll([hero, enemy]);
 
     slashFx = SpriteComponent(
       sprite: Sprite(images.fromCache('fx_slash.png')),
@@ -102,11 +101,10 @@ class ArenaGame extends FlameGame {
       position: Vector2(size.x * 0.55, size.y * 0.52),
       priority: 21,
     )..opacity = 0;
-    add(slashFx);
-    add(burstFx);
+    await addAll([slashFx, burstFx]);
 
     hud = ArenaHud()..priority = 50;
-    add(hud);
+    await add(hud);
 
     await _startRound();
   }
@@ -124,14 +122,8 @@ class ArenaGame extends FlameGame {
     nextEnemy = 999;
     onToast('Сближение…');
 
-    hero.dead = false;
-    enemy.dead = false;
-    hero.body.opacity = 1;
-    enemy.body.opacity = 1;
-    hero.body.angle = 0;
-    enemy.body.angle = 0;
-    hero.position = hero.homePosition.clone();
-    enemy.position = enemy.homePosition.clone();
+    hero.resetVisual();
+    enemy.resetVisual();
 
     await Future.wait([
       hero.enterFromOffscreen(duration: 1.05 / speed),

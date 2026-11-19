@@ -29,7 +29,12 @@ class Fighter extends PositionComponent {
   final Vector2 homePosition;
   final bool faceRight;
 
-  late SpriteComponent body;
+  late final SpriteComponent body = SpriteComponent(
+    sprite: idle,
+    size: Vector2(160, 210),
+    anchor: Anchor.bottomCenter,
+    position: Vector2(80, 210),
+  );
   FighterPose pose = FighterPose.idle;
   bool dead = false;
 
@@ -41,16 +46,22 @@ class Fighter extends PositionComponent {
   Future<void> onLoad() async {
     await super.onLoad();
     size = Vector2(160, 210);
-    body = SpriteComponent(
-      sprite: idle,
-      size: size.clone(),
-      anchor: Anchor.bottomCenter,
-      position: Vector2(size.x / 2, size.y),
-    );
-    if (!faceRight) {
+    if (!faceRight && body.scale.x > 0) {
       body.flipHorizontally();
     }
-    add(body);
+    await add(body);
+  }
+
+  void resetVisual() {
+    dead = false;
+    pose = FighterPose.idle;
+    body.sprite = idle;
+    body.opacity = 1;
+    body.angle = 0;
+    body.scale.setValues(faceRight ? 1 : -1, 1);
+    body.position = Vector2(size.x / 2, size.y);
+    position = homePosition.clone();
+    setBobbing(false);
   }
 
   void setPose(FighterPose next) {
