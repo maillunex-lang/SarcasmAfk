@@ -33,13 +33,19 @@ Done TEMP → `bg_party.jpg`, `bg_bestiary.jpg`, `bg_dialog.jpg`.
 ### VO-ICON-GUILD / VO-MAP-UFA / VO-GACHA-RESULT
 Done TEMP → `guild_icon_{crest,vault,board}.jpg`, `map_ufa_campaign.jpg`, `gacha_frame_*.png`.
 
-## PENDING (next PRs)
+## DONE Stage F
+
+| ID | Output |
+|----|--------|
+| VO-DIALOG-H13+ | `client/assets/dialogs/dialog_portrait_H13…H36.jpg` via `scripts/generate_dialog_busts_h13_h36.py` (TEMP stamp) |
+| VO-THEME-TRES | `client/themes/bashlegends_theme.tres` |
+| VO-GALLERY | `docs/reports/visual_gallery/` via `scripts/generate_visual_gallery.py` |
+
+## PENDING (later)
 
 | ID | Need | Prompt gist |
 |----|------|-------------|
-| VO-DIALOG-H13+ | Dialog busts H13–H36 | per HEROES_DRAFT; TEMP ok |
-| VO-THEME-TRES | Shared Theme.tres | fonts/colors/buttons from DesignTokens |
-| VO-GALLERY | Before/after shots | Godot capture pack |
+| VO-VIP-CHAT-DEPTH | Deeper VIP/chat chrome | optional polish after device accept |
 
 ## BLOCKED
 

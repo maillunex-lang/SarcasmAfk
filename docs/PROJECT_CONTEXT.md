@@ -1,6 +1,6 @@
 # PROJECT_CONTEXT.md — БашЛегенды: Эпоха Абсурда
 
-> Snapshot: **2026-11-19** · baseline `main` `2b1aef7` (REORG #27) · product: T-157 Expansion E  
+> Snapshot: **2026-11-19** · baseline `main` `747a6f5` (T-157 #28) · product: T-158 Visual Stage F  
 > Entry: [`../AGENTS.md`](../AGENTS.md) → this file → [`STATUS.md`](STATUS.md) → [`TASK_QUEUE.md`](TASK_QUEUE.md)
 
 ## What it is

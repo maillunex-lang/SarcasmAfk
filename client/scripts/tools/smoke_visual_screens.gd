@@ -35,6 +35,9 @@ func _run() -> void:
 		AssetPaths.gacha_frame("SSR"),
 		DesignTokens.FONT_BODY,
 		DesignTokens.FONT_DISPLAY,
+		"res://themes/bashlegends_theme.tres",
+		"res://assets/dialogs/dialog_portrait_H13.jpg",
+		"res://assets/dialogs/dialog_portrait_H36.jpg",
 	]
 	for p in required_tex:
 		if not ResourceLoader.exists(p):

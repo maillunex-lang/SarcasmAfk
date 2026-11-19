@@ -20,7 +20,7 @@
 | EQUIPMENT-001 | ЧАСТИЧНО | Catalog 32 + unique instances + API + TEMP icons + arsenal UI; random drop OFF; Draft balance |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | MONSTERS-CH01 atlases/VFX | ЧАСТИЧНО | TEMP atlases ×29 + shared TEMP VFX/SFX; не Stage E |
-| Visual Overhaul 001 | В РАБОТЕ | Audit+fonts+core polish; см. `VISUAL_OVERHAUL_001.md` |
+| Visual Overhaul 001 | Stage F (T-158) | Theme.tres + H13–H36 busts + gallery; см. `VISUAL_OVERHAUL_001.md` |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
 | Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |
@@ -320,6 +320,12 @@
 8. Не плодить новые «источники истины» статуса: NOW только в `STATUS.md`, очередь только в `TASK_QUEUE.md`, решения только в `DECISIONS.md`.
 
 ## 8. Журнал прогресса
+
+### Журнал 2026-11-19 — T-158 Visual Overhaul Stage F
+
+- Theme.tres wired in project; TEMP dialog busts H13–H36; screen enter/dialog/gacha/shop motion.
+- Gallery pack under `docs/reports/visual_gallery/`; smokes `smoke_visual_screens` + `smoke_visual_gallery`.
+- Debug APK rebuilt in Stage F cycle.
 
 ### Журнал 2026-11-19 — T-157 CH01 Expansion E (E2E)
 

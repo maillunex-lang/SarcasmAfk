@@ -31,4 +31,5 @@ Unchanged navy/gold/cyan/ivory/coral/mint + rarity colors N→UR in `DesignToken
 
 ## Theme `.tres`
 
-Still **MISSING** — helpers only. Tracked as gap `THEME_TRES`.
+`client/themes/bashlegends_theme.tres` — wired via `project.godot` `[gui] theme/custom`.  
+Helpers in `DesignTokens` remain the primary code-built UI path; Theme covers default Button/Label/Panel/LineEdit.
