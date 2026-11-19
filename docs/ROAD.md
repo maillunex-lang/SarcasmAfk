@@ -19,6 +19,7 @@
 | EQUIPMENT-001 | ЧАСТИЧНО | Catalog 32 + unique instances + API + TEMP icons + arsenal UI; random drop OFF; Draft balance |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | MONSTERS-CH01 atlases/VFX | ЧАСТИЧНО | TEMP atlases ×29 + shared TEMP VFX/SFX; не Stage E |
+| Visual Overhaul 001 | В РАБОТЕ | Audit+fonts+core polish; см. `VISUAL_OVERHAUL_001.md` |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
 | Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |

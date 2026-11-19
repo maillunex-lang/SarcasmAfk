@@ -12,12 +12,21 @@ func _ready() -> void:
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Призыв", 40, DesignTokens.COLOR_ACCENT_GOLD))
+	vbox.add_child(DesignTokens.make_display_label("Призыв", 48))
 	vbox.add_child(DesignTokens.make_label(
 		"Тикеты: %d · платные баннеры OFF · Mythic только события" % GameState.summon_tickets,
 		18,
 		DesignTokens.COLOR_TEXT_MUTED
 	))
+
+	var portal := TextureRect.new()
+	portal.texture = AssetPaths.tex(AssetPaths.GACHA_PORTAL)
+	portal.custom_minimum_size = Vector2(0, 420)
+	portal.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portal.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	portal.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.add_child(portal)
+
 	vbox.add_child(DesignTokens.make_label(
 		"Обычный: N50% R35% SR12% SSR3%",
 		16,

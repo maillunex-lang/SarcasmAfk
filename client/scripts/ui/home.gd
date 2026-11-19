@@ -103,8 +103,8 @@ func _currency_chip(icon_path: String, value: String) -> PanelContainer:
 
 func _build_brand_block() -> VBoxContainer:
 	var block := VBoxContainer.new()
-	block.add_theme_constant_override("separation", 4)
-	block.add_child(DesignTokens.make_label(DesignTokens.DISPLAY_NAME, 36, DesignTokens.COLOR_ACCENT_GOLD))
+	block.add_theme_constant_override("separation", 6)
+	block.add_child(DesignTokens.make_display_label(DesignTokens.DISPLAY_NAME, 44))
 	block.add_child(DesignTokens.make_label(DesignTokens.SLOGAN, 20, DesignTokens.COLOR_TEXT_MUTED))
 	return block
 
@@ -155,7 +155,11 @@ func _build_hero_stage() -> PanelContainer:
 	var cap_box := VBoxContainer.new()
 	caption.add_child(cap_box)
 	cap_box.add_child(DesignTokens.make_label("H01 · Каэрон", 26, DesignTokens.COLOR_TEXT_IVORY))
-	cap_box.add_child(DesignTokens.make_label("Главный экран · TEMP арт", 16, DesignTokens.COLOR_TEXT_MUTED))
+	cap_box.add_child(DesignTokens.make_label("Командир отряда · арт TEMP до Stage E", 16, DesignTokens.COLOR_TEXT_MUTED))
+	# Soft entrance motion for hero stage.
+	stage.modulate = Color(1, 1, 1, 0)
+	var tw := create_tween()
+	tw.tween_property(stage, "modulate:a", 1.0, 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	return stage
 
 

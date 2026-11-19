@@ -30,7 +30,12 @@ required = [
   "client/assets/combat/H02/H02_idle.png",
   "client/assets/combat/H03/H03_idle.png",
   "client/assets/combat/E01/E01_idle.png",
+  "client/assets/branding/bg_inventory.jpg",
+  "client/assets/branding/gacha_portal.jpg",
+  "client/assets/fonts/Manrope-Regular.ttf",
+  "client/assets/fonts/Cinzel-SemiBold.ttf",
 ]
+
 missing = [p for p in required if not pathlib.Path(p).is_file()]
 if missing:
     print("MISSING ASSETS", missing, file=sys.stderr)

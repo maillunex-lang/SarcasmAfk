@@ -22,7 +22,7 @@ var _detail: VBoxContainer
 
 func _ready() -> void:
 	super._ready()
-	_set_bg_texture(AssetPaths.BG_HEROES)
+	_set_bg_texture(AssetPaths.BG_INVENTORY if ResourceLoader.exists(AssetPaths.BG_INVENTORY) else AssetPaths.BG_HEROES)
 	var dim := ColorRect.new()
 	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.55)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -123,7 +123,7 @@ func _refresh() -> void:
 			if str(k).begins_with("mat_") and str(k) != "mat_equipment_scrap":
 				_list.add_child(_material_row(str(k), str(k), int(GameState.inventory[k])))
 		if _list.get_child_count() == 0:
-			_list.add_child(DesignTokens.make_label(UI_EMPTY, 20, DesignTokens.COLOR_TEXT_MUTED))
+			_list.add_child(_empty_state())
 		return
 
 	var filter_slot := str(SLOT_BY_TAB.get(_tab, ""))
@@ -140,7 +140,22 @@ func _refresh() -> void:
 		_list.add_child(_instance_card(str(iid), inst, def))
 		shown += 1
 	if shown == 0:
-		_list.add_child(DesignTokens.make_label(UI_EMPTY, 20, DesignTokens.COLOR_TEXT_MUTED))
+		_list.add_child(_empty_state())
+
+
+func _empty_state() -> VBoxContainer:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 12)
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	var art := TextureRect.new()
+	art.texture = AssetPaths.tex(AssetPaths.UI_EMPTY_STATE)
+	art.custom_minimum_size = Vector2(0, 220)
+	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.add_child(art)
+	box.add_child(DesignTokens.make_label(UI_EMPTY, 20, DesignTokens.COLOR_TEXT_MUTED))
+	return box
 
 
 func _hero_slots_panel(hero_id: String) -> PanelContainer:
