@@ -54,6 +54,7 @@ func _ready() -> void:
 	catalog.load_all()
 	_load_content_packs()
 	_load_heroes()
+	_load_client_config()
 	load_game()
 	_apply_api_mode()
 	if afk_started_unix == 0:
@@ -61,12 +62,40 @@ func _ready() -> void:
 		afk_claimed_unix = afk_started_unix
 
 
+func is_release_build() -> bool:
+	# Godot tags release exports with "release"; editor/debug keep mock-friendly defaults.
+	return OS.has_feature("release") and not OS.has_feature("editor")
+
+
+func allows_mock_toggle() -> bool:
+	# D-NET-05: debug/editor may switch; release stays live-oriented.
+	return not is_release_build()
+
+
+func _load_client_config() -> void:
+	var path := "res://data/net/client_config.json"
+	if not ResourceLoader.exists(path) and not FileAccess.file_exists(path):
+		return
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		return
+	var parsed = JSON.parse_string(f.get_as_text())
+	if typeof(parsed) == TYPE_DICTIONARY:
+		var url := str(parsed.get("live_api_url", ""))
+		if url != "":
+			live_api_url = url
+
+
 func _apply_api_mode() -> void:
+	# T-114 / D-NET-05: release → live by default (no silent mock fallback on failure).
+	if is_release_build():
+		prefer_live_api = true
+		_resume_or_probe_live()
+		return
 	if prefer_live_api:
 		_resume_or_probe_live()
 	else:
 		api.configure_mock()
-		saved_auth_token = ""
 		last_session_status = "mock"
 
 

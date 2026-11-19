@@ -46,11 +46,12 @@ Arenas: `arenas/ARENA-Lxx/arena_Lxx_floor.jpg` for L01–L10.
 
 ## Combat atlases (pipeline)
 
-Scripts: `tools/blender_pipeline/` (create → render → pack → validate).  
-Sample meta: `tools/blender_pipeline/samples/sample_unit.atlas.json` (dev, not final art).
+Scripts: `tools/blender_pipeline/` + `profiles.json` (H01/H02/H03/E01 unique colors/props).  
+Playable drafts in `assets/combat/{H01,H02,H03,E01}/` (`*_idle.png`, `*_atlas.png`).  
+`sample_unit` = tech-only (D-ART-04). Character drafts ≠ final art (D-ART-05).
 
 ## Still open
 
-- Owner-approved combat atlases from pipeline (replace placeholders)
-- Per-enemy unique art beyond archetypes
-- L11 Sterlitamak playable art (CH02)
+- Owner-approved final combat atlases
+- Per-enemy unique art beyond E01 draft + archetypes
+- L11 Sterlitamak playable art (CH02) — blocked until CH01 accepted

@@ -51,7 +51,11 @@ func _ready() -> void:
 
 	vbox.add_child(DesignTokens.make_label(GameState.chapter_progress_text(), 22, DesignTokens.COLOR_TEXT_MUTED))
 
-	var campaign := DesignTokens.make_button("В кампанию CH01", true)
+	var map_btn := DesignTokens.make_button("Карта Уфы", true)
+	map_btn.pressed.connect(func() -> void: SceneNav.to_map(get_tree()))
+	vbox.add_child(map_btn)
+
+	var campaign := DesignTokens.make_button("Кампания CH01", false)
 	campaign.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
 	vbox.add_child(campaign)
 

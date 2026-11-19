@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "note": "MVP roster H01–H12; H04–H12 reuse V0 sprites as placeholders (no mass art)",
+  "note": "MVP roster; H01–H03 combat sprites from Blender pipeline drafts (not final art). H04–H12 still placeholders.",
   "heroes": [
     {
       "id": "H01",
@@ -17,11 +17,13 @@
       "energy_max": 100,
       "ultimate_id": "rulebreak",
       "ultimate_name": "Прорыв регламента",
-      "sprite": "res://assets/characters/H01/H01_full.jpg",
+      "sprite": "res://assets/combat/H01/H01_idle.png",
       "portrait": "res://assets/characters/H01/H01_portrait.jpg",
       "owned": true,
       "level": 1,
-      "stars": 0
+      "stars": 0,
+      "combat_atlas": "res://assets/combat/H01/H01_atlas.png",
+      "art_status": "pipeline_draft_D-ART-05"
     },
     {
       "id": "H02",
@@ -38,11 +40,13 @@
       "energy_max": 100,
       "ultimate_id": "emergency_repair",
       "ultimate_name": "Аварийный ремонт",
-      "sprite": "res://assets/characters/H02/H02_full.jpg",
+      "sprite": "res://assets/combat/H02/H02_idle.png",
       "portrait": "res://assets/characters/H02/H02_portrait.jpg",
       "owned": true,
       "level": 1,
-      "stars": 0
+      "stars": 0,
+      "combat_atlas": "res://assets/combat/H02/H02_atlas.png",
+      "art_status": "pipeline_draft_D-ART-05"
     },
     {
       "id": "H03",
@@ -59,11 +63,13 @@
       "energy_max": 100,
       "ultimate_id": "paragraph_oblivion",
       "ultimate_name": "Параграф забвения",
-      "sprite": "res://assets/characters/H03/H03_full.jpg",
+      "sprite": "res://assets/combat/H03/H03_idle.png",
       "portrait": "res://assets/characters/H03/H03_portrait.jpg",
       "owned": true,
       "level": 1,
-      "stars": 0
+      "stars": 0,
+      "combat_atlas": "res://assets/combat/H03/H03_atlas.png",
+      "art_status": "pipeline_draft_D-ART-05"
     },
     {
       "id": "H04",

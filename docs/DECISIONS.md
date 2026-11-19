@@ -35,6 +35,8 @@
 | D-NET-02 | Тестовый APK: live API по умолчанию только после успешного probe (health+auth) |
 | D-NET-03 | Явный переключатель окружения для разработчика |
 | D-NET-04 | При ошибке live **не** переключаться молча на mock |
+| D-NET-05 | **T-114:** release-сборки: `use_mock=false` по умолчанию после прохождения integration (auth/battle/rewards/save/resume); debug: явный mock/live |
+| D-NET-06 | P3 guild/arena/events live — только после CH01 accepted; до этого stubs + контракты |
 
 ## D-ART — Арт
 
@@ -43,6 +45,9 @@
 | D-ART-01 | Оригинальные игровые ассеты; пайплайн Blender→animation→transparent 2D atlases→Godot 4 |
 | D-ART-02 | Временные заглушки допустимы в разработке, не считать финальным артом |
 | D-ART-03 | T-031: воспроизводимый Blender-пайплайн в репо (скрипты ≠ готовые ассеты) |
+| D-ART-04 | Sample-атлас (`sample_unit`) — **только** для техотладки пайплайна, не финальный игровой ассет (2026-11-19) |
+| D-ART-05 | H01 Каэрон / H02 Вейриса / H03 Эльдарион и враги CH01: уникальный дизайн по `HEROES.md`, `CHARACTER_STYLE_GUIDE.md`, `ART_DIRECTION.md` |
+| D-ART-06 | Не начинать CH02 и массовую генерацию ассетов до приёмки CH01 |
 
 ## D-SCOPE — Отложенное
 
@@ -57,6 +62,7 @@
 |---|---|
 | D-ADMIN-01 | Admin: полноценная auth + RBAC (роли admin, viewer); API key только для доверенных сервисов; секреты не в клиенте; audit |
 | D-ADMIN-02 | APK: проверить SDK/templates/keystore; не создавать новый релизный ключ если есть; не коммитить секреты; сначала debug APK, потом release |
+| D-ADMIN-03 | Release keystore: искать на VPS/CI secrets; не создавать и не перезаписывать; пароли/ключи не в логах и не в git (2026-11-19) |
 
 ## D-PRODUCT — Продукт / платформа
 

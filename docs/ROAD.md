@@ -452,11 +452,18 @@
 - Не сделано: owner art-approve; Godot import atlases as default combat sprites; release APK
 - Следующий шаг: art review / T-114 / P3
 
+### 2026-11-19 — T-114 + T-125 CH01 Android slice
+- Статус: ГОТОВО (debug APK); release APK BLOCKED (нет keystore)
+- Сделано: цепочка Home→Map→L01→Dialog→Party→Battle(+ULT)→Reward→Save→Next; H01/H02/H03/E01 pipeline drafts; `smoke_ch01_vertical`; `integration_live_slice` (auth/battle/rewards/resume, no double soft); release defaults live (D-NET-05); debug mock/live toggle; `build/BashLegends-debug.apk`
+- Аудит: дублей наград нет (mock claim + server 409 NO_ACTIVE_BATTLE); perf — короткий ATB (~30–40 ticks B01), APK ~131MB (арт/локации); silent mock отсутствует
+- Не сделано: release signing; финальный арт; P3 live; CH02
+- Следующий шаг: T-126 keystore владельца · CH01 accepted
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~P0 + T-123 + T-110 + T-031 + T-124~~ — сделано.
-2. Далее: owner art-approve атласов · release APK (keystore владельца) · T-114 no-mock.
-3. P3: guild/arena/events live. Запреты: CH02+ игрокам, rename, mass art как финал.
-4. Решения: `DECISIONS.md` D-COMBAT / D-NET / D-ART / D-SCOPE / D-ADMIN (2026-11-19).
+1. ~~P0…T-125 CH01 Android debug slice + T-114~~ — сделано.
+2. Далее: T-126 release APK (keystore владельца) · owner final art · CH01 accepted.
+3. P3 guild/arena/events live — только после CH01 accepted. Запреты: CH02+, rename, mass art.
+4. Решения: D-ART-04/05/06, D-NET-05/06, D-ADMIN-03 (2026-11-19).
