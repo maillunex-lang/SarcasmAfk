@@ -42,16 +42,17 @@ func _ready() -> void:
 	stage_box.add_child(hero)
 	stage_box.add_child(DesignTokens.make_label("H01 · Каэрон", 34, DesignTokens.COLOR_TEXT_IVORY))
 
-	var quest_done := GameState.is_quest_done("CH01-Q01")
-	var quest_label := DesignTokens.make_label(
-		"CH01-Q01: завершён" if quest_done else "CH01-Q01: Талон в неизвестность",
+	vbox.add_child(DesignTokens.make_label(
+		GameState.chapter_progress_text(),
 		24,
-		DesignTokens.COLOR_SUCCESS_MINT if quest_done else DesignTokens.COLOR_TEXT_MUTED
-	)
-	vbox.add_child(quest_label)
+		DesignTokens.COLOR_TEXT_MUTED
+	))
 
-	var campaign := DesignTokens.make_button("В кампанию" if not quest_done else "В кампанию (повтор)", true)
-	campaign.pressed.connect(func() -> void: SceneNav.to_l01(get_tree()))
+	var next_hint := _next_quest_hint()
+	vbox.add_child(DesignTokens.make_label(next_hint, 22, DesignTokens.COLOR_ACCENT_GOLD))
+
+	var campaign := DesignTokens.make_button("В кампанию CH01", true)
+	campaign.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
 	vbox.add_child(campaign)
 
 	var afk_row := HBoxContainer.new()
@@ -67,6 +68,17 @@ func _ready() -> void:
 	var afk := DesignTokens.make_button("AFK (скоро)", false)
 	afk.disabled = true
 	afk_row.add_child(afk)
+
+
+func _next_quest_hint() -> String:
+	if GameState.active_quest_id != "":
+		var q := GameState.current_quest()
+		return "Активно: %s · %s" % [GameState.active_quest_id, str(q.get("title", ""))]
+	for q in GameState.catalog.quest_list():
+		var qid := str(q.get("quest_id", ""))
+		if GameState.is_quest_available(qid):
+			return "Далее: %s · %s" % [qid, str(q.get("title", ""))]
+	return "CH01 пройден — ждут абсурдные сиквелы"
 
 
 func _set_background(path: String) -> void:

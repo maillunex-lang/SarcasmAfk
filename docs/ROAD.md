@@ -357,10 +357,17 @@
 - Не сделано: owner visual sign-off; Go server; Blender atlases
 - Следующий шаг: CH01 B02+ или ApiClient mock
 
+### 2026-11-19 — T-055 CH01 campaign embed
+- Статус: ГОТОВО (моки в клиенте, не MVP)
+- Сделано: JSON CH01 (12Q / 11L / 30B / 12 диалогов), `CampaignCatalog`, multi-quest `GameState`, экран кампании, цепочка Location→Dialog→Battle, `smoke_ch01.gd` + CI
+- Не сделано: уникальный арт L02–L10, ApiClient, главы 02–12
+- Доказательства: `client/data/quests|locations|enemies|battles|dialogues`, `client/scripts/ui/campaign.gd`
+- Следующий шаг: ApiClient (USE_MOCK) или T-060
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-040 / T-050 / T-020 / T-021~~ — сделано.
-2. Далее: CH01 контент на моках **или** `ApiClient`; T-031 при Blender.
+1. ~~T-040 / T-050 / T-020 / T-021 / T-055~~ — сделано.
+2. Далее: `ApiClient` **или** T-060 арт L02+; T-031 при Blender.
 3. Запреты: главы 02–12, массовые ассеты вне очереди, rename.

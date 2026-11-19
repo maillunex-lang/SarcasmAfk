@@ -66,6 +66,7 @@ func _run() -> void:
 	for path in [
 		"res://scenes/boot/splash.tscn",
 		"res://scenes/home/home.tscn",
+		"res://scenes/campaign/campaign.tscn",
 		"res://scenes/location/l01.tscn",
 		"res://scenes/dialog/dialog.tscn",
 		"res://scenes/battle/battle.tscn",
