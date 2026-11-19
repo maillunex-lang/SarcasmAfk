@@ -73,13 +73,20 @@ func _build_ui() -> void:
 	enemy_row.add_theme_constant_override("separation", 12)
 	vbox.add_child(enemy_row)
 
-	var hero_row := HBoxContainer.new()
-	hero_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	hero_row.add_theme_constant_override("separation", 12)
-	hero_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	vbox.add_child(hero_row)
+	var hero_back := HBoxContainer.new()
+	hero_back.alignment = BoxContainer.ALIGNMENT_CENTER
+	hero_back.add_theme_constant_override("separation", 12)
+	vbox.add_child(hero_back)
+	vbox.add_child(DesignTokens.make_label("Тыл", 18, DesignTokens.COLOR_TEXT_MUTED))
 
-	call_deferred("_populate_rows", enemy_row, hero_row)
+	var hero_front := HBoxContainer.new()
+	hero_front.alignment = BoxContainer.ALIGNMENT_CENTER
+	hero_front.add_theme_constant_override("separation", 12)
+	hero_front.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vbox.add_child(hero_front)
+	vbox.add_child(DesignTokens.make_label("Фронт", 18, DesignTokens.COLOR_TEXT_MUTED))
+
+	call_deferred("_populate_rows", enemy_row, hero_front, hero_back)
 
 	_log = RichTextLabel.new()
 	_log.custom_minimum_size = Vector2(0, 220)
@@ -103,19 +110,23 @@ func _build_ui() -> void:
 	vbox.add_child(_ended_panel)
 
 
-func _populate_rows(enemy_row: HBoxContainer, hero_row: HBoxContainer) -> void:
+func _populate_rows(enemy_row: HBoxContainer, hero_front: HBoxContainer, hero_back: HBoxContainer) -> void:
 	if _engine == null:
 		return
 	for e in _engine.enemies:
 		enemy_row.add_child(_make_unit_card(e, false))
 	for h in _engine.heroes:
-		hero_row.add_child(_make_unit_card(h, true))
+		var card := _make_unit_card(h, true)
+		if h.row == "back":
+			hero_back.add_child(card)
+		else:
+			hero_front.add_child(card)
 
 
 func _make_unit_card(unit: BattleUnit, with_ult: bool) -> PanelContainer:
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.custom_minimum_size = Vector2(200, 280)
+	panel.custom_minimum_size = Vector2(160, 260)
 	panel.add_theme_stylebox_override("panel", DesignTokens.make_panel_style(DesignTokens.COLOR_BG_ELEVATED, 12))
 
 	var box := VBoxContainer.new()

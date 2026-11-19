@@ -1,43 +1,98 @@
 extends Node
-## Persistent client mock state — campaign-driven (CH01).
+## Persistent client mock state — CH01 campaign + Phase 1 MVP systems.
 
 signal progress_changed
 
 const SAVE_PATH := "user://bashlegends_v0_save.json"
+const ROSTER_PATH := "res://data/heroes/roster_mvp.json"
+const AFK_CONFIG_PATH := "res://data/afk/afk_config.json"
+const EXPEDITIONS_PATH := "res://data/afk/expeditions_mvp.json"
+const EVENTS_PATH := "res://data/afk/events_mvp.json"
+const GACHA_PATH := "res://data/gacha/banners_mvp.json"
+const CITIES_PATH := "res://data/cities/mvp_cities.json"
 
 var soft_currency: int = 0
+var hard_currency: int = 0
+var summon_tickets: int = 10
 var commander_xp: int = 0
-var party_ids: Array = ["H01", "H02", "H03"]
+var party_ids: Array = ["H01", "H04", "H02", "H03", "H07"]
 var heroes_catalog: Array = []
+var owned_heroes: Dictionary = {} # id -> true
+var hero_levels: Dictionary = {} # id -> level
+var equipment: Dictionary = {} # hero_id -> {weapon, armor, accessory}
+var inventory: Dictionary = {"iron_scrap": 5, "arcane_ink": 3, "ticket_stub": 1}
 var last_battle_result: Dictionary = {}
 
 var api: ApiClient
 var catalog: CampaignCatalog
-var completed_quests: Dictionary = {} # quest_id -> true
-var completed_battles: Dictionary = {} # battle_id -> true
+var completed_quests: Dictionary = {}
+var completed_battles: Dictionary = {}
 var claimed_rewards: Dictionary = {}
 var active_quest_id: String = ""
 var active_battle_id: String = ""
 var pending_dialogue_quest_id: String = ""
+
+# AFK / expeditions
+var afk_started_unix: int = 0
+var afk_claimed_unix: int = 0
+var active_expedition_id: String = ""
+var expedition_ends_unix: int = 0
+var cities: Array = []
+var events: Array = []
+var expeditions: Array = []
+var gacha_banners: Array = []
+var afk_config: Dictionary = {}
 
 
 func _ready() -> void:
 	api = ApiClient.new()
 	catalog = CampaignCatalog.new()
 	catalog.load_all()
+	_load_content_packs()
 	_load_heroes()
 	load_game()
-	if active_quest_id == "" and not is_quest_completed("CH01-Q01"):
-		# Fresh profile starts available at Q01
-		pass
+	if afk_started_unix == 0:
+		afk_started_unix = int(Time.get_unix_time_from_system())
+		afk_claimed_unix = afk_started_unix
+
+
+func _load_content_packs() -> void:
+	afk_config = _read_json(AFK_CONFIG_PATH)
+	var exp_data := _read_json(EXPEDITIONS_PATH)
+	expeditions = exp_data.get("expeditions", [])
+	var ev_data := _read_json(EVENTS_PATH)
+	events = ev_data.get("events", [])
+	var gacha := _read_json(GACHA_PATH)
+	gacha_banners = gacha.get("banners", [])
+	var city_data := _read_json(CITIES_PATH)
+	cities = city_data.get("cities", [])
+
+
+func _read_json(path: String) -> Dictionary:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {}
+	var data = JSON.parse_string(file.get_as_text())
+	if typeof(data) == TYPE_DICTIONARY:
+		return data
+	return {}
 
 
 func _load_heroes() -> void:
-	var res: Dictionary = api.get_heroes()
-	if bool(res.get("ok", false)):
-		heroes_catalog = res.get("heroes", [])
+	# Prefer local MVP roster (12 heroes); ApiClient still serves V0 path for smoke compat.
+	var data := _read_json(ROSTER_PATH)
+	if data.has("heroes"):
+		heroes_catalog = data["heroes"]
 	else:
-		push_error("Missing heroes roster via ApiClient")
+		var res: Dictionary = api.get_heroes()
+		heroes_catalog = res.get("heroes", [])
+	for h in heroes_catalog:
+		var id := str(h.get("id", ""))
+		if bool(h.get("owned", false)):
+			owned_heroes[id] = true
+			hero_levels[id] = int(h.get("level", 1))
+		if not equipment.has(id):
+			equipment[id] = {"weapon": "", "armor": "", "accessory": ""}
 
 
 func get_hero(hero_id: String) -> Dictionary:
@@ -51,9 +106,27 @@ func get_party() -> Array:
 	var out: Array = []
 	for id in party_ids:
 		var h := get_hero(str(id))
-		if not h.is_empty():
+		if not h.is_empty() and bool(owned_heroes.get(str(id), false)):
 			out.append(h)
 	return out
+
+
+func set_party_slot(index: int, hero_id: String) -> bool:
+	if index < 0 or index >= 5:
+		return false
+	if not bool(owned_heroes.get(hero_id, false)):
+		return false
+	# unique ids
+	if party_ids.has(hero_id):
+		var old_i := party_ids.find(hero_id)
+		if old_i >= 0 and old_i != index:
+			party_ids[old_i] = party_ids[index]
+	while party_ids.size() < 5:
+		party_ids.append("")
+	party_ids[index] = hero_id
+	save_game()
+	progress_changed.emit()
+	return true
 
 
 func is_quest_completed(quest_id: String) -> bool:
@@ -94,7 +167,6 @@ func start_quest(quest_id: String) -> bool:
 	var q: Dictionary = catalog.get_quest(quest_id)
 	var battles: Array = q.get("battle_ids", [])
 	active_battle_id = str(battles[0]) if not battles.is_empty() else ""
-	# Skip already completed battles when resuming
 	for bid in battles:
 		if not is_battle_completed(str(bid)):
 			active_battle_id = str(bid)
@@ -124,7 +196,6 @@ func needs_dialogue() -> bool:
 
 
 func complete_battle(battle_id: String) -> Dictionary:
-	## Returns reward info if newly completed.
 	var info := {"newly_completed": false, "quest_completed": false, "next_battle_id": "", "reward": {}}
 	if is_battle_completed(battle_id):
 		info["next_battle_id"] = _next_incomplete_battle()
@@ -136,12 +207,10 @@ func complete_battle(battle_id: String) -> Dictionary:
 	var bundle := str(reward.get("bundle_id", battle_id + "-FIRST"))
 	claim_reward(bundle, int(reward.get("soft", 0)), int(reward.get("commander_xp", 0)))
 	info["reward"] = reward
-
 	var next_id := _next_incomplete_battle()
 	info["next_battle_id"] = next_id
 	active_battle_id = next_id
 	if next_id == "":
-		# all battles of active quest done
 		var qid := active_quest_id
 		if qid != "" and not is_quest_completed(qid):
 			completed_quests[qid] = true
@@ -187,7 +256,6 @@ func set_battle_result(result: Dictionary) -> void:
 		api.finish_battle(str(result.get("battle_id", "")), bool(result.get("victory", false)))
 
 
-# Back-compat helpers used by older UI
 func is_quest_done(quest_id: String) -> bool:
 	return is_quest_completed(quest_id)
 
@@ -210,17 +278,154 @@ func chapter_progress_text() -> String:
 	return "CH01: %d / %d квестов" % [done, total]
 
 
+func currency_line() -> String:
+	return "Soft %d · Hard %d · Тикеты %d · XP %d" % [soft_currency, hard_currency, summon_tickets, commander_xp]
+
+
+# --- AFK ---
+func afk_elapsed_sec() -> int:
+	var now := int(Time.get_unix_time_from_system())
+	return maxi(0, now - afk_claimed_unix)
+
+
+func afk_capped_hours() -> float:
+	var max_h := float(afk_config.get("max_hours", 24))
+	return minf(max_h, float(afk_elapsed_sec()) / 3600.0)
+
+
+func afk_pending_reward() -> Dictionary:
+	var hours := afk_capped_hours()
+	var soft := int(float(afk_config.get("soft_per_hour", 120)) * hours)
+	var xp := int(float(afk_config.get("xp_per_hour", 15)) * hours)
+	return {"hours": hours, "soft": soft, "xp": xp, "max_hours": afk_config.get("max_hours", 24)}
+
+
+func claim_afk() -> Dictionary:
+	var pending := afk_pending_reward()
+	var soft := int(pending.get("soft", 0))
+	var xp := int(pending.get("xp", 0))
+	if soft <= 0 and xp <= 0:
+		return {"ok": false, "reason": "empty"}
+	soft_currency += soft
+	commander_xp += xp
+	afk_claimed_unix = int(Time.get_unix_time_from_system())
+	progress_changed.emit()
+	save_game()
+	return {"ok": true, "soft": soft, "xp": xp}
+
+
+# --- Expeditions ---
+func start_expedition(expedition_id: String) -> bool:
+	if active_expedition_id != "":
+		return false
+	var found: Dictionary = {}
+	for e in expeditions:
+		if str(e.get("id", "")) == expedition_id:
+			found = e
+			break
+	if found.is_empty():
+		return false
+	active_expedition_id = expedition_id
+	expedition_ends_unix = int(Time.get_unix_time_from_system()) + int(found.get("duration_sec", 60))
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func claim_expedition() -> Dictionary:
+	if active_expedition_id == "":
+		return {"ok": false}
+	var now := int(Time.get_unix_time_from_system())
+	if now < expedition_ends_unix:
+		return {"ok": false, "reason": "running", "left": expedition_ends_unix - now}
+	var found: Dictionary = {}
+	for e in expeditions:
+		if str(e.get("id", "")) == active_expedition_id:
+			found = e
+			break
+	soft_currency += int(found.get("soft", 0))
+	commander_xp += int(found.get("xp", 0))
+	var result := {"ok": true, "soft": found.get("soft", 0), "xp": found.get("xp", 0), "id": active_expedition_id}
+	active_expedition_id = ""
+	expedition_ends_unix = 0
+	save_game()
+	progress_changed.emit()
+	return result
+
+
+# --- Gacha ---
+func summon_once() -> Dictionary:
+	if summon_tickets <= 0:
+		return {"ok": false, "error": "NO_TICKETS"}
+	summon_tickets -= 1
+	var pool: Array = []
+	for h in heroes_catalog:
+		pool.append(h)
+	var pick: Dictionary = pool[randi() % pool.size()]
+	var id := str(pick.get("id", ""))
+	var newly := not bool(owned_heroes.get(id, false))
+	owned_heroes[id] = true
+	if newly:
+		hero_levels[id] = 1
+	else:
+		soft_currency += 50 # shard convert mock
+	save_game()
+	progress_changed.emit()
+	return {"ok": true, "hero_id": id, "name": pick.get("name", id), "rarity": pick.get("rarity", "R"), "newly_owned": newly}
+
+
+# --- RPG ---
+func level_up_hero(hero_id: String) -> bool:
+	if not bool(owned_heroes.get(hero_id, false)):
+		return false
+	var cost := 100 + int(hero_levels.get(hero_id, 1)) * 40
+	if soft_currency < cost:
+		return false
+	soft_currency -= cost
+	hero_levels[hero_id] = int(hero_levels.get(hero_id, 1)) + 1
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func equip_item(hero_id: String, slot: String, item_id: String) -> bool:
+	if not bool(owned_heroes.get(hero_id, false)):
+		return false
+	if not equipment.has(hero_id):
+		equipment[hero_id] = {"weapon": "", "armor": "", "accessory": ""}
+	if not equipment[hero_id].has(slot):
+		return false
+	if item_id != "" and int(inventory.get(item_id, 0)) <= 0 and item_id != "starter_blade":
+		# allow empty unequip; starter free
+		if item_id not in ["starter_blade", "starter_mail", "starter_charm"]:
+			return false
+	equipment[hero_id][slot] = item_id
+	save_game()
+	progress_changed.emit()
+	return true
+
+
 func save_game() -> void:
 	var payload := {
 		"soft_currency": soft_currency,
+		"hard_currency": hard_currency,
+		"summon_tickets": summon_tickets,
 		"commander_xp": commander_xp,
 		"party_ids": party_ids,
+		"owned_heroes": owned_heroes,
+		"hero_levels": hero_levels,
+		"equipment": equipment,
+		"inventory": inventory,
 		"completed_quests": completed_quests,
 		"completed_battles": completed_battles,
 		"claimed_rewards": claimed_rewards,
 		"active_quest_id": active_quest_id,
 		"active_battle_id": active_battle_id,
 		"pending_dialogue_quest_id": pending_dialogue_quest_id,
+		"afk_started_unix": afk_started_unix,
+		"afk_claimed_unix": afk_claimed_unix,
+		"active_expedition_id": active_expedition_id,
+		"expedition_ends_unix": expedition_ends_unix,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -237,16 +442,29 @@ func load_game() -> void:
 	if typeof(data) != TYPE_DICTIONARY:
 		return
 	soft_currency = int(data.get("soft_currency", 0))
+	hard_currency = int(data.get("hard_currency", 0))
+	summon_tickets = int(data.get("summon_tickets", summon_tickets))
 	commander_xp = int(data.get("commander_xp", 0))
 	if data.has("party_ids"):
 		party_ids = data["party_ids"]
+		while party_ids.size() < 5:
+			party_ids.append("")
+		if party_ids.size() > 5:
+			party_ids = party_ids.slice(0, 5)
+	owned_heroes = data.get("owned_heroes", owned_heroes)
+	hero_levels = data.get("hero_levels", hero_levels)
+	equipment = data.get("equipment", equipment)
+	inventory = data.get("inventory", inventory)
 	completed_quests = data.get("completed_quests", {})
 	completed_battles = data.get("completed_battles", {})
 	claimed_rewards = data.get("claimed_rewards", {})
 	active_quest_id = str(data.get("active_quest_id", ""))
 	active_battle_id = str(data.get("active_battle_id", ""))
 	pending_dialogue_quest_id = str(data.get("pending_dialogue_quest_id", ""))
-	# migrate old single-flag save
+	afk_started_unix = int(data.get("afk_started_unix", afk_started_unix))
+	afk_claimed_unix = int(data.get("afk_claimed_unix", afk_claimed_unix))
+	active_expedition_id = str(data.get("active_expedition_id", ""))
+	expedition_ends_unix = int(data.get("expedition_ends_unix", 0))
 	var old_flags = data.get("quest_flags", {})
 	if typeof(old_flags) == TYPE_DICTIONARY and old_flags.get("CH01-Q01", false):
 		completed_quests["CH01-Q01"] = true
@@ -254,7 +472,14 @@ func load_game() -> void:
 
 func reset_progress() -> void:
 	soft_currency = 0
+	hard_currency = 0
+	summon_tickets = 10
 	commander_xp = 0
+	party_ids = ["H01", "H04", "H02", "H03", "H07"]
+	owned_heroes = {"H01": true, "H02": true, "H03": true, "H04": true, "H07": true}
+	hero_levels = {"H01": 1, "H02": 1, "H03": 1, "H04": 1, "H07": 1}
+	equipment.clear()
+	inventory = {"iron_scrap": 5, "arcane_ink": 3, "ticket_stub": 1}
 	completed_quests.clear()
 	completed_battles.clear()
 	claimed_rewards.clear()
@@ -262,5 +487,9 @@ func reset_progress() -> void:
 	active_battle_id = ""
 	pending_dialogue_quest_id = ""
 	last_battle_result.clear()
+	afk_started_unix = int(Time.get_unix_time_from_system())
+	afk_claimed_unix = afk_started_unix
+	active_expedition_id = ""
+	expedition_ends_unix = 0
 	save_game()
 	progress_changed.emit()
