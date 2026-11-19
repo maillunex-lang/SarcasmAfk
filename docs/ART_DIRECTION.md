@@ -3,6 +3,7 @@
 > Версия: 1.1 · 2026-11-19 · Статус: **V0-решения утверждены владельцем; ассеты не произведены**
 > Рабочее название: **БашЛегенды: Эпоха Абсурда** · Internal ID: `BashLegends`
 > Источники: `GDD.md`, `ROAD.md`, `HEROES.md`, `CAMPAIGN_LOCATIONS.md`
+> Статус проекта / очередь: [`STATUS.md`](STATUS.md), [`TASK_QUEUE.md`](TASK_QUEUE.md), [`DECISIONS.md`](DECISIONS.md)
 > Не является готовым игровым прототипом. Не меняет утверждённые механики VIS/HERO/STORY/TECH.
 
 ## 0. Назначение и границы
