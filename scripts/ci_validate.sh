@@ -38,7 +38,9 @@ if missing:
 print("assets_ok", len(required))
 PY
 
-for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/PHASE2_AUDIT.md docs/V0_REVIEW.md client/project.godot server/go.mod server/cmd/api/main.go; do
+python3 scripts/validate_ch01_expansion.py
+
+for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/PHASE2_AUDIT.md docs/V0_REVIEW.md docs/CH01_RPG_EXPANSION.md client/project.godot server/go.mod server/cmd/api/main.go; do
   test -f "$f"
   echo "OK $f"
 done
@@ -70,6 +72,7 @@ if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0a.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_api.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_mvp.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_vertical.gd)

@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "status": "draft",
+  "note": "CH01 expansion equipment. eq_ch01_clerk_coat is SQ02 armor reward. No set-bonus.",
+  "items": [
+    {
+      "item_id": "eq_ch01_clerk_coat",
+      "title": "Плащ канцеляриста",
+      "slot": "armor",
+      "rarity": "R",
+      "bonuses": {"def": 12, "hp": 40},
+      "set_bonus": null,
+      "account_unique": true,
+      "source": "CH01-SQ02",
+      "description": "Броня до первого замечания. Увеличивает DEF.",
+      "icon_asset_id": "ui_icon_inventory"
+    },
+    {
+      "item_id": "starter_blade",
+      "title": "Стартовый клинок",
+      "slot": "weapon",
+      "rarity": "N",
+      "bonuses": {"atk": 5},
+      "set_bonus": null,
+      "account_unique": false,
+      "source": "starter",
+      "description": "Бесплатный стартовый меч.",
+      "icon_asset_id": "ui_icon_battle"
+    },
+    {
+      "item_id": "starter_mail",
+      "title": "Стартовая кольчуга",
+      "slot": "armor",
+      "rarity": "N",
+      "bonuses": {"def": 5},
+      "set_bonus": null,
+      "account_unique": false,
+      "source": "starter",
+      "description": "Бесплатная стартовая броня.",
+      "icon_asset_id": "ui_icon_inventory"
+    },
+    {
+      "item_id": "starter_charm",
+      "title": "Стартовый амулет",
+      "slot": "accessory",
+      "rarity": "N",
+      "bonuses": {"hp": 20},
+      "set_bonus": null,
+      "account_unique": false,
+      "source": "starter",
+      "description": "Бесплатный стартовый аксессуар.",
+      "icon_asset_id": "ui_icon_events"
+    }
+  ]
+}

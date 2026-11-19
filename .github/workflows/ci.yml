@@ -27,6 +27,8 @@ jobs:
               print("OK", path)
           print(f"Validated {len(files)} files")
           PY
+      - name: Validate CH01 expansion schema
+        run: python3 scripts/validate_ch01_expansion.py
 
   godot-smoke:
     name: Godot V0 smoke
@@ -65,6 +67,10 @@ jobs:
         working-directory: client
         run: |
           /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_ch01.gd
+      - name: Smoke CH01 expansion content
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd
       - name: Smoke ApiClient mock
         working-directory: client
         run: |

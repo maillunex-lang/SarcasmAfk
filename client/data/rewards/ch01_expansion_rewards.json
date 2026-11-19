@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "status": "draft_test_balance",
+  "note": "Project test rewards for CH01 expansion. Soft/mat amounts are Draft knobs, not shop/VIP/gacha prices. Idempotent claim keys = bundle_id.",
+  "bundles": [
+    {
+      "bundle_id": "CH01-SQ01-FIRST_CLEAR",
+      "soft_currency": 300,
+      "inventory": {"mat_hero_exp": 100},
+      "equipment": [],
+      "heroes": [],
+      "premium_currency": 0
+    },
+    {
+      "bundle_id": "CH01-SQ02-FIRST_CLEAR",
+      "soft_currency": 150,
+      "inventory": {},
+      "equipment": ["eq_ch01_clerk_coat"],
+      "heroes": [],
+      "premium_currency": 0
+    },
+    {
+      "bundle_id": "CH01-SQ03-FIRST_CLEAR",
+      "soft_currency": 250,
+      "inventory": {"mat_hero_exp": 150},
+      "equipment": [],
+      "heroes": [],
+      "premium_currency": 0,
+      "note": "No automatic H03 grant"
+    },
+    {
+      "bundle_id": "CH01-SQ04-FIRST_CLEAR",
+      "soft_currency": 400,
+      "inventory": {"mat_hero_exp": 200},
+      "equipment": [],
+      "heroes": [],
+      "premium_currency": 0
+    },
+    {
+      "bundle_id": "CH01-SQ05-FIRST_CLEAR",
+      "soft_currency": 500,
+      "inventory": {"mat_hero_exp": 250},
+      "equipment": [],
+      "heroes": [],
+      "premium_currency": 0
+    },
+    {
+      "bundle_id": "CH01-POI-09-FIRST",
+      "soft_currency": 50,
+      "inventory": {"mat_hero_exp": 20},
+      "equipment": [],
+      "heroes": [],
+      "premium_currency": 0,
+      "note": "Timer fail does not block; reward once on success or later retry success"
+    }
+  ]
+}
