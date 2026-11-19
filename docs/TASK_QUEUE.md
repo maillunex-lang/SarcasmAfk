@@ -1,7 +1,9 @@
 # TASK_QUEUE.md — Очерёдность задач
 
-> Канон очереди. Статусы: `TODO` · `DOING` · `BLOCKED` · `DONE` · `CANCELLED`  
-> Владелец проекта утверждает смену приоритета. ИИ не перескакивает через запреты.
+> Канон очереди.  
+> **Statuses (REPO-REORG-001):** `NOT_STARTED` · `IN_PROGRESS` · `PARTIAL` · `IMPLEMENTED_UNVERIFIED` · `BLOCKED` · `DONE_VERIFIED` · `DEPRECATED`  
+> Legacy rows may still say `DONE`/`TODO`/`DOING` — treat `DONE` as `DONE_VERIFIED` only when STATUS evidence exists; otherwise `IMPLEMENTED_UNVERIFIED`.  
+> Owner approves priority changes. Agents do not skip `PX` / `BLOCKED`.
 
 ## Легенда приоритета
 
@@ -99,22 +101,26 @@
 | T-154 | P3 | **DONE** | Persist chat hub to Postgres (`PostgresChat`) | migration 006 + main wire | T-151 |
 | T-155 | P1 | **DONE** | UI TEMP art: home/shop/VIP + H13–H36 portraits/fulls + AssetPaths | `client/assets` + home/shop/vip screens | owner art request |
 | T-156 | P1 | **DONE** | CH01 RPG Expansion A–C: sidequests/POI data + campaign API + POI UI | `CH01_RPG_EXPANSION.md` + migration 007 | owner TZ |
-| T-157 | P1 | **TODO** | CH01 Expansion E: full E2E + debug APK + owner report | smoke + APK | T-156 |
-| T-153 | P6 | **TODO** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
-| T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
+| T-153 | P6 | **NOT_STARTED** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
+| T-112 | P3 | **NOT_STARTED** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация **финального** арта / Stage E | D-ART-06 | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
+| T-157 | P1 | **NOT_STARTED** | CH01 Expansion E: full E2E + debug APK + owner report | smoke + APK | T-156 |
+| T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
+| T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
+| T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
 
 ## Правила исполнения
 
-1. Брать только верхний `TODO` с наивысшим доступным P (P0→P1; P2 можно параллельно, если не конфликтует).
-2. Перед стартом: статус → `DOING` в этой таблице + обновить `STATUS.md` NOW.
-3. По завершении: `DONE`, доказательства (пути файлов / коммит), запись в `ROAD.md` §8.
-4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
-5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
+1. Take highest available P among `NOT_STARTED`/`IN_PROGRESS` (P0→P1; P2 parallel if non-conflicting).
+2. On start: set `IN_PROGRESS` here + refresh `STATUS.md` NOW.
+3. On finish: `DONE_VERIFIED` only with paths + tests + commit/PR; else `PARTIAL` / `IMPLEMENTED_UNVERIFIED`. Log in `ROAD.md` §8.
+4. `PX` / owner blockers: require written owner decision + `DECISIONS.md`.
+5. New blocker → `BLOCKED` + STATUS row.
 
 ## Следующий конкретный шаг
 
-Online stack на `main`. Открыто: T-153 (реальные платежи — только с одобрения), T-112 (arena/events).  
-CH02 (T-090) / Stage E (T-131) / release keystore (T-126) remain blocked.
+1. **Review/merge** PR #27 (REPO-REORG-001) — do not push straight to `main`.  
+2. Next product: **T-157** (CH01 Expansion E2E + debug APK + owner report).  
+3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore.

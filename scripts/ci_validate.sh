@@ -52,6 +52,10 @@ print("assets_ok", len(required))
 PY
 
 python3 scripts/validate_ch01_expansion.py
+python3 scripts/check_doc_links.py
+python3 scripts/check_ai_docs.py
+python3 scripts/check_content_refs.py
+python3 scripts/audit_repo.py --json-only >/dev/null
 
 for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/PHASE2_AUDIT.md docs/V0_REVIEW.md docs/CH01_RPG_EXPANSION.md client/project.godot server/go.mod server/cmd/api/main.go; do
   test -f "$f"

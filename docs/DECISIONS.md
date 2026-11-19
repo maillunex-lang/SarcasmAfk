@@ -16,6 +16,8 @@
 | D-META-07 | Phase 2 стартует с Go in-memory/file stub (`server/`); Postgres+Redis — отдельный T-085 | 2026-11-19 |
 | D-META-08 | Приоритеты после 2026-11-19: P0 безопасность/авторитетный бой/replay/live API; P1 APK+CH01 вертикаль+арт; P2 админка/Blender pipeline/CH01 расширение; P3 guild/arena/events/CH02+ | 2026-11-19 |
 | D-META-09 | Не удалять существующие данные и не менять production-конфиг без отдельного согласования | 2026-11-19 |
+| D-META-10 | Канон чтения ИИ (REPO-REORG-001): `AGENTS` → `PROJECT_CONTEXT` → `STATUS` → `TASK_QUEUE` → `AI_TASK_ROUTER` → профильная спека → код | 2026-11-19 |
+| D-REORG-01 | Удаления/архив только после пофайлового OK владельца по `docs/reports/REPO_REORG_DELETE_CANDIDATES.md`; backup branch/tag обязательны до правок | 2026-11-19 |
 
 ## D-COMBAT — Бой / сервер (утверждено 2026-11-19)
 

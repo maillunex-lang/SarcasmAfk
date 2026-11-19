@@ -1,37 +1,54 @@
-# AGENTS.md — Обязательная инструкция для любого ИИ
+# AGENTS.md — Entry for every AI (Cursor / Codex / Claude)
 
-Читать **в этом порядке** перед любой работой:
+**Read order (do not skip):**
 
-1. [`docs/STATUS.md`](docs/STATUS.md) — что сделано / не сделано / текущий фокус  
-2. [`docs/TASK_QUEUE.md`](docs/TASK_QUEUE.md) — очерёдность задач  
-3. [`docs/DECISIONS.md`](docs/DECISIONS.md) — утверждённые решения (не менять без владельца)  
-4. [`docs/INDEX.md`](docs/INDEX.md) — карта документов  
-5. Затем профильный файл задачи (`GDD`, `ROAD`, `V0_IMPLEMENTATION_PLAN`, …)  
-6. **Проверить фактический код/ассеты в репозитории** — документы ≠ доказательство реализации
+1. This file  
+2. [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md) — product, stack, constraints  
+3. [`docs/STATUS.md`](docs/STATUS.md) — verified snapshot (NOW / works / blocked)  
+4. [`docs/TASK_QUEUE.md`](docs/TASK_QUEUE.md) — task IDs + next action  
+5. [`docs/AI_TASK_ROUTER.md`](docs/AI_TASK_ROUTER.md) — which files/commands for the task type  
+6. One domain spec + **only the relevant code**  
+7. Confirm against git `main` + open PRs before coding  
 
-## Проект (кратко)
+Map: [`docs/INDEX.md`](docs/INDEX.md) · Architecture: [`docs/ARCHITECTURE_MAP.md`](docs/ARCHITECTURE_MAP.md) · Decisions: [`docs/DECISIONS.md`](docs/DECISIONS.md)
 
-| Поле | Значение |
+## Project
+
+| | |
 |---|---|
-| Repo | `SarcasmAfk` (не переименовывать) |
-| Display name | БашЛегенды: Эпоха Абсурда |
-| Internal ID | `BashLegends` |
-| Platform | Android only · Godot 4 · 9:16 |
-| Stack | Godot 4.3 client · Go API · Postgres/Redis (opt-in) |
-| Working branch | `main` (feature branches `cursor/*-beaf`) |
+| Repo | `maillunex-lang/SarcasmAfk` (do not rename) |
+| Display | БашЛегенды: Эпоха Абсурда |
+| Client | Godot **4.3** · Android · 9:16 · `client/` |
+| Server | Go API · `server/` · Postgres/Redis optional |
+| Branches | Work on `cursor/<name>-beaf`; change `main` only via reviewed PR |
 
-## Жёсткие правила
+## Hard rules
 
-- Не объявлять модуль `ГОТОВО` без тестов/аудита и записи в `STATUS.md` + `ROAD.md`.
-- Не менять утверждённые коды GDD (CONCEPT/HERO/BATTLE/…) без нового решения владельца.
-- Не массово генерировать ассеты вне текущего пункта `TASK_QUEUE`.
-- Не начинать главы 02–12, пока очередь явно не откроет этот этап.
-- Не переименовывать repo / Android package ID.
-- Документация **не** является игровым прототипом.
-- После значимого шага: обновить `STATUS.md`, `TASK_QUEUE.md`, журнал в `ROAD.md`, затем commit/push.
+- Never mark `DONE_VERIFIED` without: code paths + tests/smoke + acceptance + commit/PR.
+- Docs ≠ proof of implementation. Prefer STATUS evidence tables.
+- Do not open CH02, real payments, Stage E Kaeron mass art, or package-ID renames without owner decision in `DECISIONS.md`.
+- No force-push, history rewrite, `git clean -fdx`, or mass deletes. Cleanup only from an owner-approved file list.
+- TEMP art stays TEMP. Arena/events stay locked stubs (D-SCOPE-01).
+- After meaningful work: update `STATUS.md` + `TASK_QUEUE.md` (+ `ROAD.md` journal), then commit/push.
 
-## Быстрый ответ «где мы?»
+## Verify
 
-Смотри блок **NOW** в [`docs/STATUS.md`](docs/STATUS.md).
+```bash
+bash scripts/ci_validate.sh
+python3 scripts/audit_repo.py          # inventory (reorg)
+(cd server && go test ./... -count=1)
+```
 
-Клиент: [`client/`](client/) (Phase1 MVP на моках). Сервер: [`server/`](server/). Статус — `docs/STATUS.md`.
+Godot: headless smokes under `client/scripts/tools/smoke_*.gd` (CI installs Godot 4.3).
+
+## Safety / secrets
+
+- Do not print `.env`, keystore material, or API key values.
+- `scripts/check_release_keystore.sh` checks presence — it is not a secret store.
+- If a real secret is found in git: stop, report **path + risk type only**, recommend rotation.
+
+## Reorg (REPO-REORG-001)
+
+Backup: [`docs/reports/REPO_REORG_BACKUP.md`](docs/reports/REPO_REORG_BACKUP.md)  
+Audit: [`docs/reports/REPO_REORG_AUDIT.md`](docs/reports/REPO_REORG_AUDIT.md)  
+Deletes: **wait for owner** — [`docs/reports/REPO_REORG_DELETE_CANDIDATES.md`](docs/reports/REPO_REORG_DELETE_CANDIDATES.md)

@@ -7,8 +7,12 @@
 | Файл | Роль |
 |---|---|
 | [`../AGENTS.md`](../AGENTS.md) | Обязательный протокол для ИИ |
+| [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) | Продукт / стек / milestone |
 | [`STATUS.md`](STATUS.md) | Снимок: сделано / не сделано / NOW |
 | [`TASK_QUEUE.md`](TASK_QUEUE.md) | Очерёдность задач |
+| [`AI_TASK_ROUTER.md`](AI_TASK_ROUTER.md) | Тип задачи → файлы / команды |
+| [`ARCHITECTURE_MAP.md`](ARCHITECTURE_MAP.md) | Подсистемы и точки входа |
+| [`AI_ONBOARDING_TEST.md`](AI_ONBOARDING_TEST.md) | Проверка холодного старта |
 | [`DECISIONS.md`](DECISIONS.md) | Утверждённые решения |
 | [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) | Открытые вопросы к владельцу (T-126…T-129) |
 
@@ -68,10 +72,22 @@
 | [`../server/`](../server/) | Phase 2 Go API + tick-sim |
 | `.github/workflows/` | JSON + Godot smokes + Go API + load |
 
-## 6. Анти-фрагментация (правила)
+## 6. Visual Overhaul / Reorg reports
+
+| Файл | Роль |
+|---|---|
+| [`VISUAL_OVERHAUL_001.md`](VISUAL_OVERHAUL_001.md) | VO-001 stage tracker |
+| [`VISUAL_QA_REPORT.md`](VISUAL_QA_REPORT.md) | VO QA |
+| [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) | Backup proof |
+| [`reports/REPO_REORG_AUDIT.md`](reports/REPO_REORG_AUDIT.md) | Inventory audit |
+| [`reports/REPO_REORG_DELETE_CANDIDATES.md`](reports/REPO_REORG_DELETE_CANDIDATES.md) | Delete scan (resolved) |
+| [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md) | Why nothing tracked was deleted |
+
+## 7. Анти-фрагментация (правила)
 
 1. **Не** писать новый «NEXT STEP» в гайдах — только ссылка на `STATUS.md` / `TASK_QUEUE.md`.
 2. Журнал работ — в `ROAD.md` §8; дублировать кратко в `STATUS` при смене NOW.
 3. Решения владельца — только в `DECISIONS.md` (+ правка профильного гайда).
 4. Промпты генерации живут в VIS-гайдах; факт «ассет готов» — только после файла в репо + статус в `TASK_QUEUE`.
 5. README — короткий указатель, не второй ROAD.
+6. **Не** создавать параллельные `STATUS_FINAL_V2` — обновлять канон на месте.
