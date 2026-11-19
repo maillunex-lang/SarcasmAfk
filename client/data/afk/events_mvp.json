@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": "EV01",
+      "title": "День живого талона",
+      "city": "Уфа",
+      "tone": "humor",
+      "status": "active"
+    },
+    {
+      "id": "EV02",
+      "title": "Сезон слякоти и баффов",
+      "city": "Республика",
+      "tone": "season",
+      "status": "upcoming"
+    },
+    {
+      "id": "EV03",
+      "title": "Региональный босс: Инспектор Тьмы",
+      "city": "Стерлитамак",
+      "tone": "boss",
+      "status": "locked"
+    }
+  ]
+}
