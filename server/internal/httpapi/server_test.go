@@ -133,6 +133,23 @@ func TestBattleStartFinishAndContent(t *testing.T) {
 	if rr.Code != 409 {
 		t.Fatalf("expected 409 NO_ACTIVE_BATTLE, got %d %s", rr.Code, rr.Body.String())
 	}
+
+	// Too-fast finish after start
+	body = []byte(`{"party_ids":["H01","H02","H03","H04","H07"],"client_version":"test"}`)
+	req = httptest.NewRequest(http.MethodPost, "/v1/battles/B01/start", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	fast := []byte(`{"victory":true,"duration_ms":50}`)
+	req = httptest.NewRequest(http.MethodPost, "/v1/battles/B01/finish", bytes.NewReader(fast))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	if rr.Code != 409 {
+		t.Fatalf("expected 409 BATTLE_TOO_FAST, got %d %s", rr.Code, rr.Body.String())
+	}
 }
 
 func TestGuildArenaEvents(t *testing.T) {

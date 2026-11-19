@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/content"
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/httpapi"
@@ -15,12 +17,14 @@ import (
 func main() {
 	addr := flag.String("addr", ":8080", "listen address")
 	contentRoot := flag.String("content", "", "path to client/data (heroes/battles/dialogues)")
-	persist := flag.String("persist", "", "optional JSON persist path for accounts")
+	persist := flag.String("persist", "", "optional JSON persist path for memory store")
+	databaseURL := flag.String("database-url", env("DATABASE_URL", ""), "Postgres DSN; empty = memory store")
+	redisAddr := flag.String("redis", env("REDIS_ADDR", ""), "Redis host:port for sessions (optional with Postgres)")
+	migrate := flag.String("migrate", "", "path to SQL migration file (Postgres only)")
 	flag.Parse()
 
 	root := *contentRoot
 	if root == "" {
-		// default: ../client/data relative to server/
 		wd, _ := os.Getwd()
 		root = filepath.Clean(filepath.Join(wd, "..", "client", "data"))
 		if _, err := os.Stat(root); err != nil {
@@ -28,12 +32,47 @@ func main() {
 		}
 	}
 
-	st := store.NewMemory(*persist)
 	cl := content.New(root)
-	api := httpapi.New(st, cl)
+	var st store.Store
+	backend := "memory"
+	if *databaseURL != "" {
+		ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+		defer cancel()
+		pg, err := store.OpenPostgres(ctx, *databaseURL, *redisAddr)
+		if err != nil {
+			log.Fatalf("postgres: %v", err)
+		}
+		mig := *migrate
+		if mig == "" {
+			wd, _ := os.Getwd()
+			cand := filepath.Join(wd, "migrations", "001_init.sql")
+			if _, err := os.Stat(cand); err != nil {
+				cand = filepath.Join(wd, "..", "migrations", "001_init.sql")
+			}
+			mig = cand
+		}
+		if err := pg.Migrate(mig); err != nil {
+			log.Fatalf("migrate: %v", err)
+		}
+		st = pg
+		backend = "postgres"
+		if *redisAddr != "" {
+			backend = "postgres+redis"
+		}
+	} else {
+		st = store.NewMemory(*persist)
+	}
 
-	log.Printf("bashlegends-api listening on %s content=%s", *addr, root)
+	api := httpapi.New(st, cl)
+	log.Printf("bashlegends-api listening on %s content=%s backend=%s", *addr, root, backend)
 	if err := http.ListenAndServe(*addr, api.Handler()); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func env(k, def string) string {
+	if v := os.Getenv(k); v != "" {
+		return v
+	}
+	return def
 }
