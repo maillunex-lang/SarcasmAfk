@@ -97,10 +97,11 @@
 | T-151 | P3 | **DONE** | Chat moderation admin + mute/delete/reports | `/v1/admin/chat/*` | T-145 |
 | T-152 | P4 | **DONE** | Guild quests/vault/member board (+ war/boss hooks empty) | donate + quests + migration 005 | T-146 |
 | T-154 | P3 | **DONE** | Persist chat hub to Postgres (`PostgresChat`) | migration 006 + main wire | T-151 |
+| T-155 | P1 | **DONE** | UI TEMP art: home/shop/VIP + H13–H36 portraits/fulls + AssetPaths | `client/assets` + home/shop/vip screens | owner art request |
 | T-153 | P6 | **TODO** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
 | T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
-| T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
+| T-091 | PX | **BLOCKED** | Массовая генерация **финального** арта / Stage E | D-ART-06 | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
 
 ## Правила исполнения
@@ -113,6 +114,5 @@
 
 ## Следующий конкретный шаг
 
-T-145 (chat WS/DM) → T-146 guild depth → T-147 gacha pity.  
-Owner decisions needed: H13–H36 Draft names, gacha rates/pity, shop/VIP numbers.  
-CH02 (T-090) / Stage E (T-131) remain blocked.
+Online stack на `main`. Открыто: T-153 (реальные платежи — только с одобрения), T-112 (arena/events).  
+CH02 (T-090) / Stage E (T-131) / release keystore (T-126) remain blocked.
