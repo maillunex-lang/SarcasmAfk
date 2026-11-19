@@ -8,3 +8,6 @@ build/
 *.keystore
 !docs/**
 client/.godot/
+tools/blender_pipeline/out/
+*.blend1
+

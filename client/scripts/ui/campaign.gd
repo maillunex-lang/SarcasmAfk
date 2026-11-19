@@ -27,6 +27,11 @@ func _ready() -> void:
 		22,
 		DesignTokens.COLOR_ACCENT_CYAN
 	))
+	vbox.add_child(DesignTokens.make_label(
+		"CH02+ закрыт для игроков до прохождения CH01 (D-SCOPE-02)",
+		18,
+		DesignTokens.COLOR_TEXT_MUTED
+	))
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL

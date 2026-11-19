@@ -446,11 +446,17 @@
 - Не сделано: release signing (ключ владельца); CI APK artifact (тяжёлый SDK)
 - Следующий шаг: T-031 / T-124
 
+### 2026-11-19 — T-031 + T-124
+- Статус: ГОТОВО
+- Сделано: `tools/blender_pipeline` (create/render/pack/validate); smoke; CH01 L01 step hints; dialog→location; battle «К локации»; CH02 gates на карте/кампании
+- Не сделано: owner art-approve; Godot import atlases as default combat sprites; release APK
+- Следующий шаг: art review / T-114 / P3
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~P0 + T-123 + T-110 debug APK toolchain~~ — сделано.
-2. Далее: T-031 Blender scripts · T-124 CH01 polish · release APK с keystore владельца.
+1. ~~P0 + T-123 + T-110 + T-031 + T-124~~ — сделано.
+2. Далее: owner art-approve атласов · release APK (keystore владельца) · T-114 no-mock.
 3. P3: guild/arena/events live. Запреты: CH02+ игрокам, rename, mass art как финал.
 4. Решения: `DECISIONS.md` D-COMBAT / D-NET / D-ART / D-SCOPE / D-ADMIN (2026-11-19).

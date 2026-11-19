@@ -26,6 +26,7 @@ func _ready() -> void:
 	if not quest.is_empty():
 		quest_line = "%s · %s" % [str(quest.get("quest_id", "")), str(quest.get("title", ""))]
 	vbox.add_child(DesignTokens.make_label(quest_line, 24, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label(_step_hint(), 22, DesignTokens.COLOR_ACCENT_CYAN))
 	vbox.add_child(DesignTokens.make_label(str(loc.get("description", "")), 20, DesignTokens.COLOR_TEXT_MUTED))
 
 	# Prop: L01 terminal; other locs show mid crop hint via icon quest
@@ -64,6 +65,16 @@ func _ready() -> void:
 	var back := DesignTokens.make_button("На главную", false)
 	back.pressed.connect(func() -> void: SceneNav.to_home(get_tree()))
 	vbox.add_child(back)
+
+
+func _step_hint() -> String:
+	if GameState.needs_dialogue():
+		return "Шаг 1/2 · сначала диалог, затем бой"
+	if GameState.active_battle_id != "":
+		return "Шаг 2/2 · бой %s готов" % GameState.active_battle_id
+	if GameState.active_quest_id != "" and GameState.is_quest_completed(GameState.active_quest_id):
+		return "Квест закрыт · можно вернуться в кампанию"
+	return "Выберите квест в кампании CH01"
 
 
 func _add_location_layers(loc_id: String, loc: Dictionary) -> void:

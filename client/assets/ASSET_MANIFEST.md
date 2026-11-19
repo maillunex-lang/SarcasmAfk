@@ -44,8 +44,13 @@ Dialog: `dialogs/dialog_portrait_Hxx.jpg`
 Each `locations/Lxx/` has `sky` / `far` / `mid`.  
 Arenas: `arenas/ARENA-Lxx/arena_Lxx_floor.jpg` for L01–L10.
 
+## Combat atlases (pipeline)
+
+Scripts: `tools/blender_pipeline/` (create → render → pack → validate).  
+Sample meta: `tools/blender_pipeline/samples/sample_unit.atlas.json` (dev, not final art).
+
 ## Still open
 
-- Transparent combat atlases (T-031 Blender)
+- Owner-approved combat atlases from pipeline (replace placeholders)
 - Per-enemy unique art beyond archetypes
 - L11 Sterlitamak playable art (CH02)

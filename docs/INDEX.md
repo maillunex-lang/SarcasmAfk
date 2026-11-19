@@ -51,6 +51,7 @@
 | [`../scripts/ci_validate.sh`](../scripts/ci_validate.sh) | Локальный CI |
 | [`../docker-compose.yml`](../docker-compose.yml) | Postgres + Redis |
 | [`ANDROID_BUILD.md`](ANDROID_BUILD.md) | Debug APK toolchain (T-110) |
+| [`../tools/blender_pipeline/README.md`](../tools/blender_pipeline/README.md) | Blender→atlas pipeline (T-031) |
 
 ## 5. Код и ассеты
 

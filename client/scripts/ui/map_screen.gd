@@ -11,7 +11,11 @@ func _ready() -> void:
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 	vbox.add_child(DesignTokens.make_label("Карта республики", 40, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Уфа — стартовая зона. Остальные города — тизеры MVP.", 22, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label(
+		"Уфа — CH01. Стерлитамак и далее — CH02+ (закрыто до завершения первой главы).",
+		22,
+		DesignTokens.COLOR_TEXT_MUTED
+	))
 	vbox.add_child(DesignTokens.make_label(GameState.currency_line(), 20, DesignTokens.COLOR_ACCENT_CYAN))
 
 	var scroll := ScrollContainer.new()
@@ -49,5 +53,8 @@ func _city_row(city: Dictionary) -> PanelContainer:
 		DesignTokens.COLOR_SUCCESS_MINT if unlocked else DesignTokens.COLOR_TEXT_MUTED,
 		HORIZONTAL_ALIGNMENT_LEFT
 	))
-	box.add_child(DesignTokens.make_label("Открыт" if unlocked else "Закрыт", 20, DesignTokens.COLOR_TEXT_IVORY, HORIZONTAL_ALIGNMENT_LEFT))
+	var gate := "Открыт" if unlocked else "НЕДОСТУПНО · CH02+"
+	if str(city.get("id", "")) == "UFA":
+		gate = "Открыт · CH01"
+	box.add_child(DesignTokens.make_label(gate, 20, DesignTokens.COLOR_TEXT_IVORY, HORIZONTAL_ALIGNMENT_LEFT))
 	return panel
