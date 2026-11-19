@@ -434,11 +434,17 @@
 - Не сделано: session resume, APK, Blender scripts
 - Следующий шаг: T-123
 
+### 2026-11-19 — T-123 session resume
+- Статус: ГОТОВО
+- Сделано: client token persist + `resume_session`; progress sync; `smoke_session_resume.sh`
+- Не сделано: APK, Blender scripts
+- Следующий шаг: T-110
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~Phase 0–2 stubs + P0 auth battle/live/admin (T-111/113/120/121/122)~~ — сделано.
-2. Далее: T-123 resume · T-110 debug APK · T-031 pipeline · T-124 CH01.
+1. ~~P0 auth battle/live/admin + T-123 session resume~~ — сделано.
+2. Далее: T-110 debug APK · T-031 pipeline · T-124 CH01.
 3. P3: guild/arena/events live. Запреты: CH02+ игрокам, rename, mass art как финал.
 4. Решения: `DECISIONS.md` D-COMBAT / D-NET / D-ART / D-SCOPE / D-ADMIN (2026-11-19).

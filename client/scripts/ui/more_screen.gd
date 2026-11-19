@@ -66,6 +66,7 @@ func _ready() -> void:
 
 
 func _api_mode_text() -> String:
+	var st := str(GameState.last_session_status)
 	if GameState.api.is_mock():
-		return "Режим: локальные моки (офлайн)"
-	return "Режим: Live → %s" % GameState.live_api_url
+		return "Режим: локальные моки (офлайн) · session=%s" % st
+	return "Режим: Live → %s · session=%s" % [GameState.live_api_url, st]
