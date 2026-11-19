@@ -20,6 +20,8 @@
 Референсы: `HEROES.md`, `CHARACTER_STYLE_GUIDE.md`, `ART_DIRECTION.md`.  
 Файлы: `client/assets/combat/{H01,H02,H03,E01}/`.
 
+> **H01 grip (меч):** агент остановил автофикс хвата. Владелец правит рукоять в ладони локально в Blender (`tools/blender_pipeline/source/H01_kaeron_original/`, work blend). Stage E (2D atlases) не стартуем, пока grip + Stage D не подтверждены (T-131).
+
 ### Q3 — T-128 CH01 accepted
 Пройдите на устройстве (или подтвердите по smoke):  
 Home → карта Уфы → L01 → диалог → отряд → автобой → ручной ULT → победа → награда → сейв → следующий бой.

@@ -500,9 +500,11 @@
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md) + [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md).
 
 1. ~~P0…T-125 + T-114~~ — сделано (CI green, в `main`).
-2. **Сейчас ждём ответы владельца** по блокерам T-126…T-129 (см. ниже и `OWNER_CLARIFICATIONS.md`).
-3. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
-4. PX до отдельного разрешения: CH02+ (T-090), mass art (T-091), rename (T-092).
+2. **T-130** — CH01 polish: B01 HP↑, energy/hit 28, пауза на ULT, панель награды, Home Continue, AFK без rewind.
+3. H01 Kaeron grip → **T-131** (владелец правит локально; Stage E не стартуем).
+4. **Ждём ответы** по T-126…T-129 (`OWNER_CLARIFICATIONS.md`).
+5. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
+6. PX до отдельного разрешения: CH02+ (T-090), mass art (T-091), rename (T-092).
 
 ### Что уже верно (не требует уточнения)
 
@@ -519,7 +521,7 @@
 | 2 | **T-127** | Арт H01/H02/H03/E01 | Accept drafts / reject / правки силуэта·цвета·реквизита; нужен ли полный набор idle/atk/ult/hit/win/lose сейчас или только idle для CH01. |
 | 3 | **T-128** | CH01 accepted | Явное «принято» / «не принято» + список дефектов для доработки перед P3. |
 | 4 | **T-129** | Live URL | Базовый URL API для телефонов (LAN/VPS/домен). Без этого release live на устройстве не к чему подключаться. |
-| 5 | *(опц.)* | Баланс B01 | Оставить placeholder ATB или зафиксировать числа энергии/урона для ультимейтов. |
+| 5 | *(опц.)* | Баланс B01 | **Pass 1 в T-130** (HP 720, energy/hit 28). Можно вернуть/подкрутить. |
 | 6 | *(опц.)* | Админ prod | Значение `ADMIN_API_KEY` только в secrets; роли admin/viewer ок? |
 | 7 | *(позже)* | T-112 | После T-128: объём live guild/arena/events (MVP-минимум vs полный ROAD). |
 | 8 | *(PX)* | T-090/091/092 | Не трогаем, пока не дадите явное разрешение. |

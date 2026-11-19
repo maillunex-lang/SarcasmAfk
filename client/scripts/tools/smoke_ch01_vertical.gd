@@ -74,33 +74,37 @@ func _run() -> void:
 		else:
 			print("OK combat_sprite ", hid)
 
-	# --- Battle sim + manual ultimate ---
+	# --- Battle sim: natural energy fill + manual ultimate (no cheat fill) ---
 	var BattleEngine = load("res://scripts/battle/battle_engine.gd")
 	var battle_def: Dictionary = gs.catalog.get_battle("B01")
 	var engine = BattleEngine.new()
 	engine.setup(gs.get_party(), battle_def.get("enemies", []), 42)
-	# Seed energy so manual ultimate is exercisable before short fights end.
-	for u in engine.heroes:
-		u.energy = u.energy_max
 	var ult_cast := false
-	for u in engine.heroes:
-		if engine.try_cast_ultimate(u.id):
-			ult_cast = true
-			gs.api.send_battle_command("B01", "ultimate", u.id, 0)
-			print("OK manual_ultimate unit=", u.id)
-			break
-	if not ult_cast:
-		push_error("FAIL manual ultimate rejected")
-		failed = true
+	var natural_ready := false
 	var guard := 0
-	while not engine.finished and guard < 8000:
+	while not engine.finished and guard < 12000:
 		engine.tick(0.05)
 		guard += 1
+		if not ult_cast:
+			for u in engine.heroes:
+				if u.can_ultimate():
+					natural_ready = true
+					if engine.try_cast_ultimate(u.id):
+						ult_cast = true
+						gs.api.send_battle_command("B01", "ultimate", u.id, guard)
+						print("OK manual_ultimate unit=", u.id, " at_tick=", guard)
+						break
+	if not natural_ready:
+		push_error("FAIL ultimate never became ready naturally in B01")
+		failed = true
+	elif not ult_cast:
+		push_error("FAIL manual ultimate rejected after natural ready")
+		failed = true
 	if not engine.finished or not engine.victory:
 		push_error("FAIL battle not won finished=%s victory=%s ticks=%s" % [engine.finished, engine.victory, guard])
 		failed = true
 	else:
-		print("OK battle_victory ticks=", guard, " ult=", ult_cast)
+		print("OK battle_victory ticks=", guard, " ult=", ult_cast, " natural_ready=", natural_ready)
 
 	# --- Rewards + idempotency ---
 	var soft_before: int = gs.soft_currency
@@ -141,6 +145,32 @@ func _run() -> void:
 			print("OK next_stage active=", gs.active_battle_id, " next=", p1.get("next_battle_id"))
 	else:
 		print("OK next_stage B02")
+
+	# --- Home continue CTA (mid-quest / dialog) ---
+	var prev_quest: String = gs.active_quest_id
+	var prev_battle: String = gs.active_battle_id
+	var prev_dlg: String = gs.pending_dialogue_quest_id
+	gs.active_quest_id = "CH01-Q01"
+	gs.active_battle_id = "B03"
+	gs.pending_dialogue_quest_id = ""
+	# Ensure B03 not marked complete for continue CTA
+	gs.completed_battles.erase("B03")
+	var cont: Dictionary = gs.mid_quest_continue()
+	if cont.is_empty() or str(cont.get("dest", "")) != "location":
+		push_error("FAIL mid_quest_continue expected location got %s" % cont)
+		failed = true
+	else:
+		print("OK home_continue dest=", cont.get("dest"))
+	gs.pending_dialogue_quest_id = "CH01-Q01"
+	var cont_dlg: Dictionary = gs.mid_quest_continue()
+	if str(cont_dlg.get("dest", "")) != "dialog":
+		push_error("FAIL mid_quest_continue dialog got %s" % cont_dlg)
+		failed = true
+	else:
+		print("OK home_continue_dialog")
+	gs.active_quest_id = prev_quest
+	gs.active_battle_id = prev_battle
+	gs.pending_dialogue_quest_id = prev_dlg
 
 	# Scene instantiate chain (real Godot load)
 	for path in [

@@ -5,15 +5,15 @@
 
 ## NOW
 
-Ждём ответы владельца по **T-126…T-129** (keystore, art-approve, CH01 accepted, live URL).  
-Код вертикального среза и debug APK — готовы. P3 / CH02 не стартуем.
+**T-130 DONE** — CH01 polish в ветке `cursor/ch01-game-polish-beaf`.  
+Дальше: ответы владельца по **T-126…T-129**; H01 grip локально (**T-131**). P3 / CH02 не стартуем.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
 | **Работает** | CH01 цепочка на клиенте; debug APK; live API (auth/battle/rewards/resume); server ATB+replay; admin RBAC stub; CI |
-| **Частично** | Combat H01–H03/E01 — pipeline drafts; release preset без подписи; баланс ATB placeholder |
+| **Частично** | Combat H01–H03/E01 — pipeline drafts; release preset без подписи; баланс ATB pass-1 (B01) |
 | **Заглушки / mock** | Debug → mock по умолчанию; guild/arena/events «НЕДОСТУПНО»; CH02+ закрыт; H04–H12 combat placeholders |
 
 ## BLOCKED / ждёт владельца

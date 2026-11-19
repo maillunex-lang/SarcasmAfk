@@ -74,6 +74,8 @@
 | T-124 | P1 | **DONE** | CH01 vertical polish (L01/battle/dialog) | hub steps + CH02 gates | T-055 |
 | T-114 | P1 | **DONE** | Release defaults live (no silent mock); debug toggle | D-NET-05 + integration_live_slice | T-110 |
 | T-125 | P1 | **DONE** | CH01 Android vertical slice APK | home→map→L01→dialog→party→battle→ult→reward→save | T-124 |
+| T-130 | P1 | **DONE** | CH01 gameplay polish (ULT reachable, pause, reward UI, Home continue, AFK honesty) | battle/home/afk + B01 balance + smoke | T-125 |
+| T-131 | P2 | **BLOCKED** | H01 Kaeron grip + Stage E atlases | owner local Blender grip; then Stage D confirm | owner |
 | T-126 | P1 | **BLOCKED** | Release APK signed | need ANDROID_RELEASE_KEYSTORE from owner | T-125 |
 | T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | accept/reject + anim scope | T-125 |
 | T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | unlocks T-112 | T-125 |
@@ -93,5 +95,6 @@
 
 ## Следующий конкретный шаг
 
-Владелец отвечает в [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) (T-126…T-129).  
+Довести **T-130** (smoke_ch01_vertical + go test).  
+Владелец: [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) (T-126…T-129); H01 grip — локально (T-131).  
 После T-128 → T-112. PX (T-090…092) без отдельного разрешения не трогать.

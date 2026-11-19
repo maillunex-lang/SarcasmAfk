@@ -459,6 +459,29 @@ func chapter_progress_text() -> String:
 	return "CH01: %d / %d квестов" % [done, total]
 
 
+## Mid-quest resume CTA for Home. Empty dict = nothing to continue.
+func mid_quest_continue() -> Dictionary:
+	if needs_dialogue():
+		return {
+			"dest": "dialog",
+			"label": "Продолжить диалог",
+			"hint": "Квест %s — диалог не завершён" % active_quest_id,
+		}
+	if active_quest_id != "" and active_battle_id != "" and not is_battle_completed(active_battle_id):
+		return {
+			"dest": "location",
+			"label": "Продолжить: бой %s" % active_battle_id,
+			"hint": "Квест %s · локация → отряд → бой" % active_quest_id,
+		}
+	if active_quest_id != "" and not is_quest_completed(active_quest_id):
+		return {
+			"dest": "location",
+			"label": "Продолжить квест",
+			"hint": "Активен %s" % active_quest_id,
+		}
+	return {}
+
+
 func currency_line() -> String:
 	return "Soft %d · Hard %d · Тикеты %d · XP %d" % [soft_currency, hard_currency, summon_tickets, commander_xp]
 

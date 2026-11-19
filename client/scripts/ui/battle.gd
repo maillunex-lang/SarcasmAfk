@@ -7,9 +7,14 @@ var _status: Label
 var _unit_widgets: Dictionary = {} # id -> {panel, hp, energy, ult_btn}
 var _speed_btn: Button
 var _ended_panel: VBoxContainer
+var _reward_panel: VBoxContainer
+var _ult_banner: Label
 var _running: bool = true
 var _started_msec: int = 0
 var _sim_tick: int = 0
+var _ult_pause_left: float = 0.0
+var _saved_speed: float = 1.0
+var _manual_ult_used: bool = false
 
 
 func _ready() -> void:
@@ -22,9 +27,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if _engine and _running and not _engine.finished:
-		_engine.tick(delta)
-		_sim_tick += 1
+	if _engine == null or not _running or _engine.finished:
+		return
+	if _ult_pause_left > 0.0:
+		_ult_pause_left = maxf(0.0, _ult_pause_left - delta)
+		if _ult_pause_left <= 0.0:
+			_resume_after_ult_window()
+		return
+	_engine.tick(delta)
+	_sim_tick += 1
 
 
 func _load_battle() -> void:
@@ -114,6 +125,15 @@ func _build_ui() -> void:
 	_speed_btn = DesignTokens.make_button("Скорость ×1", false)
 	_speed_btn.pressed.connect(_toggle_speed)
 	controls.add_child(_speed_btn)
+
+	_ult_banner = DesignTokens.make_label("", 24, DesignTokens.COLOR_ACCENT_GOLD)
+	_ult_banner.visible = false
+	vbox.add_child(_ult_banner)
+
+	_reward_panel = VBoxContainer.new()
+	_reward_panel.visible = false
+	_reward_panel.add_theme_constant_override("separation", 8)
+	vbox.add_child(_reward_panel)
 
 	_ended_panel = VBoxContainer.new()
 	_ended_panel.visible = false
@@ -208,12 +228,38 @@ func _on_log(text: String) -> void:
 
 
 func _on_ult_ready(unit: BattleUnit) -> void:
-	_on_log("Ультимейт готов: %s" % unit.display_name)
+	_on_log("Ультимейт готов: %s — нажмите ULT" % unit.display_name)
 	_refresh_unit(unit)
+	_begin_ult_window(unit)
+
+
+func _begin_ult_window(unit: BattleUnit) -> void:
+	# Give the player a short window to tap ULT before autofight continues.
+	if _ult_pause_left > 0.0:
+		_ult_pause_left = maxf(_ult_pause_left, 3.5)
+	else:
+		_saved_speed = _engine.speed_scale
+		_ult_pause_left = 3.5
+	if _ult_banner:
+		_ult_banner.visible = true
+		_ult_banner.text = "ULT готов: %s" % unit.display_name
+	_status.text = "Пауза — жмите ULT"
+
+
+func _resume_after_ult_window() -> void:
+	_ult_pause_left = 0.0
+	if _engine:
+		_engine.speed_scale = _saved_speed
+	if _ult_banner:
+		_ult_banner.visible = false
+	if _speed_btn and _engine:
+		_status.text = "Автобой ×%s" % ("2" if _engine.speed_scale >= 1.5 else "1")
 
 
 func _toggle_speed() -> void:
 	if _engine == null:
+		return
+	if _ult_pause_left > 0.0:
 		return
 	if _engine.speed_scale < 1.5:
 		_engine.speed_scale = 2.0
@@ -229,8 +275,11 @@ func _cast_ultimate(unit_id: String) -> void:
 	if _engine == null:
 		return
 	if _engine.try_cast_ultimate(unit_id):
+		_manual_ult_used = true
 		var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
 		GameState.api.send_battle_command(battle_id, "ultimate", unit_id, _sim_tick)
+		_resume_after_ult_window()
+		_on_log("Ульт применён вручную.")
 
 
 func _on_battle_ended(result: Dictionary) -> void:
@@ -252,9 +301,10 @@ func _on_battle_ended(result: Dictionary) -> void:
 	_on_log("--- Бой завершён ---")
 
 	var progress: Dictionary = {}
+	var reward: Dictionary = {}
 	if win:
 		progress = GameState.complete_battle(battle_id, server_fin)
-		var reward: Dictionary = progress.get("reward", {})
+		reward = progress.get("reward", {})
 		if bool(progress.get("newly_completed", false)):
 			_on_log("Награда: +%d soft, +%d XP" % [
 				int(reward.get("soft", reward.get("soft_delta", 0))),
@@ -267,9 +317,16 @@ func _on_battle_ended(result: Dictionary) -> void:
 		if bool(progress.get("quest_completed", false)):
 			_on_log("Квест завершён.")
 
+	if _ult_banner:
+		_ult_banner.visible = false
+	_ult_pause_left = 0.0
+
 	_ended_panel.visible = true
 	for c in _ended_panel.get_children():
 		c.queue_free()
+	_reward_panel.visible = win
+	for c2 in _reward_panel.get_children():
+		c2.queue_free()
 
 	var msg_text := "Победа!" if win else "Поражение. Попробуйте снова."
 	if win and bool(progress.get("quest_completed", false)):
@@ -282,6 +339,25 @@ func _on_battle_ended(result: Dictionary) -> void:
 		DesignTokens.COLOR_ACCENT_GOLD if win else DesignTokens.COLOR_DANGER_CORAL
 	)
 	_ended_panel.add_child(msg)
+
+	if win:
+		var soft_gained := int(reward.get("soft", reward.get("soft_delta", 0)))
+		var xp_gained := int(reward.get("commander_xp", reward.get("xp_delta", 0)))
+		if bool(progress.get("newly_completed", false)):
+			_reward_panel.add_child(DesignTokens.make_label("Награда", 26, DesignTokens.COLOR_ACCENT_CYAN))
+			_reward_panel.add_child(DesignTokens.make_label(
+				"+%d soft · +%d XP" % [soft_gained, xp_gained],
+				32,
+				DesignTokens.COLOR_ACCENT_GOLD
+			))
+		else:
+			_reward_panel.add_child(DesignTokens.make_label(
+				"Награда уже получена ранее",
+				24,
+				DesignTokens.COLOR_TEXT_MUTED
+			))
+		if _manual_ult_used:
+			_reward_panel.add_child(DesignTokens.make_label("Ручной ULT: да", 20, DesignTokens.COLOR_SUCCESS_MINT))
 
 	if win:
 		var next_id := str(progress.get("next_battle_id", ""))

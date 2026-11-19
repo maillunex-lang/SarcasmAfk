@@ -43,11 +43,9 @@ func _refresh() -> void:
 
 
 func _on_claim() -> void:
-	# Simulate some AFK time if empty (for demo): rewind claim stamp
-	if int(GameState.afk_pending_reward().get("soft", 0)) == 0:
-		GameState.afk_claimed_unix = int(Time.get_unix_time_from_system()) - 3600
 	var res := GameState.claim_afk()
 	if bool(res.get("ok", false)):
 		_status.text = "Получено: +%d soft, +%d XP" % [int(res.get("soft", 0)), int(res.get("xp", 0))]
 	else:
+		_status.text = "Пока нечего забирать — зайдите позже."
 		_refresh()
