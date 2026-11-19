@@ -12,8 +12,8 @@ func TestSimulateATBDeterministic(t *testing.T) {
 		{"id": "H02", "name": "B", "row": "back", "hp": 900, "atk": 120, "defense": 70, "speed": 100},
 	}
 	enemies := []map[string]any{
-		{"id": "E1", "name": "X", "row": "front", "hp": 380, "atk": 95, "defense": 25, "speed": 120},
-		{"id": "E2", "name": "Y", "row": "front", "hp": 380, "atk": 95, "defense": 25, "speed": 121},
+		{"id": "E1", "name": "X", "row": "front", "hp": 1200, "atk": 95, "defense": 25, "speed": 120},
+		{"id": "E2", "name": "Y", "row": "front", "hp": 1200, "atk": 95, "defense": 25, "speed": 121},
 	}
 	a := battleverify.SimulateATB(42, heroes, enemies)
 	b := battleverify.SimulateATB(42, heroes, enemies)

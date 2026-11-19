@@ -11,33 +11,33 @@
       "enemy_type": "E01",
       "name": "Живой талон",
       "row": "front",
-      "hp": 380,
+      "hp": 1200,
       "atk": 95,
       "defense": 25,
       "speed": 120,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+      "sprite": "res://assets/combat/E01/E01_idle.png"
     },
     {
       "id": "B01_E01_2",
       "enemy_type": "E01",
       "name": "Живой талон",
       "row": "front",
-      "hp": 380,
+      "hp": 1200,
       "atk": 95,
       "defense": 25,
       "speed": 121,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+      "sprite": "res://assets/combat/E01/E01_idle.png"
     },
     {
       "id": "B01_E01_3",
       "enemy_type": "E01",
       "name": "Живой талон",
       "row": "front",
-      "hp": 380,
+      "hp": 1200,
       "atk": 95,
       "defense": 25,
       "speed": 122,
-      "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+      "sprite": "res://assets/combat/E01/E01_idle.png"
     }
   ],
   "first_clear_reward": {

@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -52,6 +53,12 @@ func (p *Postgres) Close() {
 	p.pool.Close()
 }
 
+// Pool exposes the pgx pool for companion services (chat, etc.).
+func (p *Postgres) Pool() *pgxpool.Pool { return p.pool }
+
+// Redis exposes optional Redis client (may be nil).
+func (p *Postgres) Redis() *redis.Client { return p.rdb }
+
 func (p *Postgres) Migrate(sqlPath string) error {
 	info, err := os.Stat(sqlPath)
 	if err != nil {
@@ -91,25 +98,32 @@ func pgID(prefix string) string {
 
 func (p *Postgres) CreateAnonymous() (token string, progress AccountProgress) {
 	acc := AccountProgress{
-		AccountID:      pgID("acc_"),
-		CommanderXP:    0,
-		SoftCurrency:   0,
-		HardCurrency:   0,
-		SummonTickets:  10,
-		PartyIDs:       []string{"H01", "H04", "H02", "H03", "H07"},
-		QuestFlags:     map[string]bool{},
+		AccountID:     pgID("acc_"),
+		CommanderXP:   0,
+		SoftCurrency:  StartingSoftDraft,
+		HardCurrency:  0,
+		SummonTickets: 10,
+		PartyIDs:      []string{"H01", "H04", "H02", "H03", "H07"},
+		QuestFlags:    map[string]bool{},
 		ClaimedRewards: map[string]bool{},
 		OwnedHeroes: map[string]bool{
 			"H01": true, "H02": true, "H03": true, "H04": true, "H07": true,
 		},
+		HeroInstances:  map[string]*HeroInstance{},
+		Inventory:      map[string]int{"mat_hero_exp": 500},
+		PityCounters:   map[string]int{},
 		AFKClaimedUnix: time.Now().Unix(),
 		UpdatedAt:      time.Now().UTC().Format(time.RFC3339),
 	}
+	EnsureHeroInstances(&acc)
 	tok := pgID("tok_")
 	party, _ := json.Marshal(acc.PartyIDs)
 	qf, _ := json.Marshal(acc.QuestFlags)
 	cr, _ := json.Marshal(acc.ClaimedRewards)
 	oh, _ := json.Marshal(acc.OwnedHeroes)
+	hi, _ := json.Marshal(acc.HeroInstances)
+	inv, _ := json.Marshal(acc.Inventory)
+	pity, _ := json.Marshal(acc.PityCounters)
 
 	tx, err := p.pool.Begin(p.ctx)
 	if err != nil {
@@ -120,10 +134,12 @@ func (p *Postgres) CreateAnonymous() (token string, progress AccountProgress) {
 	_, err = tx.Exec(p.ctx, `
 		INSERT INTO accounts(
 			account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
-			party_ids, quest_flags, claimed_rewards, owned_heroes, afk_claimed_unix, updated_at
-		) VALUES ($1,$2,$3,$4,$5,$6::jsonb,$7::jsonb,$8::jsonb,$9::jsonb,$10,NOW())`,
+			party_ids, quest_flags, claimed_rewards, owned_heroes, afk_claimed_unix,
+			hero_instances, inventory, vip_points, vip_level, pity_counters, guild_id, updated_at
+		) VALUES ($1,$2,$3,$4,$5,$6::jsonb,$7::jsonb,$8::jsonb,$9::jsonb,$10,
+			$11::jsonb,$12::jsonb,0,0,$13::jsonb,'',NOW())`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
-		party, qf, cr, oh, acc.AFKClaimedUnix,
+		party, qf, cr, oh, acc.AFKClaimedUnix, hi, inv, pity,
 	)
 	if err != nil {
 		return "", AccountProgress{}
@@ -173,17 +189,26 @@ func (p *Postgres) resolveAccountID(token string) (string, error) {
 
 func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	var acc AccountProgress
-	var party, qf, cr, oh, cmds []byte
+	var party, qf, cr, oh, cmds, hi, inv, pity, gh []byte
 	var updated time.Time
 	err := p.pool.QueryRow(p.ctx, `
 		SELECT account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
 			party_ids, quest_flags, claimed_rewards, owned_heroes, afk_claimed_unix,
 			active_battle_id, battle_seed, COALESCE(balance_version,''), COALESCE(battle_commands,'[]'::jsonb),
-			COALESCE(battle_tick_approx,0), updated_at
+			COALESCE(battle_tick_approx,0),
+			COALESCE(hero_instances,'{}'::jsonb), COALESCE(inventory,'{}'::jsonb),
+			COALESCE(vip_points,0), COALESCE(vip_level,0), COALESCE(pity_counters,'{}'::jsonb),
+			COALESCE(guild_id,''),
+			COALESCE(gacha_history,'[]'::jsonb), COALESCE(test_purchase_day,''),
+			COALESCE(test_purchases_day,0), COALESCE(test_hard_day,0), COALESCE(test_vip_day,0),
+			COALESCE(vip_daily_claimed,''), updated_at
 		FROM accounts WHERE account_id=$1`, accountID).Scan(
 		&acc.AccountID, &acc.CommanderXP, &acc.SoftCurrency, &acc.HardCurrency, &acc.SummonTickets,
 		&party, &qf, &cr, &oh, &acc.AFKClaimedUnix, &acc.ActiveBattleID, &acc.BattleSeed,
-		&acc.BalanceVersion, &cmds, &acc.BattleTickApprox, &updated,
+		&acc.BalanceVersion, &cmds, &acc.BattleTickApprox,
+		&hi, &inv, &acc.VipPoints, &acc.VipLevel, &pity, &acc.GuildID,
+		&gh, &acc.TestPurchaseDay, &acc.TestPurchasesDay, &acc.TestHardDay, &acc.TestVipDay,
+		&acc.VipDailyClaimed, &updated,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrUnauthorized
@@ -196,6 +221,10 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	_ = json.Unmarshal(cr, &acc.ClaimedRewards)
 	_ = json.Unmarshal(oh, &acc.OwnedHeroes)
 	_ = json.Unmarshal(cmds, &acc.BattleCommands)
+	_ = json.Unmarshal(hi, &acc.HeroInstances)
+	_ = json.Unmarshal(inv, &acc.Inventory)
+	_ = json.Unmarshal(pity, &acc.PityCounters)
+	_ = json.Unmarshal(gh, &acc.GachaHistory)
 	if acc.QuestFlags == nil {
 		acc.QuestFlags = map[string]bool{}
 	}
@@ -205,6 +234,7 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	if acc.OwnedHeroes == nil {
 		acc.OwnedHeroes = map[string]bool{}
 	}
+	EnsureHeroInstances(&acc)
 	acc.UpdatedAt = updated.UTC().Format(time.RFC3339)
 	return &acc, nil
 }
@@ -218,24 +248,38 @@ func (p *Postgres) AccountByToken(token string) (*AccountProgress, error) {
 }
 
 func (p *Postgres) saveAccount(acc *AccountProgress) error {
+	EnsureHeroInstances(acc)
 	party, _ := json.Marshal(acc.PartyIDs)
 	qf, _ := json.Marshal(acc.QuestFlags)
 	cr, _ := json.Marshal(acc.ClaimedRewards)
 	oh, _ := json.Marshal(acc.OwnedHeroes)
 	cmds, _ := json.Marshal(acc.BattleCommands)
+	hi, _ := json.Marshal(acc.HeroInstances)
+	inv, _ := json.Marshal(acc.Inventory)
+	pity, _ := json.Marshal(acc.PityCounters)
+	gh, _ := json.Marshal(acc.GachaHistory)
 	if cmds == nil {
 		cmds = []byte("[]")
+	}
+	if gh == nil {
+		gh = []byte("[]")
 	}
 	_, err := p.pool.Exec(p.ctx, `
 		UPDATE accounts SET
 			commander_xp=$2, soft_currency=$3, hard_currency=$4, summon_tickets=$5,
 			party_ids=$6::jsonb, quest_flags=$7::jsonb, claimed_rewards=$8::jsonb, owned_heroes=$9::jsonb,
 			afk_claimed_unix=$10, active_battle_id=$11, battle_seed=$12,
-			balance_version=$13, battle_commands=$14::jsonb, battle_tick_approx=$15, updated_at=NOW()
+			balance_version=$13, battle_commands=$14::jsonb, battle_tick_approx=$15,
+			hero_instances=$16::jsonb, inventory=$17::jsonb, vip_points=$18, vip_level=$19,
+			pity_counters=$20::jsonb, guild_id=$21,
+			gacha_history=$22::jsonb, test_purchase_day=$23, test_purchases_day=$24,
+			test_hard_day=$25, test_vip_day=$26, vip_daily_claimed=$27, updated_at=NOW()
 		WHERE account_id=$1`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
 		party, qf, cr, oh, acc.AFKClaimedUnix, acc.ActiveBattleID, acc.BattleSeed,
 		acc.BalanceVersion, cmds, acc.BattleTickApprox,
+		hi, inv, acc.VipPoints, acc.VipLevel, pity, acc.GuildID,
+		gh, acc.TestPurchaseDay, acc.TestPurchasesDay, acc.TestHardDay, acc.TestVipDay, acc.VipDailyClaimed,
 	)
 	return err
 }
@@ -342,12 +386,21 @@ func (p *Postgres) Summon(token string, heroPool []string) (heroID string, newly
 			return ErrNoTickets
 		}
 		acc.SummonTickets--
-		idx := int(time.Now().UnixNano() % int64(len(heroPool)))
+		idx := CryptoPick(len(heroPool))
 		heroID = heroPool[idx]
+		EnsureHeroInstances(acc)
 		newly = !acc.OwnedHeroes[heroID]
 		acc.OwnedHeroes[heroID] = true
-		if !newly {
-			acc.SoftCurrency += 50
+		if newly {
+			acc.HeroInstances[heroID] = NewHeroInstance(heroID)
+		} else {
+			inst := acc.HeroInstances[heroID]
+			if inst == nil {
+				inst = NewHeroInstance(heroID)
+				acc.HeroInstances[heroID] = inst
+			}
+			inst.Fragments++
+			acc.SoftCurrency += DuplicateSoftRefund
 		}
 		return nil
 	})
@@ -427,4 +480,270 @@ func (p *Postgres) FinishBattle(token, battleID string, victory bool) (*AccountP
 	})
 }
 
+func (p *Postgres) LevelUpHero(token, heroID string, levels int, base HeroBaseStats) (*AccountProgress, *HeroInstance, error) {
+	if heroID == "" || levels < 1 || levels > 10 {
+		return nil, nil, ErrValidation
+	}
+	var out *HeroInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		EnsureHeroInstances(acc)
+		if !acc.OwnedHeroes[heroID] {
+			return ErrNotOwned
+		}
+		inst := acc.HeroInstances[heroID]
+		if inst == nil {
+			inst = NewHeroInstance(heroID)
+			acc.HeroInstances[heroID] = inst
+		}
+		cap := LevelCap(inst.AwakenRank)
+		for i := 0; i < levels; i++ {
+			if inst.Level >= cap {
+				return ErrLevelCap
+			}
+			cost := SoftCostForLevel(inst.Level)
+			if acc.SoftCurrency < cost {
+				return ErrInsufficient
+			}
+			acc.SoftCurrency -= cost
+			inst.Level++
+		}
+		inst.Power = ComputePower(base.HP, base.Atk, base.Defense, base.Speed, inst.Level, inst.Stars, inst.AwakenRank)
+		cp := *inst
+		out = &cp
+		return nil
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) StarUpHero(token, heroID string, base HeroBaseStats) (*AccountProgress, *HeroInstance, error) {
+	if heroID == "" {
+		return nil, nil, ErrValidation
+	}
+	var out *HeroInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		EnsureHeroInstances(acc)
+		if !acc.OwnedHeroes[heroID] {
+			return ErrNotOwned
+		}
+		inst := acc.HeroInstances[heroID]
+		if inst == nil {
+			return ErrNotOwned
+		}
+		if inst.Stars >= MaxStarsDraft {
+			return ErrStarCap
+		}
+		need := FragmentsPerStarDraft[inst.Stars]
+		if inst.Fragments < need {
+			return ErrInsufficient
+		}
+		inst.Fragments -= need
+		inst.Stars++
+		inst.Power = ComputePower(base.HP, base.Atk, base.Defense, base.Speed, inst.Level, inst.Stars, inst.AwakenRank)
+		cp := *inst
+		out = &cp
+		return nil
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) EquipHero(token, heroID, slot, itemID string, base HeroBaseStats) (*AccountProgress, *HeroInstance, error) {
+	valid := map[string]bool{"weapon": true, "armor": true, "accessory": true, "relic": true}
+	if heroID == "" || !valid[slot] {
+		return nil, nil, ErrValidation
+	}
+	var out *HeroInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		EnsureHeroInstances(acc)
+		if !acc.OwnedHeroes[heroID] {
+			return ErrNotOwned
+		}
+		inst := acc.HeroInstances[heroID]
+		if inst == nil {
+			inst = NewHeroInstance(heroID)
+			acc.HeroInstances[heroID] = inst
+		}
+		if inst.Equipment == nil {
+			inst.Equipment = map[string]string{}
+		}
+		if itemID != "" {
+			if acc.Inventory[itemID] <= 0 && itemID != "starter_blade" && itemID != "starter_mail" && itemID != "starter_charm" {
+				return ErrInsufficient
+			}
+		}
+		inst.Equipment[slot] = itemID
+		inst.Power = ComputePower(base.HP, base.Atk, base.Defense, base.Speed, inst.Level, inst.Stars, inst.AwakenRank)
+		cp := *inst
+		out = &cp
+		return nil
+	})
+	return prog, out, err
+}
+
 var _ Store = (*Postgres)(nil)
+
+func (p *Postgres) SpendSoft(token string, amount int) (*AccountProgress, error) {
+	if amount < 0 {
+		return nil, ErrValidation
+	}
+	return p.mutate(token, func(acc *AccountProgress) error {
+		if acc.SoftCurrency < amount {
+			return ErrInsufficient
+		}
+		acc.SoftCurrency -= amount
+		return nil
+	})
+}
+
+func (p *Postgres) ApplySimulatedPurchase(token, sku string, soft, hard, tickets int, inventory map[string]int) (*AccountProgress, bool, error) {
+	if sku == "" {
+		return nil, false, ErrValidation
+	}
+	already := false
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		key := "shop_sim:" + sku
+		if acc.ClaimedRewards[key] {
+			already = true
+			return nil
+		}
+		acc.ClaimedRewards[key] = true
+		acc.SoftCurrency += soft
+		acc.HardCurrency += hard
+		acc.SummonTickets += tickets
+		EnsureHeroInstances(acc)
+		for k, v := range inventory {
+			acc.Inventory[k] += v
+		}
+		return nil
+	})
+	return prog, already, err
+}
+
+func (p *Postgres) SummonBanner(token, bannerID string, count int, poolByRarity map[string][]string) (*AccountProgress, []GachaPullResult, error) {
+	if count != 1 && count != 10 {
+		return nil, nil, ErrValidation
+	}
+	rates := StandardRates
+	softEvery, hardEvery := 0, 0
+	pityKey := ""
+	switch bannerID {
+	case BannerStandard:
+		rates = StandardRates
+	case BannerAdvanced:
+		rates = AdvancedRates
+		softEvery, hardEvery = PitySoftSREvery, PityHardSSREvery
+		pityKey = "advanced"
+	default:
+		return nil, nil, ErrValidation
+	}
+	var results []GachaPullResult
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		if acc.SummonTickets < count {
+			return ErrNoTickets
+		}
+		acc.SummonTickets -= count
+		EnsureHeroInstances(acc)
+		if acc.PityCounters == nil {
+			acc.PityCounters = map[string]int{}
+		}
+		soft := acc.PityCounters[pityKey+"_soft"]
+		hard := acc.PityCounters[pityKey+"_hard"]
+		for i := 0; i < count; i++ {
+			rarity := RollRarity(rates)
+			forced := ""
+			if pityKey != "" {
+				rarity, forced, soft, hard = ApplyPity(rarity, soft, hard, softEvery, hardEvery)
+			}
+			heroID := PickHeroByRarity(poolByRarity, rarity)
+			if heroID == "" {
+				return ErrValidation
+			}
+			newly := !acc.OwnedHeroes[heroID]
+			acc.OwnedHeroes[heroID] = true
+			if newly {
+				acc.HeroInstances[heroID] = NewHeroInstance(heroID)
+			} else {
+				inst := acc.HeroInstances[heroID]
+				if inst == nil {
+					inst = NewHeroInstance(heroID)
+					acc.HeroInstances[heroID] = inst
+				}
+				inst.Fragments++
+				acc.SoftCurrency += DuplicateSoftRefund
+			}
+			results = append(results, GachaPullResult{HeroID: heroID, Rarity: rarity, NewlyOwned: newly, PityForced: forced})
+			acc.GachaHistory = append(acc.GachaHistory, GachaHistoryEntry{
+				BannerID: bannerID, HeroID: heroID, Rarity: rarity, NewlyOwned: newly, At: time.Now().UTC().Format(time.RFC3339),
+			})
+			if len(acc.GachaHistory) > 100 {
+				acc.GachaHistory = acc.GachaHistory[len(acc.GachaHistory)-100:]
+			}
+		}
+		if pityKey != "" {
+			acc.PityCounters[pityKey+"_soft"] = soft
+			acc.PityCounters[pityKey+"_hard"] = hard
+		}
+		return nil
+	})
+	return prog, results, err
+}
+
+func (p *Postgres) TestPurchase(token, sku string, soft, hard, tickets, vipPoints int, inventory map[string]int) (*AccountProgress, map[string]any, error) {
+	if sku == "" {
+		return nil, nil, ErrValidation
+	}
+	meta := map[string]any{}
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		day := time.Now().UTC().Format("2006-01-02")
+		if acc.TestPurchaseDay != day {
+			acc.TestPurchaseDay = day
+			acc.TestPurchasesDay = 0
+			acc.TestHardDay = 0
+			acc.TestVipDay = 0
+		}
+		if acc.TestPurchasesDay >= TestMaxPurchasesPerDay {
+			return ErrInsufficient
+		}
+		if acc.TestHardDay+hard > TestMaxHardPerDay {
+			return ErrInsufficient
+		}
+		if acc.TestVipDay+vipPoints > TestMaxVipPerDay {
+			return ErrInsufficient
+		}
+		acc.TestPurchasesDay++
+		acc.TestHardDay += hard
+		acc.TestVipDay += vipPoints
+		acc.SoftCurrency += soft
+		acc.HardCurrency += hard
+		acc.SummonTickets += tickets
+		acc.VipPoints += vipPoints
+		acc.VipLevel = ComputeVIPLevel(acc.VipPoints)
+		EnsureHeroInstances(acc)
+		for k, v := range inventory {
+			acc.Inventory[k] += v
+		}
+		key := "TEST_PURCHASE:" + sku + ":" + day + ":" + strconv.Itoa(acc.TestPurchasesDay)
+		acc.ClaimedRewards[key] = true
+		meta["transaction_type"] = "TEST_PURCHASE"
+		meta["sku"] = sku
+		meta["test_purchases_today"] = acc.TestPurchasesDay
+		meta["not_real_revenue"] = true
+		return nil
+	})
+	return prog, meta, err
+}
+
+func (p *Postgres) ClaimVIPDaily(token string, soft, tickets int) (*AccountProgress, bool, error) {
+	already := false
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		day := time.Now().UTC().Format("2006-01-02")
+		if acc.VipDailyClaimed == day {
+			already = true
+			return nil
+		}
+		acc.VipDailyClaimed = day
+		acc.SoftCurrency += soft
+		acc.SummonTickets += tickets
+		return nil
+	})
+	return prog, already, err
+}

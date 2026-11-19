@@ -169,6 +169,48 @@ func TestBattleStartFinishAndContent(t *testing.T) {
 	}
 }
 
+func TestFinishDisablesAutoCastWhenUltimateCommand(t *testing.T) {
+	h := newTestServer(t)
+	tok := auth(t, h)
+
+	body := []byte(`{"party_ids":["H01","H02","H03","H04","H07"],"client_version":"test"}`)
+	req := httptest.NewRequest(http.MethodPost, "/v1/battles/B01/start", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	if rr.Code != 200 {
+		t.Fatalf("start %d %s", rr.Code, rr.Body.String())
+	}
+
+	cmd := []byte(`{"op":"ultimate","unit_id":"H01","at_tick":40}`)
+	req = httptest.NewRequest(http.MethodPost, "/v1/battles/B01/command", bytes.NewReader(cmd))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	if rr.Code != 200 {
+		t.Fatalf("command %d %s", rr.Code, rr.Body.String())
+	}
+
+	fin := []byte(`{"victory":true,"duration_ms":5000}`)
+	req = httptest.NewRequest(http.MethodPost, "/v1/battles/B01/finish", bytes.NewReader(fin))
+	req.Header.Set("Authorization", "Bearer "+tok)
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	h.ServeHTTP(rr, req)
+	if rr.Code != 200 {
+		t.Fatalf("finish %d %s", rr.Code, rr.Body.String())
+	}
+	var out map[string]any
+	if err := json.Unmarshal(rr.Body.Bytes(), &out); err != nil {
+		t.Fatal(err)
+	}
+	if out["auto_cast"] != false {
+		t.Fatalf("expected auto_cast=false when ultimate command present, got %#v", out["auto_cast"])
+	}
+}
+
 func TestGuildArenaEvents(t *testing.T) {
 	h := newTestServer(t)
 	tok := auth(t, h)

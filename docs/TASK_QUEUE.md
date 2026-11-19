@@ -74,11 +74,31 @@
 | T-124 | P1 | **DONE** | CH01 vertical polish (L01/battle/dialog) | hub steps + CH02 gates | T-055 |
 | T-114 | P1 | **DONE** | Release defaults live (no silent mock); debug toggle | D-NET-05 + integration_live_slice | T-110 |
 | T-125 | P1 | **DONE** | CH01 Android vertical slice APK | home→map→L01→dialog→party→battle→ult→reward→save | T-124 |
-| T-126 | P1 | **BLOCKED** | Release APK signed | need ANDROID_RELEASE_KEYSTORE from owner | T-125 |
-| T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | accept/reject + anim scope | T-125 |
-| T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | unlocks T-112 | T-125 |
-| T-129 | P1 | **BLOCKED** | Production/live API URL for devices | client_config / secrets | T-114 |
-| T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 accepted | T-128 |
+| T-130 | P1 | **DONE** | CH01 gameplay polish (ULT reachable, pause, reward UI, Home continue, AFK honesty) | battle/home/afk + B01 balance + smoke | T-125 |
+| T-132 | P1 | **DONE** | CH01 acceptance test report + owner Q answers; debug APK; live ULT auto_cast fix; party portraits | `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md` | T-130 |
+| T-133 | P1 | **DONE** | Balance pass-2: B02+ HP floor ~3200 so ULT reachable | `ch01_battles.json` + smoke B02 | T-132 |
+| T-134 | P2 | **DONE** | Heroes/Inventory/AFK/Gacha UX polish (draft art OK) | heroes/inventory/afk/gacha screens | T-132 |
+| T-131 | P2 | **BLOCKED** | H01 Kaeron grip + Stage E atlases | owner local Blender grip; then Stage D confirm | owner |
+| T-126 | P1 | **BLOCKED** | Release APK signed | debug-only until owner keystore (Q1) | T-125 |
+| T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | drafts only; no new H01 model | T-125 |
+| T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | report ready; waiting device/review | T-132 |
+| T-129 | P1 | **BLOCKED** | Production/live API URL for devices | keep `127.0.0.1:8080/v1`; need owner URL | T-114 |
+| T-140 | P1 | **DONE** | Online systems audit + D-SCOPE-03 unlock | `ONLINE_SYSTEMS_AUDIT.md` + DECISIONS | owner brief |
+| T-141 | P1 | **DONE** | 36-hero Draft catalog + progression config | `roster_release36.json` + `progression_draft.json` | T-140 |
+| T-142 | P1 | **DONE** | DB migration 003 + hero instances / economy hooks | `migrations/003_online_foundation.sql` | T-141 |
+| T-143 | P1 | **DONE** | Server progression + chat/guild/shop/VIP APIs | `store/*` + `httpapi/online.go` | T-142 |
+| T-144 | P2 | **DONE** | Client screens: hero detail / chat / shop / VIP / guild live | scenes + ApiClient | T-143 |
+| T-145 | P3 | **DONE** | Chat WebSocket + DM channel + REST | `/v1/ws/chat` + dm: pair | T-144 |
+| T-146 | P4 | **DONE** | Guild roles/announce/chat channel | set_role, announce, guild: chat | T-144 |
+| T-147 | P5 | **DONE** | Gacha rates/pity/history (paid OFF) | D-GACHA-01 + SummonBanner | T-144 |
+| T-148 | P6 | **DONE** | TEST_PURCHASE shop + limits + history keys | D-SHOP-01 | owner prices later |
+| T-149 | P7 | **DONE** | VIP 0–10 + daily claim | D-VIP-01 | owner balance later |
+| T-150 | P2 | **DONE** | H13–H36 Draft lore + GameBrain roadmap doc | roster v4 + LUNEX_GAMEBRAIN.md | D-SCOPE-04 |
+| T-151 | P3 | **DONE** | Chat moderation admin + mute/delete/reports | `/v1/admin/chat/*` | T-145 |
+| T-152 | P4 | **DONE** | Guild quests/vault/member board (+ war/boss hooks empty) | donate + quests + migration 005 | T-146 |
+| T-154 | P3 | **DONE** | Persist chat hub to Postgres (`PostgresChat`) | migration 006 + main wire | T-151 |
+| T-153 | P6 | **TODO** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
+| T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -93,5 +113,6 @@
 
 ## Следующий конкретный шаг
 
-Владелец отвечает в [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) (T-126…T-129).  
-После T-128 → T-112. PX (T-090…092) без отдельного разрешения не трогать.
+T-145 (chat WS/DM) → T-146 guild depth → T-147 gacha pity.  
+Owner decisions needed: H13–H36 Draft names, gacha rates/pity, shop/VIP numbers.  
+CH02 (T-090) / Stage E (T-131) remain blocked.

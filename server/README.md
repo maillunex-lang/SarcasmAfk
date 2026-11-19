@@ -45,8 +45,21 @@ Migrations: `migrations/*.sql` (directory auto-applied with `-migrate`). Set `AD
 | POST | `/v1/battles/{id}/finish` | Bearer (soft verify) |
 | POST | `/v1/rewards/claim` | Bearer |
 | POST | `/v1/afk/claim` | Bearer |
-| POST | `/v1/gacha/summon` | Bearer |
-| GET | `/v1/guild` | Bearer |
+| POST | `/v1/gacha/summon` | Bearer (`banner_id`, `count` 1\|10) |
+| GET | `/v1/gacha/banners` | no |
+| GET | `/v1/gacha/history` | Bearer |
+| GET | `/v1/ws/chat` | Bearer/token query (WebSocket) |
+| POST | `/v1/vip/claim-daily` | Bearer |
+| GET | `/v1/admin/config` | Admin |
+| GET/POST | `/v1/guild` | Bearer (list / create|join|leave) |
+| GET | `/v1/heroes/owned` | Bearer |
+| POST | `/v1/heroes/{id}/level-up` | Bearer |
+| POST | `/v1/heroes/{id}/star-up` | Bearer |
+| POST | `/v1/heroes/{id}/equip` | Bearer |
+| POST/GET | `/v1/chat/{channel}/send\|history` | Bearer |
+| GET | `/v1/shop/catalog` | Bearer |
+| POST | `/v1/shop/purchase` | Bearer (simulated only) |
+| GET | `/v1/vip/status` | Bearer |
 | GET | `/v1/arena` | Bearer |
 | GET | `/v1/events` | no |
 

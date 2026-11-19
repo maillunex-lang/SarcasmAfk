@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (после T-125 / PR #14).  
+> Актуализация: **2026-11-19** (T-140…T-144 online systems P1–P2 foundation; D-SCOPE-03).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -13,20 +13,22 @@
 | Debug APK | ГОТОВО | `scripts/build_debug_apk.sh` → `build/BashLegends-debug.apk` |
 | Release APK | ЗАБЛОКИРОВАНО | Нет действующего release keystore (T-126) |
 | Live API / auth / replay / rewards | ГОТОВО | Integration + CI; silent mock запрещён |
+| Heroes 36 + progression | ЧАСТИЧНО | H01–H12 MVP + H13–H36 Draft; level/star/equip API |
+| Chat / Guild / Shop / VIP | ЧАСТИЧНО | REST chat; guild create/join; simulated shop; VIP Draft |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
-| Guild / Arena / Events live | ЗАБЛОКИРОВАНО | Stubs до **CH01 accepted** (D-NET-06 / D-SCOPE-01) |
+| Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
-| Приёмка CH01 | НА ПРОВЕРКЕ у владельца | Нужен явный «CH01 accepted» |
+| Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |
 
 ### Открыто в очереди
 
 | ID | Статус | Что |
 |---|---|---|
+| T-145…T-149 | TODO | Chat WS · guild depth · gacha pity · shop provider · VIP grants |
 | T-126 | BLOCKED | Signed release APK |
-| T-127 | BLOCKED | Owner art-approve H01/H02/H03/E01 (+ объём анимаций) |
-| T-128 | BLOCKED | CH01 accepted (приёмка вертикального среза) |
+| T-127 / T-131 | BLOCKED | Art approve / Stage E |
+| T-128 | BLOCKED | CH01 accepted (не гейт online) |
 | T-129 | BLOCKED | Production/live API URL для телефонов |
-| T-112 | TODO→после T-128 | Guild/arena/events live |
 | T-090…T-092 | PX BLOCKED | CH02+, mass art, rename |
 
 ## 1. Неизменяемые решения о процессе
@@ -313,6 +315,40 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — Online systems P1–P2 (T-140…T-144)
+
+### Журнал 2026-11-19 — Online P2 (T-145…T-150)
+
+### Журнал 2026-11-19 — Online P3 (T-151/T-152)
+
+### Журнал 2026-11-19 — Online P3 chat PG (T-154)
+
+- `ChatService` interface; `PostgresChat` persists messages/blocks/reports/mutes.
+- Migration 006; Redis optional rate-limit; memory ChatHub remains default without DATABASE_URL.
+
+
+- Admin chat moderation: reports, mute/unmute, delete message.
+- Guild daily quests, vault donate, member contribution board.
+- Migration 005: vault/quests columns + empty boss/war hooks (wars not implemented).
+- Chat PG persistence still TODO (T-154).
+
+
+- Owner approvals: H13–H36 Draft lore (D-SCOPE-04), gacha rates/pity (D-GACHA-01), TEST_PURCHASE shop (D-SHOP-01), VIP 0–10 (D-VIP-01).
+- GameBrain architecture only: `docs/LUNEX_GAMEBRAIN.md` (D-AI-01).
+- WS chat `/v1/ws/chat`, DM channels, guild roles/announce, gacha history/pity counters.
+- Shop TEST_PURCHASE with daily limits; VIP daily claim; admin `/v1/admin/config`.
+- Paid banners and real payments remain OFF.
+
+
+- Owner D-SCOPE-03: chat/guilds/gacha/heroes/shop/VIP без ожидания CH01 accepted.
+- Audit: `docs/reports/ONLINE_SYSTEMS_AUDIT.md`; contracts: `docs/ONLINE_SYSTEMS_SPEC.md`.
+- Catalog: `client/data/heroes/roster_release36.json` (12 approved + 24 Draft).
+- Migration `003_online_foundation.sql`; progression/chat/guild/shop/VIP APIs.
+- Client screens: hero detail, chat, shop, VIP; guild create/join live.
+- Tests: `go test ./...` green (progression + online HTTP).
+- Still Draft/blocked: gacha rates, real payments, CH02, Stage E atlases.
+
+
 ### 2026-11-19 — VIS / визуальная концепция и дизайн-система (пакет документов)
 - Статус: СПЕЦИФИКАЦИЯ СОГЛАСОВАНА (решения V0); реализация ассетов/клиента НЕ НАЧАТО
 - Что планировалось: единый визуальный стиль, UI-токены, гайды, пайплайн, роадмап, срез V0, аудит.
@@ -495,14 +531,29 @@
 - Не сделано: ответы владельца
 - Следующий шаг: Q1–Q4 в OWNER_CLARIFICATIONS
 
+### 2026-11-19 — T-130…T-132 owner answers + CH01 test report
+- Статус: ОТЧЁТ ГОТОВ; CH01 **не accepted**
+- Сделано: ответы Q1–Q4/T-131 в OWNER_CLARIFICATIONS + DECISIONS; полный mock/live cycle; debug APK; DEF-01 live auto_cast; party portraits; `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`
+- Не сделано: T-128 accept; T-131 Stage E; phone live URL; release keystore
+- Следующий шаг: T-133/T-134 (без арта) · device review владельца
+
+### 2026-11-19 — T-133 / T-134 unblocked polish
+- Статус: ГОТОВО
+- Сделано: B02–B30 HP floor ~3200; Heroes/Inventory/AFK/Gacha/Expedition UX; smoke B02 natural ULT
+- Не сделано: owner gates T-128/129/131/126; P3 live
+- Следующий шаг: ждать владельца
+
 ## 9. Текущий следующий шаг + уточнения владельца
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md) + [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md).
 
 1. ~~P0…T-125 + T-114~~ — сделано (CI green, в `main`).
-2. **Сейчас ждём ответы владельца** по блокерам T-126…T-129 (см. ниже и `OWNER_CLARIFICATIONS.md`).
-3. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
-4. PX до отдельного разрешения: CH02+ (T-090), mass art (T-091), rename (T-092).
+2. ~~T-130 / T-132~~ — CH01 polish + acceptance test report; debug APK; live ULT auto_cast fix.
+3. ~~T-133 / T-134~~ — баланс B02+ + UX Heroes/Inventory/AFK/Gacha.
+4. H01 grip → **T-131** (владелец Blender; Stage E запрещён до confirm).
+5. Ждём: T-128 accept · T-129 phone URL · T-126 keystore (debug-only пока).
+6. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
+7. PX: CH02+ / mass art / rename — только с явным разрешением.
 
 ### Что уже верно (не требует уточнения)
 
@@ -517,9 +568,9 @@
 |---|---|---|---|
 | 1 | **T-126** | Release APK | Путь/наличие действующего keystore (или «keystore нет — оставить debug»). Alias + пароли **только** через secrets/env, не в чат. Не создавать новый, если существует. |
 | 2 | **T-127** | Арт H01/H02/H03/E01 | Accept drafts / reject / правки силуэта·цвета·реквизита; нужен ли полный набор idle/atk/ult/hit/win/lose сейчас или только idle для CH01. |
-| 3 | **T-128** | CH01 accepted | Явное «принято» / «не принято» + список дефектов для доработки перед P3. |
-| 4 | **T-129** | Live URL | Базовый URL API для телефонов (LAN/VPS/домен). Без этого release live на устройстве не к чему подключаться. |
-| 5 | *(опц.)* | Баланс B01 | Оставить placeholder ATB или зафиксировать числа энергии/урона для ультимейтов. |
+| 3 | **T-128** | CH01 accepted | Отчёт: `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`. Нужно явное «принято» после device/review. |
+| 4 | **T-129** | Live URL | Сейчас `127.0.0.1:8080/v1`. Нужен LAN/VPS/домен для телефонов (не выдумываем). |
+| 5 | *(опц.)* | Баланс B01 | **Pass 1 в T-130** (HP 720, energy/hit 28). Можно вернуть/подкрутить. |
 | 6 | *(опц.)* | Админ prod | Значение `ADMIN_API_KEY` только в secrets; роли admin/viewer ок? |
 | 7 | *(позже)* | T-112 | После T-128: объём live guild/arena/events (MVP-минимум vs полный ROAD). |
 | 8 | *(PX)* | T-090/091/092 | Не трогаем, пока не дадите явное разрешение. |

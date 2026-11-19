@@ -8,7 +8,8 @@ signal battle_ended(result: Dictionary)
 signal ultimate_ready(unit: BattleUnit)
 
 const ATB_THRESHOLD := 100.0
-const ENERGY_PER_HIT := 22.0
+## ~3 hits to fill a 100 energy bar so B01 can show a manual ULT before trash dies.
+const ENERGY_PER_HIT := 35.0
 
 var heroes: Array = [] # BattleUnit
 var enemies: Array = [] # BattleUnit

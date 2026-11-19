@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "status": "owner_preliminary_approved_paid_off",
+  "note": "Owner-approved preliminary rates 2026-11-19. Paid banners OFF until final approval. Mythic only via separate events.",
+  "paid_banners_enabled": false,
+  "display_rates_include_pity_note": true,
+  "banners": [
+    {
+      "id": "BANNER_STANDARD",
+      "name": "Обычный призыв",
+      "type": "standard",
+      "cost_tickets": 1,
+      "cost_hard": 0,
+      "pulls": [1, 10],
+      "rates": { "N": 0.50, "R": 0.35, "SR": 0.12, "SSR": 0.03 },
+      "pity": null,
+      "exclude_mythic": true,
+      "lunex_visual_id": "lunex://gacha/BANNER_STANDARD"
+    },
+    {
+      "id": "BANNER_ADVANCED",
+      "name": "Продвинутый призыв",
+      "type": "advanced",
+      "cost_tickets": 0,
+      "cost_hard": 0,
+      "cost_tickets_alt": 1,
+      "pulls": [1, 10],
+      "rates": { "R": 0.70, "SR": 0.24, "SSR": 0.05, "UR": 0.01 },
+      "pity": {
+        "soft_sr_every": 10,
+        "hard_ssr_every": 80,
+        "counters_key": "advanced"
+      },
+      "exclude_mythic": true,
+      "lunex_visual_id": "lunex://gacha/BANNER_ADVANCED"
+    },
+    {
+      "id": "BANNER_EVENT_DRAFT",
+      "name": "Событийный призыв (Draft)",
+      "type": "event",
+      "enabled": false,
+      "cost_tickets": 1,
+      "rates": { "R": 0.60, "SR": 0.28, "SSR": 0.10, "UR": 0.02 },
+      "pity": { "soft_sr_every": 10, "hard_ssr_every": 80, "counters_key": "event" },
+      "exclude_mythic": true,
+      "note": "Disabled until event rules approved",
+      "lunex_visual_id": "lunex://gacha/BANNER_EVENT_DRAFT"
+    }
+  ],
+  "mythic_policy": "event_only_after_approval"
+}

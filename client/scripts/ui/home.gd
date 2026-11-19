@@ -51,7 +51,15 @@ func _ready() -> void:
 
 	vbox.add_child(DesignTokens.make_label(GameState.chapter_progress_text(), 22, DesignTokens.COLOR_TEXT_MUTED))
 
-	var map_btn := DesignTokens.make_button("Карта Уфы", true)
+	var mid := GameState.mid_quest_continue()
+	if not mid.is_empty():
+		var cont := DesignTokens.make_button(str(mid.get("label", "Продолжить")), true)
+		var dest := str(mid.get("dest", "location"))
+		cont.pressed.connect(func() -> void: _continue_mid_quest(dest))
+		vbox.add_child(cont)
+		vbox.add_child(DesignTokens.make_label(str(mid.get("hint", "")), 20, DesignTokens.COLOR_TEXT_MUTED))
+
+	var map_btn := DesignTokens.make_button("Карта Уфы", mid.is_empty())
 	map_btn.pressed.connect(func() -> void: SceneNav.to_map(get_tree()))
 	vbox.add_child(map_btn)
 
@@ -69,6 +77,20 @@ func _ready() -> void:
 	vbox.add_child(pad)
 
 	HubChrome.attach(self, get_tree(), "home")
+
+
+func _continue_mid_quest(dest: String) -> void:
+	match dest:
+		"dialog":
+			SceneNav.to_dialog(get_tree())
+		"party":
+			SceneNav.to_party(get_tree())
+		"battle":
+			SceneNav.to_battle(get_tree())
+		"location":
+			SceneNav.to_location(get_tree())
+		_:
+			SceneNav.to_map(get_tree())
 
 
 func _set_background(path: String) -> void:

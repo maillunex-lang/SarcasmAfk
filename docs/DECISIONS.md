@@ -37,6 +37,7 @@
 | D-NET-04 | При ошибке live **не** переключаться молча на mock |
 | D-NET-05 | **T-114:** release-сборки: `use_mock=false` по умолчанию после прохождения integration (auth/battle/rewards/save/resume); debug: явный mock/live |
 | D-NET-06 | P3 guild/arena/events live — только после CH01 accepted; до этого stubs + контракты |
+| D-NET-07 | Live URL: использовать существующий `client_config` / env; не выдумывать адрес и не уходить в offline-only без согласования (2026-11-19) |
 
 ## D-ART — Арт
 
@@ -48,6 +49,8 @@
 | D-ART-04 | Sample-атлас (`sample_unit`) — **только** для техотладки пайплайна, не финальный игровой ассет (2026-11-19) |
 | D-ART-05 | H01 Каэрон / H02 Вейриса / H03 Эльдарион и враги CH01: уникальный дизайн по `HEROES.md`, `CHARACTER_STYLE_GUIDE.md`, `ART_DIRECTION.md` |
 | D-ART-06 | Не начинать CH02 и массовую генерацию ассетов до приёмки CH01 |
+| D-ART-07 | H01–H03/E01 combat = **черновики** до явного art-approve; H01 модель = Meshy GLB владельца (не генерировать заново) (2026-11-19) |
+| D-ART-08 | Stage E (финальные 2D-атласы H01) только после owner grip + Stage D confirm (T-131) (2026-11-19) |
 
 ## D-SCOPE — Отложенное
 
@@ -55,6 +58,12 @@
 |---|---|
 | D-SCOPE-01 | Guild / PvP arena / events live — после базового вертикального среза и CH01; stubs + явная «недоступно» |
 | D-SCOPE-02 | CH02+ не открывать игрокам, пока CH01 не завершён и не протестирован; контракты/закрытые переходы сохранить |
+| D-SCOPE-03 | **2026-11-19 owner unlock:** полноценная разработка chat / DM / guilds / gacha / 36 heroes / progression / shop / VIP **без** ожидания CH01 accepted. CH02 и Stage E Kaeron atlases по-прежнему blocked. TEMP art явно помечать. Платные баннеры и реальные платежи — только после утверждения чисел. |
+| D-SCOPE-04 | **2026-11-19:** H13–H36 Draft lore/abilities authorized for agent development; H01–H12 frozen; keep class/rarity/faction distribution; TEMP art only; mark Draft until final approve. |
+| D-GACHA-01 | Preliminary rates: Standard N50/R35/SR12/SSR3; Advanced R70/SR24/SSR5/UR1. Pity advanced: SR every 10, SSR every 80 (replaces pull). Mythic event-only. Paid banners OFF until final approve. Admin-editable. |
+| D-SHOP-01 | Shop live in TEST_PURCHASE mode: free grants with daily limits; show placeholder RUB prices + «Тестовый режим»; no payment provider; isolate from real revenue; architecture ready for real payments. |
+| D-VIP-01 | VIP levels 0–10 preliminary; daily rewards; AFK bonuses; cosmetic; shop offers; points via TEST_PURCHASE for testing; PvP power bonus cap ≤5%; admin-editable. |
+| D-AI-01 | Lunex GameBrain: architecture/docs only (`docs/LUNEX_GAMEBRAIN.md`); no VPS LLM install yet. |
 
 ## D-ADMIN — Админка / APK
 
@@ -63,6 +72,7 @@
 | D-ADMIN-01 | Admin: полноценная auth + RBAC (роли admin, viewer); API key только для доверенных сервисов; секреты не в клиенте; audit |
 | D-ADMIN-02 | APK: проверить SDK/templates/keystore; не создавать новый релизный ключ если есть; не коммитить секреты; сначала debug APK, потом release |
 | D-ADMIN-03 | Release keystore: искать на VPS/CI secrets; не создавать и не перезаписывать; пароли/ключи не в логах и не в git (2026-11-19) |
+| D-ADMIN-04 | Пока только **debug APK**; release отложен до keystore владельца (Q1 2026-11-19) |
 
 ## D-PRODUCT — Продукт / платформа
 

@@ -13,16 +13,29 @@ import (
 type Server struct {
 	Store   store.Store
 	Content *content.Loader
+	Chat    store.ChatService
+	Guilds  *store.GuildHub
+	WS      *wsHub
 	Backend string
 	Metrics *Metrics
 }
 
 func New(st store.Store, c *content.Loader) *Server {
-	return &Server{Store: st, Content: c, Backend: "memory", Metrics: NewMetrics()}
+	return &Server{
+		Store: st, Content: c, Backend: "memory", Metrics: NewMetrics(),
+		Chat: store.NewChatHub(), Guilds: store.NewGuildHub(), WS: newWSHub(),
+	}
 }
 
 func (s *Server) WithBackend(name string) *Server {
 	s.Backend = name
+	return s
+}
+
+func (s *Server) WithChat(chat store.ChatService) *Server {
+	if chat != nil {
+		s.Chat = chat
+	}
 	return s
 }
 
@@ -41,10 +54,25 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/battles/", s.battles)
 	mux.HandleFunc("/v1/rewards/claim", s.rewardsClaim)
 	mux.HandleFunc("/v1/afk/claim", s.afkClaim)
-	mux.HandleFunc("/v1/gacha/summon", s.gachaSummon)
-	mux.HandleFunc("/v1/guild", s.guild)
+	mux.HandleFunc("/v1/gacha/summon", s.gachaSummonBanner) // body: banner_id, count
+	mux.HandleFunc("/v1/gacha/banners", s.gachaBanners)
+	mux.HandleFunc("/v1/gacha/history", s.gachaHistory)
+	mux.HandleFunc("/v1/guild", s.guildLive)
 	mux.HandleFunc("/v1/arena", s.arena)
 	mux.HandleFunc("/v1/events", s.events)
+	mux.HandleFunc("/v1/heroes/owned", s.heroesOwned)
+	mux.HandleFunc("/v1/heroes/", s.heroesMutate)
+	mux.HandleFunc("/v1/chat/", s.chatHandler)
+	mux.HandleFunc("/v1/ws/chat", s.chatWS)
+	mux.HandleFunc("/v1/shop/catalog", s.shopCatalogV2)
+	mux.HandleFunc("/v1/shop/purchase", s.shopPurchaseV2)
+	mux.HandleFunc("/v1/vip/status", s.vipStatusV2)
+	mux.HandleFunc("/v1/vip/claim-daily", s.vipClaimDaily)
+	mux.HandleFunc("/v1/admin/config", s.adminConfig)
+	mux.HandleFunc("/v1/admin/chat/reports", s.adminChat)
+	mux.HandleFunc("/v1/admin/chat/mute", s.adminChat)
+	mux.HandleFunc("/v1/admin/chat/delete", s.adminChat)
+	mux.HandleFunc("/v1/admin/guilds", s.adminGuilds)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 
@@ -311,13 +339,18 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		cmds := make([]battleverify.Command, 0, len(acc.BattleCommands))
+		autoCast := true // D-COMBAT-02 default
 		for _, c := range acc.BattleCommands {
 			cmds = append(cmds, battleverify.Command{Op: c.Op, UnitID: c.UnitID, AtTick: c.AtTick})
+			// D-COMBAT-03: recorded manual ultimates disable server auto-cast so replay matches player taps.
+			if c.Op == "ultimate" {
+				autoCast = false
+			}
 		}
 		replayIn := battleverify.ReplayInput{
 			Seed: acc.BattleSeed, BalanceVersion: body.BalanceVersion,
 			PartyIDs: append([]string{}, acc.PartyIDs...), Heroes: heroUnits, Enemies: enemyUnits,
-			Commands: cmds, AutoCast: true, DurationMS: body.DurationMS,
+			Commands: cmds, AutoCast: autoCast, DurationMS: body.DurationMS,
 		}
 		sim, errCode := battleverify.CheckFinishReplay(replayIn)
 		if errCode != "" {
@@ -447,21 +480,6 @@ func (s *Server) gachaSummon(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"ok": true, "hero_id": heroID, "newly_owned": newly,
-	})
-}
-
-func (s *Server) guild(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		writeErr(w, http.StatusMethodNotAllowed, "METHOD")
-		return
-	}
-	if _, err := s.Store.AccountByToken(bearer(r)); err != nil {
-		writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
-		return
-	}
-	writeJSON(w, http.StatusOK, map[string]any{
-		"ok": true,
-		"guild": store.GuildStub{ID: "g_queue13", Name: "Очередь №13", Role: "Рекрут", Members: 1, Cap: 30},
 	})
 }
 

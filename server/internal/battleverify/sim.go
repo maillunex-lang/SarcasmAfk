@@ -4,7 +4,7 @@ import "math/rand"
 
 const (
 	atbThreshold  = 100.0
-	energyPerHit  = 22.0
+	energyPerHit  = 35.0
 	maxSimTicks   = 20000
 	simDelta      = 0.05 // seconds per tick (~client autofight)
 )
