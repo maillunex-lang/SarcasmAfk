@@ -323,13 +323,12 @@
 
 ## 8. Журнал прогресса
 
-### Журнал 2026-11-19 — T-163 AFK-shell rebuild (D-UI-SHELL-01)
+### Журнал 2026-11-19 — T-163 AFK-shell → owner reject → archive battle restore
 
-- Owner approved AFK-ref UI Canon → **D-UI-SHELL-01**.
-- Battle: heroes LEFT / enemies RIGHT, top timer, bottom portrait tray + АВТО/×2 (`battle.gd`).
-- City: avatar+power top bar, left/right rails, bottom nav Город/Кампания/Герои/Сумка/AFK (`home.gd`, `hub_chrome.gd`).
-- Smokes: `smoke_battle_layout`, `smoke_city_hub`, `smoke_mvp`, `smoke_ch01` EXIT 0.
-- Branding stays БашЛегенды; no 1:1 commercial asset copy.
+- Owner rejected AFK-shell L/R battle design; **D-UI-SHELL-01 revoked**.
+- `battle.gd` restored from `backup/main-pre-reorg-20261119-1451-60ebe23` (card rows + combat log + VFX/ULT).
+- City hub chrome reverted to D-UI-CITY-01; stretch `expand` kept.
+- Game/repo not deleted (hard rule); only bad shell design rolled back.
 
 ### Журнал 2026-11-19 — T-159 CITY-HUB-001 (Stage 0 → Godot)
 

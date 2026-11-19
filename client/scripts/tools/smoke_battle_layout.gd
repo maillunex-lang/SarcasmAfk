@@ -1,5 +1,5 @@
 extends SceneTree
-## AFK-style battle field smoke: full-bleed field + no legacy card grid.
+## Battle layout smoke: restored archive card-row battle + stretch expand.
 ## godot4 --headless --path client -s res://scripts/tools/smoke_battle_layout.gd
 
 
@@ -32,35 +32,34 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 
-	var field := battle.get_node_or_null("BattleField")
-	if field == null:
-		push_error("FAIL BattleField missing")
+	# Restored archive layout: unit cards + combat log (not AFK L/R field).
+	if battle.get_node_or_null("BattleField") != null:
+		push_error("FAIL unexpected BattleField (AFK shell should be reverted)")
 		failed = true
 	else:
-		print("OK BattleField")
-		if field.get_child_count() < 3:
-			push_error("FAIL expected standing units on field, got %s" % field.get_child_count())
-			failed = true
-		else:
-			print("OK field units=", field.get_child_count())
+		print("OK no BattleField")
 
-	var tray := battle.get_node_or_null("BattleTray")
-	if tray == null:
-		push_error("FAIL BattleTray missing")
+	if battle.get_node_or_null("BattleTray") != null:
+		push_error("FAIL unexpected BattleTray")
 		failed = true
 	else:
-		print("OK BattleTray")
-	var portraits := battle.find_child("PortraitTray", true, false)
-	if portraits == null:
-		push_error("FAIL PortraitTray missing")
-		failed = true
-	elif portraits.get_child_count() < 1:
-		push_error("FAIL PortraitTray empty")
-		failed = true
-	else:
-		print("OK PortraitTray count=", portraits.get_child_count())
+		print("OK no BattleTray")
 
-	# Stretch mode must fill modern tall phones (no letterbox keep).
+	var logs: Array = battle.find_children("*", "RichTextLabel", true, false)
+	if logs.is_empty():
+		push_error("FAIL combat RichTextLabel log missing")
+		failed = true
+	else:
+		print("OK combat log")
+
+	var unit_bars := battle.find_children("*", "ProgressBar", true, false).size()
+	if unit_bars < 3:
+		push_error("FAIL expected unit HP bars on cards, got %s" % unit_bars)
+		failed = true
+	else:
+		print("OK unit hp bars=", unit_bars)
+
+	# Keep fullscreen expand (letterbox fix from #31); layout itself is archive rows.
 	var aspect := str(ProjectSettings.get_setting("display/window/stretch/aspect", ""))
 	if aspect != "expand":
 		push_error("FAIL stretch aspect=%s want expand" % aspect)

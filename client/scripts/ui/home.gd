@@ -210,25 +210,18 @@ func _make_notify_badge(kind: String) -> PanelContainer:
 	return badge
 
 
-func _party_power() -> int:
-	var total := 0
-	for h in GameState.get_party():
-		total += int(h.get("power", GameState.hero_power.get(str(h.get("id", "")), 1000)))
-	return maxi(total, 1)
-
-
 func _build_chrome() -> void:
 	var top := PanelContainer.new()
 	top.name = "CityTopBar"
 	top.z_index = 40
 	top.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	top.offset_left = 12
-	top.offset_right = -12
+	top.offset_left = 16
+	top.offset_right = -16
 	top.offset_top = 16
-	top.offset_bottom = 108
+	top.offset_bottom = 100
 	top.add_theme_stylebox_override(
 		"panel",
-		DesignTokens.make_panel_style(Color(DesignTokens.COLOR_BG_NAVY, 0.92), 16)
+		DesignTokens.make_panel_style(Color(DesignTokens.COLOR_BG_NAVY, 0.9), 16)
 	)
 	add_child(top)
 
@@ -236,23 +229,11 @@ func _build_chrome() -> void:
 	row.add_theme_constant_override("separation", 10)
 	top.add_child(row)
 
-	var avatar := TextureRect.new()
-	avatar.texture = AssetPaths.tex(AssetPaths.AVATAR_DEFAULT)
-	avatar.custom_minimum_size = Vector2(64, 64)
-	avatar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	avatar.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	row.add_child(avatar)
-
 	var brand := VBoxContainer.new()
 	brand.add_theme_constant_override("separation", 2)
 	row.add_child(brand)
-	brand.add_child(DesignTokens.make_label("Командир", 24, DesignTokens.COLOR_TEXT_IVORY, HORIZONTAL_ALIGNMENT_LEFT))
-	brand.add_child(DesignTokens.make_label(
-		"Ур.%d · Сила %d" % [maxi(1, int(GameState.commander_xp / 100) + 1), _party_power()],
-		18,
-		DesignTokens.COLOR_ACCENT_GOLD,
-		HORIZONTAL_ALIGNMENT_LEFT
-	))
+	brand.add_child(DesignTokens.make_label("Уфа", 26, DesignTokens.COLOR_ACCENT_GOLD, HORIZONTAL_ALIGNMENT_LEFT))
+	brand.add_child(DesignTokens.make_label("столица Абсурда", 16, DesignTokens.COLOR_TEXT_MUTED, HORIZONTAL_ALIGNMENT_LEFT))
 
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -261,22 +242,20 @@ func _build_chrome() -> void:
 	for pair in [
 		[AssetPaths.ICON_SOFT, str(GameState.soft_currency)],
 		[AssetPaths.ICON_HARD, str(GameState.hard_currency)],
+		[AssetPaths.ICON_TICKET, str(GameState.summon_tickets)],
 	]:
 		row.add_child(_currency_chip(str(pair[0]), str(pair[1])))
 
-	_attach_side_rail(true)
-	_attach_side_rail(false)
-
-	# Mid-quest continue strip (single CTA).
+	# Mid-quest continue strip (single CTA, not a tile grid).
 	var mid := GameState.mid_quest_continue()
 	if not mid.is_empty():
 		var cont := DesignTokens.make_button(str(mid.get("label", "Продолжить")), true)
 		cont.z_index = 41
 		cont.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-		cont.anchor_left = 0.14
-		cont.anchor_right = 0.86
-		cont.offset_top = -300
-		cont.offset_bottom = -220
+		cont.anchor_left = 0.12
+		cont.anchor_right = 0.88
+		cont.offset_top = -280
+		cont.offset_bottom = -200
 		cont.offset_left = 0
 		cont.offset_right = 0
 		var dest := str(mid.get("dest", "location"))
@@ -287,9 +266,9 @@ func _build_chrome() -> void:
 	tip_panel.name = "CityTip"
 	tip_panel.z_index = 40
 	tip_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	tip_panel.offset_left = 80
-	tip_panel.offset_right = -80
-	tip_panel.offset_top = -260
+	tip_panel.offset_left = 16
+	tip_panel.offset_right = -16
+	tip_panel.offset_top = -250
 	tip_panel.offset_bottom = -180
 	tip_panel.add_theme_stylebox_override(
 		"panel",
@@ -300,72 +279,6 @@ func _build_chrome() -> void:
 	tip_panel.add_child(_tip)
 
 	HubChrome.attach(self, get_tree(), "home")
-
-
-func _attach_side_rail(left: bool) -> void:
-	var rail := VBoxContainer.new()
-	rail.name = "SideRailLeft" if left else "SideRailRight"
-	rail.z_index = 42
-	rail.add_theme_constant_override("separation", 10)
-	rail.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE if left else Control.PRESET_RIGHT_WIDE)
-	if left:
-		rail.offset_left = 10
-		rail.offset_right = 90
-	else:
-		rail.offset_left = -90
-		rail.offset_right = -10
-	rail.offset_top = 130
-	rail.offset_bottom = -280
-	add_child(rail)
-
-	var items: Array = []
-	if left:
-		items = [
-			["Почта", AssetPaths.ICON_CHAT, func() -> void: SceneNav.to_chat(get_tree())],
-			["Квесты", AssetPaths.ICON_QUEST, func() -> void: SceneNav.to_campaign(get_tree())],
-			["Карта", AssetPaths.ICON_MAP, func() -> void: SceneNav.to_map(get_tree())],
-		]
-	else:
-		items = [
-			["Магазин", AssetPaths.ICON_SHOP, func() -> void: SceneNav.to_shop(get_tree())],
-			["Призыв", AssetPaths.ICON_SUMMON, func() -> void: SceneNav.to_gacha(get_tree())],
-			["VIP", AssetPaths.ICON_VIP, func() -> void: SceneNav.to_vip(get_tree())],
-			["Ещё", AssetPaths.ICON_SETTINGS, func() -> void: SceneNav.to_more(get_tree())],
-		]
-	for it in items:
-		rail.add_child(_rail_btn(str(it[0]), str(it[1]), it[2]))
-
-
-func _rail_btn(title: String, icon_path: String, on_press: Callable) -> Button:
-	var btn := Button.new()
-	btn.custom_minimum_size = Vector2(72, 88)
-	btn.focus_mode = Control.FOCUS_NONE
-	btn.pressed.connect(on_press)
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(DesignTokens.COLOR_BG_NAVY, 0.88)
-	normal.border_color = Color(DesignTokens.COLOR_ACCENT_GOLD, 0.55)
-	normal.set_border_width_all(2)
-	normal.set_corner_radius_all(14)
-	btn.add_theme_stylebox_override("normal", normal)
-	btn.add_theme_stylebox_override("hover", normal)
-	btn.add_theme_stylebox_override("pressed", normal)
-	btn.text = ""
-	var box := VBoxContainer.new()
-	box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	box.alignment = BoxContainer.ALIGNMENT_CENTER
-	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	btn.add_child(box)
-	var ic := TextureRect.new()
-	ic.texture = AssetPaths.tex(icon_path)
-	ic.custom_minimum_size = Vector2(40, 40)
-	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.add_child(ic)
-	var lbl := DesignTokens.make_label(title, 14, DesignTokens.COLOR_TEXT_IVORY)
-	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.add_child(lbl)
-	return btn
 
 
 func _currency_chip(icon_path: String, value: String) -> PanelContainer:

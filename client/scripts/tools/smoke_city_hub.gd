@@ -96,14 +96,6 @@ func _run() -> void:
 	else:
 		print("OK HubNav")
 
-	for rail_name in ["SideRailLeft", "SideRailRight"]:
-		var rail := home.get_node_or_null(rail_name)
-		if rail == null:
-			push_error("FAIL %s missing" % rail_name)
-			failed = true
-		else:
-			print("OK ", rail_name)
-
 	# Ensure home no longer mounts the old 2×3 quick grid as primary UX.
 	if home.find_child("QuickGrid", true, false) != null:
 		push_error("FAIL legacy QuickGrid still present")
