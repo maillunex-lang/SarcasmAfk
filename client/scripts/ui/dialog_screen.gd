@@ -1,21 +1,29 @@
 extends "res://scripts/ui/screen_base.gd"
 
-const DIALOGUE_PATH := "res://data/dialogues/ch01_q01.json"
-
 var _lines: Array = []
 var _index: int = 0
+var _quest_id: String = ""
 var _speaker_label: Label
 var _body_label: Label
 var _portrait: TextureRect
 var _progress_label: Label
+var _title_label: Label
 
 
 func _ready() -> void:
 	super._ready()
+	_quest_id = GameState.pending_dialogue_quest_id
+	if _quest_id == "":
+		_quest_id = GameState.active_quest_id
+	if _quest_id == "":
+		_quest_id = "CH01-Q01"
 	_load_dialogue()
-	var vbox := _make_root_vbox(DesignTokens.COLOR_BG_NAVY)
 
-	vbox.add_child(DesignTokens.make_label("CH01-Q01 · Талон в неизвестность", 34, DesignTokens.COLOR_ACCENT_GOLD))
+	var vbox := _make_root_vbox(DesignTokens.COLOR_BG_NAVY)
+	var quest: Dictionary = GameState.catalog.get_quest(_quest_id)
+	var title := str(quest.get("title", _quest_id))
+	_title_label = DesignTokens.make_label("%s · %s" % [_quest_id, title], 34, DesignTokens.COLOR_ACCENT_GOLD)
+	vbox.add_child(_title_label)
 
 	var row := HBoxContainer.new()
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -61,7 +69,7 @@ func _ready() -> void:
 	buttons.add_child(skip_icon)
 
 	var skip := DesignTokens.make_button("Пропуск", false)
-	skip.pressed.connect(_on_skip)
+	skip.pressed.connect(_finish_dialog)
 	buttons.add_child(skip)
 
 	var next_btn := DesignTokens.make_button("Далее", true)
@@ -72,9 +80,10 @@ func _ready() -> void:
 
 
 func _load_dialogue() -> void:
-	var file := FileAccess.open(DIALOGUE_PATH, FileAccess.READ)
+	var path := GameState.catalog.dialogue_path(_quest_id)
+	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
-		_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Диалог не найден."}]
+		_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Диалог не найден: %s" % path}]
 		return
 	var data = JSON.parse_string(file.get_as_text())
 	if typeof(data) == TYPE_DICTIONARY and data.has("lines"):
@@ -96,11 +105,15 @@ func _show_line() -> void:
 
 func _on_next() -> void:
 	if _index >= _lines.size() - 1:
-		SceneNav.to_battle(get_tree())
+		_finish_dialog()
 		return
 	_index += 1
 	_show_line()
 
 
-func _on_skip() -> void:
-	SceneNav.to_battle(get_tree())
+func _finish_dialog() -> void:
+	GameState.mark_dialogue_seen(_quest_id)
+	if GameState.active_battle_id != "":
+		SceneNav.to_battle(get_tree())
+	else:
+		SceneNav.to_location(get_tree())

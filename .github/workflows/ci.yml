@@ -61,6 +61,10 @@ jobs:
         working-directory: client
         run: |
           /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_v0c.gd
+      - name: Smoke CH01 campaign
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_ch01.gd
 
   docs-presence:
     name: Required docs present

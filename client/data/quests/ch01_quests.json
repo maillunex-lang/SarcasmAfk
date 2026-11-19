@@ -1,0 +1,193 @@
+{
+  "chapter_id": "CH01",
+  "title": "Уфа: Справка о конце света",
+  "region": "Уфа",
+  "quests": [
+    {
+      "quest_id": "CH01-Q01",
+      "chapter_id": "CH01",
+      "title": "Талон в неизвестность",
+      "location_id": "L01",
+      "battle_ids": [
+        "B01",
+        "B02"
+      ],
+      "synopsis": "Каэрон доставляет роковой конверт; терминал создаёт армию талонов.",
+      "dialogue_id": "CH01-Q01",
+      "required_quest": null,
+      "reward_bundle_id": "CH01-Q01-FIRST_CLEAR",
+      "order": 1
+    },
+    {
+      "quest_id": "CH01-Q02",
+      "chapter_id": "CH01",
+      "title": "Без печати не герой",
+      "location_id": "L01",
+      "battle_ids": [
+        "B03",
+        "B04"
+      ],
+      "synopsis": "Големы требуют удостоверение спасителя, прежде чем разрешить спасение жителей.",
+      "dialogue_id": "CH01-Q02",
+      "required_quest": "CH01-Q01",
+      "reward_bundle_id": "CH01-Q02-FIRST_CLEAR",
+      "order": 2
+    },
+    {
+      "quest_id": "CH01-Q03",
+      "chapter_id": "CH01",
+      "title": "Авария по расписанию",
+      "location_id": "L02",
+      "battle_ids": [
+        "B05",
+        "B06",
+        "B07"
+      ],
+      "synopsis": "На перекрёстке Вейриса пытается отключить ожившие знаки.",
+      "dialogue_id": "CH01-Q03",
+      "required_quest": "CH01-Q02",
+      "reward_bundle_id": "CH01-Q03-FIRST_CLEAR",
+      "order": 3
+    },
+    {
+      "quest_id": "CH01-Q04",
+      "chapter_id": "CH01",
+      "title": "Заявление на заявление",
+      "location_id": "L03",
+      "battle_ids": [
+        "B08",
+        "B09",
+        "B10"
+      ],
+      "synopsis": "Герои добывают пропуск в архив и видят подпись Регламентора.",
+      "dialogue_id": "CH01-Q04",
+      "required_quest": "CH01-Q03",
+      "reward_bundle_id": "CH01-Q04-FIRST_CLEAR",
+      "order": 4
+    },
+    {
+      "quest_id": "CH01-Q05",
+      "chapter_id": "CH01",
+      "title": "Архив с характером",
+      "location_id": "L04",
+      "battle_ids": [
+        "B11",
+        "B12",
+        "B13"
+      ],
+      "synopsis": "В архиве команда встречает Эльдариона и узнаёт природу Печати.",
+      "dialogue_id": "CH01-Q05",
+      "required_quest": "CH01-Q04",
+      "reward_bundle_id": "CH01-Q05-FIRST_CLEAR",
+      "order": 5
+    },
+    {
+      "quest_id": "CH01-Q06",
+      "chapter_id": "CH01",
+      "title": "Неправильная подпись",
+      "location_id": "L05",
+      "battle_ids": [
+        "B14",
+        "B15",
+        "B16"
+      ],
+      "synopsis": "Команда сравнивает исходный и изменённый приказы.",
+      "dialogue_id": "CH01-Q06",
+      "required_quest": "CH01-Q05",
+      "reward_bundle_id": "CH01-Q06-FIRST_CLEAR",
+      "order": 6
+    },
+    {
+      "quest_id": "CH01-Q07",
+      "chapter_id": "CH01",
+      "title": "Инспектор не одобряет",
+      "location_id": "L05",
+      "battle_ids": [
+        "B17",
+        "B18",
+        "B19",
+        "B20"
+      ],
+      "synopsis": "Инспектор блокирует путь к центральному управлению.",
+      "dialogue_id": "CH01-Q07",
+      "required_quest": "CH01-Q06",
+      "reward_bundle_id": "CH01-Q07-FIRST_CLEAR",
+      "order": 7
+    },
+    {
+      "quest_id": "CH01-Q08",
+      "chapter_id": "CH01",
+      "title": "Сбой по инструкции",
+      "location_id": "L06",
+      "battle_ids": [
+        "B21",
+        "B22"
+      ],
+      "synopsis": "Отключение питания не работает; система питается от Печати.",
+      "dialogue_id": "CH01-Q08",
+      "required_quest": "CH01-Q07",
+      "reward_bundle_id": "CH01-Q08-FIRST_CLEAR",
+      "order": 8
+    },
+    {
+      "quest_id": "CH01-Q09",
+      "chapter_id": "CH01",
+      "title": "Печать без права возврата",
+      "location_id": "L07",
+      "battle_ids": [
+        "B23",
+        "B24"
+      ],
+      "synopsis": "Герои находят фрагмент и узнают, что он реагирует на команду игрока.",
+      "dialogue_id": "CH01-Q09",
+      "required_quest": "CH01-Q08",
+      "reward_bundle_id": "CH01-Q09-FIRST_CLEAR",
+      "order": 9
+    },
+    {
+      "quest_id": "CH01-Q10",
+      "chapter_id": "CH01",
+      "title": "Город по форме 404-Б",
+      "location_id": "L08",
+      "battle_ids": [
+        "B25",
+        "B26"
+      ],
+      "synopsis": "Уфа объявлена недействительной, кварталы исчезают.",
+      "dialogue_id": "CH01-Q10",
+      "required_quest": "CH01-Q09",
+      "reward_bundle_id": "CH01-Q10-FIRST_CLEAR",
+      "order": 10
+    },
+    {
+      "quest_id": "CH01-Q11",
+      "chapter_id": "CH01",
+      "title": "Последнее окошко",
+      "location_id": "L09",
+      "battle_ids": [
+        "B27",
+        "B28",
+        "B29"
+      ],
+      "synopsis": "Герои пробиваются через башню к управляющему залу.",
+      "dialogue_id": "CH01-Q11",
+      "required_quest": "CH01-Q10",
+      "reward_bundle_id": "CH01-Q11-FIRST_CLEAR",
+      "order": 11
+    },
+    {
+      "quest_id": "CH01-Q12",
+      "chapter_id": "CH01",
+      "title": "Справка о спасении",
+      "location_id": "L10",
+      "battle_ids": [
+        "B30"
+      ],
+      "synopsis": "Команда побеждает Начальника и отменяет приказ; открывается следующая глава.",
+      "dialogue_id": "CH01-Q12",
+      "required_quest": "CH01-Q11",
+      "reward_bundle_id": "CH01-Q12-FIRST_CLEAR",
+      "order": 12
+    }
+  ]
+}

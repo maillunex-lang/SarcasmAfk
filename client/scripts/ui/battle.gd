@@ -1,7 +1,5 @@
 extends "res://scripts/ui/screen_base.gd"
 
-const BATTLE_PATH := "res://data/battles/B01.json"
-
 var _engine: BattleEngine
 var _battle_def: Dictionary = {}
 var _log: RichTextLabel
@@ -26,11 +24,17 @@ func _process(delta: float) -> void:
 
 
 func _load_battle() -> void:
-	var file := FileAccess.open(BATTLE_PATH, FileAccess.READ)
-	if file:
-		var data = JSON.parse_string(file.get_as_text())
-		if typeof(data) == TYPE_DICTIONARY:
-			_battle_def = data
+	var battle_id := GameState.active_battle_id
+	if battle_id == "":
+		battle_id = "B01"
+	_battle_def = GameState.catalog.get_battle(battle_id)
+	if _battle_def.is_empty():
+		# Fallback standalone file
+		var file := FileAccess.open("res://data/battles/B01.json", FileAccess.READ)
+		if file:
+			var data = JSON.parse_string(file.get_as_text())
+			if typeof(data) == TYPE_DICTIONARY:
+				_battle_def = data
 
 
 func _start_engine() -> void:
@@ -42,7 +46,7 @@ func _start_engine() -> void:
 	_engine.setup(GameState.get_party(), _battle_def.get("enemies", []))
 	for u in _engine.all_units():
 		_refresh_unit(u)
-	_on_log("Бой %s начался. Автобой активен." % str(_battle_def.get("battle_id", "B01")))
+	_on_log("Бой %s начался. Автобой активен." % str(_battle_def.get("battle_id", "?")))
 
 
 func _build_ui() -> void:
@@ -53,7 +57,12 @@ func _build_ui() -> void:
 	add_child(dim)
 
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("ARENA-L01 · %s" % str(_battle_def.get("title", "Бой")), 34, DesignTokens.COLOR_ACCENT_GOLD))
+	var arena_label := str(_battle_def.get("location_id", "L01"))
+	vbox.add_child(DesignTokens.make_label(
+		"ARENA-%s · %s" % [arena_label, str(_battle_def.get("title", "Бой"))],
+		34,
+		DesignTokens.COLOR_ACCENT_GOLD
+	))
 	_status = DesignTokens.make_label("Автобой ×1", 22, DesignTokens.COLOR_ACCENT_CYAN)
 	vbox.add_child(_status)
 
@@ -68,7 +77,6 @@ func _build_ui() -> void:
 	hero_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(hero_row)
 
-	# Build placeholders first; fill after engine start via deferred
 	call_deferred("_populate_rows", enemy_row, hero_row)
 
 	_log = RichTextLabel.new()
@@ -199,35 +207,54 @@ func _on_battle_ended(result: Dictionary) -> void:
 	_status.text = "Победа!" if win else "Поражение"
 	_on_log("--- Бой завершён ---")
 
-	var reward: Dictionary = {}
-	if _battle_def.has("first_clear_reward") and typeof(_battle_def["first_clear_reward"]) == TYPE_DICTIONARY:
-		reward = _battle_def["first_clear_reward"]
-	var soft: int = int(reward.get("soft", 0))
-	var xp: int = int(reward.get("commander_xp", 0))
-	var bundle: String = str(reward.get("bundle_id", "B01-FIRST"))
-	var claimed: bool = false
+	var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
+	var progress: Dictionary = {}
 	if win:
-		claimed = GameState.claim_reward(bundle, soft, xp)
-		if claimed:
-			GameState.mark_quest_done("CH01-Q01")
-			_on_log("Награда: +%d soft, +%d XP" % [soft, xp])
+		progress = GameState.complete_battle(battle_id)
+		var reward: Dictionary = progress.get("reward", {})
+		if bool(progress.get("newly_completed", false)):
+			_on_log("Награда: +%d soft, +%d XP" % [int(reward.get("soft", 0)), int(reward.get("commander_xp", 0))])
 		else:
 			_on_log("Награда уже получена ранее.")
-	GameState.set_battle_result({"victory": win, "battle_id": _battle_def.get("battle_id", "B01")})
+		if bool(progress.get("quest_completed", false)):
+			_on_log("Квест завершён.")
+	GameState.set_battle_result({"victory": win, "battle_id": battle_id})
 
 	_ended_panel.visible = true
 	for c in _ended_panel.get_children():
 		c.queue_free()
-	var msg := DesignTokens.make_label("Победа! Город ещё стоит." if win else "Талоны победили. Попробуйте снова.", 28, DesignTokens.COLOR_ACCENT_GOLD if win else DesignTokens.COLOR_DANGER_CORAL)
+
+	var msg_text := "Победа!" if win else "Поражение. Попробуйте снова."
+	if win and bool(progress.get("quest_completed", false)):
+		msg_text = "Квест закрыт. Город ещё стоит."
+	elif win and str(progress.get("next_battle_id", "")) != "":
+		msg_text = "Победа! Дальше — %s" % str(progress.get("next_battle_id", ""))
+	var msg := DesignTokens.make_label(
+		msg_text,
+		28,
+		DesignTokens.COLOR_ACCENT_GOLD if win else DesignTokens.COLOR_DANGER_CORAL
+	)
 	_ended_panel.add_child(msg)
+
 	if win:
-		var home := DesignTokens.make_button("На главную", true)
+		var next_id := str(progress.get("next_battle_id", ""))
+		if next_id != "":
+			var nxt := DesignTokens.make_button("Следующий бой %s" % next_id, true)
+			nxt.pressed.connect(func() -> void: SceneNav.to_battle(get_tree()))
+			_ended_panel.add_child(nxt)
+		var camp := DesignTokens.make_button("В кампанию", next_id == "")
+		camp.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
+		_ended_panel.add_child(camp)
+		var home := DesignTokens.make_button("На главную", false)
 		home.pressed.connect(func() -> void: SceneNav.to_home(get_tree()))
 		_ended_panel.add_child(home)
 	else:
 		var retry := DesignTokens.make_button("Ещё раз", true)
 		retry.pressed.connect(func() -> void: SceneNav.to_battle(get_tree()))
 		_ended_panel.add_child(retry)
+		var camp2 := DesignTokens.make_button("В кампанию", false)
+		camp2.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
+		_ended_panel.add_child(camp2)
 		var home2 := DesignTokens.make_button("На главную", false)
 		home2.pressed.connect(func() -> void: SceneNav.to_home(get_tree()))
 		_ended_panel.add_child(home2)

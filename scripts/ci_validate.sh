@@ -31,6 +31,7 @@ fi
 if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0a.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   echo "godot_smoke_ok"
 else
   echo "WARN: Godot not found; skipped smokes"

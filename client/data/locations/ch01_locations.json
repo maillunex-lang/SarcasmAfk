@@ -1,0 +1,127 @@
+{
+  "chapter_id": "CH01",
+  "locations": [
+    {
+      "location_id": "L01",
+      "name": "Центр Уфы — Площадь талонов",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q01",
+        "CH01-Q02"
+      ],
+      "description": "Стартовая площадь с магическими терминалами и летающими талонами.",
+      "bg_hint": "res://assets/locations/L01/loc_L01_mid.jpg",
+      "unlock_after_quest": null
+    },
+    {
+      "location_id": "L02",
+      "name": "Аварийный перекрёсток",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q03"
+      ],
+      "description": "Улица, где дорожные знаки запрещают движение и мысли.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q02"
+    },
+    {
+      "location_id": "L03",
+      "name": "Центр Единого Окна",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q04"
+      ],
+      "description": "Светлый зал обслуживания, превращённый в лабиринт формуляров.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q03"
+    },
+    {
+      "location_id": "L04",
+      "name": "Старый городской архив",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q05"
+      ],
+      "description": "Полки с летающими книгами, шкафы, древние руны.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q04"
+    },
+    {
+      "location_id": "L05",
+      "name": "Зал проверки подлинности",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q06",
+        "CH01-Q07"
+      ],
+      "description": "Магические печати, весы подлинности и зеркала документов.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q05"
+    },
+    {
+      "location_id": "L06",
+      "name": "Технические тоннели",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q08"
+      ],
+      "description": "Подземные коммуникации и автономные магические генераторы.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q07"
+    },
+    {
+      "location_id": "L07",
+      "name": "Узел Печати",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q09"
+      ],
+      "description": "Подземный зал с парящим фрагментом артефакта.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q08"
+    },
+    {
+      "location_id": "L08",
+      "name": "Аннулированный квартал",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q10"
+      ],
+      "description": "Улицы стираются, оставляя белые пустоты.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q09"
+    },
+    {
+      "location_id": "L09",
+      "name": "Башня Единого Окна",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q11"
+      ],
+      "description": "Вертикальная башня с запретным лифтом.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q10"
+    },
+    {
+      "location_id": "L10",
+      "name": "Главный зал управления",
+      "region": "Уфа",
+      "quest_ids": [
+        "CH01-Q12"
+      ],
+      "description": "Платформа над городом, купол из печатей.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q11"
+    },
+    {
+      "location_id": "L11",
+      "name": "Стерлитамак — промышленный сектор",
+      "region": "Стерлитамак",
+      "quest_ids": [],
+      "description": "Тизер CH02; в CH01 недоступна.",
+      "bg_hint": "",
+      "unlock_after_quest": "CH01-Q12",
+      "locked_in_ch01": true
+    }
+  ]
+}

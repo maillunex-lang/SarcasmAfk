@@ -1,0 +1,1522 @@
+{
+  "version": 1,
+  "battles": [
+    {
+      "battle_id": "B01",
+      "quest_id": "CH01-Q01",
+      "location_id": "L01",
+      "title": "Бой B01",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B01_E01_1",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 120,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B01_E01_2",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 121,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B01_E01_3",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 122,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 220,
+        "commander_xp": 22,
+        "bundle_id": "CH01-Q01-B01-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B02",
+      "quest_id": "CH01-Q01",
+      "location_id": "L01",
+      "title": "Бой B02",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B02_E01_1",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 120,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B02_E01_2",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 121,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B02_E02_1",
+          "enemy_type": "E02",
+          "name": "Бумажный страж",
+          "row": "front",
+          "hp": 520,
+          "atk": 70,
+          "defense": 80,
+          "speed": 90,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 240,
+        "commander_xp": 24,
+        "bundle_id": "CH01-Q01-B02-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B03",
+      "quest_id": "CH01-Q02",
+      "location_id": "L01",
+      "title": "Бой B03",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B03_E03_1",
+          "enemy_type": "E03",
+          "name": "Бумажный голем",
+          "row": "front",
+          "hp": 700,
+          "atk": 85,
+          "defense": 110,
+          "speed": 80,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B03_E03_2",
+          "enemy_type": "E03",
+          "name": "Бумажный голем",
+          "row": "front",
+          "hp": 700,
+          "atk": 85,
+          "defense": 110,
+          "speed": 81,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B03_E03_3",
+          "enemy_type": "E03",
+          "name": "Бумажный голем",
+          "row": "front",
+          "hp": 700,
+          "atk": 85,
+          "defense": 110,
+          "speed": 82,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 260,
+        "commander_xp": 26,
+        "bundle_id": "CH01-Q02-B03-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B04",
+      "quest_id": "CH01-Q02",
+      "location_id": "L01",
+      "title": "Бой B04",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B04_E04_1",
+          "enemy_type": "E04",
+          "name": "Голем-печатник",
+          "row": "back",
+          "hp": 480,
+          "atk": 60,
+          "defense": 70,
+          "speed": 85,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B04_E01_1",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 120,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B04_E01_2",
+          "enemy_type": "E01",
+          "name": "Живой талон",
+          "row": "front",
+          "hp": 380,
+          "atk": 95,
+          "defense": 25,
+          "speed": 121,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 280,
+        "commander_xp": 28,
+        "bundle_id": "CH01-Q02-B04-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B05",
+      "quest_id": "CH01-Q03",
+      "location_id": "L02",
+      "title": "Бой B05",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B05_E05_1",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B05_E05_2",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B05_E05_3",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 300,
+        "commander_xp": 30,
+        "bundle_id": "CH01-Q03-B05-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B06",
+      "quest_id": "CH01-Q03",
+      "location_id": "L02",
+      "title": "Бой B06",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B06_E06_1",
+          "enemy_type": "E06",
+          "name": "Контролёр движения",
+          "row": "front",
+          "hp": 500,
+          "atk": 110,
+          "defense": 55,
+          "speed": 105,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B06_E06_2",
+          "enemy_type": "E06",
+          "name": "Контролёр движения",
+          "row": "front",
+          "hp": 500,
+          "atk": 110,
+          "defense": 55,
+          "speed": 106,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B06_E05_1",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B06_E05_2",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 320,
+        "commander_xp": 32,
+        "bundle_id": "CH01-Q03-B06-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B07",
+      "quest_id": "CH01-Q03",
+      "location_id": "L02",
+      "title": "Бой B07",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B07_E07_1",
+          "enemy_type": "E07",
+          "name": "Элитный указатель",
+          "row": "front",
+          "hp": 900,
+          "atk": 120,
+          "defense": 140,
+          "speed": 95,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B07_E05_1",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B07_E05_2",
+          "enemy_type": "E05",
+          "name": "Знак-страж",
+          "row": "front",
+          "hp": 450,
+          "atk": 80,
+          "defense": 60,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 340,
+        "commander_xp": 34,
+        "bundle_id": "CH01-Q03-B07-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B08",
+      "quest_id": "CH01-Q04",
+      "location_id": "L03",
+      "title": "Бой B08",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B08_E08_1",
+          "enemy_type": "E08",
+          "name": "Бланковый фантом",
+          "row": "back",
+          "hp": 360,
+          "atk": 130,
+          "defense": 30,
+          "speed": 110,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B08_E08_2",
+          "enemy_type": "E08",
+          "name": "Бланковый фантом",
+          "row": "back",
+          "hp": 360,
+          "atk": 130,
+          "defense": 30,
+          "speed": 111,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B08_E08_3",
+          "enemy_type": "E08",
+          "name": "Бланковый фантом",
+          "row": "back",
+          "hp": 360,
+          "atk": 130,
+          "defense": 30,
+          "speed": 112,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 360,
+        "commander_xp": 36,
+        "bundle_id": "CH01-Q04-B08-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B09",
+      "quest_id": "CH01-Q04",
+      "location_id": "L03",
+      "title": "Бой B09",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B09_E04_1",
+          "enemy_type": "E04",
+          "name": "Голем-печатник",
+          "row": "back",
+          "hp": 480,
+          "atk": 60,
+          "defense": 70,
+          "speed": 85,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B09_E04_2",
+          "enemy_type": "E04",
+          "name": "Голем-печатник",
+          "row": "back",
+          "hp": 480,
+          "atk": 60,
+          "defense": 70,
+          "speed": 86,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B09_E02_1",
+          "enemy_type": "E02",
+          "name": "Бумажный страж",
+          "row": "front",
+          "hp": 520,
+          "atk": 70,
+          "defense": 80,
+          "speed": 90,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B09_E02_2",
+          "enemy_type": "E02",
+          "name": "Бумажный страж",
+          "row": "front",
+          "hp": 520,
+          "atk": 70,
+          "defense": 80,
+          "speed": 91,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 380,
+        "commander_xp": 38,
+        "bundle_id": "CH01-Q04-B09-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B10",
+      "quest_id": "CH01-Q04",
+      "location_id": "L03",
+      "title": "Бой B10",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B10_E09_1",
+          "enemy_type": "E09",
+          "name": "Старший регистратор",
+          "row": "back",
+          "hp": 650,
+          "atk": 90,
+          "defense": 90,
+          "speed": 88,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B10_E08_1",
+          "enemy_type": "E08",
+          "name": "Бланковый фантом",
+          "row": "back",
+          "hp": 360,
+          "atk": 130,
+          "defense": 30,
+          "speed": 110,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B10_E08_2",
+          "enemy_type": "E08",
+          "name": "Бланковый фантом",
+          "row": "back",
+          "hp": 360,
+          "atk": 130,
+          "defense": 30,
+          "speed": 111,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 400,
+        "commander_xp": 40,
+        "bundle_id": "CH01-Q04-B10-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B11",
+      "quest_id": "CH01-Q05",
+      "location_id": "L04",
+      "title": "Бой B11",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B11_E10_1",
+          "enemy_type": "E10",
+          "name": "Архивный дух",
+          "row": "back",
+          "hp": 400,
+          "atk": 140,
+          "defense": 35,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B11_E10_2",
+          "enemy_type": "E10",
+          "name": "Архивный дух",
+          "row": "back",
+          "hp": 400,
+          "atk": 140,
+          "defense": 35,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B11_E10_3",
+          "enemy_type": "E10",
+          "name": "Архивный дух",
+          "row": "back",
+          "hp": 400,
+          "atk": 140,
+          "defense": 35,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 420,
+        "commander_xp": 42,
+        "bundle_id": "CH01-Q05-B11-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B12",
+      "quest_id": "CH01-Q05",
+      "location_id": "L04",
+      "title": "Бой B12",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B12_E11_1",
+          "enemy_type": "E11",
+          "name": "Печатный страж",
+          "row": "front",
+          "hp": 560,
+          "atk": 75,
+          "defense": 95,
+          "speed": 92,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B12_E11_2",
+          "enemy_type": "E11",
+          "name": "Печатный страж",
+          "row": "front",
+          "hp": 560,
+          "atk": 75,
+          "defense": 95,
+          "speed": 93,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B12_E10_1",
+          "enemy_type": "E10",
+          "name": "Архивный дух",
+          "row": "back",
+          "hp": 400,
+          "atk": 140,
+          "defense": 35,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B12_E10_2",
+          "enemy_type": "E10",
+          "name": "Архивный дух",
+          "row": "back",
+          "hp": 400,
+          "atk": 140,
+          "defense": 35,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 440,
+        "commander_xp": 44,
+        "bundle_id": "CH01-Q05-B12-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B13",
+      "quest_id": "CH01-Q05",
+      "location_id": "L04",
+      "title": "Бой B13",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B13_E12_1",
+          "enemy_type": "E12",
+          "name": "Элитный архивный дух",
+          "row": "back",
+          "hp": 720,
+          "atk": 160,
+          "defense": 50,
+          "speed": 98,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B13_E11_1",
+          "enemy_type": "E11",
+          "name": "Печатный страж",
+          "row": "front",
+          "hp": 560,
+          "atk": 75,
+          "defense": 95,
+          "speed": 92,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B13_E11_2",
+          "enemy_type": "E11",
+          "name": "Печатный страж",
+          "row": "front",
+          "hp": 560,
+          "atk": 75,
+          "defense": 95,
+          "speed": 93,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 460,
+        "commander_xp": 46,
+        "bundle_id": "CH01-Q05-B13-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B14",
+      "quest_id": "CH01-Q06",
+      "location_id": "L05",
+      "title": "Бой B14",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B14_E13_1",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B14_E13_2",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 103,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B14_E13_3",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 104,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 480,
+        "commander_xp": 48,
+        "bundle_id": "CH01-Q06-B14-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B15",
+      "quest_id": "CH01-Q06",
+      "location_id": "L05",
+      "title": "Бой B15",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B15_E14_1",
+          "enemy_type": "E14",
+          "name": "Копия документа",
+          "row": "front",
+          "hp": 300,
+          "atk": 85,
+          "defense": 20,
+          "speed": 115,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B15_E14_2",
+          "enemy_type": "E14",
+          "name": "Копия документа",
+          "row": "front",
+          "hp": 300,
+          "atk": 85,
+          "defense": 20,
+          "speed": 116,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B15_E14_3",
+          "enemy_type": "E14",
+          "name": "Копия документа",
+          "row": "front",
+          "hp": 300,
+          "atk": 85,
+          "defense": 20,
+          "speed": 117,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B15_E14_4",
+          "enemy_type": "E14",
+          "name": "Копия документа",
+          "row": "front",
+          "hp": 300,
+          "atk": 85,
+          "defense": 20,
+          "speed": 118,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 500,
+        "commander_xp": 50,
+        "bundle_id": "CH01-Q06-B15-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B16",
+      "quest_id": "CH01-Q06",
+      "location_id": "L05",
+      "title": "Бой B16",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B16_E15_1",
+          "enemy_type": "E15",
+          "name": "Старший проверяющий",
+          "row": "back",
+          "hp": 680,
+          "atk": 110,
+          "defense": 85,
+          "speed": 96,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B16_E13_1",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B16_E13_2",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 103,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 520,
+        "commander_xp": 52,
+        "bundle_id": "CH01-Q06-B16-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B17",
+      "quest_id": "CH01-Q07",
+      "location_id": "L05",
+      "title": "Бой B17",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B17_E13_1",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B17_E13_2",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 103,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B17_E03_1",
+          "enemy_type": "E03",
+          "name": "Бумажный голем",
+          "row": "front",
+          "hp": 700,
+          "atk": 85,
+          "defense": 110,
+          "speed": 80,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B17_E03_2",
+          "enemy_type": "E03",
+          "name": "Бумажный голем",
+          "row": "front",
+          "hp": 700,
+          "atk": 85,
+          "defense": 110,
+          "speed": 81,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 540,
+        "commander_xp": 54,
+        "bundle_id": "CH01-Q07-B17-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B18",
+      "quest_id": "CH01-Q07",
+      "location_id": "L05",
+      "title": "Бой B18",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B18_E16_1",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 108,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B18_E16_2",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 109,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B18_E16_3",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 110,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 560,
+        "commander_xp": 56,
+        "bundle_id": "CH01-Q07-B18-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B19",
+      "quest_id": "CH01-Q07",
+      "location_id": "L05",
+      "title": "Бой B19",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B19_E17_1",
+          "enemy_type": "E17",
+          "name": "Элитный проверяющий",
+          "row": "front",
+          "hp": 750,
+          "atk": 145,
+          "defense": 75,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B19_E16_1",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 108,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B19_E16_2",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 109,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 580,
+        "commander_xp": 58,
+        "bundle_id": "CH01-Q07-B19-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B20",
+      "quest_id": "CH01-Q07",
+      "location_id": "L05",
+      "title": "Бой B20",
+      "is_mini_boss": true,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B20_E20_1",
+          "enemy_type": "E20",
+          "name": "Инспектор Неправильных Заявлений",
+          "row": "front",
+          "hp": 1800,
+          "atk": 160,
+          "defense": 120,
+          "speed": 90,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B20_E13_1",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B20_E13_2",
+          "enemy_type": "E13",
+          "name": "Инспектор подлинности",
+          "row": "front",
+          "hp": 480,
+          "atk": 100,
+          "defense": 70,
+          "speed": 103,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 600,
+        "commander_xp": 60,
+        "bundle_id": "CH01-Q07-B20-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B21",
+      "quest_id": "CH01-Q08",
+      "location_id": "L06",
+      "title": "Бой B21",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B21_E21_1",
+          "enemy_type": "E21",
+          "name": "Ремонтный автомат",
+          "row": "back",
+          "hp": 500,
+          "atk": 70,
+          "defense": 80,
+          "speed": 85,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B21_E21_2",
+          "enemy_type": "E21",
+          "name": "Ремонтный автомат",
+          "row": "back",
+          "hp": 500,
+          "atk": 70,
+          "defense": 80,
+          "speed": 86,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B21_E21_3",
+          "enemy_type": "E21",
+          "name": "Ремонтный автомат",
+          "row": "back",
+          "hp": 500,
+          "atk": 70,
+          "defense": 80,
+          "speed": 87,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B21_E22_1",
+          "enemy_type": "E22",
+          "name": "Терминальный страж",
+          "row": "front",
+          "hp": 800,
+          "atk": 100,
+          "defense": 130,
+          "speed": 82,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 620,
+        "commander_xp": 62,
+        "bundle_id": "CH01-Q08-B21-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B22",
+      "quest_id": "CH01-Q08",
+      "location_id": "L06",
+      "title": "Бой B22",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B22_E23_1",
+          "enemy_type": "E23",
+          "name": "Энергетический контролёр",
+          "row": "back",
+          "hp": 900,
+          "atk": 150,
+          "defense": 70,
+          "speed": 94,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B22_E21_1",
+          "enemy_type": "E21",
+          "name": "Ремонтный автомат",
+          "row": "back",
+          "hp": 500,
+          "atk": 70,
+          "defense": 80,
+          "speed": 85,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B22_E21_2",
+          "enemy_type": "E21",
+          "name": "Ремонтный автомат",
+          "row": "back",
+          "hp": 500,
+          "atk": 70,
+          "defense": 80,
+          "speed": 86,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 640,
+        "commander_xp": 64,
+        "bundle_id": "CH01-Q08-B22-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B23",
+      "quest_id": "CH01-Q09",
+      "location_id": "L07",
+      "title": "Бой B23",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B23_E24_1",
+          "enemy_type": "E24",
+          "name": "Страж собственности",
+          "row": "front",
+          "hp": 620,
+          "atk": 80,
+          "defense": 110,
+          "speed": 88,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B23_E24_2",
+          "enemy_type": "E24",
+          "name": "Страж собственности",
+          "row": "front",
+          "hp": 620,
+          "atk": 80,
+          "defense": 110,
+          "speed": 89,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B23_E25_1",
+          "enemy_type": "E25",
+          "name": "Магический протокол",
+          "row": "back",
+          "hp": 420,
+          "atk": 135,
+          "defense": 40,
+          "speed": 105,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B23_E25_2",
+          "enemy_type": "E25",
+          "name": "Магический протокол",
+          "row": "back",
+          "hp": 420,
+          "atk": 135,
+          "defense": 40,
+          "speed": 106,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 660,
+        "commander_xp": 66,
+        "bundle_id": "CH01-Q09-B23-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B24",
+      "quest_id": "CH01-Q09",
+      "location_id": "L07",
+      "title": "Бой B24",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B24_E26_1",
+          "enemy_type": "E26",
+          "name": "Хранитель артефакта",
+          "row": "front",
+          "hp": 1100,
+          "atk": 130,
+          "defense": 150,
+          "speed": 86,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B24_E24_1",
+          "enemy_type": "E24",
+          "name": "Страж собственности",
+          "row": "front",
+          "hp": 620,
+          "atk": 80,
+          "defense": 110,
+          "speed": 88,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B24_E24_2",
+          "enemy_type": "E24",
+          "name": "Страж собственности",
+          "row": "front",
+          "hp": 620,
+          "atk": 80,
+          "defense": 110,
+          "speed": 89,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 680,
+        "commander_xp": 68,
+        "bundle_id": "CH01-Q09-B24-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B25",
+      "quest_id": "CH01-Q10",
+      "location_id": "L08",
+      "title": "Бой B25",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B25_E22_1",
+          "enemy_type": "E22",
+          "name": "Терминальный страж",
+          "row": "front",
+          "hp": 800,
+          "atk": 100,
+          "defense": 130,
+          "speed": 82,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B25_E22_2",
+          "enemy_type": "E22",
+          "name": "Терминальный страж",
+          "row": "front",
+          "hp": 800,
+          "atk": 100,
+          "defense": 130,
+          "speed": 83,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B25_E16_1",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 108,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B25_E16_2",
+          "enemy_type": "E16",
+          "name": "Контролёр штрафов",
+          "row": "back",
+          "hp": 440,
+          "atk": 95,
+          "defense": 50,
+          "speed": 109,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 700,
+        "commander_xp": 70,
+        "bundle_id": "CH01-Q10-B25-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B26",
+      "quest_id": "CH01-Q10",
+      "location_id": "L08",
+      "title": "Бой B26",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B26_E27_1",
+          "enemy_type": "E27",
+          "name": "Протокол аннулирования",
+          "row": "back",
+          "hp": 1000,
+          "atk": 170,
+          "defense": 60,
+          "speed": 97,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B26_E22_1",
+          "enemy_type": "E22",
+          "name": "Терминальный страж",
+          "row": "front",
+          "hp": 800,
+          "atk": 100,
+          "defense": 130,
+          "speed": 82,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B26_E22_2",
+          "enemy_type": "E22",
+          "name": "Терминальный страж",
+          "row": "front",
+          "hp": 800,
+          "atk": 100,
+          "defense": 130,
+          "speed": 83,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 720,
+        "commander_xp": 72,
+        "bundle_id": "CH01-Q10-B26-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B27",
+      "quest_id": "CH01-Q11",
+      "location_id": "L09",
+      "title": "Бой B27",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B27_E28_1",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B27_E28_2",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B27_E28_3",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 102,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 740,
+        "commander_xp": 74,
+        "bundle_id": "CH01-Q11-B27-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B28",
+      "quest_id": "CH01-Q11",
+      "location_id": "L09",
+      "title": "Бой B28",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B28_E29_1",
+          "enemy_type": "E29",
+          "name": "Контролёр башни",
+          "row": "back",
+          "hp": 550,
+          "atk": 110,
+          "defense": 75,
+          "speed": 103,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B28_E29_2",
+          "enemy_type": "E29",
+          "name": "Контролёр башни",
+          "row": "back",
+          "hp": 550,
+          "atk": 110,
+          "defense": 75,
+          "speed": 104,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B28_E28_1",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B28_E28_2",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 760,
+        "commander_xp": 76,
+        "bundle_id": "CH01-Q11-B28-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B29",
+      "quest_id": "CH01-Q11",
+      "location_id": "L09",
+      "title": "Бой B29",
+      "is_mini_boss": false,
+      "is_final_boss": false,
+      "enemies": [
+        {
+          "id": "B29_E29A_1",
+          "enemy_type": "E29A",
+          "name": "Элитный секретарь",
+          "row": "back",
+          "hp": 700,
+          "atk": 100,
+          "defense": 90,
+          "speed": 95,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B29_E28_1",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 100,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        },
+        {
+          "id": "B29_E28_2",
+          "enemy_type": "E28",
+          "name": "Гвардеец Окошка",
+          "row": "front",
+          "hp": 600,
+          "atk": 125,
+          "defense": 70,
+          "speed": 101,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 780,
+        "commander_xp": 78,
+        "bundle_id": "CH01-Q11-B29-FIRST_CLEAR"
+      }
+    },
+    {
+      "battle_id": "B30",
+      "quest_id": "CH01-Q12",
+      "location_id": "L10",
+      "title": "Бой B30",
+      "is_mini_boss": false,
+      "is_final_boss": true,
+      "enemies": [
+        {
+          "id": "B30_E30_1",
+          "enemy_type": "E30",
+          "name": "Начальник Последнего Окошка",
+          "row": "front",
+          "hp": 3200,
+          "atk": 200,
+          "defense": 160,
+          "speed": 92,
+          "sprite": "res://assets/enemies/E01/E01_living_ticket.jpg"
+        }
+      ],
+      "first_clear_reward": {
+        "soft": 800,
+        "commander_xp": 80,
+        "bundle_id": "CH01-Q12-B30-FIRST_CLEAR"
+      }
+    }
+  ]
+}
