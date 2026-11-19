@@ -3,7 +3,7 @@
   "note": "MVP mock cities — not final lore lock",
   "cities": [
     {"id": "UFA", "name": "Уфа", "unlocked": true, "region": "Центр", "hint": "Стартовая зона CH01"},
-    {"id": "STERLITAMAK", "name": "Стерлитамак", "unlocked": false, "region": "Юг", "hint": "Откроется позже"},
+    {"id": "STERLITAMAK", "name": "Стерлитамак", "unlocked": false, "region": "Юг", "hint": "CH02 · закрыто до прохождения CH01"},
     {"id": "SALAVAT", "name": "Салават", "unlocked": false, "region": "Юг", "hint": "Кузнецы договора"},
     {"id": "NEFTEKAMSK", "name": "Нефтекамск", "unlocked": false, "region": "Северо-запад", "hint": "Проводники путей"},
     {"id": "SIBAI", "name": "Сибай", "unlocked": false, "region": "Зауралье", "hint": "Вольные искатели"},

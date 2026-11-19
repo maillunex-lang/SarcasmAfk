@@ -109,7 +109,5 @@ func _on_next() -> void:
 
 func _finish_dialog() -> void:
 	GameState.mark_dialogue_seen(_quest_id)
-	if GameState.active_battle_id != "":
-		SceneNav.to_battle(get_tree())
-	else:
-		SceneNav.to_location(get_tree())
+	# Always return to location hub so L01 shows clear next step (battle CTA).
+	SceneNav.to_location(get_tree())

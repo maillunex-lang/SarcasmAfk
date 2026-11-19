@@ -28,7 +28,7 @@
 | T-020 | P2 | **DONE** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` | T-001 |
 | T-021 | P2 | **DONE** | Минимальный CI (JSON + Godot smoke) | `.github/workflows/ci.yml` | T-010 |
 | T-030 | P1 | **DONE** | **V0-B:** точечный арт только среза | `client/assets/` поэлементно + wire-in | T-010 |
-| T-031 | P1 | **BLOCKED** | Blender→atlas pipeline scripts in repo | scripts ≠ final art; нет Blender в CI | T-030 |
+| T-031 | P1 | **DONE** | Blender→atlas pipeline scripts in repo | `tools/blender_pipeline` + smoke | T-030 |
 | T-040 | P1 | **DONE** | **V0-C:** playable demo-path | autofight B01 + GameState + rewards | T-030 |
 | T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-055 | P1 | **DONE** | **CH01 embed:** квесты/локации/бои/диалоги в клиент | `client/data/` + CampaignCatalog + campaign UI + `smoke_ch01.gd` | T-050 |
@@ -71,7 +71,7 @@
 | T-122 | P0 | **DONE** | Mark guild/arena/events unavailable | D-SCOPE-01 UI | T-084 |
 | T-123 | P0 | **DONE** | Persist/reconnect session resume | token save + resume_session | T-087 |
 | T-110 | P1 | **DONE** | Debug APK toolchain + build script | `build_debug_apk.sh` → `build/*.apk` | T-100 |
-| T-124 | P1 | **TODO** | CH01 vertical polish (L01/battle/dialog) | playable slice | T-055 |
+| T-124 | P1 | **DONE** | CH01 vertical polish (L01/battle/dialog) | hub steps + CH02 gates | T-055 |
 | T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 vertical | T-122 |
 | T-114 | P3 | **TODO** | Phase 3 acceptance: no-mock release path | ROAD Фаза 3 | T-110 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
@@ -86,6 +86,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-110
+## Следующий конкретный шаг после T-031/T-124
 
-`T-031` Blender pipeline scripts · `T-124` CH01 polish · release APK только с keystore владельца.
+`T-114` release no-mock · owner art-approve atlases · release APK с keystore владельца · P3 guild live.
