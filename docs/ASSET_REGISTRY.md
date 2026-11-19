@@ -1,8 +1,8 @@
 # ASSET_REGISTRY.md
 
-> Auto from `scripts/audit_visual_assets.py` · 2026-11-19T14:41:06.210947+00:00
+> Auto from `scripts/audit_visual_assets.py` · 2026-11-19T14:46:38.943516+00:00
 
-Total media files under `client/assets`: **546**
+Total media files under `client/assets`: **555**
 
 See `client/data/visual/asset_registry.json` for full machine-readable catalog.
 
@@ -28,6 +28,10 @@ See `client/data/visual/asset_registry.json` for full machine-readable catalog.
 | `BG_DIALOG` | `res://assets/branding/bg_dialog.jpg` | yes |
 | `GACHA_PORTAL` | `res://assets/branding/gacha_portal.jpg` | yes |
 | `UI_EMPTY_STATE` | `res://assets/ui/panels/ui_empty_state.jpg` | yes |
+| `MAP_UFA` | `res://assets/maps/map_ufa_campaign.jpg` | yes |
+| `GUILD_ICON_CREST` | `res://assets/ui/guild/guild_icon_crest.jpg` | yes |
+| `GUILD_ICON_VAULT` | `res://assets/ui/guild/guild_icon_vault.jpg` | yes |
+| `GUILD_ICON_BOARD` | `res://assets/ui/guild/guild_icon_board.jpg` | yes |
 | `LOGO` | `res://assets/branding/ui_logo_wordmark.jpg` | yes |
 | `HOME_HERO_STAGE` | `res://assets/ui/home/home_hero_stage.jpg` | yes |
 | `AVATAR_DEFAULT` | `res://assets/ui/avatars/avatar_default.jpg` | yes |

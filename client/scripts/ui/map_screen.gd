@@ -10,13 +10,22 @@ func _ready() -> void:
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Карта республики", 40, DesignTokens.COLOR_ACCENT_GOLD))
+	vbox.add_child(DesignTokens.make_display_label("Карта республики", 40))
 	vbox.add_child(DesignTokens.make_label(
 		"Уфа — CH01. Стерлитамак и далее — CH02+ (закрыто до завершения первой главы).",
 		22,
 		DesignTokens.COLOR_TEXT_MUTED
 	))
 	vbox.add_child(DesignTokens.make_label(GameState.currency_line(), 20, DesignTokens.COLOR_ACCENT_CYAN))
+
+	if ResourceLoader.exists(AssetPaths.MAP_UFA):
+		var map_art := TextureRect.new()
+		map_art.texture = AssetPaths.tex(AssetPaths.MAP_UFA)
+		map_art.custom_minimum_size = Vector2(0, 360)
+		map_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		map_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		map_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		vbox.add_child(map_art)
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL

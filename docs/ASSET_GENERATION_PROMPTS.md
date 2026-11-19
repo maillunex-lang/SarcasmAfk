@@ -30,14 +30,16 @@ in navy and gold with soft cyan glow, clean stylized fantasy, no text no logos
 ### VO-BG-PARTY / BESTIARY / DIALOG
 Done TEMP → `bg_party.jpg`, `bg_bestiary.jpg`, `bg_dialog.jpg`.
 
+### VO-ICON-GUILD / VO-MAP-UFA / VO-GACHA-RESULT
+Done TEMP → `guild_icon_{crest,vault,board}.jpg`, `map_ufa_campaign.jpg`, `gacha_frame_*.png`.
+
 ## PENDING (next PRs)
 
 | ID | Need | Prompt gist |
 |----|------|-------------|
-| VO-ICON-GUILD | Guild nav/icon set | crest + vault + board icons 512 |
 | VO-DIALOG-H13+ | Dialog busts H13–H36 | per HEROES_DRAFT; TEMP ok |
-| VO-MAP-UFA | Map art pack | stylized Ufa campaign map 9:16 |
-| VO-GACHA-RESULT | Rarity reveal frames | N/R/SR/SSR/UR frames transparent |
+| VO-THEME-TRES | Shared Theme.tres | fonts/colors/buttons from DesignTokens |
+| VO-GALLERY | Before/after shots | Godot capture pack |
 
 ## BLOCKED
 

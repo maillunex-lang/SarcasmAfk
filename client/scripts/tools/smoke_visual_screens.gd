@@ -17,6 +17,9 @@ func _run() -> void:
 		"res://scenes/gacha/gacha.tscn",
 		"res://scenes/inventory/inventory.tscn",
 		"res://scenes/bestiary/bestiary.tscn",
+		"res://scenes/guild/guild.tscn",
+		"res://scenes/map/map.tscn",
+		"res://scenes/shop/shop.tscn",
 	]
 	var required_tex := [
 		AssetPaths.BG_PARTY,
@@ -25,6 +28,11 @@ func _run() -> void:
 		AssetPaths.BG_INVENTORY,
 		AssetPaths.GACHA_PORTAL,
 		AssetPaths.UI_EMPTY_STATE,
+		AssetPaths.MAP_UFA,
+		AssetPaths.GUILD_ICON_CREST,
+		AssetPaths.GUILD_ICON_VAULT,
+		AssetPaths.GUILD_ICON_BOARD,
+		AssetPaths.gacha_frame("SSR"),
 		DesignTokens.FONT_BODY,
 		DesignTokens.FONT_DISPLAY,
 	]

@@ -23,16 +23,18 @@
 | Party | Dedicated BG + display title | Code done |
 | Bestiary | Dedicated BG + display title | Code done |
 | Heroes | Rarity-colored card borders | Code done |
+| Guild | Crest/vault/board icons | Code done |
+| Map | Ufa campaign art | Code done |
+| Gacha | Rarity reveal frames | Code done |
 
 ## Remaining defects (honest)
 
-1. Several online screens still reuse older BGs (guild/shop/VIP deepen = Stage E).
+1. VIP/chat still light polish only.
 2. No Godot Theme `.tres` yet.
 3. Dialog portraits H13–H36 missing.
-4. `assets/maps/` empty.
-5. Combat/enemy art still TEMP (not Stage E).
-6. Real Godot before/after screenshot gallery incomplete until capture tooling lands.
-7. Android debug APK not rebuilt in this PR.
+4. Combat/enemy art still TEMP (Stage E Kaeron blocked).
+5. Real Godot before/after screenshot gallery incomplete.
+6. Android debug APK not rebuilt in this PR.
 
 ## Classification counts (Stage A heuristic)
 

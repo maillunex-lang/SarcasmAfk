@@ -1,20 +1,20 @@
 {
   "version": 1,
-  "generated_at": "2026-11-19T14:41:06.210947+00:00",
+  "generated_at": "2026-11-19T14:46:38.943516+00:00",
   "project": "BashLegends Visual Overhaul 001",
   "counts": {
-    "assets": 546,
+    "assets": 555,
     "scenes": 23,
-    "assetpaths_constants": 70,
+    "assetpaths_constants": 74,
     "broken_constants": 0,
     "by_ext": {
-      ".jpg": 485,
-      ".png": 48,
+      ".jpg": 489,
+      ".png": 53,
       ".ttf": 3,
       ".ogg": 10
     },
     "by_status": {
-      "PRESENT": 347,
+      "PRESENT": 356,
       "TEMP": 196,
       "FINAL_FONT_OFL": 3
     }
@@ -334,6 +334,30 @@
     {
       "id": "UI_EMPTY_STATE",
       "path": "res://assets/ui/panels/ui_empty_state.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "MAP_UFA",
+      "path": "res://assets/maps/map_ufa_campaign.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_CREST",
+      "path": "res://assets/ui/guild/guild_icon_crest.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_VAULT",
+      "path": "res://assets/ui/guild/guild_icon_vault.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_BOARD",
+      "path": "res://assets/ui/guild/guild_icon_board.jpg",
       "exists": true,
       "status": "OK"
     },
@@ -3816,6 +3840,13 @@
       "status": "PRESENT"
     },
     {
+      "id": "assets_maps_map_ufa_campaign_jpg",
+      "path": "res://assets/maps/map_ufa_campaign.jpg",
+      "bytes": 536158,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
       "id": "assets_sfx_shared_attack_ogg",
       "path": "res://assets/sfx/shared/attack.ogg",
       "bytes": 3660,
@@ -4134,6 +4165,62 @@
       "id": "assets_ui_equipment_ui_icon_mat_equipment_scrap_jpg",
       "path": "res://assets/ui/equipment/ui_icon_mat_equipment_scrap.jpg",
       "bytes": 534552,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_n_png",
+      "path": "res://assets/ui/gacha/gacha_frame_n.png",
+      "bytes": 3443,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_r_png",
+      "path": "res://assets/ui/gacha/gacha_frame_r.png",
+      "bytes": 3440,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_sr_png",
+      "path": "res://assets/ui/gacha/gacha_frame_sr.png",
+      "bytes": 3432,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_ssr_png",
+      "path": "res://assets/ui/gacha/gacha_frame_ssr.png",
+      "bytes": 3437,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_ur_png",
+      "path": "res://assets/ui/gacha/gacha_frame_ur.png",
+      "bytes": 3437,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_board_jpg",
+      "path": "res://assets/ui/guild/guild_icon_board.jpg",
+      "bytes": 250478,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_crest_jpg",
+      "path": "res://assets/ui/guild/guild_icon_crest.jpg",
+      "bytes": 213372,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_vault_jpg",
+      "path": "res://assets/ui/guild/guild_icon_vault.jpg",
+      "bytes": 251642,
       "ext": ".jpg",
       "status": "PRESENT"
     },
