@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>БашЛегенды — Демо арена 1×1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="demo.css" />
+</head>
+<body>
+  <div class="phone">
+    <!-- MENU -->
+    <section class="screen menu" id="screen-menu">
+      <img class="bg" src="assets/menu_bg.jpg" alt="" />
+      <div class="veil"></div>
+      <div class="menu-copy">
+        <p class="brand">БашЛегенды</p>
+        <h1>Арена 1×1</h1>
+        <p class="sub">Демо · вид сбоку · 2.5D анимация</p>
+        <button class="menu-btn" id="btn-fight">
+          <img src="assets/icon_play.png" alt="" />
+          <span>В бой</span>
+        </button>
+        <div class="menu-row">
+          <div class="stat">
+            <img src="assets/icon_gold.png" alt="" />
+            <span id="gold">1200</span>
+          </div>
+          <div class="stat">
+            <img src="assets/icon_battle.png" alt="" />
+            <span>Каэрон vs Печать</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARENA -->
+    <section class="screen arena" id="screen-arena" hidden>
+      <div class="arena-stage">
+        <img class="arena-bg" src="assets/arena_bg.jpg" alt="" />
+        <canvas id="fx-layer" class="fx-layer"></canvas>
+
+        <div class="hud">
+          <div class="hp-card left">
+            <strong>Каэрон</strong>
+            <div class="bar"><i id="hero-hp"></i></div>
+          </div>
+          <div class="timer" id="timer">00:00</div>
+          <div class="hp-card right">
+            <strong>Живая Печать</strong>
+            <div class="bar enemy"><i id="enemy-hp"></i></div>
+          </div>
+        </div>
+
+        <div class="fighter hero" id="hero">
+          <img src="assets/hero.png" alt="Герой" />
+          <div class="shadow"></div>
+        </div>
+        <div class="fighter enemy" id="enemy">
+          <img src="assets/enemy.png" alt="Враг" />
+          <div class="shadow"></div>
+        </div>
+
+        <img class="slash" id="slash" src="assets/fx_slash.png" alt="" hidden />
+        <img class="burst" id="burst" src="assets/fx_hit.png" alt="" hidden />
+      </div>
+
+      <div class="tray">
+        <p class="toast" id="toast">Автобой</p>
+        <div class="tray-btns">
+          <button id="btn-ult" class="act">ULT</button>
+          <button id="btn-speed" class="act ghost">×1</button>
+          <button id="btn-menu" class="act ghost">Меню</button>
+        </div>
+        <div class="end" id="end" hidden>
+          <p id="end-title">Победа</p>
+          <button class="menu-btn small" id="btn-again">Ещё раз</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="demo.js"></script>
+</body>
+</html>
