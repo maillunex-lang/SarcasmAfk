@@ -57,6 +57,10 @@
 | T-094 | P1 | **DONE** | Request logging + counters | httpapi middleware | T-093 |
 | T-095 | P1 | **DONE** | Client UI live API toggle | More + GameState.set_live_api | T-086 |
 | T-096 | P1 | **DONE** | Postgres backup script | `scripts/backup_db.sh` | T-085 |
+| T-097 | P1 | **DONE** | Server ATB tick battle sim | `battleverify/sim.go` | T-085 |
+| T-098 | P1 | **DONE** | Finish uses tick-sim truth | `/battles/{id}/finish` | T-097 |
+| T-099 | P1 | **DONE** | Concurrent load smoke | `scripts/load_smoke.sh` | T-089 |
+| T-100 | P2 | **DONE** | Android export preset stub | `export_presets.cfg.example` | T-070 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 | полные квесты/бои | Явное разрешение владельца |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -69,6 +73,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-096
+## Следующий конкретный шаг после T-100
 
-Полный tick-sim боёв **или** нагрузочные тесты/APK online. **T-031** — при Blender.
+Подписанный тестовый APK (нужны SDK/templates) **или** ultimates в server sim **или** T-031 Blender.

@@ -262,25 +262,31 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		battle, ok := s.Content.Battle(battleID)
-		enemyPower := 0
+		enemyUnits := []map[string]any{}
 		if ok {
 			if enemies, ok2 := battle["enemies"].([]any); ok2 {
-				units := make([]map[string]any, 0, len(enemies))
 				for _, e := range enemies {
 					if m, ok3 := e.(map[string]any); ok3 {
-						units = append(units, m)
+						enemyUnits = append(enemyUnits, m)
 					}
 				}
-				enemyPower = battleverify.PowerFromUnits(units)
 			}
 		}
-		partyPower := battleverify.PowerFromHeroIDs(acc.PartyIDs, s.Content.HeroMap())
-		serverVictory, errCode := battleverify.CheckFinish(acc.BattleSeed, body.DurationMS, partyPower, enemyPower, body.Victory)
+		heroMap := s.Content.HeroMap()
+		heroUnits := make([]map[string]any, 0, len(acc.PartyIDs))
+		for _, id := range acc.PartyIDs {
+			if h, ok := heroMap[id].(map[string]any); ok {
+				heroUnits = append(heroUnits, h)
+			}
+		}
+		partyPower := battleverify.PowerFromUnits(heroUnits)
+		enemyPower := battleverify.PowerFromUnits(enemyUnits)
+		sim, errCode := battleverify.CheckFinishSim(acc.BattleSeed, body.DurationMS, heroUnits, enemyUnits, body.Victory)
 		if errCode != "" {
 			writeErr(w, http.StatusConflict, errCode)
 			return
 		}
-		prog, err := s.Store.FinishBattle(tok, battleID, serverVictory)
+		prog, err := s.Store.FinishBattle(tok, battleID, sim.Victory)
 		if err == store.ErrUnauthorized {
 			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
 			return
@@ -294,11 +300,12 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, http.StatusOK, map[string]any{
-			"ok": true, "battle_id": battleID, "victory": serverVictory,
+			"ok": true, "battle_id": battleID, "victory": sim.Victory,
 			"client_victory": body.Victory, "duration_ms": body.DurationMS,
 			"party_power": partyPower, "enemy_power": enemyPower,
+			"sim_ticks": sim.Ticks, "sim_note": sim.Note,
 			"rewards_claimed": false, "progress": prog,
-			"note": "soft server verify (power+seed); full tick sim later",
+			"note": "server ATB tick-sim is source of truth",
 		})
 	default:
 		writeErr(w, http.StatusNotFound, "NOT_FOUND")

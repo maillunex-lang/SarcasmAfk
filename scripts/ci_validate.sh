@@ -45,6 +45,8 @@ if command -v go >/dev/null 2>&1; then
   # memory live smoke (unset PG so script stays offline-capable)
   env -u DATABASE_URL -u REDIS_ADDR bash scripts/smoke_live_api.sh
   echo "live_api_ok"
+  env -u DATABASE_URL -u REDIS_ADDR LOAD_N=12 bash scripts/load_smoke.sh
+  echo "load_smoke_ok"
 else
   echo "WARN: go not found; skipped API tests"
 fi
