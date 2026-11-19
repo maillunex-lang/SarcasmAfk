@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "chapter_id": "CH01",
+  "status": "draft",
+  "poi": [
+    {
+      "poi_id": "POI-01",
+      "location_id": "L01",
+      "title": "Терминал №8042",
+      "description": "Официальный источник абсурда и полезных подсказок.",
+      "icon_asset_id": "ui_icon_quest",
+      "required_quest": null,
+      "required_flags": [],
+      "interaction_type": "dialogue_then_hint",
+      "actions": [
+        {"action_id": "read_intro", "label": "Прочитать объявление"},
+        {"action_id": "open_heroes_hint", "label": "Подсказка: Герои", "requires_flag": "battle:B01"}
+      ],
+      "dialogue_id": "CH01-POI-01",
+      "reward_bundle_id": null,
+      "one_time": true,
+      "completion_flag": "poi_terminal_visited",
+      "state": "available",
+      "sort_order": 1,
+      "accessibility_label": "Терминал восемь тысяч сорок два"
+    },
+    {
+      "poi_id": "POI-02",
+      "location_id": "L01",
+      "title": "Потерянные документы",
+      "description": "Три документа для CH01-SQ01. Собираются в любом порядке.",
+      "icon_asset_id": "ui_icon_inventory",
+      "required_quest": "CH01-Q01",
+      "required_flags": [],
+      "sidequest_id": "CH01-SQ01",
+      "interaction_type": "collect_steps",
+      "actions": [
+        {"action_id": "sq01_doc_1", "label": "Справка о намерении", "step_id": "sq01_doc_1"},
+        {"action_id": "sq01_doc_2", "label": "Подтверждение отсутствия намерения", "step_id": "sq01_doc_2"},
+        {"action_id": "sq01_doc_3", "label": "Квитанция о получении квитанции", "step_id": "sq01_doc_3"}
+      ],
+      "dialogue_id": "CH01-POI-02",
+      "reward_bundle_id": null,
+      "one_time": false,
+      "state": "locked",
+      "sort_order": 2,
+      "accessibility_label": "Потерянные документы"
+    },
+    {
+      "poi_id": "POI-03",
+      "location_id": "L02",
+      "title": "Светофор с мнением",
+      "description": "Два выбора, одна сюжетная информация — без наказания.",
+      "icon_asset_id": "ui_icon_map",
+      "required_quest": "CH01-Q02",
+      "required_flags": [],
+      "interaction_type": "choice_same_outcome",
+      "actions": [
+        {"action_id": "check_power", "label": "Проверить питание"},
+        {"action_id": "read_ban", "label": "Прочитать запрет"}
+      ],
+      "dialogue_id": "CH01-POI-03",
+      "reward_bundle_id": null,
+      "one_time": true,
+      "completion_flag": "poi_traffic_light_seen",
+      "state": "locked",
+      "sort_order": 3,
+      "accessibility_label": "Светофор с мнением"
+    },
+    {
+      "poi_id": "POI-04",
+      "location_id": "L03",
+      "title": "Три печати",
+      "description": "Порядок: Синий → Золотой → Пустой. Ошибка сбрасывает только головоломку.",
+      "icon_asset_id": "ui_icon_quest",
+      "required_quest": "CH01-Q03",
+      "required_flags": [],
+      "sidequest_id": "CH01-SQ02",
+      "interaction_type": "sequence_puzzle",
+      "hint": "Сначала небо, потом золото, затем отсутствие всего",
+      "actions": [
+        {"action_id": "sq02_seal_blue", "label": "Синяя печать", "step_id": "sq02_seal_blue", "sequence_index": 0},
+        {"action_id": "sq02_seal_gold", "label": "Золотая печать", "step_id": "sq02_seal_gold", "sequence_index": 1},
+        {"action_id": "sq02_seal_empty", "label": "Пустая печать", "step_id": "sq02_seal_empty", "sequence_index": 2}
+      ],
+      "dialogue_id": "CH01-POI-04",
+      "reward_bundle_id": null,
+      "one_time": false,
+      "state": "locked",
+      "sort_order": 4,
+      "accessibility_label": "Три печати"
+    },
+    {
+      "poi_id": "POI-05",
+      "location_id": "L04",
+      "title": "Каталог забытых",
+      "description": "Три архивные записи CH01-SQ03 в любом порядке.",
+      "icon_asset_id": "ui_icon_heroes",
+      "required_quest": "CH01-Q04",
+      "required_flags": [],
+      "sidequest_id": "CH01-SQ03",
+      "interaction_type": "collect_steps",
+      "actions": [
+        {"action_id": "sq03_record_1", "label": "Герой, победивший очередь", "step_id": "sq03_record_1"},
+        {"action_id": "sq03_record_2", "label": "Рыцарь без подписи", "step_id": "sq03_record_2"},
+        {"action_id": "sq03_record_3", "label": "Маг обратного отчёта", "step_id": "sq03_record_3"}
+      ],
+      "dialogue_id": "CH01-POI-05",
+      "reward_bundle_id": null,
+      "one_time": false,
+      "state": "locked",
+      "sort_order": 5,
+      "accessibility_label": "Каталог забытых"
+    },
+    {
+      "poi_id": "POI-06",
+      "location_id": "L05",
+      "title": "Зеркало подлинности",
+      "description": "Сравнение приказов и подсказка апгрейда навыка.",
+      "icon_asset_id": "ui_icon_settings",
+      "required_quest": "CH01-Q05",
+      "required_flags": [],
+      "interaction_type": "dialogue_then_hint",
+      "actions": [
+        {"action_id": "compare_orders", "label": "Сравнить приказы"},
+        {"action_id": "skill_upgrade_hint", "label": "Подсказка: навыки"}
+      ],
+      "dialogue_id": "CH01-POI-06",
+      "reward_bundle_id": null,
+      "one_time": true,
+      "completion_flag": "poi_mirror_seen",
+      "state": "locked",
+      "sort_order": 6,
+      "accessibility_label": "Зеркало подлинности"
+    },
+    {
+      "poi_id": "POI-07",
+      "location_id": "L06",
+      "title": "Генераторы 1–3",
+      "description": "Три независимых генератора для CH01-SQ04.",
+      "icon_asset_id": "ui_icon_expedition",
+      "required_quest": "CH01-Q07",
+      "required_flags": [],
+      "sidequest_id": "CH01-SQ04",
+      "interaction_type": "collect_steps",
+      "actions": [
+        {"action_id": "sq04_gen_1", "label": "Генератор 1", "step_id": "sq04_gen_1"},
+        {"action_id": "sq04_gen_2", "label": "Генератор 2", "step_id": "sq04_gen_2"},
+        {"action_id": "sq04_gen_3", "label": "Генератор 3", "step_id": "sq04_gen_3"}
+      ],
+      "dialogue_id": "CH01-POI-07",
+      "reward_bundle_id": null,
+      "one_time": false,
+      "state": "locked",
+      "sort_order": 7,
+      "accessibility_label": "Резервные генераторы"
+    },
+    {
+      "poi_id": "POI-08",
+      "location_id": "L07",
+      "title": "Фрагмент Печати",
+      "description": "Сюжетное взаимодействие после B24. Запись в журнал, не Mythic-герой.",
+      "icon_asset_id": "ui_icon_quest",
+      "required_quest": "CH01-Q09",
+      "required_flags": ["battle:B24"],
+      "interaction_type": "journal_artifact",
+      "actions": [
+        {"action_id": "inspect_fragment", "label": "Осмотреть фрагмент"}
+      ],
+      "dialogue_id": "CH01-EX-05",
+      "reward_bundle_id": null,
+      "one_time": true,
+      "completion_flag": "journal_seal_fragment",
+      "state": "locked",
+      "sort_order": 8,
+      "accessibility_label": "Фрагмент Печати"
+    },
+    {
+      "poi_id": "POI-09",
+      "location_id": "L08",
+      "title": "Исчезающий указатель",
+      "description": "Локальный таймер 60 с. Таймаут не лишает награды; можно повторить.",
+      "icon_asset_id": "ui_icon_speed",
+      "required_quest": "CH01-Q09",
+      "required_flags": [],
+      "interaction_type": "local_timer_scene",
+      "timer_seconds": 60,
+      "actions": [
+        {"action_id": "stop_erase", "label": "Остановить стирание"},
+        {"action_id": "retry_timer", "label": "Повторить сценку"}
+      ],
+      "dialogue_id": "CH01-POI-09",
+      "reward_bundle_id": "CH01-POI-09-FIRST",
+      "one_time": false,
+      "one_time_reward": true,
+      "completion_flag": "poi_vanishing_sign",
+      "state": "locked",
+      "sort_order": 9,
+      "accessibility_label": "Исчезающий указатель"
+    },
+    {
+      "poi_id": "POI-10",
+      "location_id": "L09",
+      "title": "Предфинальный стенд",
+      "description": "CH01-SQ05 и кнопка подготовки отряда. Не блокирует B30.",
+      "icon_asset_id": "ui_icon_battle",
+      "required_quest": "CH01-Q10",
+      "required_flags": [],
+      "sidequest_id": "CH01-SQ05",
+      "interaction_type": "prep_stand",
+      "actions": [
+        {"action_id": "open_party", "label": "Подготовить отряд"},
+        {"action_id": "sq05_review_hero_1", "label": "Проверить первого героя", "step_id": "sq05_review_hero_1"},
+        {"action_id": "sq05_review_hero_2", "label": "Проверить второго героя", "step_id": "sq05_review_hero_2"},
+        {"action_id": "sq05_upgrade_or_train", "label": "Улучшение или учебный просмотр", "step_id": "sq05_upgrade_or_train"}
+      ],
+      "dialogue_id": "CH01-POI-10",
+      "reward_bundle_id": null,
+      "one_time": false,
+      "state": "locked",
+      "sort_order": 10,
+      "accessibility_label": "Предфинальный стенд готовности"
+    }
+  ]
+}

@@ -33,6 +33,10 @@ var catalog: CampaignCatalog
 var completed_quests: Dictionary = {}
 var completed_battles: Dictionary = {}
 var claimed_rewards: Dictionary = {}
+var sidequest_progress: Dictionary = {} # quest_id -> {state, completed_step_ids}
+var poi_progress: Dictionary = {} # poi_id -> {state, completed_actions}
+var journal_flags: Dictionary = {}
+var pending_expansion_dialogue_id: String = ""
 var active_quest_id: String = ""
 var active_battle_id: String = ""
 var pending_dialogue_quest_id: String = ""
@@ -377,6 +381,7 @@ func complete_battle(battle_id: String, server_finish: Dictionary = {}) -> Dicti
 				info["quest_completed"] = true
 				active_quest_id = ""
 				active_battle_id = ""
+		_maybe_queue_expansion_insert(battle_id, true)
 		progress_changed.emit()
 		save_game()
 		return info
@@ -403,9 +408,39 @@ func complete_battle(battle_id: String, server_finish: Dictionary = {}) -> Dicti
 			info["quest_completed"] = true
 			active_quest_id = ""
 			active_battle_id = ""
+	_maybe_queue_expansion_insert(battle_id, true)
 	progress_changed.emit()
 	save_game()
 	return info
+
+
+func _maybe_queue_expansion_insert(battle_id: String, after: bool) -> void:
+	## One-shot EX inserts from ch01_expansion_dialogues.json (do not replace main Q dialogues).
+	var trigger_map := {
+		"B01": "CH01-EX-01",
+		"B07": "CH01-EX-02",
+		"B13": "CH01-EX-03",
+		"B24": "CH01-EX-05",
+		"B30": "CH01-EX-06",
+	}
+	if not after:
+		if battle_id == "B20":
+			trigger_map = {"B20": "CH01-EX-04"}
+		else:
+			return
+	var ex_id := str(trigger_map.get(battle_id, ""))
+	if ex_id == "":
+		return
+	var flag := "seen_" + ex_id
+	if bool(journal_flags.get(flag, false)):
+		return
+	journal_flags[flag] = true
+	pending_expansion_dialogue_id = ex_id
+	if battle_id == "B24":
+		journal_flags["journal_seal_fragment"] = true
+	if battle_id == "B30":
+		journal_flags["ch01_act_complete"] = true
+
 
 
 func _next_incomplete_battle() -> String:
@@ -466,7 +501,151 @@ func chapter_progress_text() -> String:
 	for q in catalog.quest_list():
 		if is_quest_completed(str(q.get("quest_id", ""))):
 			done += 1
-	return "CH01: %d / %d квестов" % [done, total]
+	var sq_done := sidequests_completed_count()
+	var sq_total := catalog.sidequest_list().size()
+	return "Основные %d/%d · Побочные %d/%d" % [done, total, sq_done, sq_total]
+
+
+func sidequests_completed_count() -> int:
+	var n := 0
+	for sq in catalog.sidequest_list():
+		var id := str(sq.get("quest_id", ""))
+		var st: Dictionary = sidequest_progress.get(id, {})
+		if str(st.get("state", "")) == "completed" or claimed_rewards.has(str(sq.get("reward_bundle_id", ""))):
+			n += 1
+	return n
+
+
+func is_sidequest_available(quest_id: String) -> bool:
+	var sq: Dictionary = catalog.get_sidequest(quest_id)
+	if sq.is_empty():
+		return false
+	var req := str(sq.get("required_quest", ""))
+	if req != "" and not is_quest_completed(req):
+		return false
+	var st: Dictionary = sidequest_progress.get(quest_id, {})
+	return str(st.get("state", "")) != "completed"
+
+
+func start_sidequest(quest_id: String) -> Dictionary:
+	var res: Dictionary = api.ch01_sidequest_start(quest_id)
+	if not bool(res.get("ok", false)):
+		return res
+	var sq: Dictionary = catalog.get_sidequest(quest_id)
+	sidequest_progress[quest_id] = {
+		"state": "active",
+		"completed_step_ids": [],
+	}
+	pending_expansion_dialogue_id = str(sq.get("start_dialogue_id", ""))
+	if not api.is_mock():
+		_apply_expansion_progress(res.get("progress", {}))
+	save_game()
+	progress_changed.emit()
+	return res
+
+
+func interact_poi(poi_id: String, action_id: String) -> Dictionary:
+	var res: Dictionary = api.ch01_poi_interact(poi_id, action_id)
+	if not bool(res.get("ok", false)):
+		return res
+	if api.is_mock():
+		_mock_apply_poi(poi_id, action_id, bool(res.get("puzzle_reset", false)))
+	else:
+		_apply_expansion_progress(res.get("progress", {}))
+	save_game()
+	progress_changed.emit()
+	return res
+
+
+func claim_sidequest(quest_id: String) -> Dictionary:
+	var res: Dictionary = api.ch01_sidequest_claim(quest_id)
+	if not bool(res.get("ok", false)):
+		return res
+	if api.is_mock() and not bool(res.get("already", false)):
+		var sq: Dictionary = catalog.get_sidequest(quest_id)
+		var bundle_id := str(sq.get("reward_bundle_id", ""))
+		var bundle: Dictionary = catalog.get_reward_bundle(bundle_id)
+		soft_currency += int(bundle.get("soft_currency", 0))
+		var inv: Dictionary = bundle.get("inventory", {})
+		for k in inv.keys():
+			inventory[str(k)] = int(inventory.get(str(k), 0)) + int(inv[k])
+		for eq in bundle.get("equipment", []):
+			inventory[str(eq)] = int(inventory.get(str(eq), 0)) + 1
+		claimed_rewards[bundle_id] = true
+		sidequest_progress[quest_id] = {
+			"state": "completed",
+			"completed_step_ids": sq.get("step_ids", []),
+		}
+		pending_expansion_dialogue_id = str(sq.get("complete_dialogue_id", ""))
+	elif not api.is_mock():
+		_apply_expansion_progress(res.get("progress", {}))
+	save_game()
+	progress_changed.emit()
+	return res
+
+
+func _mock_apply_poi(poi_id: String, action_id: String, puzzle_reset: bool) -> void:
+	var poi: Dictionary = catalog.get_poi(poi_id)
+	var sq_id := str(poi.get("sidequest_id", ""))
+	var step_id := ""
+	for a in poi.get("actions", []):
+		if str(a.get("action_id", "")) == action_id:
+			step_id = str(a.get("step_id", ""))
+			break
+	var poi_st: Dictionary = poi_progress.get(poi_id, {"state": "available", "completed_actions": []})
+	var actions: Array = poi_st.get("completed_actions", [])
+	if puzzle_reset and sq_id != "":
+		var sq_st: Dictionary = sidequest_progress.get(sq_id, {"state": "active", "completed_step_ids": [], "sequence_buffer": []})
+		sq_st["sequence_buffer"] = []
+		sidequest_progress[sq_id] = sq_st
+		return
+	if not actions.has(action_id):
+		actions.append(action_id)
+	poi_st["completed_actions"] = actions
+	poi_st["state"] = "completed" if bool(poi.get("one_time", false)) else "in_progress"
+	poi_progress[poi_id] = poi_st
+	var flag := str(poi.get("completion_flag", ""))
+	if flag != "":
+		journal_flags[flag] = true
+	if sq_id != "" and step_id != "":
+		var sq_def: Dictionary = catalog.get_sidequest(sq_id)
+		var sq_st2: Dictionary = sidequest_progress.get(sq_id, {"state": "active", "completed_step_ids": [], "sequence_buffer": []})
+		var seq: Array = sq_def.get("step_sequence", [])
+		if not bool(sq_def.get("steps_any_order", true)) and not seq.is_empty():
+			var buf: Array = sq_st2.get("sequence_buffer", [])
+			buf.append(step_id)
+			sq_st2["sequence_buffer"] = buf
+		var steps: Array = sq_st2.get("completed_step_ids", [])
+		if not steps.has(step_id):
+			steps.append(step_id)
+		sq_st2["completed_step_ids"] = steps
+		sq_st2["state"] = "active"
+		var required: Array = sq_def.get("step_ids", [])
+		var all_done := true
+		for s in required:
+			if not steps.has(str(s)):
+				all_done = false
+				break
+		if all_done:
+			sq_st2["state"] = "ready_to_claim"
+		sidequest_progress[sq_id] = sq_st2
+
+
+func _apply_expansion_progress(progress: Dictionary) -> void:
+	if typeof(progress) != TYPE_DICTIONARY or progress.is_empty():
+		return
+	if progress.has("sidequests"):
+		sidequest_progress = progress.get("sidequests")
+	if progress.has("poi_progress"):
+		poi_progress = progress.get("poi_progress")
+	if progress.has("journal_flags"):
+		journal_flags = progress.get("journal_flags")
+	if progress.has("claimed_rewards"):
+		claimed_rewards = progress.get("claimed_rewards")
+	if progress.has("soft_currency"):
+		soft_currency = int(progress.get("soft_currency"))
+	if progress.has("inventory"):
+		inventory = progress.get("inventory")
 
 
 ## Mid-quest resume CTA for Home. Empty dict = nothing to continue.
@@ -660,13 +839,24 @@ func equip_item(hero_id: String, slot: String, item_id: String) -> bool:
 	if not bool(owned_heroes.get(hero_id, false)):
 		return false
 	if not equipment.has(hero_id):
-		equipment[hero_id] = {"weapon": "", "armor": "", "accessory": ""}
+		equipment[hero_id] = {"weapon": "", "armor": "", "accessory": "", "relic": ""}
 	if not equipment[hero_id].has(slot):
+		equipment[hero_id][slot] = ""
+	var starters := ["starter_blade", "starter_mail", "starter_charm"]
+	if item_id != "" and int(inventory.get(item_id, 0)) <= 0 and item_id not in starters:
 		return false
-	if item_id != "" and int(inventory.get(item_id, 0)) <= 0 and item_id != "starter_blade":
-		# allow empty unequip; starter free
-		if item_id not in ["starter_blade", "starter_mail", "starter_charm"]:
-			return false
+	var prev := str(equipment[hero_id].get(slot, ""))
+	if prev != "" and prev != item_id and prev not in starters:
+		inventory[prev] = int(inventory.get(prev, 0)) + 1
+	if item_id != "" and item_id not in starters:
+		inventory[item_id] = int(inventory.get(item_id, 0)) - 1
+		for hid in equipment.keys():
+			if str(hid) == hero_id:
+				continue
+			var eq: Dictionary = equipment[hid]
+			for s in eq.keys():
+				if str(eq[s]) == item_id:
+					eq[s] = ""
 	equipment[hero_id][slot] = item_id
 	save_game()
 	progress_changed.emit()
@@ -687,6 +877,9 @@ func save_game() -> void:
 		"completed_quests": completed_quests,
 		"completed_battles": completed_battles,
 		"claimed_rewards": claimed_rewards,
+		"sidequest_progress": sidequest_progress,
+		"poi_progress": poi_progress,
+		"journal_flags": journal_flags,
 		"active_quest_id": active_quest_id,
 		"active_battle_id": active_battle_id,
 		"pending_dialogue_quest_id": pending_dialogue_quest_id,
@@ -729,6 +922,9 @@ func load_game() -> void:
 	completed_quests = data.get("completed_quests", {})
 	completed_battles = data.get("completed_battles", {})
 	claimed_rewards = data.get("claimed_rewards", {})
+	sidequest_progress = data.get("sidequest_progress", {})
+	poi_progress = data.get("poi_progress", {})
+	journal_flags = data.get("journal_flags", {})
 	active_quest_id = str(data.get("active_quest_id", ""))
 	active_battle_id = str(data.get("active_battle_id", ""))
 	pending_dialogue_quest_id = str(data.get("pending_dialogue_quest_id", ""))
@@ -761,6 +957,10 @@ func reset_progress() -> void:
 	completed_quests.clear()
 	completed_battles.clear()
 	claimed_rewards.clear()
+	sidequest_progress.clear()
+	poi_progress.clear()
+	journal_flags.clear()
+	pending_expansion_dialogue_id = ""
 	active_quest_id = ""
 	active_battle_id = ""
 	pending_dialogue_quest_id = ""

@@ -108,10 +108,14 @@ func (m *Memory) CreateAnonymous() (token string, progress AccountProgress) {
 		HeroInstances:  map[string]*HeroInstance{},
 		Inventory:      map[string]int{"mat_hero_exp": 500},
 		PityCounters:   map[string]int{},
+		Sidequests:     map[string]*SidequestState{},
+		POIProgress:    map[string]*POIProgress{},
+		JournalFlags:   map[string]bool{},
 		AFKClaimedUnix: time.Now().Unix(),
 		UpdatedAt:      time.Now().UTC().Format(time.RFC3339),
 	}
 	EnsureHeroInstances(acc)
+	EnsureExpansion(acc)
 	tok := newID("tok_")
 	m.accounts[acc.AccountID] = acc
 	m.sessions[tok] = &Session{Token: tok, AccountID: acc.AccountID, CreatedAt: time.Now()}
@@ -607,4 +611,58 @@ func (m *Memory) ClaimVIPDaily(token string, soft, tickets int) (*AccountProgres
 		return nil
 	})
 	return prog, already, err
+}
+
+func (m *Memory) SkillUpHero(token, heroID, skillID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error) {
+	var out *HeroInstance
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		bonus := map[string]int{}
+		if inst := acc.HeroInstances[heroID]; inst != nil {
+			bonus = GearBonusForHero(inst, defs)
+		}
+		inst, e := ApplySkillUp(acc, heroID, skillID, base, bonus)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (m *Memory) EquipHeroUnique(token, heroID, slot, itemID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error) {
+	var out *HeroInstance
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		inst, e := ApplyEquipUnique(acc, heroID, slot, itemID, base, defs)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (m *Memory) StartSidequest(token, questID, requiredMain string) (*AccountProgress, error) {
+	return m.mutate(token, func(acc *AccountProgress) error {
+		return ApplySidequestStart(acc, questID, requiredMain, func(q string) bool {
+			return acc.QuestFlags[q]
+		})
+	})
+}
+
+func (m *Memory) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (*AccountProgress, bool, error) {
+	reset := false
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		r, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime)
+		reset = r
+		return e
+	})
+	return prog, reset, err
+}
+
+func (m *Memory) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
+	already := false
+	var granted map[string]any
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs)
+		already = a
+		granted = g
+		return e
+	})
+	return prog, already, granted, err
 }

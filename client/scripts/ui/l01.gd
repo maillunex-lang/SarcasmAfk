@@ -62,6 +62,10 @@ func _ready() -> void:
 	elif GameState.active_quest_id != "" and GameState.is_quest_completed(GameState.active_quest_id):
 		vbox.add_child(DesignTokens.make_label("Квест уже завершён — можно повторить бой из кампании.", 20, DesignTokens.COLOR_SUCCESS_MINT))
 
+	var poi := DesignTokens.make_button("Точки интереса / побочные", true)
+	poi.pressed.connect(func() -> void: SceneNav.to_poi(get_tree()))
+	vbox.add_child(poi)
+
 	var camp := DesignTokens.make_button("К списку квестов", false)
 	camp.pressed.connect(func() -> void: SceneNav.to_campaign(get_tree()))
 	vbox.add_child(camp)

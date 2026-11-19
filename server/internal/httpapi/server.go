@@ -73,6 +73,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/admin/chat/mute", s.adminChat)
 	mux.HandleFunc("/v1/admin/chat/delete", s.adminChat)
 	mux.HandleFunc("/v1/admin/guilds", s.adminGuilds)
+	mux.HandleFunc("/v1/campaign/ch01/", s.ch01Campaign)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 

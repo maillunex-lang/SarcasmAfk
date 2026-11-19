@@ -6,9 +6,9 @@
 
 ## NOW
 
-Online systems P1–P3b **слиты в `main`** (chat WS+PG, guild depth, gacha pity, TEST_PURCHASE, VIP 0–10).  
-UI TEMP art pass (T-155): home/shop/VIP polish + H13–H36 portraits/fulls + shop icons/banner.  
-CH02 + Stage E blocked. CH01 not accepted.
+CH01 RPG Expansion (срезы A–C + частичный D) на ветке `cursor/ch01-rpg-expansion-beaf`:  
+5 sidequests, 10 POI, campaign API, migration 007, POI UI, skill-up/equip DEF.  
+CH02 + Stage E blocked. CH01 **не** accepted.
 
 ## Работает / частично / заглушки
 
