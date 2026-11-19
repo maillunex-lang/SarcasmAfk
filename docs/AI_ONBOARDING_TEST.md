@@ -18,7 +18,7 @@ Optional 6th: one domain spec from the router row (not the whole docs tree).
 
 1. **What is the game?** Android Godot idle RPG “БашЛегенды”; repo `SarcasmAfk`.
 2. **Where is code?** `client/` + `server/`.
-3. **What is NOW?** T-158 Visual Overhaul Stage F in progress; T-157 merged (#28). Status only in `STATUS.md`.
+3. **What is NOW?** T-159 CITY-HUB-001 (Stage 0 approved → Godot city hub); T-158 merged (#29). Status only in `STATUS.md`.
 4. **What is blocked?** T-090 CH02, T-131 Stage E, T-126 keystore, T-153 real payments, T-128 owner accept.
 5. **How to verify?** `bash scripts/ci_validate.sh` (or router commands for the subsystem).
 

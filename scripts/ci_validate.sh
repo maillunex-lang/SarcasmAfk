@@ -42,6 +42,12 @@ required = [
   "client/assets/branding/gacha_portal.jpg",
   "client/assets/fonts/Manrope-Regular.ttf",
   "client/assets/fonts/Cinzel-SemiBold.ttf",
+  "client/assets/city/ufa/city_ufa_sky.jpg",
+  "client/assets/city/ufa/city_ufa_far.jpg",
+  "client/assets/city/ufa/city_ufa_mid.jpg",
+  "client/assets/city/ufa/city_ufa_road.jpg",
+  "client/assets/city/ufa/city_ufa_panorama.jpg",
+  "client/data/city/ufa_buildings.json",
 ]
 
 missing = [p for p in required if not pathlib.Path(p).is_file()]
@@ -93,6 +99,7 @@ if [[ -n "${GODOT_BIN}" ]]; then
   python3 scripts/generate_visual_gallery.py
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_visual_gallery.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_location_ui.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_city_hub.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd)

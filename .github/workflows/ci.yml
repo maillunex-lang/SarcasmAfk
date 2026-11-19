@@ -79,6 +79,10 @@ jobs:
         working-directory: client
         run: |
           /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_mvp.gd
+      - name: Smoke city hub
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_city_hub.gd
 
   go-api:
     name: Go API tests

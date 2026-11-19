@@ -12,6 +12,7 @@
 | Equipment | `EQUIPMENT_SYSTEM.md`, `client/data/equipment/*`, inventory UI | equipment / inventory smokes | Claiming final art |
 | Monsters / VFX | `MONSTERS_CH01.md`, `enemy_*_registry.json`, combat sprites | `validate_monsters_ch01.py` | Stage E Kaeron (T-131) without owner |
 | Visual polish | `VISUAL_OVERHAUL_001.md`, `VISUAL_QA_REPORT.md`, `DesignTokens` | `smoke_visual_screens.gd` | Deleting TEMP assets as “final” |
+| City hub / Home UX | `CITY_HUB_001.md`, `D-UI-CITY-01`, `home.gd`, `ufa_buildings.json` | `smoke_city_hub.gd` | Arena live; final iso art without TEMP mark |
 | Android APK | `ANDROID_BUILD.md`, export presets example | `scripts/build_debug_apk.sh` (if toolchain present) | Release signing without keystore (T-126) |
 | Docs / AI context | `INDEX.md`, this router, `STATUS.md` | `python3 scripts/audit_repo.py` | Parallel STATUS_V2 files |
 | Repo cleanup | `reports/REPO_REORG_DELETE_CANDIDATES.md` | — | Any delete without owner checklist |

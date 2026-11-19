@@ -3,7 +3,7 @@ extends RefCounted
 ## Bottom navigation for Phase 1 hub screens with icons.
 
 const ITEMS := [
-	{"id": "home", "label": "Дом", "scene": "home", "icon": AssetPaths.ICON_HOME},
+	{"id": "home", "label": "Город", "scene": "home", "icon": AssetPaths.ICON_HOME},
 	{"id": "map", "label": "Карта", "scene": "map", "icon": AssetPaths.ICON_MAP},
 	{"id": "heroes", "label": "Герои", "scene": "heroes", "icon": AssetPaths.ICON_HEROES},
 	{"id": "afk", "label": "AFK", "scene": "afk", "icon": AssetPaths.ICON_AFK},
