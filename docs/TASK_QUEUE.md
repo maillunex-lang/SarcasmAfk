@@ -48,7 +48,7 @@
 | T-082 | P1 | **DONE** | Ф2.2 Rewards/AFK/gacha idempotent | `/rewards/claim` `/afk` `/gacha` | T-081 |
 | T-083 | P1 | **DONE** | Ф2.3 Battle start/finish seed stub | `/battles/{id}/start|finish` | T-082 |
 | T-084 | P1 | **DONE** | Ф2.4 Guild/arena/events stubs + CI | `/guild` `/arena` `/events` | T-083 |
-| T-085 | P3 | **TODO** | Postgres + Redis + full battle sim | TECH-001 harden | T-089 |
+| T-085 | P1 | **DONE** | Postgres + Redis + soft battle verify | `store/postgres` + `battleverify` + compose | T-089 |
 | T-086 | P1 | **DONE** | ApiClient live HTTP (`use_mock=false`) | `api_client.gd` HTTPClient | T-084 |
 | T-087 | P1 | **DONE** | File persist sessions/accounts | `store` JSON persist reload | T-084 |
 | T-088 | P1 | **DONE** | Battle finish session gate | `NO_ACTIVE_BATTLE` | T-083 |
@@ -65,6 +65,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-089
+## Следующий конкретный шаг после T-085
 
-`T-085` Postgres/Redis + full battle sim **или** UI-переключатель live API в клиенте. **T-031** — при Blender.
+Админка/мониторинг (Фаза 2) **или** UI live-toggle в клиенте **или** полный tick-sim боёв. **T-031** — при Blender.

@@ -1,0 +1,19 @@
+# Local Phase 2 stack (T-085). Optional — memory store works without this.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bashlegends
+      POSTGRES_PASSWORD: bashlegends
+      POSTGRES_DB: bashlegends
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./server/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+volumes:
+  pgdata:

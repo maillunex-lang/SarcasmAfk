@@ -5,16 +5,17 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/maillunex-lang/SarcasmAfk/server/internal/battleverify"
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/content"
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/store"
 )
 
 type Server struct {
-	Store   *store.Memory
+	Store   store.Store
 	Content *content.Loader
 }
 
-func New(st *store.Memory, c *content.Loader) *Server {
+func New(st store.Store, c *content.Loader) *Server {
 	return &Server{Store: st, Content: c}
 }
 
@@ -207,12 +208,45 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		var body struct {
-			Victory    bool   `json:"victory"`
-			DurationMS int    `json:"duration_ms"`
+			Victory     bool   `json:"victory"`
+			DurationMS  int    `json:"duration_ms"`
 			ActionsHash string `json:"actions_hash"`
 		}
 		_ = json.NewDecoder(r.Body).Decode(&body)
-		prog, err := s.Store.FinishBattle(bearer(r), battleID, body.Victory)
+		tok := bearer(r)
+		acc, err := s.Store.AccountByToken(tok)
+		if err == store.ErrUnauthorized {
+			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
+			return
+		}
+		if err != nil || acc == nil {
+			writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
+			return
+		}
+		if acc.ActiveBattleID == "" || acc.ActiveBattleID != battleID {
+			writeErr(w, http.StatusConflict, "NO_ACTIVE_BATTLE")
+			return
+		}
+		battle, ok := s.Content.Battle(battleID)
+		enemyPower := 0
+		if ok {
+			if enemies, ok2 := battle["enemies"].([]any); ok2 {
+				units := make([]map[string]any, 0, len(enemies))
+				for _, e := range enemies {
+					if m, ok3 := e.(map[string]any); ok3 {
+						units = append(units, m)
+					}
+				}
+				enemyPower = battleverify.PowerFromUnits(units)
+			}
+		}
+		partyPower := battleverify.PowerFromHeroIDs(acc.PartyIDs, s.Content.HeroMap())
+		serverVictory, errCode := battleverify.CheckFinish(acc.BattleSeed, body.DurationMS, partyPower, enemyPower, body.Victory)
+		if errCode != "" {
+			writeErr(w, http.StatusConflict, errCode)
+			return
+		}
+		prog, err := s.Store.FinishBattle(tok, battleID, serverVictory)
 		if err == store.ErrUnauthorized {
 			writeErr(w, http.StatusUnauthorized, "UNAUTHENTICATED")
 			return
@@ -226,10 +260,11 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, http.StatusOK, map[string]any{
-			"ok": true, "battle_id": battleID, "victory": body.Victory,
-			"duration_ms": body.DurationMS, "rewards_claimed": false,
-			"progress": prog,
-			"note":     "session-gated finish; full server sim still TBD (T-085)",
+			"ok": true, "battle_id": battleID, "victory": serverVictory,
+			"client_victory": body.Victory, "duration_ms": body.DurationMS,
+			"party_power": partyPower, "enemy_power": enemyPower,
+			"rewards_claimed": false, "progress": prog,
+			"note": "soft server verify (power+seed); full tick sim later",
 		})
 	default:
 		writeErr(w, http.StatusNotFound, "NOT_FOUND")

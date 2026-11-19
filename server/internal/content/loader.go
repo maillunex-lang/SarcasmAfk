@@ -103,11 +103,27 @@ func (l *Loader) HeroIDs() []string {
 	return append([]string{}, l.heroIDs...)
 }
 
-func (l *Loader) Battle(id string) (any, bool) {
+func (l *Loader) HeroMap() map[string]any {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	out := make(map[string]any, len(l.heroes))
+	for k, v := range l.heroes {
+		out[k] = v
+	}
+	return out
+}
+
+func (l *Loader) Battle(id string) (map[string]any, bool) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	b, ok := l.battles[id]
-	return b, ok
+	if !ok {
+		return nil, false
+	}
+	if m, ok := b.(map[string]any); ok {
+		return m, true
+	}
+	return nil, false
 }
 
 func (l *Loader) Dialogue(id string) (any, bool) {

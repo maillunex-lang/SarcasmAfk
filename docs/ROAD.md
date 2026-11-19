@@ -65,9 +65,9 @@
 - [x] Клиентская демонстрация end-to-end, тесты, аудит, APK. *(smoke+audit T-077; APK — у владельца)*
 
 ### Фаза 2. Сервер и замена моков
-- [x] Go API, авторизация anonymous, модели прогресса *(in-memory stub T-081; PG/Redis → T-085)*.
+- [x] Go API, авторизация anonymous, модели прогресса *(memory + Postgres/Redis T-085)*.
 - [x] Серверные награды, лимит AFK 24 часа, экономика, гача и защита от дублей *(T-082)*.
-- [x] Старт/финиш боёв + seed stub *(T-083; полный server sim → T-085)*.
+- [x] Старт/финиш боёв + soft power/seed verify *(T-083/T-088/T-085; full tick-sim later)*.
 - [x] Гильдии, арена, события — клиентские API stubs *(T-084)*.
 - [ ] Админка, мониторинг, бэкапы, права доступа и аудит безопасности.
 - [ ] Интеграционные тесты, нагрузочные проверки, тестовый онлайн и APK.
@@ -401,10 +401,16 @@
 - Не сделано: Postgres/Redis, full battle sim, admin
 - Следующий шаг: T-085
 
+### 2026-11-19 — Phase 2 Postgres/Redis T-085
+- Статус: ГОТОВО (opt-in backends)
+- Сделано: `store.Postgres` + Redis sessions, soft `battleverify`, migrations, docker-compose, CI services smoke
+- Не сделано: admin, full tick-sim, APK online
+- Следующий шаг: admin/monitoring или UI live-toggle
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-060 / T-061 / T-081…T-089~~ — сделано.
-2. Далее: T-085 Postgres/Redis/full battle sim; T-031 при Blender.
+1. ~~T-060 / T-061 / T-081…T-089 / T-085~~ — сделано.
+2. Далее: админка/мониторинг или UI live-toggle; T-031 при Blender.
 3. Запреты: главы 02–12, rename.

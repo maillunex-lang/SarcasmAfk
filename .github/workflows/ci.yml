@@ -77,6 +77,32 @@ jobs:
   go-api:
     name: Go API tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: bashlegends
+          POSTGRES_PASSWORD: bashlegends
+          POSTGRES_DB: bashlegends
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U bashlegends"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://bashlegends:bashlegends@localhost:5432/bashlegends?sslmode=disable
+      REDIS_ADDR: 127.0.0.1:6379
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -85,8 +111,25 @@ jobs:
       - name: Test server
         working-directory: server
         run: go test ./... -count=1
-      - name: Live API integration smoke
+      - name: Live API integration smoke (memory)
+        env:
+          DATABASE_URL: ""
+          REDIS_ADDR: ""
         run: bash scripts/smoke_live_api.sh
+      - name: Live API smoke (postgres+redis)
+        run: |
+          set -euo pipefail
+          go build -o /tmp/bashlegends-api ./server/cmd/api
+          /tmp/bashlegends-api -addr :8081 -content client/data \
+            -database-url "$DATABASE_URL" -redis "$REDIS_ADDR" \
+            -migrate server/migrations/001_init.sql &
+          PID=$!
+          trap 'kill $PID' EXIT
+          for i in $(seq 1 40); do curl -fsS http://127.0.0.1:8081/healthz && break; sleep 0.15; done
+          AUTH=$(curl -fsS -X POST http://127.0.0.1:8081/v1/auth/anonymous)
+          TOKEN=$(python3 -c 'import json,sys; print(json.load(sys.stdin)["token"])' <<<"$AUTH")
+          curl -fsS -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8081/v1/me/progress | grep -q account_id
+          echo "postgres_redis_smoke_ok"
 
   docs-presence:
     name: Required docs present

@@ -42,7 +42,8 @@ done
 if command -v go >/dev/null 2>&1; then
   (cd server && go test ./... -count=1)
   echo "go_api_ok"
-  bash scripts/smoke_live_api.sh
+  # memory live smoke (unset PG so script stays offline-capable)
+  env -u DATABASE_URL -u REDIS_ADDR bash scripts/smoke_live_api.sh
   echo "live_api_ok"
 else
   echo "WARN: go not found; skipped API tests"
