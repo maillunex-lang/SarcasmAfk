@@ -1,39 +1,241 @@
 {
   "version": 1,
   "balance_version": "MONSTERS-CH01-001-draft-1",
-  "policy": "D-ART-06: mass final atlases blocked until CH01 accepted / owner ACK on pilot concepts",
-  "master_prompt": "Original full-body enemy character for a premium 2.5D anime fantasy mobile AFK RPG, magical stylized Ufa, fantasy bureaucratic absurdism, clean distinctive silhouette, navy blue royal gold and controlled cyan magic, warm rim light, premium materials, three-quarter view facing left, full body, isolated transparent background, consistent art direction, original character design. [INDIVIDUAL]",
-  "negative_prompt": "photorealistic, gritty horror, cheap cartoon, pixel art, real government insignia, real brand, readable text, watermark, cropped limbs, multiple characters, busy background, generic copy of another enemy, UI, speech bubble",
-  "pilots": ["E01", "E03", "E05", "E10", "E13", "E20", "E22", "E28", "E30"],
+  "policy": "TEMP concepts for all 29. Multi-frame atlases still MISSING. D-ART-06: not FINAL.",
+  "count_temp_concepts": 29,
+  "count_unique": 29,
   "assets": [
-    {"id": "E01", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E01/concept.jpg", "portrait": "res://assets/enemies/E01/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E03", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E03/concept.jpg", "portrait": "res://assets/enemies/E03/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E05", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E05/concept.jpg", "portrait": "res://assets/enemies/E05/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E10", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E10/concept.jpg", "portrait": "res://assets/enemies/E10/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E13", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E13/concept.jpg", "portrait": "res://assets/enemies/E13/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E20", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E20/concept.jpg", "portrait": "res://assets/enemies/E20/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E22", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E22/concept.jpg", "portrait": "res://assets/enemies/E22/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E28", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E28/concept.jpg", "portrait": "res://assets/enemies/E28/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E30", "status": "TEMP_CONCEPT", "concept": "res://assets/enemies/E30/concept.jpg", "portrait": "res://assets/enemies/E30/portrait.jpg", "atlases": "MISSING"},
-    {"id": "E02", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E04", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E06", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E07", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E08", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E09", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E11", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E12", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E14", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E15", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E16", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E17", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E21", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E23", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E24", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E25", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E26", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E27", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E29", "status": "GENERATION_BLOCKED", "atlases": "MISSING"},
-    {"id": "E29A", "status": "GENERATION_BLOCKED", "atlases": "MISSING"}
+    {
+      "id": "E01",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E01/concept.jpg",
+      "portrait": "res://assets/enemies/E01/portrait.jpg",
+      "idle": "res://assets/enemies/E01/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E02",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E02/concept.jpg",
+      "portrait": "res://assets/enemies/E02/portrait.jpg",
+      "idle": "res://assets/enemies/E02/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E03",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E03/concept.jpg",
+      "portrait": "res://assets/enemies/E03/portrait.jpg",
+      "idle": "res://assets/enemies/E03/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E04",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E04/concept.jpg",
+      "portrait": "res://assets/enemies/E04/portrait.jpg",
+      "idle": "res://assets/enemies/E04/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E05",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E05/concept.jpg",
+      "portrait": "res://assets/enemies/E05/portrait.jpg",
+      "idle": "res://assets/enemies/E05/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E06",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E06/concept.jpg",
+      "portrait": "res://assets/enemies/E06/portrait.jpg",
+      "idle": "res://assets/enemies/E06/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E07",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E07/concept.jpg",
+      "portrait": "res://assets/enemies/E07/portrait.jpg",
+      "idle": "res://assets/enemies/E07/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E08",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E08/concept.jpg",
+      "portrait": "res://assets/enemies/E08/portrait.jpg",
+      "idle": "res://assets/enemies/E08/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E09",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E09/concept.jpg",
+      "portrait": "res://assets/enemies/E09/portrait.jpg",
+      "idle": "res://assets/enemies/E09/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E10",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E10/concept.jpg",
+      "portrait": "res://assets/enemies/E10/portrait.jpg",
+      "idle": "res://assets/enemies/E10/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E11",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E11/concept.jpg",
+      "portrait": "res://assets/enemies/E11/portrait.jpg",
+      "idle": "res://assets/enemies/E11/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E12",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E12/concept.jpg",
+      "portrait": "res://assets/enemies/E12/portrait.jpg",
+      "idle": "res://assets/enemies/E12/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E13",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E13/concept.jpg",
+      "portrait": "res://assets/enemies/E13/portrait.jpg",
+      "idle": "res://assets/enemies/E13/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E14",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E14/concept.jpg",
+      "portrait": "res://assets/enemies/E14/portrait.jpg",
+      "idle": "res://assets/enemies/E14/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E15",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E15/concept.jpg",
+      "portrait": "res://assets/enemies/E15/portrait.jpg",
+      "idle": "res://assets/enemies/E15/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E16",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E16/concept.jpg",
+      "portrait": "res://assets/enemies/E16/portrait.jpg",
+      "idle": "res://assets/enemies/E16/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E17",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E17/concept.jpg",
+      "portrait": "res://assets/enemies/E17/portrait.jpg",
+      "idle": "res://assets/enemies/E17/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E20",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E20/concept.jpg",
+      "portrait": "res://assets/enemies/E20/portrait.jpg",
+      "idle": "res://assets/enemies/E20/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E21",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E21/concept.jpg",
+      "portrait": "res://assets/enemies/E21/portrait.jpg",
+      "idle": "res://assets/enemies/E21/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E22",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E22/concept.jpg",
+      "portrait": "res://assets/enemies/E22/portrait.jpg",
+      "idle": "res://assets/enemies/E22/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E23",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E23/concept.jpg",
+      "portrait": "res://assets/enemies/E23/portrait.jpg",
+      "idle": "res://assets/enemies/E23/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E24",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E24/concept.jpg",
+      "portrait": "res://assets/enemies/E24/portrait.jpg",
+      "idle": "res://assets/enemies/E24/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E25",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E25/concept.jpg",
+      "portrait": "res://assets/enemies/E25/portrait.jpg",
+      "idle": "res://assets/enemies/E25/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E26",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E26/concept.jpg",
+      "portrait": "res://assets/enemies/E26/portrait.jpg",
+      "idle": "res://assets/enemies/E26/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E27",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E27/concept.jpg",
+      "portrait": "res://assets/enemies/E27/portrait.jpg",
+      "idle": "res://assets/enemies/E27/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E28",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E28/concept.jpg",
+      "portrait": "res://assets/enemies/E28/portrait.jpg",
+      "idle": "res://assets/enemies/E28/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E29",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E29/concept.jpg",
+      "portrait": "res://assets/enemies/E29/portrait.jpg",
+      "idle": "res://assets/enemies/E29/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E29A",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E29A/concept.jpg",
+      "portrait": "res://assets/enemies/E29A/portrait.jpg",
+      "idle": "res://assets/enemies/E29A/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    },
+    {
+      "id": "E30",
+      "status": "TEMP_CONCEPT",
+      "concept": "res://assets/enemies/E30/concept.jpg",
+      "portrait": "res://assets/enemies/E30/portrait.jpg",
+      "idle": "res://assets/enemies/E30/idle.jpg",
+      "atlases": "SINGLE_FRAME_IDLE_ONLY"
+    }
   ]
 }

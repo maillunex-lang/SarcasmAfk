@@ -32,13 +32,24 @@ def main() -> None:
     unused = set(ids) - used
     if unused:
         fail(f"catalog types unused in battles {unused}")
-    pilots = {"E01","E03","E05","E10","E13","E20","E22","E28","E30"}
-    for p in pilots:
-        path = ROOT / f"client/assets/enemies/{p}/concept.jpg"
+    for eid in ids:
+        path = ROOT / f"client/assets/enemies/{eid}/concept.jpg"
         if not path.exists():
-            fail(f"missing pilot concept {path}")
+            fail(f"missing concept {path}")
+        idle = ROOT / f"client/assets/enemies/{eid}/idle.jpg"
+        if not idle.exists():
+            fail(f"missing idle {idle}")
+    # uniqueness: no two types may share the same concept file bytes as another folder's legacy reuse — require own path
+    sprites = set()
+    for e in json.loads((ROOT / "client/data/enemies/ch01_enemies.json").read_text(encoding="utf-8"))["enemies"]:
+        sp = e.get("sprite", "")
+        if sp in sprites:
+            fail(f"duplicate sprite path {sp}")
+        sprites.add(sp)
+        if e["id"] not in sp:
+            fail(f"sprite path should include id {e['id']}: {sp}")
     print("OK monsters-ch01 validation")
-    print(f"  enemies=29 battles_types={len(used)} pilots={len(pilots)}")
+    print(f"  enemies=29 battles_types={len(used)} unique_concepts={len(ids)}")
 
 if __name__ == "__main__":
     main()

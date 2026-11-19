@@ -10,8 +10,9 @@
       "defense": 25,
       "speed": 120,
       "sprite": "res://assets/enemies/E01/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E01/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E01/portrait.jpg",
+      "idle": "res://assets/enemies/E01/idle.jpg"
     },
     {
       "id": "E02",
@@ -21,8 +22,10 @@
       "atk": 70,
       "defense": 80,
       "speed": 90,
-      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E02/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E02/portrait.jpg",
+      "idle": "res://assets/enemies/E02/idle.jpg"
     },
     {
       "id": "E03",
@@ -33,8 +36,9 @@
       "defense": 110,
       "speed": 80,
       "sprite": "res://assets/enemies/E03/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E03/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E03/portrait.jpg",
+      "idle": "res://assets/enemies/E03/idle.jpg"
     },
     {
       "id": "E04",
@@ -44,8 +48,10 @@
       "atk": 60,
       "defense": 70,
       "speed": 85,
-      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E04/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E04/portrait.jpg",
+      "idle": "res://assets/enemies/E04/idle.jpg"
     },
     {
       "id": "E05",
@@ -56,8 +62,9 @@
       "defense": 60,
       "speed": 100,
       "sprite": "res://assets/enemies/E05/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E05/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E05/portrait.jpg",
+      "idle": "res://assets/enemies/E05/idle.jpg"
     },
     {
       "id": "E06",
@@ -67,8 +74,10 @@
       "atk": 110,
       "defense": 55,
       "speed": 105,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E06/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E06/portrait.jpg",
+      "idle": "res://assets/enemies/E06/idle.jpg"
     },
     {
       "id": "E07",
@@ -78,8 +87,10 @@
       "atk": 120,
       "defense": 140,
       "speed": 95,
-      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E07/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E07/portrait.jpg",
+      "idle": "res://assets/enemies/E07/idle.jpg"
     },
     {
       "id": "E08",
@@ -89,8 +100,10 @@
       "atk": 130,
       "defense": 30,
       "speed": 110,
-      "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E08/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E08/portrait.jpg",
+      "idle": "res://assets/enemies/E08/idle.jpg"
     },
     {
       "id": "E09",
@@ -100,8 +113,10 @@
       "atk": 90,
       "defense": 90,
       "speed": 88,
-      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E09/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E09/portrait.jpg",
+      "idle": "res://assets/enemies/E09/idle.jpg"
     },
     {
       "id": "E10",
@@ -112,8 +127,9 @@
       "defense": 35,
       "speed": 100,
       "sprite": "res://assets/enemies/E10/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E10/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E10/portrait.jpg",
+      "idle": "res://assets/enemies/E10/idle.jpg"
     },
     {
       "id": "E11",
@@ -123,8 +139,10 @@
       "atk": 75,
       "defense": 95,
       "speed": 92,
-      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E11/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E11/portrait.jpg",
+      "idle": "res://assets/enemies/E11/idle.jpg"
     },
     {
       "id": "E12",
@@ -134,8 +152,10 @@
       "atk": 160,
       "defense": 50,
       "speed": 98,
-      "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E12/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E12/portrait.jpg",
+      "idle": "res://assets/enemies/E12/idle.jpg"
     },
     {
       "id": "E13",
@@ -146,8 +166,9 @@
       "defense": 70,
       "speed": 102,
       "sprite": "res://assets/enemies/E13/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E13/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E13/portrait.jpg",
+      "idle": "res://assets/enemies/E13/idle.jpg"
     },
     {
       "id": "E14",
@@ -157,8 +178,10 @@
       "atk": 85,
       "defense": 20,
       "speed": 115,
-      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E14/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E14/portrait.jpg",
+      "idle": "res://assets/enemies/E14/idle.jpg"
     },
     {
       "id": "E15",
@@ -168,8 +191,10 @@
       "atk": 110,
       "defense": 85,
       "speed": 96,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E15/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E15/portrait.jpg",
+      "idle": "res://assets/enemies/E15/idle.jpg"
     },
     {
       "id": "E16",
@@ -179,8 +204,10 @@
       "atk": 95,
       "defense": 50,
       "speed": 108,
-      "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E16/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E16/portrait.jpg",
+      "idle": "res://assets/enemies/E16/idle.jpg"
     },
     {
       "id": "E17",
@@ -190,8 +217,10 @@
       "atk": 145,
       "defense": 75,
       "speed": 100,
-      "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E17/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E17/portrait.jpg",
+      "idle": "res://assets/enemies/E17/idle.jpg"
     },
     {
       "id": "E20",
@@ -202,8 +231,9 @@
       "defense": 120,
       "speed": 90,
       "sprite": "res://assets/enemies/E20/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E20/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E20/portrait.jpg",
+      "idle": "res://assets/enemies/E20/idle.jpg"
     },
     {
       "id": "E21",
@@ -213,8 +243,10 @@
       "atk": 70,
       "defense": 80,
       "speed": 85,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E21/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E21/portrait.jpg",
+      "idle": "res://assets/enemies/E21/idle.jpg"
     },
     {
       "id": "E22",
@@ -225,8 +257,9 @@
       "defense": 130,
       "speed": 82,
       "sprite": "res://assets/enemies/E22/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E22/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E22/portrait.jpg",
+      "idle": "res://assets/enemies/E22/idle.jpg"
     },
     {
       "id": "E23",
@@ -236,8 +269,10 @@
       "atk": 150,
       "defense": 70,
       "speed": 94,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E23/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E23/portrait.jpg",
+      "idle": "res://assets/enemies/E23/idle.jpg"
     },
     {
       "id": "E24",
@@ -247,8 +282,10 @@
       "atk": 80,
       "defense": 110,
       "speed": 88,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E24/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E24/portrait.jpg",
+      "idle": "res://assets/enemies/E24/idle.jpg"
     },
     {
       "id": "E25",
@@ -258,8 +295,10 @@
       "atk": 135,
       "defense": 40,
       "speed": 105,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E25/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E25/portrait.jpg",
+      "idle": "res://assets/enemies/E25/idle.jpg"
     },
     {
       "id": "E26",
@@ -269,8 +308,10 @@
       "atk": 130,
       "defense": 150,
       "speed": 86,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E26/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E26/portrait.jpg",
+      "idle": "res://assets/enemies/E26/idle.jpg"
     },
     {
       "id": "E27",
@@ -280,8 +321,10 @@
       "atk": 170,
       "defense": 60,
       "speed": 97,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E27/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E27/portrait.jpg",
+      "idle": "res://assets/enemies/E27/idle.jpg"
     },
     {
       "id": "E28",
@@ -292,8 +335,9 @@
       "defense": 70,
       "speed": 100,
       "sprite": "res://assets/enemies/E28/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E28/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E28/portrait.jpg",
+      "idle": "res://assets/enemies/E28/idle.jpg"
     },
     {
       "id": "E29",
@@ -303,8 +347,10 @@
       "atk": 110,
       "defense": 75,
       "speed": 103,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E29/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E29/portrait.jpg",
+      "idle": "res://assets/enemies/E29/idle.jpg"
     },
     {
       "id": "E29A",
@@ -314,8 +360,10 @@
       "atk": 100,
       "defense": 90,
       "speed": 95,
-      "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
-      "note": "GENERATION_BLOCKED pending owner ACK (D-ART-06); legacy placeholder sprite"
+      "sprite": "res://assets/enemies/E29A/concept.jpg",
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E29A/portrait.jpg",
+      "idle": "res://assets/enemies/E29A/idle.jpg"
     },
     {
       "id": "E30",
@@ -326,9 +374,10 @@
       "defense": 160,
       "speed": 92,
       "sprite": "res://assets/enemies/E30/concept.jpg",
-      "note": "TEMP control concept (MONSTERS-CH01-001 pilot); atlases MISSING",
-      "portrait": "res://assets/enemies/E30/portrait.jpg"
+      "note": "TEMP unique concept (MONSTERS-CH01-001); animation atlases still MISSING/single-frame idle",
+      "portrait": "res://assets/enemies/E30/portrait.jpg",
+      "idle": "res://assets/enemies/E30/idle.jpg"
     }
   ],
-  "note": "Sprites: pilots use TEMP concepts; others still share placeholders until art pack approved."
+  "note": "All 29 enemy_types have unique TEMP concept sprites. Full atlases pending."
 }

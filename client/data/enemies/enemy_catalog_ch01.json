@@ -35,7 +35,7 @@
         "portrait": "res://assets/enemies/E01/portrait.jpg",
         "sprite": "res://assets/enemies/E01/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E01/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -71,12 +71,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E02/concept.jpg",
+        "portrait": "res://assets/enemies/E02/portrait.jpg",
+        "sprite": "res://assets/enemies/E02/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E02/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -117,7 +117,7 @@
         "portrait": "res://assets/enemies/E03/portrait.jpg",
         "sprite": "res://assets/enemies/E03/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E03/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -153,12 +153,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E04/concept.jpg",
+        "portrait": "res://assets/enemies/E04/portrait.jpg",
+        "sprite": "res://assets/enemies/E04/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E04/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -199,7 +199,7 @@
         "portrait": "res://assets/enemies/E05/portrait.jpg",
         "sprite": "res://assets/enemies/E05/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E05/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -235,12 +235,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E06/concept.jpg",
+        "portrait": "res://assets/enemies/E06/portrait.jpg",
+        "sprite": "res://assets/enemies/E06/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E06/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -276,12 +276,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E07/concept.jpg",
+        "portrait": "res://assets/enemies/E07/portrait.jpg",
+        "sprite": "res://assets/enemies/E07/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E07/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -317,12 +317,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E08/E08_form_phantom.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E08/concept.jpg",
+        "portrait": "res://assets/enemies/E08/portrait.jpg",
+        "sprite": "res://assets/enemies/E08/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E08/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -358,12 +358,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E09/concept.jpg",
+        "portrait": "res://assets/enemies/E09/portrait.jpg",
+        "sprite": "res://assets/enemies/E09/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E09/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -404,7 +404,7 @@
         "portrait": "res://assets/enemies/E10/portrait.jpg",
         "sprite": "res://assets/enemies/E10/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E10/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -440,12 +440,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E11/concept.jpg",
+        "portrait": "res://assets/enemies/E11/portrait.jpg",
+        "sprite": "res://assets/enemies/E11/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E11/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -481,12 +481,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E02/E02_paper_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E12/concept.jpg",
+        "portrait": "res://assets/enemies/E12/portrait.jpg",
+        "sprite": "res://assets/enemies/E12/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E12/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -527,7 +527,7 @@
         "portrait": "res://assets/enemies/E13/portrait.jpg",
         "sprite": "res://assets/enemies/E13/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E13/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -563,12 +563,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E14/concept.jpg",
+        "portrait": "res://assets/enemies/E14/portrait.jpg",
+        "sprite": "res://assets/enemies/E14/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E14/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -604,12 +604,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E15/concept.jpg",
+        "portrait": "res://assets/enemies/E15/portrait.jpg",
+        "sprite": "res://assets/enemies/E15/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E15/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -645,12 +645,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E05/E05_sign_guard.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E16/concept.jpg",
+        "portrait": "res://assets/enemies/E16/portrait.jpg",
+        "sprite": "res://assets/enemies/E16/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E16/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -686,12 +686,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E03/E03_paper_golem.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E17/concept.jpg",
+        "portrait": "res://assets/enemies/E17/portrait.jpg",
+        "sprite": "res://assets/enemies/E17/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E17/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -732,7 +732,7 @@
         "portrait": "res://assets/enemies/E20/portrait.jpg",
         "sprite": "res://assets/enemies/E20/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E20/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -768,12 +768,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E21/concept.jpg",
+        "portrait": "res://assets/enemies/E21/portrait.jpg",
+        "sprite": "res://assets/enemies/E21/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E21/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -814,7 +814,7 @@
         "portrait": "res://assets/enemies/E22/portrait.jpg",
         "sprite": "res://assets/enemies/E22/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E22/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -850,12 +850,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E23/concept.jpg",
+        "portrait": "res://assets/enemies/E23/portrait.jpg",
+        "sprite": "res://assets/enemies/E23/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E23/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -891,12 +891,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E24/concept.jpg",
+        "portrait": "res://assets/enemies/E24/portrait.jpg",
+        "sprite": "res://assets/enemies/E24/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E24/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -932,12 +932,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E25/concept.jpg",
+        "portrait": "res://assets/enemies/E25/portrait.jpg",
+        "sprite": "res://assets/enemies/E25/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E25/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -973,12 +973,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E26/concept.jpg",
+        "portrait": "res://assets/enemies/E26/portrait.jpg",
+        "sprite": "res://assets/enemies/E26/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E26/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -1014,12 +1014,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E27/concept.jpg",
+        "portrait": "res://assets/enemies/E27/portrait.jpg",
+        "sprite": "res://assets/enemies/E27/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E27/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -1060,7 +1060,7 @@
         "portrait": "res://assets/enemies/E28/portrait.jpg",
         "sprite": "res://assets/enemies/E28/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E28/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -1096,12 +1096,12 @@
         "proc_chance": 0.25
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E29/concept.jpg",
+        "portrait": "res://assets/enemies/E29/portrait.jpg",
+        "sprite": "res://assets/enemies/E29/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E29/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -1137,12 +1137,12 @@
         "proc_chance": 0.35
       },
       "art": {
-        "status": "GENERATION_BLOCKED",
-        "concept": "",
-        "portrait": "",
-        "sprite": "res://assets/enemies/E28/E28_inspector.jpg",
+        "status": "TEMP_CONCEPT",
+        "concept": "res://assets/enemies/E29A/concept.jpg",
+        "portrait": "res://assets/enemies/E29A/portrait.jpg",
+        "sprite": "res://assets/enemies/E29A/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E29A/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",
@@ -1183,7 +1183,7 @@
         "portrait": "res://assets/enemies/E30/portrait.jpg",
         "sprite": "res://assets/enemies/E30/concept.jpg",
         "atlases": {
-          "idle": "MISSING",
+          "idle": "res://assets/enemies/E30/idle.jpg",
           "attack": "MISSING",
           "hit": "MISSING",
           "death": "MISSING",

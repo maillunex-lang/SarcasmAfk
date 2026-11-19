@@ -62,9 +62,6 @@ func _is_unlocked(enemy_id: String) -> bool:
 		for en in battle.get("enemies", []):
 			if str(en.get("enemy_type", "")) == enemy_id:
 				return true
-	# Pilots visible for review even before fight (TEMP)
-	if enemy_id in ["E01", "E03", "E05", "E10", "E13", "E20", "E22", "E28", "E30"]:
-		return true
 	return false
 
 

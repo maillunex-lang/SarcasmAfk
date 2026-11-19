@@ -168,22 +168,11 @@ static func enemy_sprite_for_type(enemy_type: String) -> String:
 	var combat := combat_idle(enemy_type)
 	if combat != "":
 		return combat
+	var idle := "res://assets/enemies/%s/idle.jpg" % enemy_type
+	if ResourceLoader.exists(idle):
+		return idle
 	var concept := enemy_concept(enemy_type)
 	if concept != "":
 		return concept
-	# Legacy placeholders only until per-type TEMP/FINAL art lands (D-ART-06).
-	match enemy_type:
-		"E01":
-			return "res://assets/enemies/E01/E01_living_ticket.jpg"
-		"E02", "E04", "E07", "E09", "E12":
-			return "res://assets/enemies/E02/E02_paper_guard.jpg"
-		"E03", "E11", "E14", "E17":
-			return "res://assets/enemies/E03/E03_paper_golem.jpg"
-		"E05", "E06", "E10", "E13", "E15", "E16":
-			return "res://assets/enemies/E05/E05_sign_guard.jpg"
-		"E08", "E20", "E21", "E22", "E23", "E24", "E25", "E26", "E27":
-			return "res://assets/enemies/E08/E08_form_phantom.jpg"
-		"E28", "E29", "E29A", "E30":
-			return "res://assets/enemies/E28/E28_inspector.jpg"
-		_:
-			return "res://assets/enemies/E01/E01_living_ticket.jpg"
+	# Last-resort legacy placeholders (should not hit after MONSTERS-CH01-001).
+	return "res://assets/enemies/E01/E01_living_ticket.jpg"
