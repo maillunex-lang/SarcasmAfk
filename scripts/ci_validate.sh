@@ -34,7 +34,7 @@ if missing:
 print("assets_ok", len(required))
 PY
 
-for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/V0_REVIEW.md client/project.godot server/go.mod server/cmd/api/main.go; do
+for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/PHASE2_AUDIT.md docs/V0_REVIEW.md client/project.godot server/go.mod server/cmd/api/main.go; do
   test -f "$f"
   echo "OK $f"
 done

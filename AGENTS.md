@@ -17,8 +17,8 @@
 | Display name | БашЛегенды: Эпоха Абсурда |
 | Internal ID | `BashLegends` |
 | Platform | Android only · Godot 4 · 9:16 |
-| Stack later | Go + PostgreSQL + Redis |
-| Working branch | `cursor/phase0-design-docs-beaf` (синхронизировать с `main`) |
+| Stack | Godot 4.3 client · Go API · Postgres/Redis (opt-in) |
+| Working branch | `main` (feature branches `cursor/*-beaf`) |
 
 ## Жёсткие правила
 
@@ -34,4 +34,4 @@
 
 Смотри блок **NOW** в [`docs/STATUS.md`](docs/STATUS.md).
 
-Клиент V0-A: [`client/`](client/) (Godot 4.3). Это каркас, не готовый MVP.
+Клиент: [`client/`](client/) (Phase1 MVP на моках). Сервер: [`server/`](server/). Статус — `docs/STATUS.md`.

@@ -17,7 +17,7 @@
 | `client/` | Godot 4.3 V0-C stub | Нет (local save) |
 | `client/data/*.json` | Контент/баланс-моки | Контент |
 | `docs/` | GDD/ROAD/VIS/API | Документы |
-| `server/` | Go Phase2 stub API | In-memory/file (PG/Redis → T-085) |
+| `server/` | Go Phase2 API | memory **или** Postgres+Redis (T-085); ATB tick-sim |
 | `.github/workflows/` | CI (T-021) | Проверки |
 
 ## 2. Идентификаторы (стабильные)

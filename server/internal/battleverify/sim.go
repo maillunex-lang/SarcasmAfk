@@ -25,7 +25,8 @@ type SimResult struct {
 	Note    string `json:"note"`
 }
 
-// SimulateATB runs a seeded ATB sim mirroring client/scripts/battle/battle_engine.gd (no ultimates auto-cast).
+// SimulateATB runs a seeded ATB sim mirroring client/scripts/battle/battle_engine.gd.
+// Hero ultimates auto-cast when energy is full (server baseline; client may delay — see PHASE2_AUDIT).
 func SimulateATB(seed int64, heroes, enemies []map[string]any) SimResult {
 	rng := rand.New(rand.NewSource(seed))
 	hs := make([]*unit, 0, len(heroes))
@@ -121,6 +122,51 @@ func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
 		actor.energy += energyPerHit
 		if actor.energy > actor.energyMax {
 			actor.energy = actor.energyMax
+		}
+		if actor.energy >= actor.energyMax && actor.ultimateID != "" {
+			castUltimate(actor, heroes, enemies, rng)
+		}
+	}
+}
+
+func castUltimate(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
+	actor.energy = 0
+	switch actor.ultimateID {
+	case "rulebreak":
+		if t := pickTarget(enemies, rng); t != nil {
+			takeDamage(t, int(float64(actor.atk)*2.2))
+		}
+	case "emergency_repair":
+		var lowest *unit
+		for _, h := range heroes {
+			if !h.alive {
+				continue
+			}
+			if lowest == nil || float64(h.hp)/float64(h.maxHP) < float64(lowest.hp)/float64(lowest.maxHP) {
+				lowest = h
+			}
+		}
+		if lowest != nil {
+			heal := int(float64(lowest.maxHP) * 0.35)
+			lowest.hp += heal
+			if lowest.hp > lowest.maxHP {
+				lowest.hp = lowest.maxHP
+			}
+		}
+	case "paragraph_oblivion":
+		for _, e := range enemies {
+			if !e.alive {
+				continue
+			}
+			takeDamage(e, int(float64(actor.atk)*0.85))
+			e.atb -= 35
+			if e.atb < 0 {
+				e.atb = 0
+			}
+		}
+	default:
+		if t := pickTarget(enemies, rng); t != nil {
+			takeDamage(t, int(float64(actor.atk)*1.8))
 		}
 	}
 }

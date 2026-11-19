@@ -18,8 +18,11 @@ var victory: bool = false
 var _rng := RandomNumberGenerator.new()
 
 
-func setup(party: Array, enemy_defs: Array) -> void:
-	_rng.randomize()
+func setup(party: Array, enemy_defs: Array, rng_seed: int = -1) -> void:
+	if rng_seed >= 0:
+		_rng.seed = rng_seed
+	else:
+		_rng.randomize()
 	heroes.clear()
 	enemies.clear()
 	finished = false

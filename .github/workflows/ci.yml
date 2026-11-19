@@ -152,6 +152,7 @@ jobs:
             docs/TASK_QUEUE.md \
             docs/DECISIONS.md \
             docs/PHASE0_SPEC.md \
+            docs/PHASE2_AUDIT.md \
             docs/V0_REVIEW.md \
             client/project.godot \
             server/go.mod \
