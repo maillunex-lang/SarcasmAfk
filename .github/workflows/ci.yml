@@ -83,6 +83,10 @@ jobs:
         working-directory: client
         run: |
           /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_city_hub.gd
+      - name: Smoke battle layout
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_battle_layout.gd
 
   go-api:
     name: Go API tests

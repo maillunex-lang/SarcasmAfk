@@ -6,8 +6,8 @@
 
 ## NOW
 
-1. **T-159** CITY-HUB-001 — **DONE_VERIFIED** on PR branch: Ufa city hub (pan + 10 buildings + decor + smoke).  
-2. T-158 Visual Overhaul Stage F merged (`#29` → `main`).  
+1. **Fullscreen + AFK battle layout** — `stretch/aspect=expand`; battle field (standing units + ULT bar), not card grid. Branch `cursor/battle-fullscreen-afk-4106`.  
+2. T-159 CITY-HUB-001 merged (`#30` → `main`).  
 3. Owner blockers unchanged: T-128 device accept, T-129 live URL, T-126 keystore, T-131 Stage E, T-153 payments.
 
 ## Subsystem matrix (evidence-based)

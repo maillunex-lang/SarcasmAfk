@@ -100,6 +100,7 @@ if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_visual_gallery.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_location_ui.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_city_hub.gd)
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_battle_layout.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd)
