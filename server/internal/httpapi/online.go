@@ -86,7 +86,17 @@ func (s *Server) heroesMutate(w http.ResponseWriter, r *http.Request) {
 			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
 			return
 		}
-		prog, inst, err := s.Store.EquipHero(tok, heroID, body.Slot, body.ItemID, base)
+		prog, inst, err := s.Store.EquipHeroUnique(tok, heroID, body.Slot, body.ItemID, base, s.Content.EquipmentDefs())
+		s.writeHeroMutate(w, prog, inst, err)
+	case action == "skill-up" && r.Method == http.MethodPost:
+		var body struct {
+			SkillID string `json:"skill_id"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.SkillID == "" {
+			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
+			return
+		}
+		prog, inst, err := s.Store.SkillUpHero(tok, heroID, body.SkillID, base, s.Content.EquipmentDefs())
 		s.writeHeroMutate(w, prog, inst, err)
 	default:
 		writeErr(w, http.StatusNotFound, "NOT_FOUND")

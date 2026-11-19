@@ -43,6 +43,9 @@ type AccountProgress struct {
 	TestVipDay       int                      `json:"test_vip_day,omitempty"`
 	VipDailyClaimed  string                   `json:"vip_daily_claimed,omitempty"`
 	GuildID          string                   `json:"guild_id,omitempty"`
+	Sidequests       map[string]*SidequestState `json:"sidequests,omitempty"`
+	POIProgress      map[string]*POIProgress    `json:"poi_progress,omitempty"`
+	JournalFlags     map[string]bool            `json:"journal_flags,omitempty"`
 	AFKClaimedUnix   int64                    `json:"afk_claimed_unix"`
 	ActiveBattleID   string                   `json:"active_battle_id,omitempty"`
 	BattleSeed       int64                    `json:"battle_seed,omitempty"`

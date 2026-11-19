@@ -19,11 +19,26 @@
 
 | Срез | Содержание | Статус |
 |---|---|---|
-| A | Data: sidequests, POI, dialogues, rewards, equipment + validation | этот PR |
-| B | Go API + PG migration + idempotent claims | следующий |
+| A | Data: sidequests, POI, dialogues, rewards, equipment + validation | DONE |
+| B | Go API + PG migration + idempotent claims + skill-up/equip DEF | DONE |
 | C | Godot UI POI / журнал / sidequests | следующий |
-| D | RPG tutorial + server skill/equip combat effects | следующий |
+| D | RPG tutorial + server skill/equip combat effects in battle sim | частичнo (skill ATK/equip DEF API) |
 | E | E2E + debug APK + STATUS/ROAD | следующий |
+
+### Срез B — API
+
+| Method | Path |
+|---|---|
+| GET | `/v1/campaign/ch01/sidequests` |
+| POST | `/v1/campaign/ch01/sidequests/{id}/start` |
+| POST | `/v1/campaign/ch01/sidequests/{id}/claim` |
+| POST | `/v1/campaign/ch01/poi/{id}/interact` |
+| GET | `/v1/campaign/ch01/journal` |
+| POST | `/v1/heroes/{id}/skill-up` |
+| POST | `/v1/heroes/{id}/equip` (unique + DEF bonuses) |
+
+Migration: `server/migrations/007_ch01_expansion.sql`  
+Tests: `store/ch01_expansion_test.go`, `httpapi/ch01_campaign_test.go`
 
 ## Контент (срез A)
 

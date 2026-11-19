@@ -5,23 +5,33 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+
+	"github.com/maillunex-lang/SarcasmAfk/server/internal/store"
 )
 
 type Loader struct {
-	mu       sync.RWMutex
-	root     string
-	heroes   map[string]any
-	battles  map[string]any
-	dialogue map[string]any
-	heroIDs  []string
+	mu         sync.RWMutex
+	root       string
+	heroes     map[string]any
+	battles    map[string]any
+	dialogue   map[string]any
+	heroIDs    []string
+	sidequests map[string]SidequestDef
+	poi        map[string]POIDef
+	rewards    map[string]store.ExpansionRewardBundle
+	equipment  map[string]store.EquipmentDef
 }
 
 func New(root string) *Loader {
 	l := &Loader{
-		root:     root,
-		heroes:   map[string]any{},
-		battles:  map[string]any{},
-		dialogue: map[string]any{},
+		root:       root,
+		heroes:     map[string]any{},
+		battles:    map[string]any{},
+		dialogue:   map[string]any{},
+		sidequests: map[string]SidequestDef{},
+		poi:        map[string]POIDef{},
+		rewards:    map[string]store.ExpansionRewardBundle{},
+		equipment:  map[string]store.EquipmentDef{},
 	}
 	l.reload()
 	return l
@@ -71,9 +81,13 @@ func (l *Loader) reload() {
 			}
 		}
 	}
-	// dialogues
+	// dialogues (single-file packs; expansion packed file handled in loadExpansion)
 	matches, _ := filepath.Glob(filepath.Join(l.root, "dialogues", "*.json"))
 	for _, p := range matches {
+		base := filepath.Base(p)
+		if base == "ch01_expansion_dialogues.json" {
+			continue
+		}
 		var d map[string]any
 		b, err := os.ReadFile(p)
 		if err != nil || json.Unmarshal(b, &d) != nil {
@@ -82,9 +96,9 @@ func (l *Loader) reload() {
 		if qid, _ := d["quest_id"].(string); qid != "" {
 			l.dialogue[qid] = d
 		}
-		base := filepath.Base(p)
 		l.dialogue[base[:len(base)-5]] = d
 	}
+	l.loadExpansion()
 }
 
 func (l *Loader) Heroes() []any {

@@ -112,10 +112,14 @@ func (p *Postgres) CreateAnonymous() (token string, progress AccountProgress) {
 		HeroInstances:  map[string]*HeroInstance{},
 		Inventory:      map[string]int{"mat_hero_exp": 500},
 		PityCounters:   map[string]int{},
+		Sidequests:     map[string]*SidequestState{},
+		POIProgress:    map[string]*POIProgress{},
+		JournalFlags:   map[string]bool{},
 		AFKClaimedUnix: time.Now().Unix(),
 		UpdatedAt:      time.Now().UTC().Format(time.RFC3339),
 	}
 	EnsureHeroInstances(&acc)
+	EnsureExpansion(&acc)
 	tok := pgID("tok_")
 	party, _ := json.Marshal(acc.PartyIDs)
 	qf, _ := json.Marshal(acc.QuestFlags)
@@ -124,6 +128,9 @@ func (p *Postgres) CreateAnonymous() (token string, progress AccountProgress) {
 	hi, _ := json.Marshal(acc.HeroInstances)
 	inv, _ := json.Marshal(acc.Inventory)
 	pity, _ := json.Marshal(acc.PityCounters)
+	sq, _ := json.Marshal(acc.Sidequests)
+	poi, _ := json.Marshal(acc.POIProgress)
+	jf, _ := json.Marshal(acc.JournalFlags)
 
 	tx, err := p.pool.Begin(p.ctx)
 	if err != nil {
@@ -135,11 +142,12 @@ func (p *Postgres) CreateAnonymous() (token string, progress AccountProgress) {
 		INSERT INTO accounts(
 			account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
 			party_ids, quest_flags, claimed_rewards, owned_heroes, afk_claimed_unix,
-			hero_instances, inventory, vip_points, vip_level, pity_counters, guild_id, updated_at
+			hero_instances, inventory, vip_points, vip_level, pity_counters, guild_id,
+			sidequest_progress, poi_progress, journal_flags, updated_at
 		) VALUES ($1,$2,$3,$4,$5,$6::jsonb,$7::jsonb,$8::jsonb,$9::jsonb,$10,
-			$11::jsonb,$12::jsonb,0,0,$13::jsonb,'',NOW())`,
+			$11::jsonb,$12::jsonb,0,0,$13::jsonb,'',$14::jsonb,$15::jsonb,$16::jsonb,NOW())`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
-		party, qf, cr, oh, acc.AFKClaimedUnix, hi, inv, pity,
+		party, qf, cr, oh, acc.AFKClaimedUnix, hi, inv, pity, sq, poi, jf,
 	)
 	if err != nil {
 		return "", AccountProgress{}
@@ -189,7 +197,7 @@ func (p *Postgres) resolveAccountID(token string) (string, error) {
 
 func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	var acc AccountProgress
-	var party, qf, cr, oh, cmds, hi, inv, pity, gh []byte
+	var party, qf, cr, oh, cmds, hi, inv, pity, gh, sq, poi, jf []byte
 	var updated time.Time
 	err := p.pool.QueryRow(p.ctx, `
 		SELECT account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
@@ -201,14 +209,16 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 			COALESCE(guild_id,''),
 			COALESCE(gacha_history,'[]'::jsonb), COALESCE(test_purchase_day,''),
 			COALESCE(test_purchases_day,0), COALESCE(test_hard_day,0), COALESCE(test_vip_day,0),
-			COALESCE(vip_daily_claimed,''), updated_at
+			COALESCE(vip_daily_claimed,''),
+			COALESCE(sidequest_progress,'{}'::jsonb), COALESCE(poi_progress,'{}'::jsonb),
+			COALESCE(journal_flags,'{}'::jsonb), updated_at
 		FROM accounts WHERE account_id=$1`, accountID).Scan(
 		&acc.AccountID, &acc.CommanderXP, &acc.SoftCurrency, &acc.HardCurrency, &acc.SummonTickets,
 		&party, &qf, &cr, &oh, &acc.AFKClaimedUnix, &acc.ActiveBattleID, &acc.BattleSeed,
 		&acc.BalanceVersion, &cmds, &acc.BattleTickApprox,
 		&hi, &inv, &acc.VipPoints, &acc.VipLevel, &pity, &acc.GuildID,
 		&gh, &acc.TestPurchaseDay, &acc.TestPurchasesDay, &acc.TestHardDay, &acc.TestVipDay,
-		&acc.VipDailyClaimed, &updated,
+		&acc.VipDailyClaimed, &sq, &poi, &jf, &updated,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrUnauthorized
@@ -225,6 +235,9 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	_ = json.Unmarshal(inv, &acc.Inventory)
 	_ = json.Unmarshal(pity, &acc.PityCounters)
 	_ = json.Unmarshal(gh, &acc.GachaHistory)
+	_ = json.Unmarshal(sq, &acc.Sidequests)
+	_ = json.Unmarshal(poi, &acc.POIProgress)
+	_ = json.Unmarshal(jf, &acc.JournalFlags)
 	if acc.QuestFlags == nil {
 		acc.QuestFlags = map[string]bool{}
 	}
@@ -235,6 +248,7 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 		acc.OwnedHeroes = map[string]bool{}
 	}
 	EnsureHeroInstances(&acc)
+	EnsureExpansion(&acc)
 	acc.UpdatedAt = updated.UTC().Format(time.RFC3339)
 	return &acc, nil
 }
@@ -249,6 +263,7 @@ func (p *Postgres) AccountByToken(token string) (*AccountProgress, error) {
 
 func (p *Postgres) saveAccount(acc *AccountProgress) error {
 	EnsureHeroInstances(acc)
+	EnsureExpansion(acc)
 	party, _ := json.Marshal(acc.PartyIDs)
 	qf, _ := json.Marshal(acc.QuestFlags)
 	cr, _ := json.Marshal(acc.ClaimedRewards)
@@ -258,6 +273,9 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 	inv, _ := json.Marshal(acc.Inventory)
 	pity, _ := json.Marshal(acc.PityCounters)
 	gh, _ := json.Marshal(acc.GachaHistory)
+	sq, _ := json.Marshal(acc.Sidequests)
+	poi, _ := json.Marshal(acc.POIProgress)
+	jf, _ := json.Marshal(acc.JournalFlags)
 	if cmds == nil {
 		cmds = []byte("[]")
 	}
@@ -273,13 +291,16 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 			hero_instances=$16::jsonb, inventory=$17::jsonb, vip_points=$18, vip_level=$19,
 			pity_counters=$20::jsonb, guild_id=$21,
 			gacha_history=$22::jsonb, test_purchase_day=$23, test_purchases_day=$24,
-			test_hard_day=$25, test_vip_day=$26, vip_daily_claimed=$27, updated_at=NOW()
+			test_hard_day=$25, test_vip_day=$26, vip_daily_claimed=$27,
+			sidequest_progress=$28::jsonb, poi_progress=$29::jsonb, journal_flags=$30::jsonb,
+			updated_at=NOW()
 		WHERE account_id=$1`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
 		party, qf, cr, oh, acc.AFKClaimedUnix, acc.ActiveBattleID, acc.BattleSeed,
 		acc.BalanceVersion, cmds, acc.BattleTickApprox,
 		hi, inv, acc.VipPoints, acc.VipLevel, pity, acc.GuildID,
 		gh, acc.TestPurchaseDay, acc.TestPurchasesDay, acc.TestHardDay, acc.TestVipDay, acc.VipDailyClaimed,
+		sq, poi, jf,
 	)
 	return err
 }
@@ -746,4 +767,58 @@ func (p *Postgres) ClaimVIPDaily(token string, soft, tickets int) (*AccountProgr
 		return nil
 	})
 	return prog, already, err
+}
+
+func (p *Postgres) SkillUpHero(token, heroID, skillID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error) {
+	var out *HeroInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		bonus := map[string]int{}
+		if inst := acc.HeroInstances[heroID]; inst != nil {
+			bonus = GearBonusForHero(inst, defs)
+		}
+		inst, e := ApplySkillUp(acc, heroID, skillID, base, bonus)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) EquipHeroUnique(token, heroID, slot, itemID string, base HeroBaseStats, defs map[string]EquipmentDef) (*AccountProgress, *HeroInstance, error) {
+	var out *HeroInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		inst, e := ApplyEquipUnique(acc, heroID, slot, itemID, base, defs)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) StartSidequest(token, questID, requiredMain string) (*AccountProgress, error) {
+	return p.mutate(token, func(acc *AccountProgress) error {
+		return ApplySidequestStart(acc, questID, requiredMain, func(q string) bool {
+			return acc.QuestFlags[q]
+		})
+	})
+}
+
+func (p *Postgres) InteractPOI(token, poiID, actionID, stepID, sidequestID string, sequence []string, completionFlag string, oneTime bool) (*AccountProgress, bool, error) {
+	reset := false
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		r, e := ApplyPOIInteract(acc, poiID, actionID, stepID, sidequestID, sequence, completionFlag, oneTime)
+		reset = r
+		return e
+	})
+	return prog, reset, err
+}
+
+func (p *Postgres) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
+	already := false
+	var granted map[string]any
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs)
+		already = a
+		granted = g
+		return e
+	})
+	return prog, already, granted, err
 }
