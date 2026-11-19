@@ -1,6 +1,7 @@
 package store
 
 import (
+	"errors"
 	"strings"
 	"sync"
 	"time"
@@ -27,27 +28,33 @@ type ChatMessage struct {
 }
 
 type ChatHub struct {
-	mu       sync.Mutex
-	nextID   int64
-	msgs     map[string][]ChatMessage // channel -> messages
-	lastSent map[string]time.Time     // account:channel
-	lastBody map[string]string        // account:channel
-	lastAt   map[string]time.Time
-	blocks   map[string]map[string]bool // account -> blocked
-	reports  []map[string]any
-	muted    map[string]bool // channel mute flags client-side mirrored optional
+	mu            sync.Mutex
+	nextID        int64
+	msgs          map[string][]ChatMessage // channel -> messages
+	lastSent      map[string]time.Time     // account:channel
+	lastBody      map[string]string        // account:channel
+	lastAt        map[string]time.Time
+	blocks        map[string]map[string]bool // account -> blocked
+	reports       []map[string]any
+	mutedChannels map[string]bool      // channel sound mute (client preference mirrored)
+	mutedUntil    map[string]time.Time // account mute (moderation)
+	deleted       map[int64]bool
 }
 
 func NewChatHub() *ChatHub {
 	return &ChatHub{
-		msgs:     map[string][]ChatMessage{},
-		lastSent: map[string]time.Time{},
-		lastBody: map[string]string{},
-		lastAt:   map[string]time.Time{},
-		blocks:   map[string]map[string]bool{},
-		muted:    map[string]bool{},
+		msgs:          map[string][]ChatMessage{},
+		lastSent:      map[string]time.Time{},
+		lastBody:      map[string]string{},
+		lastAt:        map[string]time.Time{},
+		blocks:        map[string]map[string]bool{},
+		mutedChannels: map[string]bool{},
+		mutedUntil:    map[string]time.Time{},
+		deleted:       map[int64]bool{},
 	}
 }
+
+var ErrMuted = errors.New("MUTED")
 
 func SanitizeChatBody(raw string) string {
 	s := strings.TrimSpace(raw)
@@ -73,8 +80,11 @@ func (h *ChatHub) Post(channel, accountID, displayName, body string, level int) 
 	}
 	h.mu.Lock()
 	defer h.mu.Unlock()
-	key := accountID + ":" + channel
 	now := time.Now()
+	if until, ok := h.mutedUntil[accountID]; ok && now.Before(until) {
+		return ChatMessage{}, ErrMuted
+	}
+	key := accountID + ":" + channel
 	if t, ok := h.lastSent[key]; ok && now.Sub(t) < ChatRateMinGap {
 		return ChatMessage{}, ErrValidation
 	}
@@ -114,6 +124,9 @@ func (h *ChatHub) History(channel string, beforeID int64, limit int) []ChatMessa
 	out := make([]ChatMessage, 0, limit)
 	for i := len(all) - 1; i >= 0 && len(out) < limit; i-- {
 		m := all[i]
+		if h.deleted[m.ID] {
+			continue
+		}
 		if beforeID > 0 && m.ID >= beforeID {
 			continue
 		}
@@ -158,4 +171,47 @@ func (h *ChatHub) Reports() []map[string]any {
 	out := make([]map[string]any, len(h.reports))
 	copy(out, h.reports)
 	return out
+}
+
+func (h *ChatHub) MuteAccount(accountID string, durationSec int) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	if durationSec <= 0 {
+		durationSec = 3600
+	}
+	h.mutedUntil[accountID] = time.Now().Add(time.Duration(durationSec) * time.Second)
+}
+
+func (h *ChatHub) UnmuteAccount(accountID string) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	delete(h.mutedUntil, accountID)
+}
+
+func (h *ChatHub) DeleteMessage(id int64) bool {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	h.deleted[id] = true
+	return true
+}
+
+func (h *ChatHub) SetChannelMute(channel string, muted bool) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	h.mutedChannels[channel] = muted
+}
+
+func (h *ChatHub) ModerationSnapshot() map[string]any {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	mutes := map[string]string{}
+	for id, until := range h.mutedUntil {
+		mutes[id] = until.UTC().Format(time.RFC3339)
+	}
+	return map[string]any{
+		"reports":        append([]map[string]any{}, h.reports...),
+		"muted_accounts": mutes,
+		"deleted_count":  len(h.deleted),
+		"channels":       len(h.msgs),
+	}
 }

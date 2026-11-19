@@ -319,6 +319,14 @@
 
 ### Журнал 2026-11-19 — Online P2 (T-145…T-150)
 
+### Журнал 2026-11-19 — Online P3 (T-151/T-152)
+
+- Admin chat moderation: reports, mute/unmute, delete message.
+- Guild daily quests, vault donate, member contribution board.
+- Migration 005: vault/quests columns + empty boss/war hooks (wars not implemented).
+- Chat PG persistence still TODO (T-154).
+
+
 - Owner approvals: H13–H36 Draft lore (D-SCOPE-04), gacha rates/pity (D-GACHA-01), TEST_PURCHASE shop (D-SHOP-01), VIP 0–10 (D-VIP-01).
 - GameBrain architecture only: `docs/LUNEX_GAMEBRAIN.md` (D-AI-01).
 - WS chat `/v1/ws/chat`, DM channels, guild roles/announce, gacha history/pity counters.

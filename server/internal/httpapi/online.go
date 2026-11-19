@@ -173,9 +173,16 @@ func (s *Server) chatHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		// Never trust client sender id — always use session account.
 		msg, err := s.Chat.Post(channel, acc.AccountID, name, body.Text, acc.CommanderXP/100+1)
+		if err == store.ErrMuted {
+			writeErr(w, http.StatusForbidden, "MUTED")
+			return
+		}
 		if err != nil {
 			writeErr(w, http.StatusTooManyRequests, "RATE_LIMITED")
 			return
+		}
+		if ch, ok := s.Guilds.ChatChannel(acc.AccountID); ok && channel == ch {
+			_, _ = s.Guilds.ProgressQuest(acc.AccountID, "gq_chat", 1)
 		}
 		writeJSON(w, http.StatusOK, map[string]any{"ok": true, "message": msg})
 	default:
@@ -194,9 +201,12 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 		if g, role, ok := s.Guilds.ForAccount(acc.AccountID); ok {
 			pub := g.Public()
 			ch, _ := s.Guilds.ChatChannel(acc.AccountID)
+			quests, _ := s.Guilds.Quests(acc.AccountID)
+			board, _ := s.Guilds.MemberBoard(acc.AccountID)
 			writeJSON(w, http.StatusOK, map[string]any{
 				"ok": true, "guild": pub, "role": role, "chat_channel": ch,
 				"announcements": g.Announcements, "permissions": g.Permissions,
+				"quests": quests, "board": board,
 				"list": s.Guilds.List(),
 			})
 			return
@@ -212,6 +222,8 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 			Target string `json:"target_id"`
 			Role   string `json:"role"`
 			Text   string `json:"text"`
+			Amount  int    `json:"amount"`
+			QuestID string `json:"quest_id"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
@@ -264,6 +276,47 @@ func (s *Server) guildLive(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			writeJSON(w, http.StatusOK, map[string]any{"ok": true})
+		case "donate":
+			softAmt := body.Amount
+			if softAmt <= 0 {
+				softAmt = 100
+			}
+			if softAmt > 5000 {
+				softAmt = 5000
+			}
+			if _, err := s.Store.SpendSoft(bearer(r), softAmt); err == store.ErrInsufficient {
+				writeErr(w, http.StatusConflict, "INSUFFICIENT_RESOURCES")
+				return
+			} else if err != nil {
+				writeErr(w, http.StatusUnprocessableEntity, "VALIDATION_FAILED")
+				return
+			}
+			g, err := s.Guilds.Donate(acc.AccountID, softAmt)
+			if err != nil {
+				_, _, _ = s.Store.ApplySimulatedPurchase(bearer(r), "guild_donate_refund", softAmt, 0, 0, nil)
+				writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
+				return
+			}
+			writeJSON(w, http.StatusOK, map[string]any{"ok": true, "guild": g.Public(), "donated": softAmt})
+		case "quest_progress":
+			qid := body.QuestID
+			if qid == "" {
+				qid = body.ID
+			}
+			g, err := s.Guilds.ProgressQuest(acc.AccountID, qid, 1)
+			if err != nil {
+				writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
+				return
+			}
+			writeJSON(w, http.StatusOK, map[string]any{"ok": true, "guild": g.Public(), "quests": g.Quests})
+		case "board":
+			board, err := s.Guilds.MemberBoard(acc.AccountID)
+			if err != nil {
+				writeErr(w, http.StatusNotFound, "NOT_FOUND")
+				return
+			}
+			quests, _ := s.Guilds.Quests(acc.AccountID)
+			writeJSON(w, http.StatusOK, map[string]any{"ok": true, "board": board, "quests": quests})
 		default:
 			writeErr(w, http.StatusBadRequest, "VALIDATION_FAILED")
 		}

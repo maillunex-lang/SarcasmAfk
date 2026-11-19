@@ -94,8 +94,9 @@
 | T-148 | P6 | **DONE** | TEST_PURCHASE shop + limits + history keys | D-SHOP-01 | owner prices later |
 | T-149 | P7 | **DONE** | VIP 0–10 + daily claim | D-VIP-01 | owner balance later |
 | T-150 | P2 | **DONE** | H13–H36 Draft lore + GameBrain roadmap doc | roster v4 + LUNEX_GAMEBRAIN.md | D-SCOPE-04 |
-| T-151 | P3 | **TODO** | Chat moderation admin UI + PG chat persistence | admin + migration wiring | T-145 |
-| T-152 | P4 | **TODO** | Guild quests/vault/boss hooks | schema already reserved | T-146 |
+| T-151 | P3 | **DONE** | Chat moderation admin + mute/delete/reports | `/v1/admin/chat/*` | T-145 |
+| T-152 | P4 | **DONE** | Guild quests/vault/member board (+ war/boss hooks empty) | donate + quests + migration 005 | T-146 |
+| T-154 | P3 | **TODO** | Persist chat hub to Postgres end-to-end | wire chat_messages table | T-151 |
 | T-153 | P6 | **TODO** | Real payment provider adapter (when approved) | replace TEST_PURCHASE | owner + D-SHOP-01 |
 | T-112 | P3 | **TODO** | Arena/events live | after rules; guilds unlocked by D-SCOPE-03 | T-146 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |

@@ -62,6 +62,10 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/vip/status", s.vipStatusV2)
 	mux.HandleFunc("/v1/vip/claim-daily", s.vipClaimDaily)
 	mux.HandleFunc("/v1/admin/config", s.adminConfig)
+	mux.HandleFunc("/v1/admin/chat/reports", s.adminChat)
+	mux.HandleFunc("/v1/admin/chat/mute", s.adminChat)
+	mux.HandleFunc("/v1/admin/chat/delete", s.adminChat)
+	mux.HandleFunc("/v1/admin/guilds", s.adminGuilds)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 

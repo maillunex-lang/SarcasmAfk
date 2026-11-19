@@ -3,6 +3,7 @@ extends "res://scripts/ui/screen_base.gd"
 var _name_in: LineEdit
 var _tag_in: LineEdit
 var _status: Label
+var _quests_box: VBoxContainer
 
 
 func _ready() -> void:
@@ -16,7 +17,7 @@ func _ready() -> void:
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 	vbox.add_child(DesignTokens.make_label("Гильдия", 40, DesignTokens.COLOR_ACCENT_GOLD))
 	vbox.add_child(DesignTokens.make_label(
-		"Live create/join · стоимость создания Draft %d soft" % 500,
+		"Казна · задания · чат · роли (войны не включены)",
 		18,
 		DesignTokens.COLOR_TEXT_MUTED
 	))
@@ -36,6 +37,19 @@ func _ready() -> void:
 	create_btn.pressed.connect(_on_create)
 	vbox.add_child(create_btn)
 
+	var donate := DesignTokens.make_button("Вклад в казну (−100 soft)", false)
+	donate.pressed.connect(func() -> void:
+		GameState.api.guild_action("donate", {"amount": 100})
+		GameState.soft_currency = max(0, GameState.soft_currency - 100)
+		GameState.save_game()
+		_reload()
+	)
+	vbox.add_child(donate)
+
+	vbox.add_child(DesignTokens.make_label("Задания", 28, DesignTokens.COLOR_ACCENT_GOLD))
+	_quests_box = VBoxContainer.new()
+	vbox.add_child(_quests_box)
+
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(scroll)
@@ -43,7 +57,7 @@ func _ready() -> void:
 	list.name = "GuildList"
 	scroll.add_child(list)
 
-	var chat := DesignTokens.make_button("Чат гильдии / global", false)
+	var chat := DesignTokens.make_button("Чат", false)
 	chat.pressed.connect(func() -> void: SceneNav.to_chat(get_tree()))
 	vbox.add_child(chat)
 	var back := DesignTokens.make_button("Назад", false)
@@ -59,16 +73,48 @@ func _reload(list: VBoxContainer = null) -> void:
 		return
 	for c in list.get_children():
 		c.queue_free()
+	for c in _quests_box.get_children():
+		c.queue_free()
 	var res: Dictionary = GameState.api.get_guild()
 	var mine = res.get("guild", null)
 	if typeof(mine) == TYPE_DICTIONARY and mine != null:
-		_status.text = "Вы в: [%s] %s · роль %s" % [
-			str(mine.get("tag", "")), str(mine.get("name", "")), str(res.get("role", ""))
+		_status.text = "[%s] %s · lvl %s · казна %s · роль %s" % [
+			str(mine.get("tag", "")),
+			str(mine.get("name", "")),
+			str(mine.get("level", 1)),
+			str(mine.get("vault_soft", 0)),
+			str(res.get("role", "")),
 		]
 	else:
 		_status.text = "Нет гильдии · золото %d" % GameState.soft_currency
+
+	var quests: Array = res.get("quests", [])
+	if quests.is_empty():
+		_quests_box.add_child(DesignTokens.make_label("Нет заданий (вступите в гильдию)", 16, DesignTokens.COLOR_TEXT_MUTED))
+	for q in quests:
+		if typeof(q) != TYPE_DICTIONARY:
+			continue
+		var done := "✓" if bool(q.get("completed", false)) else "%s/%s" % [q.get("progress", 0), q.get("target", 0)]
+		_quests_box.add_child(DesignTokens.make_label(
+			"%s · %s" % [str(q.get("title", "")), done],
+			16,
+			DesignTokens.COLOR_TEXT_IVORY
+		))
+
+	var board: Array = res.get("board", [])
+	if not board.is_empty():
+		list.add_child(DesignTokens.make_label("Таблица участников", 20, DesignTokens.COLOR_ACCENT_GOLD))
+		for m in board:
+			if typeof(m) != TYPE_DICTIONARY:
+				continue
+			list.add_child(DesignTokens.make_label(
+				"%s · %s · вклад %s" % [m.get("account_id", ""), m.get("role", ""), m.get("contrib_xp", 0)],
+				16,
+				DesignTokens.COLOR_TEXT_MUTED
+			))
+
 	var guilds: Array = res.get("list", [])
-	if guilds.is_empty():
+	if guilds.is_empty() and (typeof(mine) != TYPE_DICTIONARY or mine == null):
 		list.add_child(DesignTokens.make_label("Список пуст — создайте первую.", 18, DesignTokens.COLOR_TEXT_MUTED))
 		return
 	for g in guilds:

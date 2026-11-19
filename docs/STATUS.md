@@ -6,16 +6,16 @@
 
 ## NOW
 
-P2 online systems slice: H13–H36 Draft lore, gacha pity (D-GACHA-01), TEST_PURCHASE shop, VIP 0–10, WS chat, guild roles.  
-CH02 + Stage E still blocked. CH01 not accepted.
+P3: chat moderation admin + guild quests/vault/board. Stack: #17 → #18 → online-p3.  
+CH02 + Stage E blocked. CH01 not accepted.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
-| **Работает** | 36 heroes Draft; progression; gacha standard/advanced+pity; TEST_PURCHASE shop limits; VIP daily; REST+WS chat; guild create/join/roles/announce |
-| **Частично** | Chat moderation admin; PG chat persistence; guild quests/vault; awaken/skills depth |
-| **Заглушки** | Real payments OFF; paid gacha OFF; Mythic event-only; arena/events; CH02; GameBrain (docs only) |
+| **Работает** | P2 systems + admin mute/delete/reports; guild donate/quests/board; war/boss hook tables empty |
+| **Частично** | Chat still in-memory (PG tables exist; T-154 wire); awaken/skills depth |
+| **Заглушки** | Real payments OFF; paid gacha OFF; guild wars; CH02; GameBrain runtime |
 
 ## BLOCKED / ждёт владельца
 
