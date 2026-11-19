@@ -23,7 +23,7 @@ window/size/window_width_override=405
 window/size/window_height_override=720
 window/handheld/orientation=1
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [debug]
 gdscript/warnings/infer_typed_closures_on_variant=0
