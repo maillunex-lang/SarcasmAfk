@@ -501,13 +501,19 @@
 - Не сделано: T-128 accept; T-131 Stage E; phone live URL; release keystore
 - Следующий шаг: T-133/T-134 (без арта) · device review владельца
 
+### 2026-11-19 — T-133 / T-134 unblocked polish
+- Статус: ГОТОВО
+- Сделано: B02–B30 HP floor ~3200; Heroes/Inventory/AFK/Gacha/Expedition UX; smoke B02 natural ULT
+- Не сделано: owner gates T-128/129/131/126; P3 live
+- Следующий шаг: ждать владельца
+
 ## 9. Текущий следующий шаг + уточнения владельца
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md) + [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md).
 
 1. ~~P0…T-125 + T-114~~ — сделано (CI green, в `main`).
 2. ~~T-130 / T-132~~ — CH01 polish + acceptance test report; debug APK; live ULT auto_cast fix.
-3. **Сейчас (без Каэрона):** T-133 баланс B02+ · T-134 UX polish.
+3. ~~T-133 / T-134~~ — баланс B02+ + UX Heroes/Inventory/AFK/Gacha.
 4. H01 grip → **T-131** (владелец Blender; Stage E запрещён до confirm).
 5. Ждём: T-128 accept · T-129 phone URL · T-126 keystore (debug-only пока).
 6. После **CH01 accepted** (T-128): T-112 guild/arena/events live.

@@ -76,8 +76,8 @@
 | T-125 | P1 | **DONE** | CH01 Android vertical slice APK | home→map→L01→dialog→party→battle→ult→reward→save | T-124 |
 | T-130 | P1 | **DONE** | CH01 gameplay polish (ULT reachable, pause, reward UI, Home continue, AFK honesty) | battle/home/afk + B01 balance + smoke | T-125 |
 | T-132 | P1 | **DONE** | CH01 acceptance test report + owner Q answers; debug APK; live ULT auto_cast fix; party portraits | `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md` | T-130 |
-| T-133 | P1 | **TODO** | Balance pass-2: B02+ HP/energy so ULT reachable (no art dependency) | `ch01_battles.json` + server content | T-132 |
-| T-134 | P2 | **TODO** | Heroes/Inventory/AFK UX polish (mock+live, draft art OK) | client UI screens | T-132 |
+| T-133 | P1 | **DONE** | Balance pass-2: B02+ HP floor ~3200 so ULT reachable | `ch01_battles.json` + smoke B02 | T-132 |
+| T-134 | P2 | **DONE** | Heroes/Inventory/AFK/Gacha UX polish (draft art OK) | heroes/inventory/afk/gacha screens | T-132 |
 | T-131 | P2 | **BLOCKED** | H01 Kaeron grip + Stage E atlases | owner local Blender grip; then Stage D confirm | owner |
 | T-126 | P1 | **BLOCKED** | Release APK signed | debug-only until owner keystore (Q1) | T-125 |
 | T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | drafts only; no new H01 model | T-125 |
@@ -98,6 +98,7 @@
 
 ## Следующий конкретный шаг
 
-Независимо от Каэрона: **T-133** (баланс B02+) → **T-134** (UX polish).  
+Независимый бэклог исчерпан до owner-гейтов: T-128 / T-129 / T-131 / T-126.  
+Опционально: More live-toggle UX, expedition polish, DEF docs.  
 Владелец: device review → T-128; grip → T-131; phone URL → T-129.  
 После T-128 → T-112. PX (T-090…092) без отдельного разрешения не трогать.

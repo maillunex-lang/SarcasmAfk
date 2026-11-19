@@ -6,16 +6,15 @@
 
 ## NOW
 
-CH01 **не accepted**. Полный цикл автотестов PASS; debug APK собран; DEF-01/02 закрыты.  
-Ждём: device/review → Q3; H01 grip владельца (T-131); live URL для телефонов (Q4).  
-Разрешено: системы **без** финальных ассетов Каэрона.
+CH01 **не accepted**. T-133/T-134 DONE (баланс B02+, UX Heroes/Inventory/AFK/Gacha).  
+Ждём владельца: T-128 accept · T-131 grip/Stage E · T-129 phone URL · T-126 keystore.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
 | **Работает** | CH01 цепочка (mock+live smokes); debug APK; live API localhost; ATB+replay; manual ULT↔auto_cast; Home continue; party portraits |
-| **Частично** | Combat H01–H03/E01 drafts; B01 balance pass-1 (B02+ старые); live URL только 127.0.0.1 |
+| **Частично** | Combat H01–H03/E01 drafts; баланс pass-2 (B01–B30 HP floor); live URL только 127.0.0.1 |
 | **Заглушки / mock** | Debug → mock по умолчанию на устройстве без URL; guild/arena/events «НЕДОСТУПНО»; CH02+ закрыт |
 
 ## BLOCKED / ждёт владельца

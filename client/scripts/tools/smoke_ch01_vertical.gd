@@ -146,6 +146,27 @@ func _run() -> void:
 	else:
 		print("OK next_stage B02")
 
+	# --- B02 natural ULT (balance pass-2) ---
+	var b02: Dictionary = gs.catalog.get_battle("B02")
+	var eng2 = BattleEngine.new()
+	eng2.setup(gs.get_party(), b02.get("enemies", []), 7)
+	var ready2 := false
+	var g2 := 0
+	while not eng2.finished and g2 < 16000:
+		eng2.tick(0.05)
+		g2 += 1
+		for u in eng2.heroes:
+			if u.can_ultimate():
+				ready2 = true
+				break
+		if ready2:
+			break
+	if not ready2:
+		push_error("FAIL B02 ultimate never ready naturally ticks=%s" % g2)
+		failed = true
+	else:
+		print("OK B02_natural_ult_ready at_tick=", g2)
+
 	# --- Home continue CTA (mid-quest / dialog) ---
 	var prev_quest: String = gs.active_quest_id
 	var prev_battle: String = gs.active_battle_id

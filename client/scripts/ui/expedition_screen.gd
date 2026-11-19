@@ -13,7 +13,7 @@ func _ready() -> void:
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
 	vbox.add_child(DesignTokens.make_label("Экспедиции", 40, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Таймеры на моках · AFK-002 C", 22, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_label("Одна активная за раз · таймер реального времени", 22, DesignTokens.COLOR_TEXT_MUTED))
 	_status = DesignTokens.make_label(_status_text(), 24, DesignTokens.COLOR_ACCENT_CYAN)
 	vbox.add_child(_status)
 
@@ -31,8 +31,10 @@ func _ready() -> void:
 
 func _status_text() -> String:
 	if GameState.active_expedition_id == "":
-		return "Нет активной экспедиции"
+		return "Нет активной экспедиции — выберите и нажмите Старт"
 	var left := maxi(0, GameState.expedition_ends_unix - int(Time.get_unix_time_from_system()))
+	if left <= 0:
+		return "Готово: %s — можно забрать" % GameState.active_expedition_id
 	return "Активно: %s · осталось %d с" % [GameState.active_expedition_id, left]
 
 
@@ -44,19 +46,28 @@ func _row(e: Dictionary) -> PanelContainer:
 	var text := VBoxContainer.new()
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_child(text)
+	var eid := str(e.get("id", ""))
+	var active := GameState.active_expedition_id == eid
 	text.add_child(DesignTokens.make_label(str(e.get("name", "")), 26, DesignTokens.COLOR_TEXT_IVORY, HORIZONTAL_ALIGNMENT_LEFT))
 	text.add_child(DesignTokens.make_label(
-		"%s · %ds · +%d soft / +%d XP" % [str(e.get("id", "")), int(e.get("duration_sec", 0)), int(e.get("soft", 0)), int(e.get("xp", 0))],
+		"%s · %ds · +%d soft / +%d XP%s" % [
+			eid,
+			int(e.get("duration_sec", 0)),
+			int(e.get("soft", 0)),
+			int(e.get("xp", 0)),
+			" · активна" if active else "",
+		],
 		18,
-		DesignTokens.COLOR_TEXT_MUTED,
+		DesignTokens.COLOR_SUCCESS_MINT if active else DesignTokens.COLOR_TEXT_MUTED,
 		HORIZONTAL_ALIGNMENT_LEFT
 	))
 	var btn := DesignTokens.make_button("Старт", false)
 	btn.custom_minimum_size = Vector2(180, 80)
-	var eid := str(e.get("id", ""))
+	btn.disabled = GameState.active_expedition_id != ""
 	btn.pressed.connect(func() -> void:
 		if GameState.start_expedition(eid):
 			_status.text = _status_text()
+			SceneNav.to_expedition(get_tree())
 	)
 	box.add_child(btn)
 	return panel
@@ -66,5 +77,7 @@ func _on_claim() -> void:
 	var res := GameState.claim_expedition()
 	if bool(res.get("ok", false)):
 		_status.text = "Готово: +%d soft / +%d XP" % [int(res.get("soft", 0)), int(res.get("xp", 0))]
+	elif str(res.get("reason", "")) == "running":
+		_status.text = "Ещё рано — осталось %d с" % int(res.get("left", 0))
 	else:
 		_status.text = _status_text()
