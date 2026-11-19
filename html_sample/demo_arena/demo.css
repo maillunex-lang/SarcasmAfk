@@ -112,6 +112,15 @@ html, body {
   flex: 1;
   overflow: hidden;
 }
+.arena-stage.shake {
+  animation: stageShake .28s ease;
+}
+@keyframes stageShake {
+  0%, 100% { transform: translate(0,0); }
+  25% { transform: translate(-4px, 2px); }
+  50% { transform: translate(5px, -2px); }
+  75% { transform: translate(-3px, 1px); }
+}
 .arena-bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -166,101 +175,180 @@ html, body {
 .fighter {
   position: absolute;
   z-index: 6;
-  bottom: 16%;
-  width: 38%;
-  max-width: 180px;
-  will-change: transform, filter;
+  bottom: 14%;
+  width: 42%;
+  max-width: 200px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, filter, left, right;
+  transition: filter .12s ease;
 }
-.fighter img {
+.fighter img.pose {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 10px 12px rgba(0,0,0,.45));
+  background: transparent;
+  filter: drop-shadow(0 12px 14px rgba(0,0,0,.5));
   user-select: none;
   pointer-events: none;
+  image-rendering: auto;
 }
 .fighter .shadow {
   position: absolute;
   left: 18%; right: 18%; bottom: -2%;
-  height: 12px;
+  height: 14px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0,0,0,.45), transparent 70%);
+  background: radial-gradient(ellipse, rgba(0,0,0,.5), transparent 70%);
   z-index: -1;
+  transition: opacity .2s ease, transform .2s ease;
 }
-.fighter.hero { left: 6%; }
-.fighter.enemy { right: 6%; }
 
-/* Idle bob */
+/* Combat home positions */
+.fighter.hero {
+  left: 4%;
+  --home-x: 0%;
+  --lunge: 48%;
+  --run-from: -55%;
+  --knock: -10%;
+}
+.fighter.enemy {
+  right: 2%;
+  --home-x: 0%;
+  --lunge: -48%;
+  --run-from: 55%;
+  --knock: 10%;
+}
+
+/* Idle breathing */
 .fighter.idle {
-  animation: idleBob 1.6s ease-in-out infinite;
+  animation: idleBob 1.45s ease-in-out infinite;
 }
-.fighter.enemy.idle {
-  animation-delay: .35s;
-}
+.fighter.enemy.idle { animation-delay: .28s; }
 @keyframes idleBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -8px, 0) scale(1.01); }
 }
 
-/* Attack lunges */
+/* Run-in from offscreen */
+.fighter.enter {
+  animation: none;
+}
+.fighter.hero.enter {
+  animation: heroEnter 1.05s cubic-bezier(.2,.75,.2,1) forwards;
+}
+.fighter.enemy.enter {
+  animation: enemyEnter 1.05s cubic-bezier(.2,.75,.2,1) forwards;
+}
+@keyframes heroEnter {
+  0% { transform: translate3d(-120%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes enemyEnter {
+  0% { transform: translate3d(120%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Run stride bob while entering / chasing */
+.fighter.run img.pose {
+  animation: runStride .28s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+@keyframes runStride {
+  0%, 100% { transform: translateY(0) rotate(-2deg) scaleY(1); }
+  50% { transform: translateY(-10px) rotate(2deg) scaleY(.97); }
+}
+
+/* Attack lunge + squash */
 .fighter.hero.attack {
-  animation: heroAtk .42s cubic-bezier(.2,.8,.2,1);
+  animation: heroAtk .48s cubic-bezier(.15,.9,.25,1);
+  z-index: 10;
 }
 .fighter.enemy.attack {
-  animation: enemyAtk .42s cubic-bezier(.2,.8,.2,1);
+  animation: enemyAtk .48s cubic-bezier(.15,.9,.25,1);
+  z-index: 10;
 }
 @keyframes heroAtk {
-  0% { transform: translate(0,0) rotate(0); }
-  35% { transform: translate(42%, -4%) rotate(4deg); }
-  100% { transform: translate(0,0) rotate(0); }
+  0% { transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+  18% { transform: translate3d(-6%, 4%, 0) rotate(-3deg) scale(.96); }
+  42% { transform: translate3d(52%, -6%, 0) rotate(7deg) scale(1.06); }
+  100% { transform: translate3d(0, 0, 0) rotate(0) scale(1); }
 }
 @keyframes enemyAtk {
-  0% { transform: translate(0,0) rotate(0); }
-  35% { transform: translate(-42%, -4%) rotate(-4deg); }
-  100% { transform: translate(0,0) rotate(0); }
+  0% { transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+  18% { transform: translate3d(6%, 4%, 0) rotate(3deg) scale(.96); }
+  42% { transform: translate3d(-52%, -6%, 0) rotate(-7deg) scale(1.06); }
+  100% { transform: translate3d(0, 0, 0) rotate(0) scale(1); }
 }
 
+/* Hurt knockback + flash */
 .fighter.hurt {
-  animation: hurtFlash .28s ease;
+  animation: hurtKnock .38s ease;
 }
-@keyframes hurtFlash {
-  0%, 100% { filter: none; }
-  40% { filter: brightness(2.2) saturate(1.4); }
+.fighter.hero.hurt {
+  animation-name: heroHurt;
 }
+.fighter.enemy.hurt {
+  animation-name: enemyHurt;
+}
+@keyframes heroHurt {
+  0% { filter: none; transform: translate3d(0,0,0); }
+  30% { filter: brightness(2.4) saturate(1.5); transform: translate3d(-12%, 2%, 0) rotate(-4deg); }
+  100% { filter: none; transform: translate3d(0,0,0); }
+}
+@keyframes enemyHurt {
+  0% { filter: none; transform: translate3d(0,0,0); }
+  30% { filter: brightness(2.4) saturate(1.5); transform: translate3d(12%, 2%, 0) rotate(4deg); }
+  100% { filter: none; transform: translate3d(0,0,0); }
+}
+
+/* Death */
+.fighter.dead {
+  animation: deathFall .9s ease forwards;
+  pointer-events: none;
+}
+.fighter.hero.dead { animation-name: heroDeath; }
+.fighter.enemy.dead { animation-name: enemyDeath; }
+@keyframes heroDeath {
+  0% { opacity: 1; transform: translate3d(0,0,0) rotate(0); filter: none; }
+  40% { opacity: 1; transform: translate3d(-8%, 4%, 0) rotate(-12deg); filter: brightness(1.6); }
+  100% { opacity: 0; transform: translate3d(-18%, 28%, 0) rotate(-55deg); filter: brightness(.4); }
+}
+@keyframes enemyDeath {
+  0% { opacity: 1; transform: translate3d(0,0,0) rotate(0); filter: none; }
+  40% { opacity: 1; transform: translate3d(8%, 4%, 0) rotate(12deg); filter: brightness(1.6); }
+  100% { opacity: 0; transform: translate3d(18%, 28%, 0) rotate(55deg); filter: brightness(.4); }
+}
+.fighter.dead .shadow { opacity: 0; transform: scaleX(.2); }
 
 .slash, .burst {
   position: absolute;
   z-index: 9;
   pointer-events: none;
   mix-blend-mode: screen;
+  background: transparent;
 }
 .slash {
-  width: 55%;
-  top: 42%;
-  left: 22%;
-  opacity: 0;
-}
-.slash.show {
-  animation: slashPop .35s ease-out;
-}
-.burst {
-  width: 34%;
+  width: 58%;
   top: 40%;
-  left: 33%;
+  left: 20%;
   opacity: 0;
 }
-.burst.show {
-  animation: burstPop .4s ease-out;
+.slash.show { animation: slashPop .38s ease-out; }
+.burst {
+  width: 36%;
+  top: 38%;
+  left: 32%;
+  opacity: 0;
 }
+.burst.show { animation: burstPop .42s ease-out; }
 @keyframes slashPop {
-  0% { opacity: 0; transform: scale(.6) rotate(-8deg); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.15) rotate(6deg); }
+  0% { opacity: 0; transform: scale(.55) rotate(-12deg); }
+  28% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.2) rotate(8deg); }
 }
 @keyframes burstPop {
-  0% { opacity: 0; transform: scale(.4); }
-  25% { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.25); }
+  0% { opacity: 0; transform: scale(.35); }
+  22% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.35); }
 }
 
 .tray {
@@ -299,6 +387,9 @@ html, body {
   margin-top: 12px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.end[hidden] {
+  display: none !important;
 }
 #end-title {
   margin: 0;

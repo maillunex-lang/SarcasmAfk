@@ -18,7 +18,7 @@
       <div class="menu-copy">
         <p class="brand">БашЛегенды</p>
         <h1>Арена 1×1</h1>
-        <p class="sub">Демо · вид сбоку · 2.5D анимация</p>
+        <p class="sub">Демо · бег · удар · без белого фона</p>
         <button class="menu-btn" id="btn-fight">
           <img src="assets/icon_play.png" alt="" />
           <span>В бой</span>
@@ -38,7 +38,7 @@
 
     <!-- ARENA -->
     <section class="screen arena" id="screen-arena" hidden>
-      <div class="arena-stage">
+      <div class="arena-stage" id="arena-stage">
         <img class="arena-bg" src="assets/arena_bg.jpg" alt="" />
         <canvas id="fx-layer" class="fx-layer"></canvas>
 
@@ -54,12 +54,12 @@
           </div>
         </div>
 
-        <div class="fighter hero" id="hero">
-          <img src="assets/hero.png" alt="Герой" />
+        <div class="fighter hero" id="hero" data-pose="idle">
+          <img class="pose" data-role="sprite" src="assets/hero_idle.png" alt="Герой" />
           <div class="shadow"></div>
         </div>
-        <div class="fighter enemy" id="enemy">
-          <img src="assets/enemy.png" alt="Враг" />
+        <div class="fighter enemy" id="enemy" data-pose="idle">
+          <img class="pose" data-role="sprite" src="assets/enemy_idle.png" alt="Враг" />
           <div class="shadow"></div>
         </div>
 
