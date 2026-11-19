@@ -43,7 +43,12 @@
 | T-075 | P1 | **DONE** | Ф1.5 RPG / экип / экономика / гача | Inventory+Gacha | T-074 |
 | T-076 | P1 | **DONE** | Ф1.6 Гильдия / арена / города | Guild+Arena+cities JSON | T-075 |
 | T-077 | P1 | **DONE** | Ф1.7 E2E smoke + аудит | `smoke_mvp.gd` + PHASE1_AUDIT | T-076 |
-| T-080 | P3 | **TODO** | Сервер Go + замена моков (Фаза 2) | TECH-001 | T-070 |
+| T-080 | P1 | **DONE** | Сервер Go Phase2 stub (пакет) | `server/` + CI go-api | T-070 |
+| T-081 | P1 | **DONE** | Ф2.1 Go API + anonymous auth + progress | `server/cmd/api` + store | T-080 |
+| T-082 | P1 | **DONE** | Ф2.2 Rewards/AFK/gacha idempotent | `/rewards/claim` `/afk` `/gacha` | T-081 |
+| T-083 | P1 | **DONE** | Ф2.3 Battle start/finish seed stub | `/battles/{id}/start|finish` | T-082 |
+| T-084 | P1 | **DONE** | Ф2.4 Guild/arena/events stubs + CI | `/guild` `/arena` `/events` | T-083 |
+| T-085 | P3 | **TODO** | Postgres + Redis + server battle verify | TECH-001 harden | T-084 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 | полные квесты/бои | Явное разрешение владельца |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
@@ -56,6 +61,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-060 / T-061
+## Следующий конкретный шаг после T-084
 
-Сервер `T-080` (Фаза 2) **или** paintover/уникальные враги. **T-031** — при Blender. Владельцу: визуальный sign-off.
+`T-085` Postgres/Redis + verify боёв **или** клиентская смена `USE_MOCK=false`. **T-031** — при Blender.

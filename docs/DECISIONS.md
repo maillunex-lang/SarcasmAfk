@@ -13,6 +13,7 @@
 | D-META-04 | Repo `SarcasmAfk` и package ID не переименовывать без отдельного подтверждения | 2026-11-19 |
 | D-META-05 | Рабочая ветка после PR #1: `cursor/phase0-design-docs-beaf`; изменения сливать в `main` | 2026-11-19 |
 | D-META-06 | Канон состояния для ИИ: `AGENTS.md` → `STATUS` → `TASK_QUEUE` → `DECISIONS` → `INDEX` | 2026-11-19 |
+| D-META-07 | Phase 2 стартует с Go in-memory/file stub (`server/`); Postgres+Redis — отдельный T-085 | 2026-11-19 |
 
 ## D-PRODUCT — Продукт / платформа
 

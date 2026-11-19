@@ -3,8 +3,9 @@ extends RefCounted
 ## Thin Phase 0 API façade. USE_MOCK=true → local JSON / in-memory progress (X-Mock).
 ## Real HTTP is stubbed; do not invent network until server exists.
 
+## Flip USE_MOCK to false and point BASE_URL at local Phase2 API (`scripts/run_api.sh`).
 const USE_MOCK := true
-const BASE_URL := "https://api.example.local/v1"
+const BASE_URL := "http://127.0.0.1:8080/v1"
 const CLIENT_VERSION := "0.0.1-ch01"
 const HEADER_MOCK := "X-Mock: true"
 
