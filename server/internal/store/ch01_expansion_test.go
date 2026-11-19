@@ -25,7 +25,7 @@ func TestSidequestSQ01AnyOrderIdempotentClaim(t *testing.T) {
 		BundleID: "CH01-SQ01-FIRST_CLEAR", Soft: 300,
 		Inventory: map[string]int{"mat_hero_exp": 100},
 	}
-	prog, already, granted, err := m.ClaimSidequest(tok, "CH01-SQ01", steps, bundle, defs)
+	prog, already, granted, err := m.ClaimSidequest(tok, "CH01-SQ01", steps, bundle, defs, nil, store.EquipmentBalance{})
 	if err != nil || already {
 		t.Fatalf("claim1 err=%v already=%v", err, already)
 	}
@@ -35,7 +35,7 @@ func TestSidequestSQ01AnyOrderIdempotentClaim(t *testing.T) {
 	if granted["soft"] != 300 {
 		t.Fatalf("granted=%v", granted)
 	}
-	_, already2, _, err := m.ClaimSidequest(tok, "CH01-SQ01", steps, bundle, defs)
+	_, already2, _, err := m.ClaimSidequest(tok, "CH01-SQ01", steps, bundle, defs, nil, store.EquipmentBalance{})
 	if err != nil || !already2 {
 		t.Fatalf("claim2 should already err=%v already=%v", err, already2)
 	}
@@ -63,7 +63,7 @@ func TestSQ02SequenceResetAndEquipDEF(t *testing.T) {
 		"eq_ch01_clerk_coat": {ItemID: "eq_ch01_clerk_coat", Slot: "armor", Bonuses: map[string]int{"def": 12, "hp": 40}, AccountUnique: true},
 	}
 	bundle := store.ExpansionRewardBundle{BundleID: "CH01-SQ02-FIRST_CLEAR", Soft: 150, Equipment: []string{"eq_ch01_clerk_coat"}}
-	prog, _, _, err := m.ClaimSidequest(tok, "CH01-SQ02", seq, bundle, defs)
+	prog, _, _, err := m.ClaimSidequest(tok, "CH01-SQ02", seq, bundle, defs, nil, store.EquipmentBalance{})
 	if err != nil {
 		t.Fatalf("claim %v", err)
 	}

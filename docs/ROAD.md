@@ -16,6 +16,7 @@
 | Heroes 36 + progression | ЧАСТИЧНО | H01–H12 MVP + H13–H36 Draft lore/API; TEMP portraits (+fulls) |
 | Chat / Guild / Shop / VIP / Gacha | ЧАСТИЧНО | WS+PG chat; guild quests/vault; TEST_PURCHASE shop; VIP 0–10; pity Draft |
 | UI арт (home/shop/VIP) | ЧАСТИЧНО | TEMP BG/icons/banner/badges wired (T-155); Stage E blocked |
+| EQUIPMENT-001 | ЧАСТИЧНО | Catalog 32 + unique instances + API + TEMP icons + arsenal UI; random drop OFF; Draft balance |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
@@ -316,6 +317,14 @@
 8. Не плодить новые «источники истины» статуса: NOW только в `STATUS.md`, очередь только в `TASK_QUEUE.md`, решения только в `DECISIONS.md`.
 
 ## 8. Журнал прогресса
+
+### Журнал 2026-11-19 — EQUIPMENT-001 (EQ-P1…P5)
+
+- Catalog 32 templates + 4 sets; validator `scripts/validate_equipment_001.py`.
+- Unique UUID instances (Memory + Postgres JSONB migration 008); equip/unequip/transfer/upgrade/lock/salvage + set 2/4 %.
+- CH01 first-clear grants B02/B07/B13/B20/B30 + SQ02 coat; EQ-EX01…04 dialogues.
+- Godot arsenal UI + TEMP icons `client/assets/ui/equipment/` (32 + scrap).
+- Docs: EQUIPMENT_SYSTEM / BALANCE / CONTENT. Random drop OFF. Draft balance.
 
 ### Журнал 2026-11-19 — Online systems P1–P2 (T-140…T-144)
 

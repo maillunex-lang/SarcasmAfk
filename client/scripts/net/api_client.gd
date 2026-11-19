@@ -682,3 +682,124 @@ func hero_skill_up(hero_id: String, skill_id: String) -> Dictionary:
 	var res := _http("POST", path, {"skill_id": skill_id})
 	_log("POST", path, bool(res.get("ok", false)))
 	return res
+
+
+func equipment_catalog() -> Dictionary:
+	var path := "/equipment/catalog"
+	if use_mock:
+		_log("GET", path, true)
+		return {"ok": true, "mock": true, "catalog": {}}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_inventory() -> Dictionary:
+	var path := "/equipment/inventory"
+	if use_mock:
+		_log("GET", path, true)
+		return {
+			"ok": true,
+			"mock": true,
+			"instances": GameState.equipment_instances.values(),
+			"capacity": 200,
+			"count": GameState.equipment_instances.size(),
+			"materials": {"mat_equipment_scrap": int(GameState.inventory.get("mat_equipment_scrap", 0))},
+			"soft_currency": GameState.soft_currency,
+		}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_equip(instance_id: String, hero_id: String, slot: String, confirm_transfer: bool = false, expected_version: int = 0, request_id: String = "") -> Dictionary:
+	var path := "/equipment/%s/equip" % instance_id
+	var body := {
+		"hero_id": hero_id,
+		"slot": slot,
+		"confirm_transfer": confirm_transfer,
+		"expected_version": expected_version,
+		"request_id": request_id if request_id != "" else ("eq-%s-%s" % [instance_id, Time.get_unix_time_from_system()]),
+	}
+	if use_mock:
+		_log("POST", path, true)
+		var ok := GameState.equip_instance(instance_id, hero_id, slot, confirm_transfer)
+		return {"ok": ok, "mock": true, "error": "" if ok else "EQUIP_FAILED"}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, body)
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_unequip(instance_id: String, expected_version: int = 0, request_id: String = "") -> Dictionary:
+	var path := "/equipment/%s/unequip" % instance_id
+	if use_mock:
+		_log("POST", path, true)
+		var ok := GameState.unequip_instance(instance_id)
+		return {"ok": ok, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {
+		"expected_version": expected_version,
+		"request_id": request_id if request_id != "" else ("uq-%s" % Time.get_unix_time_from_system()),
+	})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_upgrade(instance_id: String, expected_version: int = 0, request_id: String = "") -> Dictionary:
+	var path := "/equipment/%s/upgrade" % instance_id
+	if use_mock:
+		_log("POST", path, true)
+		var ok := GameState.upgrade_instance(instance_id)
+		return {"ok": ok, "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {
+		"expected_version": expected_version,
+		"request_id": request_id if request_id != "" else ("up-%s" % Time.get_unix_time_from_system()),
+		"levels": 1,
+	})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_lock(instance_id: String, locked: bool, expected_version: int = 0) -> Dictionary:
+	var path := "/equipment/%s/lock" % instance_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": GameState.lock_instance(instance_id, locked), "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"locked": locked, "expected_version": expected_version, "request_id": "lk-%s" % Time.get_unix_time_from_system()})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func equipment_salvage(instance_id: String, expected_version: int = 0) -> Dictionary:
+	var path := "/equipment/%s/salvage" % instance_id
+	if use_mock:
+		_log("POST", path, true)
+		return {"ok": GameState.salvage_instance(instance_id), "mock": true}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("POST", path, {"confirm": true, "expected_version": expected_version, "request_id": "sv-%s" % Time.get_unix_time_from_system()})
+	_log("POST", path, bool(res.get("ok", false)))
+	return res
+
+
+func hero_equipment(hero_id: String) -> Dictionary:
+	var path := "/heroes/%s/equipment" % hero_id
+	if use_mock:
+		_log("GET", path, true)
+		return {"ok": true, "mock": true, "hero_id": hero_id, "slots": GameState.equipment.get(hero_id, {})}
+	if auth_token == "":
+		auth_anonymous()
+	var res := _http("GET", path)
+	_log("GET", path, bool(res.get("ok", false)))
+	return res

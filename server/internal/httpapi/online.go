@@ -64,6 +64,9 @@ func (s *Server) heroesMutate(w http.ResponseWriter, r *http.Request) {
 	base := s.heroBase(heroID)
 
 	switch {
+	case action == "equipment" && r.Method == http.MethodGet:
+		s.heroEquipmentGet(w, r, heroID)
+		return
 	case action == "level-up" && r.Method == http.MethodPost:
 		var body struct {
 			Levels int `json:"levels"`

@@ -197,7 +197,7 @@ func (p *Postgres) resolveAccountID(token string) (string, error) {
 
 func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	var acc AccountProgress
-	var party, qf, cr, oh, cmds, hi, inv, pity, gh, sq, poi, jf []byte
+	var party, qf, cr, oh, cmds, hi, inv, pity, gh, sq, poi, jf, eqi, eqp []byte
 	var updated time.Time
 	err := p.pool.QueryRow(p.ctx, `
 		SELECT account_id, commander_xp, soft_currency, hard_currency, summon_tickets,
@@ -211,14 +211,16 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 			COALESCE(test_purchases_day,0), COALESCE(test_hard_day,0), COALESCE(test_vip_day,0),
 			COALESCE(vip_daily_claimed,''),
 			COALESCE(sidequest_progress,'{}'::jsonb), COALESCE(poi_progress,'{}'::jsonb),
-			COALESCE(journal_flags,'{}'::jsonb), updated_at
+			COALESCE(journal_flags,'{}'::jsonb),
+			COALESCE(equipment_instances,'{}'::jsonb), COALESCE(equipment_pending,'[]'::jsonb),
+			updated_at
 		FROM accounts WHERE account_id=$1`, accountID).Scan(
 		&acc.AccountID, &acc.CommanderXP, &acc.SoftCurrency, &acc.HardCurrency, &acc.SummonTickets,
 		&party, &qf, &cr, &oh, &acc.AFKClaimedUnix, &acc.ActiveBattleID, &acc.BattleSeed,
 		&acc.BalanceVersion, &cmds, &acc.BattleTickApprox,
 		&hi, &inv, &acc.VipPoints, &acc.VipLevel, &pity, &acc.GuildID,
 		&gh, &acc.TestPurchaseDay, &acc.TestPurchasesDay, &acc.TestHardDay, &acc.TestVipDay,
-		&acc.VipDailyClaimed, &sq, &poi, &jf, &updated,
+		&acc.VipDailyClaimed, &sq, &poi, &jf, &eqi, &eqp, &updated,
 	)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, ErrUnauthorized
@@ -238,6 +240,8 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	_ = json.Unmarshal(sq, &acc.Sidequests)
 	_ = json.Unmarshal(poi, &acc.POIProgress)
 	_ = json.Unmarshal(jf, &acc.JournalFlags)
+	_ = json.Unmarshal(eqi, &acc.EquipmentBag)
+	_ = json.Unmarshal(eqp, &acc.EquipmentPending)
 	if acc.QuestFlags == nil {
 		acc.QuestFlags = map[string]bool{}
 	}
@@ -249,6 +253,7 @@ func (p *Postgres) loadAccount(accountID string) (*AccountProgress, error) {
 	}
 	EnsureHeroInstances(&acc)
 	EnsureExpansion(&acc)
+	EnsureEquipment(&acc)
 	acc.UpdatedAt = updated.UTC().Format(time.RFC3339)
 	return &acc, nil
 }
@@ -276,11 +281,19 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 	sq, _ := json.Marshal(acc.Sidequests)
 	poi, _ := json.Marshal(acc.POIProgress)
 	jf, _ := json.Marshal(acc.JournalFlags)
+	eqi, _ := json.Marshal(acc.EquipmentBag)
+	eqp, _ := json.Marshal(acc.EquipmentPending)
 	if cmds == nil {
 		cmds = []byte("[]")
 	}
 	if gh == nil {
 		gh = []byte("[]")
+	}
+	if eqi == nil {
+		eqi = []byte("{}")
+	}
+	if eqp == nil {
+		eqp = []byte("[]")
 	}
 	_, err := p.pool.Exec(p.ctx, `
 		UPDATE accounts SET
@@ -293,6 +306,7 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 			gacha_history=$22::jsonb, test_purchase_day=$23, test_purchases_day=$24,
 			test_hard_day=$25, test_vip_day=$26, vip_daily_claimed=$27,
 			sidequest_progress=$28::jsonb, poi_progress=$29::jsonb, journal_flags=$30::jsonb,
+			equipment_instances=$31::jsonb, equipment_pending=$32::jsonb,
 			updated_at=NOW()
 		WHERE account_id=$1`,
 		acc.AccountID, acc.CommanderXP, acc.SoftCurrency, acc.HardCurrency, acc.SummonTickets,
@@ -300,7 +314,7 @@ func (p *Postgres) saveAccount(acc *AccountProgress) error {
 		acc.BalanceVersion, cmds, acc.BattleTickApprox,
 		hi, inv, acc.VipPoints, acc.VipLevel, pity, acc.GuildID,
 		gh, acc.TestPurchaseDay, acc.TestPurchasesDay, acc.TestHardDay, acc.TestVipDay, acc.VipDailyClaimed,
-		sq, poi, jf,
+		sq, poi, jf, eqi, eqp,
 	)
 	return err
 }
@@ -811,14 +825,161 @@ func (p *Postgres) InteractPOI(token, poiID, actionID, stepID, sidequestID strin
 	return prog, reset, err
 }
 
-func (p *Postgres) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
+func (p *Postgres) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, bool, map[string]any, error) {
 	already := false
 	var granted map[string]any
 	prog, err := p.mutate(token, func(acc *AccountProgress) error {
-		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs)
+		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs, templates, bal)
 		already = a
 		granted = g
 		return e
 	})
 	return prog, already, granted, err
+}
+
+func (p *Postgres) idempotent(acc *AccountProgress, requestID string, action func() (map[string]any, error)) (map[string]any, error) {
+	EnsureEquipment(acc)
+	if requestID == "" {
+		return action()
+	}
+	if prev, ok := acc.Idempotency[requestID]; ok {
+		return prev, nil
+	}
+	out, err := action()
+	if err != nil {
+		return nil, err
+	}
+	acc.Idempotency[requestID] = out
+	return out, nil
+}
+
+func (p *Postgres) EquipInstance(token, instanceID, heroID, slot string, confirmTransfer bool, expectedVersion int, requestID string, base HeroBaseStats, heroClass string, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, map[string]any, error) {
+	var outInst *EquipmentInstance
+	var extras map[string]any
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		EnsureEquipment(acc)
+		MigrateLegacyEquipment(acc, templates, bal.Aliases, bal.InventoryCapacity)
+		payload, e := p.idempotent(acc, requestID, func() (map[string]any, error) {
+			lvl := 1
+			if hi := acc.HeroInstances[heroID]; hi != nil {
+				lvl = hi.Level
+			}
+			eq, err2 := EquipInstance(acc, instanceID, heroID, slot, confirmTransfer, expectedVersion, lvl, heroClass, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			flat, pct, counts := ComputeHeroGearFlat(acc, heroID, templates, sets, bal.UpgradeGrowth)
+			if hi := acc.HeroInstances[heroID]; hi != nil {
+				hi.Power = ComputePowerWithGear(base, hi, flat)
+			}
+			outInst = eq
+			return map[string]any{"instance": eq, "flat": flat, "set_pct": pct, "set_counts": counts}, nil
+		})
+		extras = payload
+		if payload != nil {
+			if inst, ok := payload["instance"].(*EquipmentInstance); ok {
+				outInst = inst
+			}
+		}
+		return e
+	})
+	return prog, outInst, extras, err
+}
+
+func (p *Postgres) UnequipInstance(token, instanceID string, expectedVersion int, requestID string) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		_, e := p.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, err2 := UnequipInstance(acc, instanceID, expectedVersion)
+			if err2 != nil {
+				return nil, err2
+			}
+			out = eq
+			return map[string]any{"instance": eq}, nil
+		})
+		return e
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) UpgradeInstance(token, instanceID string, expectedVersion int, requestID string, base HeroBaseStats, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, map[string]any, error) {
+	var out *EquipmentInstance
+	var extras map[string]any
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		payload, e := p.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, cost, err2 := UpgradeInstance(acc, instanceID, expectedVersion, bal, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			if eq.EquippedHeroID != "" {
+				if hi := acc.HeroInstances[eq.EquippedHeroID]; hi != nil {
+					flat, _, _ := ComputeHeroGearFlat(acc, eq.EquippedHeroID, templates, sets, bal.UpgradeGrowth)
+					hi.Power = ComputePowerWithGear(base, hi, flat)
+				}
+			}
+			out = eq
+			return map[string]any{"instance": eq, "cost": cost}, nil
+		})
+		extras = payload
+		return e
+	})
+	return prog, out, extras, err
+}
+
+func (p *Postgres) LockInstance(token, instanceID string, locked bool, expectedVersion int, requestID string) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		_, e := p.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, err2 := LockInstance(acc, instanceID, locked, expectedVersion)
+			if err2 != nil {
+				return nil, err2
+			}
+			out = eq
+			return map[string]any{"instance": eq}, nil
+		})
+		return e
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) SalvageInstance(token, instanceID string, expectedVersion int, requestID string, confirm bool, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, map[string]any, error) {
+	if !confirm {
+		return nil, nil, ErrValidation
+	}
+	var reward map[string]any
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		payload, e := p.idempotent(acc, requestID, func() (map[string]any, error) {
+			r, err2 := SalvageInstance(acc, instanceID, expectedVersion, bal, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			return map[string]any{"reward": r}, nil
+		})
+		if payload != nil {
+			if r, ok := payload["reward"].(map[string]any); ok {
+				reward = r
+			}
+		}
+		return e
+	})
+	return prog, reward, err
+}
+
+func (p *Postgres) GrantEquipmentReward(token, rewardKey, templateID, source string, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		inst, e := GrantEquipmentOnce(acc, rewardKey, templateID, source, templates, bal)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (p *Postgres) MigrateLegacyEquipment(token string, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, int, error) {
+	created := 0
+	prog, err := p.mutate(token, func(acc *AccountProgress) error {
+		created = MigrateLegacyEquipment(acc, templates, bal.Aliases, bal.InventoryCapacity)
+		return nil
+	})
+	return prog, created, err
 }

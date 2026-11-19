@@ -175,8 +175,10 @@ func ApplyPOIInteract(acc *AccountProgress, poiID, actionID, stepID, sidequestID
 }
 
 // ApplySidequestClaim grants a bundle once when all required steps are done.
-func ApplySidequestClaim(acc *AccountProgress, questID string, requiredSteps []string, bundle ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef) (already bool, granted map[string]any, err error) {
+// When templates is non-empty, equipment rewards become unique EQUIPMENT-001 instances.
+func ApplySidequestClaim(acc *AccountProgress, questID string, requiredSteps []string, bundle ExpansionRewardBundle, equipmentDefs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (already bool, granted map[string]any, err error) {
 	EnsureExpansion(acc)
+	EnsureEquipment(acc)
 	if questID == "" || bundle.BundleID == "" {
 		return false, nil, ErrValidation
 	}
@@ -212,7 +214,23 @@ func ApplySidequestClaim(acc *AccountProgress, questID string, requiredSteps []s
 		granted["inventory"] = invGranted
 	}
 	eqGranted := []string{}
+	instances := []string{}
 	for _, itemID := range bundle.Equipment {
+		tplID := ResolveTemplateID(itemID, bal.Aliases)
+		if len(templates) > 0 {
+			if _, ok := templates[tplID]; !ok {
+				return false, nil, ErrNotFound
+			}
+			inst, gerr := GrantEquipmentOnce(acc, bundle.BundleID+":"+tplID, tplID, "sidequest:"+questID, templates, bal)
+			if gerr != nil && gerr != ErrInventoryFull {
+				return false, nil, gerr
+			}
+			if inst != nil {
+				eqGranted = append(eqGranted, tplID)
+				instances = append(instances, inst.ID)
+			}
+			continue
+		}
 		def, ok := equipmentDefs[itemID]
 		if !ok {
 			return false, nil, ErrNotFound
@@ -226,12 +244,51 @@ func ApplySidequestClaim(acc *AccountProgress, questID string, requiredSteps []s
 	if len(eqGranted) > 0 {
 		granted["equipment"] = eqGranted
 	}
+	if len(instances) > 0 {
+		granted["equipment_instances"] = instances
+	}
 	acc.ClaimedRewards[bundle.BundleID] = true
 	sq.State = "completed"
 	sq.RewardClaimedAt = nowRFC3339()
 	sq.UpdatedAt = nowRFC3339()
 	sq.Version++
 	return false, granted, nil
+}
+
+// GrantEquipmentOnce grants one instance keyed by rewardKey (idempotent via ClaimedRewards).
+func GrantEquipmentOnce(acc *AccountProgress, rewardKey, templateID, source string, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*EquipmentInstance, error) {
+	EnsureEquipment(acc)
+	if rewardKey == "" || templateID == "" {
+		return nil, ErrValidation
+	}
+	if acc.ClaimedRewards[rewardKey] {
+		// return existing instance of this template if present
+		for _, eq := range acc.EquipmentBag {
+			if eq != nil && eq.TemplateID == templateID && eq.AcquisitionSource == source {
+				return eq, nil
+			}
+		}
+		for _, eq := range acc.EquipmentBag {
+			if eq != nil && eq.TemplateID == templateID {
+				return eq, nil
+			}
+		}
+		return nil, nil
+	}
+	cap := bal.InventoryCapacity
+	if cap <= 0 {
+		cap = DefaultEquipCapacity
+	}
+	inst, err := CreateEquipmentInstance(acc, templateID, source, cap, templates)
+	if err == ErrInventoryFull {
+		acc.ClaimedRewards[rewardKey] = true // still mark claimed; pending holds the grant
+		return nil, ErrInventoryFull
+	}
+	if err != nil {
+		return nil, err
+	}
+	acc.ClaimedRewards[rewardKey] = true
+	return inst, nil
 }
 
 const (
@@ -345,15 +402,44 @@ func ApplyEquipUnique(acc *AccountProgress, heroID, slot, itemID string, base He
 }
 
 func GearBonusForHero(inst *HeroInstance, defs map[string]EquipmentDef) map[string]int {
+	return GearBonusForHeroWithInstances(nil, inst, defs, nil, 0.10)
+}
+
+// GearBonusForHeroWithInstances prefers unique instances on AccountProgress when present.
+func GearBonusForHeroWithInstances(acc *AccountProgress, inst *HeroInstance, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, growth float64) map[string]int {
 	out := map[string]int{}
 	if inst == nil || inst.Equipment == nil {
 		return out
 	}
-	for _, itemID := range inst.Equipment {
-		if itemID == "" {
+	if growth <= 0 {
+		growth = 0.10
+	}
+	for _, ref := range inst.Equipment {
+		if ref == "" {
 			continue
 		}
-		def, ok := defs[itemID]
+		if acc != nil && acc.EquipmentBag != nil {
+			if eq := acc.EquipmentBag[ref]; eq != nil {
+				if templates != nil {
+					if tpl, ok := templates[eq.TemplateID]; ok {
+						for k, v := range TemplateStatsAtUpgrade(tpl, eq.UpgradeLevel, growth) {
+							out[k] += v
+							if k == "defense" {
+								out["def"] += v
+							}
+						}
+						continue
+					}
+				}
+				if def, ok := defs[eq.TemplateID]; ok {
+					for k, v := range def.Bonuses {
+						out[k] += v
+					}
+					continue
+				}
+			}
+		}
+		def, ok := defs[ref]
 		if !ok {
 			continue
 		}
@@ -382,17 +468,29 @@ func ComputePowerWithGear(base HeroBaseStats, inst *HeroInstance, gear map[strin
 
 // EffectiveCombatStats returns stats used by battle sim seeding/checks.
 func EffectiveCombatStats(base HeroBaseStats, inst *HeroInstance, defs map[string]EquipmentDef) (hp, atk, def, spd int) {
-	bonus := GearBonusForHero(inst, defs)
+	return EffectiveCombatStatsFull(nil, base, inst, defs, nil, nil, 0.10)
+}
+
+// EffectiveCombatStatsFull applies instance flat stats + set % then level/skill modifiers.
+func EffectiveCombatStatsFull(acc *AccountProgress, base HeroBaseStats, inst *HeroInstance, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, growth float64) (hp, atk, def, spd int) {
+	if acc != nil && templates != nil && inst != nil {
+		return EffectiveHeroCombatFromGear(base, acc, inst.CatalogID, templates, sets, growth)
+	}
+	bonus := GearBonusForHeroWithInstances(acc, inst, defs, templates, growth)
 	hp = base.HP + bonus["hp"]
 	atk = base.Atk + bonus["atk"]
 	def = base.Defense + bonus["def"] + bonus["defense"]
 	spd = base.Speed + bonus["speed"]
-	lvlMul := 1.0 + LevelStatBonusDraft*float64(max(0, inst.Level-1))
+	lvl := 1
+	if inst != nil {
+		lvl = inst.Level
+	}
+	lvlMul := 1.0 + LevelStatBonusDraft*float64(max(0, lvl-1))
 	hp = int(float64(hp) * lvlMul)
 	atk = int(float64(atk) * lvlMul)
 	def = int(float64(def) * lvlMul)
 	spd = int(float64(spd) * lvlMul)
-	if inst.SkillLevels != nil {
+	if inst != nil && inst.SkillLevels != nil {
 		ult := inst.SkillLevels["ultimate"]
 		if ult > 1 {
 			atk += (ult - 1) * 8

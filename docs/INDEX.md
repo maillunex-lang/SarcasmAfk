@@ -25,6 +25,9 @@
 |---|---|---|
 | [`HEROES.md`](HEROES.md) | 12 героев MVP (карточки) | Проект каталога |
 | [`CAMPAIGN_LOCATIONS.md`](CAMPAIGN_LOCATIONS.md) | CH01: локации, квесты, диалоги, 30 боёв | Проект сценарного пакета |
+| [`EQUIPMENT_SYSTEM.md`](EQUIPMENT_SYSTEM.md) | EQUIPMENT-001 архитектура / API / slots | Draft system |
+| [`EQUIPMENT_BALANCE.md`](EQUIPMENT_BALANCE.md) | Upgrade / sets / salvage Draft числа | Draft balance |
+| [`EQUIPMENT_CONTENT.md`](EQUIPMENT_CONTENT.md) | Каталог 32, CH01 rewards, TEMP icons | Content pack |
 
 ## 3. Визуал
 

@@ -6,17 +6,16 @@
 
 ## NOW
 
-CH01 RPG Expansion (срезы A–C + частичный D) на ветке `cursor/ch01-rpg-expansion-beaf`:  
-5 sidequests, 10 POI, campaign API, migration 007, POI UI, skill-up/equip DEF.  
-CH02 + Stage E blocked. CH01 **не** accepted.
+EQUIPMENT-001 на ветке `cursor/equipment-001-beaf`: каталог 32, unique instances, equip/upgrade/salvage/sets, CH01 rewards, TEMP icons, Godot arsenal UI.  
+CH02 + Stage E blocked. CH01 **не** accepted. Баланс Draft.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
-| **Работает** | Live API auth/battle/rewards; progression; gacha pity Draft; TEST_PURCHASE shop; VIP daily; chat WS+PG; guild roles/quests/vault/board; admin mute/delete/reports |
-| **Частично** | H13–H36 TEMP art (не Stage E); home/shop/VIP UI на TEMP ассетах; awaken/skills depth |
-| **Заглушки** | Real payments OFF (`T-153`); paid gacha OFF; guild wars/boss; CH02; GameBrain runtime; arena/events live |
+| **Работает** | Live API auth/battle/rewards; progression; gacha pity Draft; TEST_PURCHASE shop; VIP daily; chat WS+PG; guild roles/quests/vault/board; admin mute/delete/reports; EQUIPMENT-001 instances + combat flats/sets |
+| **Частично** | H13–H36 TEMP art (не Stage E); home/shop/VIP UI на TEMP ассетах; awaken/skills depth; equipment TEMP icons (не финальный арт) |
+| **Заглушки** | Real payments OFF (`T-153`); paid gacha OFF; equipment random drop OFF; guild wars/boss; CH02; GameBrain runtime; arena/events live |
 
 ## BLOCKED / ждёт владельца
 

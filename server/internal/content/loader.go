@@ -20,6 +20,14 @@ type Loader struct {
 	poi        map[string]POIDef
 	rewards    map[string]store.ExpansionRewardBundle
 	equipment  map[string]store.EquipmentDef
+	// EQUIPMENT-001
+	eqTemplates         map[string]store.EquipmentTemplate
+	eqSets              map[string]store.EquipmentSetDef
+	eqBalance           store.EquipmentBalance
+	eqBalanceVersion    string
+	eqAliases           map[string]string
+	eqCH01Rewards       map[string]string
+	eqRandomDropEnabled bool
 }
 
 func New(root string) *Loader {
@@ -28,10 +36,14 @@ func New(root string) *Loader {
 		heroes:     map[string]any{},
 		battles:    map[string]any{},
 		dialogue:   map[string]any{},
-		sidequests: map[string]SidequestDef{},
-		poi:        map[string]POIDef{},
-		rewards:    map[string]store.ExpansionRewardBundle{},
-		equipment:  map[string]store.EquipmentDef{},
+		sidequests:   map[string]SidequestDef{},
+		poi:          map[string]POIDef{},
+		rewards:      map[string]store.ExpansionRewardBundle{},
+		equipment:    map[string]store.EquipmentDef{},
+		eqTemplates:  map[string]store.EquipmentTemplate{},
+		eqSets:       map[string]store.EquipmentSetDef{},
+		eqAliases:    map[string]string{},
+		eqCH01Rewards: map[string]string{},
 	}
 	l.reload()
 	return l
@@ -99,6 +111,7 @@ func (l *Loader) reload() {
 		l.dialogue[base[:len(base)-5]] = d
 	}
 	l.loadExpansion()
+	l.loadEquipmentCatalog()
 }
 
 func (l *Loader) Heroes() []any {

@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "balance_version": "EQUIPMENT-001-draft-1",
+  "status": "draft_test_balance",
+  "note": "32 templates for EQUIPMENT-001. Stats are Draft. Mythic type supported but no Mythic items issued in CH01.",
+  "slots": ["weapon", "armor", "accessory", "relic"],
+  "rarities": ["N", "R", "SR", "SSR", "UR", "Mythic"],
+  "max_upgrade_by_rarity": {"N": 3, "R": 5, "SR": 8, "SSR": 10, "UR": 12, "Mythic": 15},
+  "rarity_cost_multiplier": {"N": 1, "R": 2, "SR": 4, "SSR": 8, "UR": 16, "Mythic": 32},
+  "salvage_yield_by_rarity": {"N": 1, "R": 3, "SR": 8, "SSR": 20, "UR": 50, "Mythic": 0},
+  "inventory_capacity": 200,
+  "upgrade_growth_per_level": 0.10,
+  "materials": [
+    {
+      "item_id": "mat_equipment_scrap",
+      "display_name": "Обломки Регламента",
+      "description": "Материал улучшения экипировки R+.",
+      "icon_asset_id": "ui_icon_inventory"
+    }
+  ],
+  "aliases": {
+    "starter_blade": "eq_n_starter_blade",
+    "starter_mail": "eq_n_starter_mail",
+    "starter_charm": "eq_n_starter_charm"
+  },
+  "templates": [
+    {"template_id": "eq_n_wooden_decree", "display_name": "Деревянный Указ", "slot": "weapon", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"atk": 8}, "max_upgrade": 3, "set_id": null, "flavor_text": "Самый убедительный аргумент в споре с терминалом.", "icon_asset_id": "eq_icon_wooden_decree", "source_tags": ["craft", "drop_n"], "content_status": "draft"},
+    {"template_id": "eq_n_starter_blade", "display_name": "Клинок Дежурного", "slot": "weapon", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"atk": 10}, "max_upgrade": 3, "set_id": null, "flavor_text": "Выдан на смену. Смену забыли закрыть.", "icon_asset_id": "eq_icon_starter_blade", "source_tags": ["ch01_b02", "starter"], "content_status": "draft"},
+    {"template_id": "eq_r_queue_cutter", "display_name": "Рассекатель Очереди", "slot": "weapon", "rarity": "R", "required_hero_level": 3, "allowed_classes": [], "base_stats": {"atk": 16}, "max_upgrade": 5, "set_id": "set_queue_guard", "flavor_text": "Не сокращает ожидание. Сокращает саму очередь.", "icon_asset_id": "eq_icon_queue_cutter", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_r_ink_quill", "display_name": "Перо Неповиновения", "slot": "weapon", "rarity": "R", "required_hero_level": 3, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 15, "speed": 1}, "max_upgrade": 5, "set_id": "set_archive_wisdom", "flavor_text": "Каждая подпись отменяет одну бессмысленную инструкцию.", "icon_asset_id": "eq_icon_ink_quill", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_sr_traffic_sabre", "display_name": "Сабля Запрещённого Поворота", "slot": "weapon", "rarity": "SR", "required_hero_level": 8, "allowed_classes": ["warrior", "tank"], "base_stats": {"atk": 26, "speed": 2}, "max_upgrade": 8, "set_id": "set_emergency_protocol", "flavor_text": "Рубит только там, где поворот официально запрещён.", "icon_asset_id": "eq_icon_traffic_sabre", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_sr_archive_staff", "display_name": "Посох Секретного Приложения", "slot": "weapon", "rarity": "SR", "required_hero_level": 8, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 28}, "max_upgrade": 8, "set_id": "set_archive_wisdom", "flavor_text": "Содержит приложение, которого нет в описи.", "icon_asset_id": "eq_icon_archive_staff", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_ssr_stampbreaker", "display_name": "Разрушитель Печатей", "slot": "weapon", "rarity": "SSR", "required_hero_level": 20, "allowed_classes": [], "base_stats": {"atk": 45, "speed": 3}, "max_upgrade": 10, "set_id": "set_final_stamp", "flavor_text": "После удара печать требует адвоката.", "icon_asset_id": "eq_icon_stampbreaker", "source_tags": ["endgame"], "content_status": "draft"},
+    {"template_id": "eq_ur_regulation_edge", "display_name": "Лезвие Отменённого Регламента", "slot": "weapon", "rarity": "UR", "required_hero_level": 40, "allowed_classes": [], "base_stats": {"atk": 75, "speed": 5}, "max_upgrade": 12, "set_id": "set_final_stamp", "flavor_text": "Нормы отменены. Острый край остался.", "icon_asset_id": "eq_icon_regulation_edge", "source_tags": ["endgame"], "content_status": "draft"},
+
+    {"template_id": "eq_n_paper_vest", "display_name": "Бумажный Жилет", "slot": "armor", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 35, "defense": 4}, "max_upgrade": 3, "set_id": null, "flavor_text": "Защищает от сквозняков и неубедительных доводов.", "icon_asset_id": "eq_icon_paper_vest", "source_tags": ["drop_n"], "content_status": "draft"},
+    {"template_id": "eq_n_starter_mail", "display_name": "Куртка Стажёра", "slot": "armor", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 40, "defense": 5}, "max_upgrade": 3, "set_id": null, "flavor_text": "Броня первого рабочего дня. Второго никто не обещал.", "icon_asset_id": "eq_icon_starter_mail", "source_tags": ["starter"], "content_status": "draft"},
+    {"template_id": "eq_r_clerk_coat", "display_name": "Плащ Младшего Делопроизводителя", "slot": "armor", "rarity": "R", "required_hero_level": 3, "allowed_classes": [], "base_stats": {"hp": 65, "defense": 9}, "max_upgrade": 5, "set_id": "set_queue_guard", "flavor_text": "Добавляет солидности, но не полномочий.", "icon_asset_id": "eq_icon_clerk_coat", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_ch01_clerk_coat", "display_name": "Мундир Трёх Печатей", "slot": "armor", "rarity": "R", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 60, "defense": 10}, "max_upgrade": 5, "set_id": null, "flavor_text": "Прошёл три проверки. Четвёртую пережил молча.", "icon_asset_id": "eq_icon_ch01_clerk_coat", "source_tags": ["ch01_sq02"], "account_unique_reward": true, "content_status": "draft"},
+    {"template_id": "eq_r_archive_robe", "display_name": "Мантия Тихого Архива", "slot": "armor", "rarity": "R", "required_hero_level": 3, "allowed_classes": ["mage", "support"], "base_stats": {"hp": 55, "defense": 8}, "max_upgrade": 5, "set_id": "set_archive_wisdom", "flavor_text": "Книги шепчут владельцу. Иногда полезное.", "icon_asset_id": "eq_icon_archive_robe", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_sr_emergency_armor", "display_name": "Кираса Аварийного Согласования", "slot": "armor", "rarity": "SR", "required_hero_level": 8, "allowed_classes": ["tank", "warrior"], "base_stats": {"hp": 105, "defense": 16}, "max_upgrade": 8, "set_id": "set_emergency_protocol", "flavor_text": "Утверждена за секунду до катастрофы.", "icon_asset_id": "eq_icon_emergency_armor", "source_tags": ["ch01_b30"], "content_status": "draft"},
+    {"template_id": "eq_ssr_final_counter_armor", "display_name": "Панцирь Последнего Окошка", "slot": "armor", "rarity": "SSR", "required_hero_level": 20, "allowed_classes": [], "base_stats": {"hp": 180, "defense": 26}, "max_upgrade": 10, "set_id": "set_final_stamp", "flavor_text": "Очередь закончится раньше, чем он треснет.", "icon_asset_id": "eq_icon_final_counter_armor", "source_tags": ["endgame"], "content_status": "draft"},
+    {"template_id": "eq_ur_unchanging_protocol", "display_name": "Облачение Вечного Протокола", "slot": "armor", "rarity": "UR", "required_hero_level": 40, "allowed_classes": [], "base_stats": {"hp": 300, "defense": 42}, "max_upgrade": 12, "set_id": "set_final_stamp", "flavor_text": "Не мнётся. Не горит. Не подлежит обсуждению.", "icon_asset_id": "eq_icon_unchanging_protocol", "source_tags": ["endgame"], "content_status": "draft"},
+
+    {"template_id": "eq_n_ticket_ring", "display_name": "Кольцо Нулевого Талона", "slot": "accessory", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 20}, "max_upgrade": 3, "set_id": null, "flavor_text": "Ваша очередь ещё не началась. Поздравляем.", "icon_asset_id": "eq_icon_ticket_ring", "source_tags": ["drop_n"], "content_status": "draft"},
+    {"template_id": "eq_n_starter_charm", "display_name": "Брелок Начинающего", "slot": "accessory", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 25}, "max_upgrade": 3, "set_id": null, "flavor_text": "Звенит при виде первой серьёзной проблемы.", "icon_asset_id": "eq_icon_starter_charm", "source_tags": ["ch01_b07", "starter"], "content_status": "draft"},
+    {"template_id": "eq_r_queue_badge", "display_name": "Значок Безочередного", "slot": "accessory", "rarity": "R", "required_hero_level": 3, "allowed_classes": [], "base_stats": {"hp": 35, "defense": 4}, "max_upgrade": 5, "set_id": "set_queue_guard", "flavor_text": "Не даёт права пройти. Даёт право мечтать.", "icon_asset_id": "eq_icon_queue_badge", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_r_archivist_glasses", "display_name": "Очки Всевидящего Архивариуса", "slot": "accessory", "rarity": "R", "required_hero_level": 3, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 8, "speed": 1}, "max_upgrade": 5, "set_id": "set_archive_wisdom", "flavor_text": "Видят сноски даже на обратной стороне судьбы.", "icon_asset_id": "eq_icon_archivist_glasses", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_sr_alarm_bell", "display_name": "Колокол Незапланированной Тревоги", "slot": "accessory", "rarity": "SR", "required_hero_level": 8, "allowed_classes": [], "base_stats": {"hp": 60, "speed": 2}, "max_upgrade": 8, "set_id": "set_emergency_protocol", "flavor_text": "Звонит только после того, как всё случилось.", "icon_asset_id": "eq_icon_alarm_bell", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_sr_signed_exception", "display_name": "Подписанное Исключение", "slot": "accessory", "rarity": "SR", "required_hero_level": 8, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 14, "hp": 40}, "max_upgrade": 8, "set_id": "set_archive_wisdom", "flavor_text": "Единственное правило, которое разрешено нарушать.", "icon_asset_id": "eq_icon_signed_exception", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_ssr_window_key", "display_name": "Ключ от Последнего Окошка", "slot": "accessory", "rarity": "SSR", "required_hero_level": 20, "allowed_classes": [], "base_stats": {"atk": 24, "hp": 90}, "max_upgrade": 10, "set_id": "set_final_stamp", "flavor_text": "Подходит к замку, который не признаёт существования.", "icon_asset_id": "eq_icon_window_key", "source_tags": ["endgame"], "content_status": "draft"},
+    {"template_id": "eq_ur_eternal_signature", "display_name": "Подпись Без Срока Давности", "slot": "accessory", "rarity": "UR", "required_hero_level": 40, "allowed_classes": [], "base_stats": {"atk": 40, "hp": 140}, "max_upgrade": 12, "set_id": "set_final_stamp", "flavor_text": "Её поставили завтра. Действует со вчера.", "icon_asset_id": "eq_icon_eternal_signature", "source_tags": ["endgame"], "content_status": "draft"},
+
+    {"template_id": "eq_n_blank_form", "display_name": "Чистый Бланк", "slot": "relic", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"defense": 3}, "max_upgrade": 3, "set_id": null, "flavor_text": "На нём ещё не успели запретить победу.", "icon_asset_id": "eq_icon_blank_form", "source_tags": ["ch01_b13"], "content_status": "draft"},
+    {"template_id": "eq_n_broken_seal", "display_name": "Треснувшая Печать", "slot": "relic", "rarity": "N", "required_hero_level": 1, "allowed_classes": [], "base_stats": {"hp": 20, "defense": 2}, "max_upgrade": 3, "set_id": null, "flavor_text": "Один удар отделяет порядок от здравого смысла.", "icon_asset_id": "eq_icon_broken_seal", "source_tags": ["drop_n"], "content_status": "draft"},
+    {"template_id": "eq_r_queue_token", "display_name": "Талон Вне Времени", "slot": "relic", "rarity": "R", "required_hero_level": 3, "allowed_classes": [], "base_stats": {"hp": 40, "defense": 5}, "max_upgrade": 5, "set_id": "set_queue_guard", "flavor_text": "Его номер вызывают во всех эпохах сразу.", "icon_asset_id": "eq_icon_queue_token", "source_tags": ["ch01_b20"], "content_status": "draft"},
+    {"template_id": "eq_r_archive_index", "display_name": "Индекс Забытых Имен", "slot": "relic", "rarity": "R", "required_hero_level": 3, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 9, "hp": 20}, "max_upgrade": 5, "set_id": "set_archive_wisdom", "flavor_text": "Помнит тех, кого официально никогда не было.", "icon_asset_id": "eq_icon_archive_index", "source_tags": ["drop_r"], "content_status": "draft"},
+    {"template_id": "eq_sr_emergency_battery", "display_name": "Батарея Аварийного Порядка", "slot": "relic", "rarity": "SR", "required_hero_level": 8, "allowed_classes": [], "base_stats": {"hp": 70, "defense": 8}, "max_upgrade": 8, "set_id": "set_emergency_protocol", "flavor_text": "Питает систему даже после её отмены.", "icon_asset_id": "eq_icon_emergency_battery", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_sr_sealed_report", "display_name": "Отчёт о Несостоявшейся Катастрофе", "slot": "relic", "rarity": "SR", "required_hero_level": 8, "allowed_classes": ["mage", "support"], "base_stats": {"atk": 15, "hp": 45}, "max_upgrade": 8, "set_id": "set_archive_wisdom", "flavor_text": "Катастрофы не было. Отчёт всё равно готов.", "icon_asset_id": "eq_icon_sealed_report", "source_tags": ["drop_sr"], "content_status": "draft"},
+    {"template_id": "eq_ssr_last_stamp", "display_name": "Печать Последнего Решения", "slot": "relic", "rarity": "SSR", "required_hero_level": 20, "allowed_classes": [], "base_stats": {"atk": 27, "defense": 13}, "max_upgrade": 10, "set_id": "set_final_stamp", "flavor_text": "Обжалованию не подлежит. Пока.", "icon_asset_id": "eq_icon_last_stamp", "source_tags": ["endgame"], "content_status": "draft"},
+    {"template_id": "eq_ur_order_core", "display_name": "Ядро Великого Порядка", "slot": "relic", "rarity": "UR", "required_hero_level": 40, "allowed_classes": [], "base_stats": {"hp": 160, "atk": 42}, "max_upgrade": 12, "set_id": "set_final_stamp", "flavor_text": "Пульсирует, когда кто-то принимает решение самостоятельно.", "icon_asset_id": "eq_icon_order_core", "source_tags": ["endgame"], "content_status": "draft"}
+  ],
+  "ch01_guaranteed_rewards": [
+    {"trigger": "battle:B02", "template_id": "eq_n_starter_blade", "bundle_key": "CH01-B02-EQ-FIRST_CLEAR"},
+    {"trigger": "sidequest:CH01-SQ02", "template_id": "eq_ch01_clerk_coat", "bundle_key": "CH01-SQ02-FIRST_CLEAR"},
+    {"trigger": "battle:B07", "template_id": "eq_n_starter_charm", "bundle_key": "CH01-B07-EQ-FIRST_CLEAR"},
+    {"trigger": "battle:B13", "template_id": "eq_n_blank_form", "bundle_key": "CH01-B13-EQ-FIRST_CLEAR"},
+    {"trigger": "battle:B20", "template_id": "eq_r_queue_token", "bundle_key": "CH01-B20-EQ-FIRST_CLEAR"},
+    {"trigger": "battle:B30", "template_id": "eq_sr_emergency_armor", "bundle_key": "CH01-B30-EQ-FIRST_CLEAR"}
+  ],
+  "random_drop": {
+    "enabled": false,
+    "note": "Random equipment drop OFF by default (Draft). Enable only after economy review.",
+    "normal_battles": {"N": 0.08, "R": 0.03, "SR": 0.005}
+  }
+}

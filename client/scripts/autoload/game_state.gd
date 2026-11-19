@@ -24,8 +24,9 @@ var party_ids: Array = ["H01", "H04", "H02", "H03", "H07"]
 var heroes_catalog: Array = []
 var owned_heroes: Dictionary = {} # id -> true
 var hero_levels: Dictionary = {} # id -> level
-var equipment: Dictionary = {} # hero_id -> {weapon, armor, accessory}
-var inventory: Dictionary = {"iron_scrap": 5, "arcane_ink": 3, "ticket_stub": 1}
+var equipment: Dictionary = {} # hero_id -> {weapon, armor, accessory, relic} (instance ids or legacy template ids)
+var equipment_instances: Dictionary = {} # instance_id -> {id, template_id, upgrade_level, is_locked, equipped_hero_id, equipped_slot, version}
+var inventory: Dictionary = {"iron_scrap": 5, "arcane_ink": 3, "ticket_stub": 1, "mat_equipment_scrap": 10}
 var last_battle_result: Dictionary = {}
 
 var api: ApiClient
@@ -842,13 +843,18 @@ func equip_item(hero_id: String, slot: String, item_id: String) -> bool:
 		equipment[hero_id] = {"weapon": "", "armor": "", "accessory": "", "relic": ""}
 	if not equipment[hero_id].has(slot):
 		equipment[hero_id][slot] = ""
-	var starters := ["starter_blade", "starter_mail", "starter_charm"]
-	if item_id != "" and int(inventory.get(item_id, 0)) <= 0 and item_id not in starters:
+	# Prefer unique instance path when catalog templates exist.
+	if item_id != "" and not equipment_instances.has(item_id):
+		var inst_id := _ensure_instance_for_template(item_id)
+		if inst_id != "":
+			return equip_instance(inst_id, hero_id, slot, true)
+	var starters := ["starter_blade", "starter_mail", "starter_charm", "eq_n_starter_blade", "eq_n_starter_mail", "eq_n_starter_charm"]
+	if item_id != "" and int(inventory.get(item_id, 0)) <= 0 and item_id not in starters and not equipment_instances.has(item_id):
 		return false
 	var prev := str(equipment[hero_id].get(slot, ""))
-	if prev != "" and prev != item_id and prev not in starters:
+	if prev != "" and prev != item_id and prev not in starters and not equipment_instances.has(prev):
 		inventory[prev] = int(inventory.get(prev, 0)) + 1
-	if item_id != "" and item_id not in starters:
+	if item_id != "" and item_id not in starters and not equipment_instances.has(item_id):
 		inventory[item_id] = int(inventory.get(item_id, 0)) - 1
 		for hid in equipment.keys():
 			if str(hid) == hero_id:
@@ -863,6 +869,159 @@ func equip_item(hero_id: String, slot: String, item_id: String) -> bool:
 	return true
 
 
+func _new_instance_id() -> String:
+	return "eqi_%s_%s" % [Time.get_unix_time_from_system(), randi() % 100000]
+
+
+func _ensure_instance_for_template(template_id: String) -> String:
+	var tid := template_id
+	var aliases := {"starter_blade": "eq_n_starter_blade", "starter_mail": "eq_n_starter_mail", "starter_charm": "eq_n_starter_charm"}
+	if aliases.has(tid):
+		tid = str(aliases[tid])
+	var def: Dictionary = catalog.get_equipment(tid) if catalog != null else {}
+	if def.is_empty():
+		def = catalog.get_equipment(template_id) if catalog != null else {}
+	if def.is_empty() and int(inventory.get(template_id, 0)) <= 0 and template_id not in aliases.keys() and template_id not in aliases.values():
+		return ""
+	if bool(def.get("account_unique_reward", def.get("account_unique", false))):
+		for iid in equipment_instances.keys():
+			var ex: Dictionary = equipment_instances[iid]
+			if str(ex.get("template_id", "")) == tid:
+				return str(iid)
+	var iid2 := _new_instance_id()
+	equipment_instances[iid2] = {
+		"id": iid2,
+		"template_id": tid if not def.is_empty() else template_id,
+		"upgrade_level": 0,
+		"is_locked": false,
+		"equipped_hero_id": "",
+		"equipped_slot": "",
+		"version": 1,
+	}
+	if int(inventory.get(template_id, 0)) > 0:
+		inventory[template_id] = int(inventory.get(template_id, 0)) - 1
+	return iid2
+
+
+func equip_instance(instance_id: String, hero_id: String, slot: String, confirm_transfer: bool = false) -> bool:
+	if not equipment_instances.has(instance_id):
+		return false
+	if not bool(owned_heroes.get(hero_id, false)):
+		return false
+	var inst: Dictionary = equipment_instances[instance_id]
+	var def: Dictionary = catalog.get_equipment(str(inst.get("template_id", ""))) if catalog != null else {}
+	if not def.is_empty() and str(def.get("slot", slot)) != "" and str(def.get("slot", slot)) != slot:
+		return false
+	var prev_hero := str(inst.get("equipped_hero_id", ""))
+	if prev_hero != "" and prev_hero != hero_id and not confirm_transfer:
+		return false
+	if not equipment.has(hero_id):
+		equipment[hero_id] = {"weapon": "", "armor": "", "accessory": "", "relic": ""}
+	if prev_hero != "":
+		if equipment.has(prev_hero):
+			var ps := str(inst.get("equipped_slot", ""))
+			if str(equipment[prev_hero].get(ps, "")) == instance_id:
+				equipment[prev_hero][ps] = ""
+	var old := str(equipment[hero_id].get(slot, ""))
+	if old != "" and old != instance_id and equipment_instances.has(old):
+		equipment_instances[old]["equipped_hero_id"] = ""
+		equipment_instances[old]["equipped_slot"] = ""
+		equipment_instances[old]["version"] = int(equipment_instances[old].get("version", 1)) + 1
+	equipment[hero_id][slot] = instance_id
+	inst["equipped_hero_id"] = hero_id
+	inst["equipped_slot"] = slot
+	inst["version"] = int(inst.get("version", 1)) + 1
+	equipment_instances[instance_id] = inst
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func unequip_instance(instance_id: String) -> bool:
+	if not equipment_instances.has(instance_id):
+		return false
+	var inst: Dictionary = equipment_instances[instance_id]
+	var hid := str(inst.get("equipped_hero_id", ""))
+	var slot := str(inst.get("equipped_slot", ""))
+	if hid != "" and equipment.has(hid) and str(equipment[hid].get(slot, "")) == instance_id:
+		equipment[hid][slot] = ""
+	inst["equipped_hero_id"] = ""
+	inst["equipped_slot"] = ""
+	inst["version"] = int(inst.get("version", 1)) + 1
+	equipment_instances[instance_id] = inst
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func upgrade_instance(instance_id: String) -> bool:
+	if not equipment_instances.has(instance_id):
+		return false
+	var inst: Dictionary = equipment_instances[instance_id]
+	var def: Dictionary = catalog.get_equipment(str(inst.get("template_id", ""))) if catalog != null else {}
+	var rarity := str(def.get("rarity", "N"))
+	var max_u := int(def.get("max_upgrade", 3))
+	var u := int(inst.get("upgrade_level", 0))
+	if u >= max_u:
+		return false
+	var mult := {"N": 1, "R": 2, "SR": 4, "SSR": 8, "UR": 16, "Mythic": 32}.get(rarity, 1)
+	var soft_cost := 100 * (u + 1) * int(mult)
+	var scrap := 0 if rarity == "N" else 1 + int(u / 2)
+	if soft_currency < soft_cost:
+		return false
+	if scrap > 0 and int(inventory.get("mat_equipment_scrap", 0)) < scrap:
+		return false
+	soft_currency -= soft_cost
+	if scrap > 0:
+		inventory["mat_equipment_scrap"] = int(inventory.get("mat_equipment_scrap", 0)) - scrap
+	inst["upgrade_level"] = u + 1
+	inst["version"] = int(inst.get("version", 1)) + 1
+	equipment_instances[instance_id] = inst
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func lock_instance(instance_id: String, locked: bool) -> bool:
+	if not equipment_instances.has(instance_id):
+		return false
+	equipment_instances[instance_id]["is_locked"] = locked
+	equipment_instances[instance_id]["version"] = int(equipment_instances[instance_id].get("version", 1)) + 1
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func salvage_instance(instance_id: String) -> bool:
+	if not equipment_instances.has(instance_id):
+		return false
+	var inst: Dictionary = equipment_instances[instance_id]
+	if bool(inst.get("is_locked", false)):
+		return false
+	if str(inst.get("equipped_hero_id", "")) != "":
+		return false
+	var def: Dictionary = catalog.get_equipment(str(inst.get("template_id", ""))) if catalog != null else {}
+	var rarity := str(def.get("rarity", "N"))
+	if rarity == "Mythic":
+		return false
+	var yield_map := {"N": 1, "R": 3, "SR": 8, "SSR": 20, "UR": 50}
+	var y := int(yield_map.get(rarity, 1))
+	inventory["mat_equipment_scrap"] = int(inventory.get("mat_equipment_scrap", 0)) + y
+	equipment_instances.erase(instance_id)
+	save_game()
+	progress_changed.emit()
+	return true
+
+
+func grant_equipment_template(template_id: String, source: String = "reward") -> String:
+	var iid := _ensure_instance_for_template(template_id)
+	if iid != "" and equipment_instances.has(iid):
+		equipment_instances[iid]["acquisition_source"] = source
+		save_game()
+		progress_changed.emit()
+	return iid
+
+
 func save_game() -> void:
 	var payload := {
 		"soft_currency": soft_currency,
@@ -873,6 +1032,7 @@ func save_game() -> void:
 		"owned_heroes": owned_heroes,
 		"hero_levels": hero_levels,
 		"equipment": equipment,
+		"equipment_instances": equipment_instances,
 		"inventory": inventory,
 		"completed_quests": completed_quests,
 		"completed_battles": completed_battles,
@@ -918,6 +1078,7 @@ func load_game() -> void:
 	owned_heroes = data.get("owned_heroes", owned_heroes)
 	hero_levels = data.get("hero_levels", hero_levels)
 	equipment = data.get("equipment", equipment)
+	equipment_instances = data.get("equipment_instances", equipment_instances)
 	inventory = data.get("inventory", inventory)
 	completed_quests = data.get("completed_quests", {})
 	completed_battles = data.get("completed_battles", {})

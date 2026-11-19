@@ -9,6 +9,8 @@ const POI_PATH := "res://data/poi/ch01_poi.json"
 const EXPANSION_DIALOGUES_PATH := "res://data/dialogues/ch01_expansion_dialogues.json"
 const EXPANSION_REWARDS_PATH := "res://data/rewards/ch01_expansion_rewards.json"
 const EQUIPMENT_PATH := "res://data/equipment/ch01_equipment.json"
+const EQUIPMENT_CATALOG_V1 := "res://data/equipment/equipment_catalog_v1.json"
+const EQUIPMENT_SETS_PATH := "res://data/equipment/equipment_sets.json"
 const LOCATIONS_PATH := "res://data/locations/ch01_locations.json"
 const BATTLES_PATH := "res://data/battles/ch01_battles.json"
 const ENEMIES_PATH := "res://data/enemies/ch01_enemies.json"
@@ -20,6 +22,8 @@ var poi_by_id: Dictionary = {}
 var expansion_dialogues_by_id: Dictionary = {}
 var reward_bundles_by_id: Dictionary = {}
 var equipment_by_id: Dictionary = {}
+var equipment_sets_by_id: Dictionary = {}
+var equipment_balance: Dictionary = {}
 var locations_by_id: Dictionary = {}
 var battles_by_id: Dictionary = {}
 var enemies_by_id: Dictionary = {}
@@ -55,6 +59,31 @@ func load_all() -> void:
 	equipment_by_id.clear()
 	for e in eq_root.get("items", []):
 		equipment_by_id[str(e.get("item_id", ""))] = e
+
+	# EQUIPMENT-001 full catalog overlays / extends legacy CH01 items.
+	var cat = _read_json(EQUIPMENT_CATALOG_V1)
+	equipment_balance = cat
+	for t in cat.get("templates", []):
+		var tid := str(t.get("template_id", ""))
+		if tid == "":
+			continue
+		var row: Dictionary = t.duplicate(true)
+		row["item_id"] = tid
+		row["title"] = str(t.get("display_name", ""))
+		row["bonuses"] = t.get("base_stats", {})
+		row["account_unique"] = bool(t.get("account_unique_reward", false))
+		equipment_by_id[tid] = row
+	for alias in cat.get("aliases", {}).keys():
+		var canon := str(cat.get("aliases", {}).get(alias, ""))
+		if equipment_by_id.has(canon):
+			var aliased: Dictionary = equipment_by_id[canon].duplicate(true)
+			aliased["item_id"] = str(alias)
+			equipment_by_id[str(alias)] = aliased
+
+	var sets_root = _read_json(EQUIPMENT_SETS_PATH)
+	equipment_sets_by_id.clear()
+	for s in sets_root.get("sets", []):
+		equipment_sets_by_id[str(s.get("set_id", ""))] = s
 
 	var locs = _read_json(LOCATIONS_PATH)
 	locations_by_id.clear()

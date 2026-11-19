@@ -46,6 +46,12 @@ type AccountProgress struct {
 	Sidequests       map[string]*SidequestState `json:"sidequests,omitempty"`
 	POIProgress      map[string]*POIProgress    `json:"poi_progress,omitempty"`
 	JournalFlags     map[string]bool            `json:"journal_flags,omitempty"`
+	// EquipmentBag: unique EQUIPMENT-001 instances keyed by UUID.
+	EquipmentBag map[string]*EquipmentInstance `json:"equipment_instances,omitempty"`
+	// EquipmentPending: deferred grants when inventory is full.
+	EquipmentPending []map[string]any `json:"equipment_pending,omitempty"`
+	// Idempotency: request_id → cached response payload for equipment mutations.
+	Idempotency map[string]map[string]any `json:"idempotency,omitempty"`
 	AFKClaimedUnix   int64                    `json:"afk_claimed_unix"`
 	ActiveBattleID   string                   `json:"active_battle_id,omitempty"`
 	BattleSeed       int64                    `json:"battle_seed,omitempty"`
