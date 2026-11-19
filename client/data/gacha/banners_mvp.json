@@ -1,0 +1,16 @@
+{
+  "banners": [
+    {
+      "id": "BANNER_CH01",
+      "name": "Талонный баннер",
+      "cost_tickets": 1,
+      "rates": {
+        "R": 0.55,
+        "SR": 0.3,
+        "SSR": 0.12,
+        "UR": 0.03
+      }
+    }
+  ],
+  "note": "gacha mock only"
+}
