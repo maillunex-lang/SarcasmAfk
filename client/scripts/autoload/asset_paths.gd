@@ -70,6 +70,20 @@ const ICON_TICKET := "res://assets/ui/icons/ui_icon_ticket.jpg"
 const ICON_SHOP := "res://assets/ui/icons/ui_icon_shop.jpg"
 const ICON_VIP := "res://assets/ui/icons/ui_icon_vip.jpg"
 const ICON_CHAT := "res://assets/ui/icons/ui_icon_chat.jpg"
+const ICON_MAT_EQUIPMENT_SCRAP := "res://assets/ui/equipment/ui_icon_mat_equipment_scrap.jpg"
+
+
+static func equipment_icon(icon_asset_id: String) -> String:
+	if icon_asset_id == "":
+		return ICON_INVENTORY
+	var path := "res://assets/ui/equipment/%s.jpg" % icon_asset_id
+	if ResourceLoader.exists(path):
+		return path
+	# TEMP fallback without extension mismatch
+	path = "res://assets/ui/equipment/%s.png" % icon_asset_id
+	if ResourceLoader.exists(path):
+		return path
+	return ICON_INVENTORY
 
 
 static func shop_icon_for_category(category: String) -> String:

@@ -104,7 +104,7 @@ func (s *Server) ch01ClaimSidequest(w http.ResponseWriter, tok, questID string) 
 		writeErr(w, http.StatusNotFound, "REWARD_NOT_FOUND")
 		return
 	}
-	prog, already, granted, err := s.Store.ClaimSidequest(tok, questID, def.StepIDs, bundle, s.Content.EquipmentDefs())
+	prog, already, granted, err := s.Store.ClaimSidequest(tok, questID, def.StepIDs, bundle, s.Content.EquipmentDefs(), s.Content.EquipmentTemplates(), s.Content.EquipmentBalance())
 	if err != nil {
 		writeErr(w, http.StatusConflict, "VALIDATION_FAILED")
 		return

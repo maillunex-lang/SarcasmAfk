@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "balance_version": "EQUIPMENT-001-draft-1",
+  "status": "draft_test_balance",
+  "sets": [
+    {
+      "set_id": "set_queue_guard",
+      "display_name": "Страж Очереди",
+      "piece_2": {"defense_pct": 0.08, "status": "active"},
+      "piece_4": {"hp_pct": 0.10, "status": "active"},
+      "description": "Защита тех, кто стоит дольше всех."
+    },
+    {
+      "set_id": "set_archive_wisdom",
+      "display_name": "Архивная Мудрость",
+      "piece_2": {"atk_pct": 0.06, "status": "active"},
+      "piece_4": {"speed_pct": 0.05, "status": "active"},
+      "description": "Знание сносок и запретов."
+    },
+    {
+      "set_id": "set_emergency_protocol",
+      "display_name": "Аварийный Протокол",
+      "piece_2": {"hp_pct": 0.08, "status": "active"},
+      "piece_4": {"defense_pct": 0.08, "status": "active"},
+      "description": "Утверждено за секунду до катастрофы."
+    },
+    {
+      "set_id": "set_final_stamp",
+      "display_name": "Последняя Печать",
+      "piece_2": {"atk_pct": 0.08, "status": "active"},
+      "piece_4": {"hp_pct": 0.08, "status": "active"},
+      "description": "Обжалованию не подлежит. Пока."
+    }
+  ]
+}

@@ -655,14 +655,161 @@ func (m *Memory) InteractPOI(token, poiID, actionID, stepID, sidequestID string,
 	return prog, reset, err
 }
 
-func (m *Memory) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef) (*AccountProgress, bool, map[string]any, error) {
+func (m *Memory) ClaimSidequest(token, questID string, requiredSteps []string, bundle ExpansionRewardBundle, defs map[string]EquipmentDef, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, bool, map[string]any, error) {
 	already := false
 	var granted map[string]any
 	prog, err := m.mutate(token, func(acc *AccountProgress) error {
-		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs)
+		a, g, e := ApplySidequestClaim(acc, questID, requiredSteps, bundle, defs, templates, bal)
 		already = a
 		granted = g
 		return e
 	})
 	return prog, already, granted, err
+}
+
+func (m *Memory) idempotent(acc *AccountProgress, requestID string, action func() (map[string]any, error)) (map[string]any, error) {
+	EnsureEquipment(acc)
+	if requestID == "" {
+		return action()
+	}
+	if prev, ok := acc.Idempotency[requestID]; ok {
+		return prev, nil
+	}
+	out, err := action()
+	if err != nil {
+		return nil, err
+	}
+	acc.Idempotency[requestID] = out
+	return out, nil
+}
+
+func (m *Memory) EquipInstance(token, instanceID, heroID, slot string, confirmTransfer bool, expectedVersion int, requestID string, base HeroBaseStats, heroClass string, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, map[string]any, error) {
+	var outInst *EquipmentInstance
+	var extras map[string]any
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		EnsureEquipment(acc)
+		MigrateLegacyEquipment(acc, templates, bal.Aliases, bal.InventoryCapacity)
+		payload, e := m.idempotent(acc, requestID, func() (map[string]any, error) {
+			lvl := 1
+			if hi := acc.HeroInstances[heroID]; hi != nil {
+				lvl = hi.Level
+			}
+			eq, err2 := EquipInstance(acc, instanceID, heroID, slot, confirmTransfer, expectedVersion, lvl, heroClass, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			flat, pct, counts := ComputeHeroGearFlat(acc, heroID, templates, sets, bal.UpgradeGrowth)
+			if hi := acc.HeroInstances[heroID]; hi != nil {
+				hi.Power = ComputePowerWithGear(base, hi, flat)
+			}
+			outInst = eq
+			return map[string]any{"instance": eq, "flat": flat, "set_pct": pct, "set_counts": counts}, nil
+		})
+		extras = payload
+		if payload != nil {
+			if inst, ok := payload["instance"].(*EquipmentInstance); ok {
+				outInst = inst
+			}
+		}
+		return e
+	})
+	return prog, outInst, extras, err
+}
+
+func (m *Memory) UnequipInstance(token, instanceID string, expectedVersion int, requestID string) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		_, e := m.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, err2 := UnequipInstance(acc, instanceID, expectedVersion)
+			if err2 != nil {
+				return nil, err2
+			}
+			out = eq
+			return map[string]any{"instance": eq}, nil
+		})
+		return e
+	})
+	return prog, out, err
+}
+
+func (m *Memory) UpgradeInstance(token, instanceID string, expectedVersion int, requestID string, base HeroBaseStats, templates map[string]EquipmentTemplate, sets map[string]EquipmentSetDef, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, map[string]any, error) {
+	var out *EquipmentInstance
+	var extras map[string]any
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		payload, e := m.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, cost, err2 := UpgradeInstance(acc, instanceID, expectedVersion, bal, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			if eq.EquippedHeroID != "" {
+				if hi := acc.HeroInstances[eq.EquippedHeroID]; hi != nil {
+					flat, _, _ := ComputeHeroGearFlat(acc, eq.EquippedHeroID, templates, sets, bal.UpgradeGrowth)
+					hi.Power = ComputePowerWithGear(base, hi, flat)
+				}
+			}
+			out = eq
+			return map[string]any{"instance": eq, "cost": cost}, nil
+		})
+		extras = payload
+		return e
+	})
+	return prog, out, extras, err
+}
+
+func (m *Memory) LockInstance(token, instanceID string, locked bool, expectedVersion int, requestID string) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		_, e := m.idempotent(acc, requestID, func() (map[string]any, error) {
+			eq, err2 := LockInstance(acc, instanceID, locked, expectedVersion)
+			if err2 != nil {
+				return nil, err2
+			}
+			out = eq
+			return map[string]any{"instance": eq}, nil
+		})
+		return e
+	})
+	return prog, out, err
+}
+
+func (m *Memory) SalvageInstance(token, instanceID string, expectedVersion int, requestID string, confirm bool, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, map[string]any, error) {
+	if !confirm {
+		return nil, nil, ErrValidation
+	}
+	var reward map[string]any
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		payload, e := m.idempotent(acc, requestID, func() (map[string]any, error) {
+			r, err2 := SalvageInstance(acc, instanceID, expectedVersion, bal, templates)
+			if err2 != nil {
+				return nil, err2
+			}
+			return map[string]any{"reward": r}, nil
+		})
+		if payload != nil {
+			if r, ok := payload["reward"].(map[string]any); ok {
+				reward = r
+			}
+		}
+		return e
+	})
+	return prog, reward, err
+}
+
+func (m *Memory) GrantEquipmentReward(token, rewardKey, templateID, source string, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, *EquipmentInstance, error) {
+	var out *EquipmentInstance
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		inst, e := GrantEquipmentOnce(acc, rewardKey, templateID, source, templates, bal)
+		out = inst
+		return e
+	})
+	return prog, out, err
+}
+
+func (m *Memory) MigrateLegacyEquipment(token string, templates map[string]EquipmentTemplate, bal EquipmentBalance) (*AccountProgress, int, error) {
+	created := 0
+	prog, err := m.mutate(token, func(acc *AccountProgress) error {
+		created = MigrateLegacyEquipment(acc, templates, bal.Aliases, bal.InventoryCapacity)
+		return nil
+	})
+	return prog, created, err
 }

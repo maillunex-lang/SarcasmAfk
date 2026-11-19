@@ -74,6 +74,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/admin/chat/delete", s.adminChat)
 	mux.HandleFunc("/v1/admin/guilds", s.adminGuilds)
 	mux.HandleFunc("/v1/campaign/ch01/", s.ch01Campaign)
+	mux.HandleFunc("/v1/equipment/", s.equipmentRoutes)
 	return withLogging(s.Metrics, withCORS(mux))
 }
 
@@ -388,6 +389,24 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 							prog = p2
 						}
 					}
+				}
+			}
+			// EQUIPMENT-001 guaranteed first-clear grants (idempotent).
+			eqKey := "CH01-" + battleID + "-EQ-FIRST_CLEAR"
+			if tplID, okEq := s.Content.CH01EquipmentReward(eqKey); okEq {
+				inst, gerr := func() (*store.EquipmentInstance, error) {
+					_, eqInst, e := s.Store.GrantEquipmentReward(tok, eqKey, tplID, "battle:"+battleID, s.Content.EquipmentTemplates(), s.Content.EquipmentBalance())
+					return eqInst, e
+				}()
+				if gerr == nil && inst != nil {
+					reward["equipment_instance"] = inst
+					reward["equipment_template_id"] = tplID
+				} else if gerr == store.ErrInventoryFull {
+					reward["equipment_pending"] = true
+					reward["equipment_template_id"] = tplID
+				}
+				if p2, e2 := s.Store.AccountByToken(tok); e2 == nil {
+					prog = p2
 				}
 			}
 		}
