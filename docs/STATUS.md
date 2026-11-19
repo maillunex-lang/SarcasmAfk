@@ -6,9 +6,9 @@
 
 ## NOW (текущий фокус)
 
-**Следующая задача:** `T-020` (Phase 0 API/contracts) **или** `T-030` (V0-B точечный арт) — по приоритету владельца.  
-**Только что завершено:** `T-010` V0-A Godot skeleton.  
-**Не делать сейчас:** массовая генерация ассетов; главы 02–12; rename repo/package; объявление MVP готовым.
+**Текущая / следующая:** `T-031` пилот Blender→atlas **или** review арта V0-B; параллельно `T-020` API.  
+**Только что:** `T-030` — точечные ассеты V0 сгенерированы по одному и подключены в `client/`.  
+**Не делать:** массовая генерация вне V0; главы 02–12; rename; объявление MVP готовым.
 
 Полная очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
@@ -22,7 +22,8 @@
 | Решения V0 | УТВЕРЖДЕНО | `DECISIONS.md` |
 | План V0 | ГОТОВ | `V0_IMPLEMENTATION_PLAN.md` |
 | **Godot-клиент V0-A** | **ГОТОВО (каркас)** | `client/project.godot`, сцены, smoke OK |
-| Ассеты (арт/атласы) | НЕ НАЧАТО | placeholders only |
+| **Ассеты V0-B (draft)** | **ГОТОВО (draft, по элементам)** | `client/assets/` + `ASSET_MANIFEST.md` |
+| Combat atlases Blender | НЕ НАЧАТО | T-031 |
 | Backend Go/API | НЕ НАЧАТО | — |
 | CI GitHub Actions | НЕ НАЧАТО | — |
 | Главы 02–12 | НЕ НАЧАТО | — |
@@ -31,28 +32,25 @@
 
 1. Документы дизайна + AI handoff в `main`.
 2. Решения V0 утверждены.
-3. **V0-A:** Godot 4.3 проект `client/` — Splash → Home → L01 → Dialog CH01-Q01 → Battle stub → Home.
-4. Название на splash/home; диалог со static portrait placeholder; токены палитры; JSON мок 10 реплик.
-5. Headless smoke: `godot --headless --path client -s res://scripts/tools/smoke_v0a.gd` → EXIT 0.
+3. **V0-A:** Godot 4.3 каркас `client/`.
+4. **V0-B:** отдельные draft-ассеты (UI, фоны, L01 слои, арена, H01–H03, E01, диалоговые портреты) в `client/assets/`; подключены к экранам; smoke OK.
+5. Манифест: `client/assets/ASSET_MANIFEST.md`.
 
 ## Чего нет
 
-- Нет финального арта / Blender-атласов.
-- Нет реального автобоя / RPG-цифр.
-- Нет Android package ID / APK.
-- Нет сервера и CI.
-- Это **не** готовый игровой прототип MVP — только каркас V0-A.
+- Нет финального paintover / прозрачных combat-атласов (T-031).
+- Нет реального автобоя / RPG-цифр / APK / сервера / CI.
+- Draft-арт **не** равен утверждённому финалу (нужен review T-050).
+- Это **не** готовый MVP.
 
 ## Очерёдность верхнего уровня
 
 ```
-DONE: docs + V0 decisions + AI index + T-010 V0-A skeleton
- → T-020 Phase 0 API contracts (параллельно можно)
- → T-030 V0-B точечный арт среза
+DONE: docs + V0-A + V0-B draft assets (поэлементно)
  → T-031 Blender→atlas пилот H01
- → T-040 V0-C сборка demo-path с артом
- → T-050 V0-D review
- → далее ROAD Фаза 1; НЕ главы 02–12 до разрешения
+ → T-040 / T-050 review
+ → T-020 API параллельно
+ → далее ROAD Фаза 1; НЕ главы 02–12
 ```
 
 ## Как обновлять этот файл
