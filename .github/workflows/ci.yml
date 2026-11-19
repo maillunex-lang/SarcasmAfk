@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "cursor/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-json:
+    name: Validate JSON content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python JSON check
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          root = pathlib.Path("client/data")
+          files = list(root.rglob("*.json"))
+          if not files:
+              print("No JSON files found", file=sys.stderr)
+              sys.exit(1)
+          for path in files:
+              with path.open() as f:
+                  json.load(f)
+              print("OK", path)
+          print(f"Validated {len(files)} files")
+          PY
+
+  godot-smoke:
+    name: Godot V0 smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache Godot
+        uses: actions/cache@v4
+        with:
+          path: /tmp/godot-ci
+          key: godot-4.3-stable-linux-x86_64
+      - name: Install Godot 4.3
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/godot-ci
+          if [ ! -x /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 ]; then
+            curl -fsSL -o /tmp/godot.zip \
+              https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+            unzip -o /tmp/godot.zip -d /tmp/godot-ci
+            chmod +x /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64
+          fi
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --version
+      - name: Import project
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . --import
+      - name: Smoke V0-A
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_v0a.gd
+      - name: Smoke V0-C
+        working-directory: client
+        run: |
+          /tmp/godot-ci/Godot_v4.3-stable_linux.x86_64 --headless --path . -s res://scripts/tools/smoke_v0c.gd
+
+  docs-presence:
+    name: Required docs present
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check required files
+        run: |
+          set -euo pipefail
+          for f in \
+            AGENTS.md \
+            docs/STATUS.md \
+            docs/TASK_QUEUE.md \
+            docs/DECISIONS.md \
+            docs/PHASE0_SPEC.md \
+            docs/V0_REVIEW.md \
+            client/project.godot
+          do
+            test -f "$f" && echo "OK $f"
+          done

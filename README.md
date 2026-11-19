@@ -18,14 +18,13 @@
 
 ## Быстрый статус (см. актуальный STATUS.md)
 
-- Сделано: docs + draft-арт + **играбельный V0-C stub** (Splash→Home→L01→Dialog→autofight B01→награда).
-- Дальше: review / Phase 0 API / Blender-атласы когда доступны.
+- Сделано: V0-C stub + **V0 review** + **PHASE0_SPEC** + **CI**.
+- Дальше: CH01 B02+ на моках / ApiClient; Blender-атласы когда доступны.
 - Запрещено: массовые ассеты вне очереди, главы 02–12, rename.
 
 ```bash
 godot4 --path client
-godot4 --headless --path client -s res://scripts/tools/smoke_v0a.gd
-godot4 --headless --path client -s res://scripts/tools/smoke_v0c.gd
+./scripts/ci_validate.sh
 ```
 
 
