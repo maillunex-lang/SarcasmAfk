@@ -33,6 +33,8 @@ var active_battle_id: String = ""
 var pending_dialogue_quest_id: String = ""
 var prefer_live_api: bool = false
 var live_api_url: String = "http://127.0.0.1:8080/v1"
+var saved_auth_token: String = ""
+var last_session_status: String = "mock" # mock | live | live_unreachable | token_expired
 
 # AFK / expeditions
 var afk_started_unix: int = 0
@@ -61,12 +63,70 @@ func _ready() -> void:
 
 func _apply_api_mode() -> void:
 	if prefer_live_api:
-		api.configure_live(live_api_url)
-		var auth: Dictionary = api.auth_anonymous()
-		if not bool(auth.get("ok", false)):
-			push_warning("Live API auth failed; staying configured live with empty token")
+		_resume_or_probe_live()
 	else:
 		api.configure_mock()
+		saved_auth_token = ""
+		last_session_status = "mock"
+
+
+func _resume_or_probe_live() -> Dictionary:
+	api.configure_live(live_api_url)
+	# 1) Try saved token (T-123)
+	if saved_auth_token != "":
+		var resumed: Dictionary = api.resume_session(live_api_url, saved_auth_token)
+		if bool(resumed.get("ok", false)):
+			last_session_status = "live"
+			_apply_server_progress(resumed.get("progress", {}))
+			return resumed
+		if str(resumed.get("error", "")) == "TOKEN_EXPIRED":
+			last_session_status = "token_expired"
+			push_warning("Live token expired; re-auth required (not falling back to mock)")
+		else:
+			last_session_status = "live_unreachable"
+			push_warning("Live resume failed: %s" % resumed.get("error", "?"))
+			# Stay live-configured; do not mock (D-NET-04)
+			return resumed
+	# 2) Fresh anonymous auth after probe
+	var probe: Dictionary = api.probe_live(live_api_url)
+	if bool(probe.get("ok", false)):
+		saved_auth_token = str(probe.get("token", api.auth_token))
+		last_session_status = "live"
+		var prog: Dictionary = api.get_progress(null)
+		if bool(prog.get("ok", false)):
+			_apply_server_progress(prog.get("progress", {}))
+		save_game()
+		return probe
+	last_session_status = "live_unreachable"
+	# Keep prefer_live + live config; no silent mock
+	return probe
+
+
+func _apply_server_progress(progress: Dictionary) -> void:
+	if typeof(progress) != TYPE_DICTIONARY or progress.is_empty():
+		return
+	if progress.has("soft_currency"):
+		soft_currency = int(progress.get("soft_currency", soft_currency))
+	if progress.has("hard_currency"):
+		hard_currency = int(progress.get("hard_currency", hard_currency))
+	if progress.has("commander_xp"):
+		commander_xp = int(progress.get("commander_xp", commander_xp))
+	if progress.has("summon_tickets"):
+		summon_tickets = int(progress.get("summon_tickets", summon_tickets))
+	if progress.has("party_ids"):
+		party_ids = progress.get("party_ids", party_ids)
+	if progress.has("claimed_rewards") and typeof(progress.get("claimed_rewards")) == TYPE_DICTIONARY:
+		claimed_rewards = progress.get("claimed_rewards")
+	if progress.has("quest_flags") and typeof(progress.get("quest_flags")) == TYPE_DICTIONARY:
+		# Map battle:ID flags into completed_battles when present
+		var qf: Dictionary = progress.get("quest_flags")
+		for k in qf.keys():
+			var key := str(k)
+			if key.begins_with("battle:") and bool(qf[k]):
+				completed_battles[key.replace("battle:", "")] = true
+			elif bool(qf[k]):
+				completed_quests[key] = true
+	progress_changed.emit()
 
 
 func set_live_api(enabled: bool, url: String = "") -> Dictionary:
@@ -84,6 +144,11 @@ func set_live_api(enabled: bool, url: String = "") -> Dictionary:
 				"detail": probe,
 			}
 		prefer_live_api = true
+		saved_auth_token = str(probe.get("token", api.auth_token))
+		last_session_status = "live"
+		var prog: Dictionary = api.get_progress(null)
+		if bool(prog.get("ok", false)):
+			_apply_server_progress(prog.get("progress", {}))
 		save_game()
 		progress_changed.emit()
 		return {
@@ -92,9 +157,12 @@ func set_live_api(enabled: bool, url: String = "") -> Dictionary:
 			"mock": false,
 			"token": api.auth_token,
 			"base_url": api.base_url,
+			"session": last_session_status,
 		}
 	prefer_live_api = false
 	api.configure_mock()
+	saved_auth_token = ""
+	last_session_status = "mock"
 	save_game()
 	progress_changed.emit()
 	return {"ok": true, "live": false, "mock": true, "base_url": api.base_url}
@@ -512,6 +580,7 @@ func save_game() -> void:
 		"expedition_ends_unix": expedition_ends_unix,
 		"prefer_live_api": prefer_live_api,
 		"live_api_url": live_api_url,
+		"saved_auth_token": saved_auth_token if prefer_live_api else "",
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -553,6 +622,7 @@ func load_game() -> void:
 	expedition_ends_unix = int(data.get("expedition_ends_unix", 0))
 	prefer_live_api = bool(data.get("prefer_live_api", false))
 	live_api_url = str(data.get("live_api_url", live_api_url))
+	saved_auth_token = str(data.get("saved_auth_token", ""))
 	var old_flags = data.get("quest_flags", {})
 	if typeof(old_flags) == TYPE_DICTIONARY and old_flags.get("CH01-Q01", false):
 		completed_quests["CH01-Q01"] = true
@@ -580,6 +650,8 @@ func reset_progress() -> void:
 	active_expedition_id = ""
 	expedition_ends_unix = 0
 	prefer_live_api = false
+	saved_auth_token = ""
+	last_session_status = "mock"
 	if api != null:
 		api.configure_mock()
 	save_game()

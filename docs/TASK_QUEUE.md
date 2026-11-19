@@ -69,7 +69,7 @@
 | T-120 | P0 | **DONE** | Live probe; no silent mock fallback | `probe_live` + More UX | T-095 |
 | T-121 | P0 | **DONE** | Live rewards only from server finish | `complete_battle(server_finish)` | T-113 |
 | T-122 | P0 | **DONE** | Mark guild/arena/events unavailable | D-SCOPE-01 UI | T-084 |
-| T-123 | P0 | **TODO** | Persist/reconnect session resume | token restore + progress sync | T-087 |
+| T-123 | P0 | **DONE** | Persist/reconnect session resume | token save + resume_session | T-087 |
 | T-110 | P1 | **TODO** | Debug APK + SDK/templates/keystore check | no new release key if exists | T-100 |
 | T-124 | P1 | **TODO** | CH01 vertical polish (L01/battle/dialog) | playable slice | T-055 |
 | T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 vertical | T-122 |
@@ -86,6 +86,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-121
+## Следующий конкретный шаг после T-123
 
-`T-123` session resume · затем `T-110` debug APK · `T-031` Blender pipeline scripts · `T-124` CH01 polish.
+`T-110` debug APK / SDK check · `T-031` Blender pipeline scripts · `T-124` CH01 polish.

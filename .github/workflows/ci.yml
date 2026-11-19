@@ -122,6 +122,11 @@ jobs:
           REDIS_ADDR: ""
           LOAD_N: "24"
         run: bash scripts/load_smoke.sh
+      - name: Session resume smoke
+        env:
+          DATABASE_URL: ""
+          REDIS_ADDR: ""
+        run: bash scripts/smoke_session_resume.sh
       - name: Live API smoke (postgres+redis)
         working-directory: server
         run: |

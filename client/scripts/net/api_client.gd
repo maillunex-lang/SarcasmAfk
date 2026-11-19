@@ -35,6 +35,26 @@ func configure_mock() -> void:
 	auth_token = ""
 
 
+func set_auth_token(token: String) -> void:
+	auth_token = token
+
+
+## Resume existing Bearer token via GET /me/progress. Does not fall back to mock.
+func resume_session(url: String = DEFAULT_BASE, token: String = "") -> Dictionary:
+	if token != "":
+		auth_token = token
+	if auth_token == "":
+		return {"ok": false, "error": "NO_TOKEN", "mock": use_mock}
+	configure_live(url)
+	var prog := get_progress(null)
+	if bool(prog.get("ok", false)):
+		return {"ok": true, "progress": prog.get("progress", {}), "token": auth_token, "resumed": true}
+	var status := int(prog.get("http_status", 0))
+	if status == 401 or str(prog.get("error", "")) == "UNAUTHENTICATED":
+		return {"ok": false, "error": "TOKEN_EXPIRED", "detail": prog, "mock": false}
+	return {"ok": false, "error": "RESUME_FAILED", "detail": prog, "mock": false}
+
+
 ## Probe live server (health + anonymous auth). Never silently falls back to mock (D-NET-04).
 func probe_live(url: String = DEFAULT_BASE) -> Dictionary:
 	var prev_mock := use_mock
