@@ -77,6 +77,7 @@
 | Файл | Роль |
 |---|---|
 | [`VISUAL_OVERHAUL_001.md`](VISUAL_OVERHAUL_001.md) | VO-001 stage tracker |
+| [`CITY_HUB_001.md`](CITY_HUB_001.md) | Ufa interactive city hub (Stage 0 → Godot) |
 | [`VISUAL_QA_REPORT.md`](VISUAL_QA_REPORT.md) | VO QA |
 | [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) | Backup proof |
 | [`reports/REPO_REORG_AUDIT.md`](reports/REPO_REORG_AUDIT.md) | Inventory audit |

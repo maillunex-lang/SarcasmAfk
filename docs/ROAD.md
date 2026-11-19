@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (T-157 CH01 Expansion E E2E; REORG #27 on `main`).  
+> Актуализация: **2026-11-19** (T-159 CITY-HUB-001 after Stage 0 Canvas approve; T-158 VO Stage F on `main`).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -21,6 +21,7 @@
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | MONSTERS-CH01 atlases/VFX | ЧАСТИЧНО | TEMP atlases ×29 + shared TEMP VFX/SFX; не Stage E |
 | Visual Overhaul 001 | Stage F (T-158) | Theme.tres + H13–H36 busts + gallery; см. `VISUAL_OVERHAUL_001.md` |
+| CITY-HUB-001 Ufa hub | DONE_VERIFIED (T-159, TEMP art) | Stage 0 approved; Godot pan+hotspots+decor; final iso later |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
 | Приёмка CH01 | НЕ ПРИНЯТО | Не блокирует online systems (D-SCOPE-03) |
@@ -29,6 +30,7 @@
 
 | ID | Статус | Что |
 |---|---|---|
+| T-159 | DONE_VERIFIED | CITY-HUB-001 Ufa interactive city hub |
 | T-153 | TODO | Real payment provider (когда одобрит владелец) |
 | T-112 | TODO | Arena/events live |
 | T-126 | BLOCKED | Signed release APK |
@@ -320,6 +322,13 @@
 8. Не плодить новые «источники истины» статуса: NOW только в `STATUS.md`, очередь только в `TASK_QUEUE.md`, решения только в `DECISIONS.md`.
 
 ## 8. Журнал прогресса
+
+### Журнал 2026-11-19 — T-159 CITY-HUB-001 (Stage 0 → Godot)
+
+- Owner approved Stage 0 Canvas «Уфа, столица Абсурда» → **D-UI-CITY-01**.
+- Spec: `docs/CITY_HUB_001.md`; data `client/data/city/ufa_buildings.json`.
+- Home rewritten as pan+hotspot city hub; TEMP layers via `scripts/generate_city_ufa_temp.py`.
+- Smoke: `smoke_city_hub.gd`. Arena remains locked stub.
 
 ### Журнал 2026-11-19 — T-158 Visual Overhaul Stage F
 

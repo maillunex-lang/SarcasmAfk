@@ -33,3 +33,8 @@ Unchanged navy/gold/cyan/ivory/coral/mint + rarity colors N→UR in `DesignToken
 
 `client/themes/bashlegends_theme.tres` — wired via `project.godot` `[gui] theme/custom`.  
 Helpers in `DesignTokens` remain the primary code-built UI path; Theme covers default Button/Label/Panel/LineEdit.
+
+## City hub (D-UI-CITY-01)
+
+Home = interactive Ufa city (`home.gd`), not a 2×3 dashboard.  
+Spec: [`CITY_HUB_001.md`](CITY_HUB_001.md). Bottom nav label: **Город**.

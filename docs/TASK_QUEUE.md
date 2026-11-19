@@ -108,6 +108,7 @@
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
 | T-157 | P1 | **DONE_VERIFIED** | CH01 Expansion E: full E2E + debug APK + owner report | `smoke_ch01_expansion.gd` + `smoke_ch01_expansion_live.sh` + `docs/reports/CH01_EXPANSION_E2E_2026-11-19.md` + debug APK | T-156 |
 | T-158 | P1 | **DONE_VERIFIED** | Visual Overhaul 001 Stage F: Theme.tres, H13–H36 busts, gallery, anims, debug APK | `bashlegends_theme.tres` + `visual_gallery/` + `smoke_visual_*` + debug APK | VO-001 |
+| T-159 | P0 | **DONE_VERIFIED** | CITY-HUB-001: Stage 0 approved → Ufa interactive city hub vertical slice | `CITY_HUB_001.md` + `home.gd` city + `ufa_buildings.json` + TEMP layers + `smoke_city_hub.gd` | D-UI-CITY-01 |
 | T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
 | T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
 | T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
@@ -122,6 +123,6 @@
 
 ## Следующий конкретный шаг
 
-1. **Review/merge** T-158 PR (Visual Overhaul Stage F).  
+1. **Review/merge** T-159 CITY-HUB-001 PR (Ufa interactive city hub).  
 2. Owner: device accept **T-128** / live URL **T-129** when ready.  
-3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore. Optional: VIP/chat depth polish.
+3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore. Next polish: final city iso art (still TEMP).
