@@ -1,6 +1,6 @@
 class_name SceneNav
 extends RefCounted
-## Scene navigation for CH01 campaign stub flow.
+## Scene navigation for Phase 1 MVP mock screens.
 
 const SCENE_SPLASH := "res://scenes/boot/splash.tscn"
 const SCENE_HOME := "res://scenes/home/home.tscn"
@@ -9,6 +9,17 @@ const SCENE_L01 := "res://scenes/location/l01.tscn"
 const SCENE_LOCATION := "res://scenes/location/l01.tscn"
 const SCENE_DIALOG := "res://scenes/dialog/dialog.tscn"
 const SCENE_BATTLE := "res://scenes/battle/battle.tscn"
+const SCENE_MAP := "res://scenes/map/map.tscn"
+const SCENE_HEROES := "res://scenes/heroes/heroes.tscn"
+const SCENE_PARTY := "res://scenes/party/party.tscn"
+const SCENE_AFK := "res://scenes/afk/afk.tscn"
+const SCENE_EXPEDITION := "res://scenes/expedition/expedition.tscn"
+const SCENE_EVENTS := "res://scenes/events/events.tscn"
+const SCENE_GACHA := "res://scenes/gacha/gacha.tscn"
+const SCENE_INVENTORY := "res://scenes/inventory/inventory.tscn"
+const SCENE_GUILD := "res://scenes/guild/guild.tscn"
+const SCENE_ARENA := "res://scenes/arena/arena.tscn"
+const SCENE_MORE := "res://scenes/more/more.tscn"
 
 
 static func go(tree: SceneTree, path: String) -> void:
@@ -43,3 +54,47 @@ static func to_dialog(tree: SceneTree) -> void:
 
 static func to_battle(tree: SceneTree) -> void:
 	go(tree, SCENE_BATTLE)
+
+
+static func to_map(tree: SceneTree) -> void:
+	go(tree, SCENE_MAP)
+
+
+static func to_heroes(tree: SceneTree) -> void:
+	go(tree, SCENE_HEROES)
+
+
+static func to_party(tree: SceneTree) -> void:
+	go(tree, SCENE_PARTY)
+
+
+static func to_afk(tree: SceneTree) -> void:
+	go(tree, SCENE_AFK)
+
+
+static func to_expedition(tree: SceneTree) -> void:
+	go(tree, SCENE_EXPEDITION)
+
+
+static func to_events(tree: SceneTree) -> void:
+	go(tree, SCENE_EVENTS)
+
+
+static func to_gacha(tree: SceneTree) -> void:
+	go(tree, SCENE_GACHA)
+
+
+static func to_inventory(tree: SceneTree) -> void:
+	go(tree, SCENE_INVENTORY)
+
+
+static func to_guild(tree: SceneTree) -> void:
+	go(tree, SCENE_GUILD)
+
+
+static func to_arena(tree: SceneTree) -> void:
+	go(tree, SCENE_ARENA)
+
+
+static func to_more(tree: SceneTree) -> void:
+	go(tree, SCENE_MORE)
