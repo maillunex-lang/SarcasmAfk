@@ -18,7 +18,7 @@ Optional 6th: one domain spec from the router row (not the whole docs tree).
 
 1. **What is the game?** Android Godot idle RPG “БашЛегенды”; repo `SarcasmAfk`.
 2. **Where is code?** `client/` + `server/`.
-3. **What is NOW?** Post VO-001 on `main`; REPO-REORG-001 in progress on `cursor/chore-repo-reorg-001-beaf`; next product TODO includes T-157 / owner-gated items.
+3. **What is NOW?** PR #27 REPO-REORG ready for review; after merge next product task **T-157**. Status only in `STATUS.md`.
 4. **What is blocked?** T-090 CH02, T-131 Stage E, T-126 keystore, T-153 real payments, T-128 owner accept.
 5. **How to verify?** `bash scripts/ci_validate.sh` (or router commands for the subsystem).
 
@@ -27,8 +27,9 @@ Optional 6th: one domain spec from the router row (not the whole docs tree).
 | Check | Result |
 |-------|--------|
 | ≤5 files to next task | **PASS** (route above) |
-| STATUS matches `main` VO merge | Fixed in PR-2 (was stale pre-reorg) |
-| No conflicting “truth” files required | **PASS** if agents ignore archive reports as canon |
+| Single status source | **PASS** — `STATUS.md`; others link to it |
+| STATUS matches VO merge + reorg | **PASS** |
+| Spec ≠ implementation | **PASS** — STATUS evidence table + DONE_VERIFIED rules |
 | Token savings claim | **Not measured** — do not claim % |
 
 ## Failure modes to avoid

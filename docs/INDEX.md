@@ -80,7 +80,8 @@
 | [`VISUAL_QA_REPORT.md`](VISUAL_QA_REPORT.md) | VO QA |
 | [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) | Backup proof |
 | [`reports/REPO_REORG_AUDIT.md`](reports/REPO_REORG_AUDIT.md) | Inventory audit |
-| [`reports/REPO_REORG_DELETE_CANDIDATES.md`](reports/REPO_REORG_DELETE_CANDIDATES.md) | Deletes awaiting owner |
+| [`reports/REPO_REORG_DELETE_CANDIDATES.md`](reports/REPO_REORG_DELETE_CANDIDATES.md) | Delete scan (resolved) |
+| [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md) | Why nothing tracked was deleted |
 
 ## 7. Анти-фрагментация (правила)
 

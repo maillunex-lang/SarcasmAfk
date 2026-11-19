@@ -14,23 +14,24 @@
 | Deletes | No owner checklist |
 | Internal MD links | Untested systematically |
 
-## After (this branch, so far)
+## After (this branch, merge-ready)
 
 | Area | State |
 |------|-------|
-| Backup | Branch + annotated tag + local bundle (see `REPO_REORG_BACKUP.md`) |
-| Inventory | `repo_inventory.json` + audit + broken-links (0) + delete-candidates |
+| Backup | Branch + annotated tag + local bundle (see `REPO_REORG_BACKUP.md`) — **re-verified on origin** |
+| Inventory | `repo_inventory.json` + audit + broken-links (0) |
 | AI context | `PROJECT_CONTEXT`, `AI_TASK_ROUTER`, `ARCHITECTURE_MAP`, `AI_ONBOARDING_TEST`; refreshed AGENTS/STATUS/INDEX/DECISIONS/TASK_QUEUE |
-| Deletes | **None** — waiting owner approval |
-| Validators/CI extras | Pending PR-3 (`T-161`) |
-| `main` | **Unchanged** until you merge |
+| Deletes | **None tracked** — dispositions in `REPO_REORG_CLEANUP_DECISIONS.md` |
+| Hygiene | `.gitignore` blender exports/source/work (files kept on disk) |
+| Validators | `check_doc_links` / `check_ai_docs` / `check_content_refs` in `ci_validate.sh` |
+| `main` | **Unchanged** until reviewed merge of PR #27 |
 
 ## Metrics
 
 | Metric | Before | After (branch) |
 |--------|--------|----------------|
-| Tracked files @ baseline | 1139 | +reports/scripts (see PR diff) |
-| Internal MD link breaks | unknown | **0** (docs tree scan) |
+| Tracked files @ baseline | 1139 | +reports/scripts/docs (see PR diff); **0 tracked deletions** |
+| Internal MD link breaks | unknown | **0** |
 | Open PRs @ backup | 0 | #27 reorg (no auto-merge) |
 | Force-push / history rewrite | — | **none** |
 
@@ -38,5 +39,4 @@
 
 1. Protect backup branch against force-push/deletion.  
 2. Copy bundle from agent VM (`/home/ubuntu/repo-backups/…`) to private storage.  
-3. Approve/reject rows in `REPO_REORG_DELETE_CANDIDATES.md` before any PR-4.  
-4. Explicit OK to merge reorg PRs into `main`.
+3. Review & merge PR #27 (no direct push to `main`).

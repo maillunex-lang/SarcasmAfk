@@ -9,6 +9,9 @@ build/
 !docs/**
 client/.godot/
 tools/blender_pipeline/out/
+tools/blender_pipeline/exports/
+tools/blender_pipeline/source/
+tools/blender_pipeline/work/
 *.blend1
 
 __pycache__/

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19T14:54:53.533574+00:00",
-  "git_sha": "7b820a1692375620a19577b7125c98933d708a35",
+  "generated_at": "2026-11-19T15:05:01.009510+00:00",
+  "git_sha": "9ba8eada2e1da097c8a526f5f5fbafe027f12e9d",
   "branch": "cursor/chore-repo-reorg-001-beaf",
-  "tracked_count": 1145,
+  "tracked_count": 1153,
   "status_counts": {
-    "KEEP": 1143,
+    "KEEP": 1151,
     "UNKNOWN": 2
   },
   "subsystem_counts": {
@@ -13,9 +13,9 @@
     "client": 864,
     "godot-import": 143,
     "other": 1,
-    "docs": 36,
-    "docs-reports": 7,
-    "scripts": 18,
+    "docs": 40,
+    "docs-reports": 8,
+    "scripts": 21,
     "secrets": 1,
     "server": 59,
     "tools": 12
@@ -34,12 +34,12 @@
       143
     ],
     [
-      ".png",
-      53
+      ".md",
+      54
     ],
     [
-      ".md",
-      49
+      ".png",
+      53
     ],
     [
       ".go",
@@ -54,12 +54,12 @@
       23
     ],
     [
-      ".sh",
-      13
+      ".py",
+      14
     ],
     [
-      ".py",
-      11
+      ".sh",
+      13
     ],
     [
       ".ogg",
@@ -223,7 +223,7 @@
       "sha256": "9411f5e035b6d4d11c5c3a610e451a47f5cd8bdba78d96cf40cb7574c81a7b78"
     }
   ],
-  "untracked_local_count": 416,
+  "untracked_local_count": 414,
   "untracked_local_sample": [
     "client/assets/branding/bg_chat.jpg.import",
     "client/assets/branding/bg_shop.jpg.import",
@@ -290,22 +290,22 @@
     {
       "path": ".gitignore",
       "ext": "(none)",
-      "size": 150,
+      "size": 242,
       "subsystem": "root",
       "status": "KEEP",
       "rationale": "Root policy/entrypoint",
       "binary": false,
-      "sha256": "1e2f0381ab653669aa4b4a494cf164bbeaea699861797a017b7520aa292681a8"
+      "sha256": "3bed9ad902ddf0e1ce92e9bdb2d8696203c1e590b5e693b506d2b41bf23b7afc"
     },
     {
       "path": "AGENTS.md",
       "ext": ".md",
-      "size": 2354,
+      "size": 2478,
       "subsystem": "root",
       "status": "KEEP",
       "rationale": "Root policy/entrypoint",
       "binary": false,
-      "sha256": "d9da636d88a957f2a0012d37fd43236a6208445c4688adf388892b2249010978"
+      "sha256": "e6a0cc909d477110e8f888a763181d8be42abe5ce24e9e537624c80f757447bf"
     },
     {
       "path": "README.md",
@@ -9843,6 +9843,26 @@
       "sha256": "9608c19f3743c5a9ad02d605e8cc9c40027dfcc260f44b197c233410bebc06ba"
     },
     {
+      "path": "docs/AI_ONBOARDING_TEST.md",
+      "ext": ".md",
+      "size": 1711,
+      "subsystem": "docs",
+      "status": "KEEP",
+      "rationale": "Documentation",
+      "binary": false,
+      "sha256": "b41bc2fc7d39a737764f58f2035dec4b7acf0cb530e240ae9accf2a2451a52b5"
+    },
+    {
+      "path": "docs/AI_TASK_ROUTER.md",
+      "ext": ".md",
+      "size": 2774,
+      "subsystem": "docs",
+      "status": "KEEP",
+      "rationale": "Documentation",
+      "binary": false,
+      "sha256": "e3590700957937a879311f45a2e774bc650183e52254e88629e328c97a5dc200"
+    },
+    {
       "path": "docs/ANDROID_BUILD.md",
       "ext": ".md",
       "size": 1778,
@@ -9851,6 +9871,16 @@
       "rationale": "Documentation",
       "binary": false,
       "sha256": "f76cfb89d98ba3fb06cf8ddce836fa218699f91335fbcddb98240a16ee8840db"
+    },
+    {
+      "path": "docs/ARCHITECTURE_MAP.md",
+      "ext": ".md",
+      "size": 2342,
+      "subsystem": "docs",
+      "status": "KEEP",
+      "rationale": "Documentation",
+      "binary": false,
+      "sha256": "f8ce2afcee51676e4b8be851ffd39495365737837f04f1d5a14eb62c48fc1485"
     },
     {
       "path": "docs/ART_DIRECTION.md",
@@ -9935,22 +9965,22 @@
     {
       "path": "docs/DECISIONS.md",
       "ext": ".md",
-      "size": 10366,
+      "size": 10810,
       "subsystem": "docs",
       "status": "KEEP",
       "rationale": "Documentation",
       "binary": false,
-      "sha256": "e1c603f12e9a0bea08c3909cb9a26872dae6700b8b17de7243e79f1363b78833"
+      "sha256": "3cd38c3a066ca5095a155709d0a4798270e0379e4b0e539c7c6fd43f0ee9a0a7"
     },
     {
       "path": "docs/DESIGN_SYSTEM.md",
       "ext": ".md",
-      "size": 12213,
+      "size": 12267,
       "subsystem": "docs",
       "status": "KEEP",
       "rationale": "Documentation",
       "binary": false,
-      "sha256": "16a020de2e5760b85cf0a14d80772479fc7147040a5b6b1ba69c3f2499564c07"
+      "sha256": "e0c68e492d857901243625929b859b72304fb85047aa1c5bff747896572a47cf"
     },
     {
       "path": "docs/EQUIPMENT_BALANCE.md",
@@ -10015,12 +10045,12 @@
     {
       "path": "docs/INDEX.md",
       "ext": ".md",
-      "size": 4828,
+      "size": 5951,
       "subsystem": "docs",
       "status": "KEEP",
       "rationale": "Documentation",
       "binary": false,
-      "sha256": "ebc1b62bdd19d57f3785b997a40d5b3f3303b40888945c07db21401f70f8716d"
+      "sha256": "80fa34e797179d268f846d747d4575fcb8682394606da7a0cfd7d495bb5b1de0"
     },
     {
       "path": "docs/LOCATION_STYLE_GUIDE.md",
@@ -10103,6 +10133,16 @@
       "sha256": "31f6cca1eaeca28e5f3a1713a3df779dc06aafefd01b169a70e330214d9121e5"
     },
     {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "ext": ".md",
+      "size": 1916,
+      "subsystem": "docs",
+      "status": "KEEP",
+      "rationale": "Documentation",
+      "binary": false,
+      "sha256": "f86018466c46dc9ecc55f8f73db65285451c4dfdf86e4d0d5db533f784b21633"
+    },
+    {
       "path": "docs/ROAD.md",
       "ext": ".md",
       "size": 66701,
@@ -10115,22 +10155,22 @@
     {
       "path": "docs/STATUS.md",
       "ext": ".md",
-      "size": 2069,
+      "size": 2791,
       "subsystem": "docs",
       "status": "KEEP",
       "rationale": "Documentation",
       "binary": false,
-      "sha256": "371a8e3cc42365b1deba2ef9a521bc2a241500e92309298feb622e7d983bef29"
+      "sha256": "0d8dbf5c6faee77d39bff888ba1c8de6ff98b69db9760e7ac30ce03b3bf67b90"
     },
     {
       "path": "docs/TASK_QUEUE.md",
       "ext": ".md",
-      "size": 11793,
+      "size": 12140,
       "subsystem": "docs",
       "status": "KEEP",
       "rationale": "Documentation",
       "binary": false,
-      "sha256": "5a3303b669c3bbdfc171a86e03224d89f0aeb5c69d55183bf5c3fb72c84b0478"
+      "sha256": "61d333d860c4c7dfc54baed367b02cdf6b8ee8e7746712ea3235c351d924ac6c"
     },
     {
       "path": "docs/UI_DESIGN_SYSTEM.md",
@@ -10225,12 +10265,12 @@
     {
       "path": "docs/reports/REPO_REORG_AUDIT.md",
       "ext": ".md",
-      "size": 6232,
+      "size": 4837,
       "subsystem": "docs-reports",
       "status": "KEEP",
       "rationale": "Historical report; archive only after link audit",
       "binary": false,
-      "sha256": "599c10249acaf57707d95579cde881abdd4fe3f78e530e6fc14e4e5002c659f5"
+      "sha256": "e625acbc8abb4c35a00732ffa97b7eabbfeb0f9ebd642900b1125846882fa79a"
     },
     {
       "path": "docs/reports/REPO_REORG_BACKUP.md",
@@ -10241,6 +10281,16 @@
       "rationale": "Historical report; archive only after link audit",
       "binary": false,
       "sha256": "bd9a5f3f3a693de55708060a51801a082bfc7238e7b4e795a3e19ba70340e602"
+    },
+    {
+      "path": "docs/reports/REPO_REORG_BEFORE_AFTER.md",
+      "ext": ".md",
+      "size": 1858,
+      "subsystem": "docs-reports",
+      "status": "KEEP",
+      "rationale": "Historical report; archive only after link audit",
+      "binary": false,
+      "sha256": "38d4823fecf65c6077a63d3ea55906ba5a2679de89299b8e881927ee9577227c"
     },
     {
       "path": "docs/reports/REPO_REORG_BROKEN_LINKS.md",
@@ -10255,32 +10305,32 @@
     {
       "path": "docs/reports/REPO_REORG_DELETE_CANDIDATES.md",
       "ext": ".md",
-      "size": 8575,
+      "size": 742,
       "subsystem": "docs-reports",
       "status": "KEEP",
       "rationale": "Historical report; archive only after link audit",
       "binary": false,
-      "sha256": "7ebb1a10d20ab99e892a114a974deeebc124d7566bb47b20999b967e8f63a8aa"
+      "sha256": "d717bc01666c49499bc5ab687dad32553d3352a840e144d0731c5b789d55e0a4"
     },
     {
       "path": "docs/reports/repo_inventory.json",
       "ext": ".json",
-      "size": 317997,
+      "size": 322367,
       "subsystem": "docs-reports",
       "status": "KEEP",
       "rationale": "Historical report; archive only after link audit",
       "binary": false,
-      "sha256": "dca92cd31395a25dbb5c813dfa8cce9b9fd319bf2fec6f7f2a7b4dc6eb276d58"
+      "sha256": "9ba973d98fd06580a0d7b3b779aae5398ee3a893e1a4a997156f3b4d49a51ebf"
     },
     {
       "path": "scripts/audit_repo.py",
       "ext": ".py",
-      "size": 12764,
+      "size": 13077,
       "subsystem": "scripts",
       "status": "KEEP",
       "rationale": "Tooling/CI",
       "binary": false,
-      "sha256": "56b5fa2ecfea6b5cf89a262e3ebd8c18c047ce4c028ae53e8031c951c0cc3fb8"
+      "sha256": "5c1721608133fd57d37b045d6fc5e1422ca6704a4fc40195fd0b16e54af2fee0"
     },
     {
       "path": "scripts/audit_visual_assets.py",
@@ -10313,6 +10363,16 @@
       "sha256": "42695167ed2b83660d093635cd3e2794d0bbb3b3b028acdef75f4c2637d4f293"
     },
     {
+      "path": "scripts/check_ai_docs.py",
+      "ext": ".py",
+      "size": 2184,
+      "subsystem": "scripts",
+      "status": "KEEP",
+      "rationale": "Tooling/CI",
+      "binary": false,
+      "sha256": "84c3cfefd39063159b8f4c1428656d240833c1f459ebd8251385b178a789c38b"
+    },
+    {
       "path": "scripts/check_android_toolchain.sh",
       "ext": ".sh",
       "size": 1660,
@@ -10321,6 +10381,26 @@
       "rationale": "Tooling/CI",
       "binary": false,
       "sha256": "e1c2ba10c2b2b139cf09fbad8400bf9a6b738ec3353e3a9446a52e89df3218cd"
+    },
+    {
+      "path": "scripts/check_content_refs.py",
+      "ext": ".py",
+      "size": 2229,
+      "subsystem": "scripts",
+      "status": "KEEP",
+      "rationale": "Tooling/CI",
+      "binary": false,
+      "sha256": "4090bd67103667a93e9e722d92e2a57bed22d326dbaa615508fc9d3313483d4d"
+    },
+    {
+      "path": "scripts/check_doc_links.py",
+      "ext": ".py",
+      "size": 2143,
+      "subsystem": "scripts",
+      "status": "KEEP",
+      "rationale": "Tooling/CI",
+      "binary": false,
+      "sha256": "f8eed7e208ebd978a63301092e3c59ab5b7561dc700224c18bcff501aa30a71e"
     },
     {
       "path": "scripts/check_release_keystore.sh",
@@ -10335,12 +10415,12 @@
     {
       "path": "scripts/ci_validate.sh",
       "ext": ".sh",
-      "size": 4007,
+      "size": 4166,
       "subsystem": "scripts",
       "status": "KEEP",
       "rationale": "Tooling/CI",
       "binary": false,
-      "sha256": "c180ad01a08d3e6287fe01299bd46eab488b701c4879f46526b8157992d1e905"
+      "sha256": "aed708c274718daa026c2ad6b023238cdf7fd85bc5fe4ca6809f2ddc255f38a4"
     },
     {
       "path": "scripts/generate_temp_enemy_atlases.py",

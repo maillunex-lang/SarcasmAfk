@@ -1,14 +1,14 @@
 # STATUS.md — Verified project snapshot
 
 > Date: **2026-11-19** · Baseline `main` SHA **`60ebe23`** · Reorg branch `cursor/chore-repo-reorg-001-beaf`  
-> Cold-start: [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · Queue: [`TASK_QUEUE.md`](TASK_QUEUE.md)  
-> Backup: [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md)
+> **Single status source for agents.** Cold-start: [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · Queue: [`TASK_QUEUE.md`](TASK_QUEUE.md)  
+> Backup: [`reports/REPO_REORG_BACKUP.md`](reports/REPO_REORG_BACKUP.md) · Cleanup: [`reports/REPO_REORG_CLEANUP_DECISIONS.md`](reports/REPO_REORG_CLEANUP_DECISIONS.md)
 
 ## NOW
 
-1. **REPO-REORG-001** — AI context + audit (PR [#27](https://github.com/maillunex-lang/SarcasmAfk/pull/27)); deletions **blocked** until owner approves the candidate list.  
-2. Product follow-ups on `main`: T-157 (CH01 expansion E2E/APK report), owner-gated blockers below.  
-3. Visual Overhaul 001 **merged** to `main` (PR #26) — Stage F (gallery/Theme/APK) still open.
+1. **REPO-REORG-001** ready for review — PR [#27](https://github.com/maillunex-lang/SarcasmAfk/pull/27): backup verified, AI canon, validators, **no tracked deletes** (see cleanup decisions).  
+2. Next product work after merge: **T-157** (CH01 expansion E2E/APK report).  
+3. Visual Overhaul 001 on `main` (PR #26); Stage F (Theme/gallery/APK) still open.
 
 ## Subsystem matrix (evidence-based)
 
@@ -26,7 +26,8 @@
 | Arena / events live | `BLOCKED` | UI stubs D-SCOPE-01; T-112 |
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |
 | Release signed APK | `BLOCKED` | T-126 keystore |
-| REPO-REORG cleanup deletes | `BLOCKED` | awaiting owner checklist |
+| REPO-REORG-001 docs/validators | `DONE_VERIFIED` (pending PR merge) | PR #27; cleanup decisions: no safe tracked deletes |
+| REPO-REORG tracked file deletes | `DEPRECATED` | Identical media kept (dynamic paths); see cleanup decisions |
 
 ## BLOCKED (owner)
 

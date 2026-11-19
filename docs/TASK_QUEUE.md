@@ -107,9 +107,9 @@
 | T-091 | PX | **BLOCKED** | Массовая генерация **финального** арта / Stage E | D-ART-06 | Явное разрешение |
 | T-092 | PX | **BLOCKED** | Rename repo / package ID | — | Явное разрешение |
 | T-157 | P1 | **NOT_STARTED** | CH01 Expansion E: full E2E + debug APK + owner report | smoke + APK | T-156 |
-| T-160 | P0 | **IN_PROGRESS** | REPO-REORG-001 backup+audit+AI context | `docs/reports/REPO_REORG_*`, AGENTS/STATUS/router | D-REORG-01 |
-| T-161 | P1 | **NOT_STARTED** | REPO-REORG validators + CI path/link checks | `scripts/check_*.py` | T-160 |
-| T-162 | P1 | **BLOCKED** | REPO-REORG safe deletes | owner-approved rows only | T-160 + owner list |
+| T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
+| T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
+| T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
 
 ## Правила исполнения
 
@@ -121,6 +121,6 @@
 
 ## Следующий конкретный шаг
 
-1. Finish REPO-REORG PR-2/3 on `cursor/chore-repo-reorg-001-beaf` (no deletes until T-162 owner OK).  
-2. Product: T-157 when reorg stage allows bandwidth.  
+1. **Review/merge** PR #27 (REPO-REORG-001) — do not push straight to `main`.  
+2. Next product: **T-157** (CH01 Expansion E2E + debug APK + owner report).  
 3. Still blocked: T-153 payments, T-112 arena/events, T-090 CH02, T-131 Stage E, T-126 keystore.
