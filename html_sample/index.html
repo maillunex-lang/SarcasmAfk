@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e1422" />
+  <title>БашЛегенды — HTML-клиент</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="desk-note" aria-hidden="true">
+      <p class="eyebrow">HTML-клиент · образец</p>
+      <h1>БашЛегенды</h1>
+      <p>Интерфейс на HTML/CSS. Правь файлы в <code>html_sample/</code> — без Godot-нод.</p>
+    </aside>
+
+    <div class="phone" id="app-root">
+      <div class="notch" aria-hidden="true"></div>
+
+      <section class="screen" id="screen-splash" data-screen="splash">
+        <div class="splash-bg"></div>
+        <div class="splash-copy">
+          <p class="brand">БашЛегенды</p>
+          <h2>Эпоха Абсурда</h2>
+          <p class="sub">Idle AFK · Уфа · бюрократическое фэнтези</p>
+          <button class="btn primary" data-nav="home">Играть</button>
+          <a class="btn ghost" href="demo_arena/" style="display:inline-flex;align-items:center;text-decoration:none">Демо арена 1×1</a>
+          <button class="btn ghost" id="btn-reset">Сброс сохранения</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-home" data-screen="home" hidden>
+        <div class="city-layer sky"></div>
+        <div class="city-layer mid"></div>
+        <div class="city-layer road"></div>
+        <button class="poi p1" data-nav="campaign" data-label="Кампания">Кампания</button>
+        <button class="poi p2" data-nav="heroes" data-label="Герои">Герои</button>
+        <button class="poi p3" data-nav="shop" data-label="Магазин">Магазин</button>
+        <button class="poi p4" data-nav="afk" data-label="AFK">AFK</button>
+        <button class="poi p5" data-nav="battle" data-label="Бой">Бой</button>
+
+        <header class="topbar" data-hud></header>
+
+        <aside class="rail left">
+          <button data-nav="campaign">Квесты</button>
+          <button data-nav="heroes">Герои</button>
+        </aside>
+        <aside class="rail right">
+          <button data-nav="shop">Магазин</button>
+          <button data-nav="afk">AFK</button>
+        </aside>
+
+        <div class="city-hero">
+          <p class="brand-sm">БашЛегенды</p>
+          <h2>Уфа</h2>
+          <p>столица Абсурда</p>
+        </div>
+        <p class="tip" id="home-tip">Жми здание · продолжай кампанию</p>
+        <nav class="tabbar" data-tabs="home"></nav>
+      </section>
+
+      <section class="screen panel" id="screen-campaign" data-screen="campaign" hidden>
+        <header class="panel-head">
+          <button class="icon-btn" data-nav="home" aria-label="Назад">←</button>
+          <div><p class="brand-sm">БашЛегенды</p><h2>Кампания</h2></div>
+        </header>
+        <div class="panel-scroll" id="campaign-list"></div>
+        <nav class="tabbar" data-tabs="campaign"></nav>
+      </section>
+
+      <section class="screen panel" id="screen-heroes" data-screen="heroes" hidden>
+        <header class="panel-head">
+          <button class="icon-btn" data-nav="home" aria-label="Назад">←</button>
+          <div><p class="brand-sm">БашЛегенды</p><h2>Герои</h2></div>
+        </header>
+        <p class="panel-sub" id="party-line"></p>
+        <div class="panel-scroll" id="heroes-list"></div>
+        <nav class="tabbar" data-tabs="heroes"></nav>
+      </section>
+
+      <section class="screen panel" id="screen-shop" data-screen="shop" hidden>
+        <header class="panel-head">
+          <button class="icon-btn" data-nav="home" aria-label="Назад">←</button>
+          <div><p class="brand-sm">БашЛегенды</p><h2>Магазин</h2></div>
+        </header>
+        <div class="panel-scroll" id="shop-list"></div>
+        <nav class="tabbar" data-tabs="home"></nav>
+      </section>
+
+      <section class="screen panel" id="screen-afk" data-screen="afk" hidden>
+        <header class="panel-head">
+          <button class="icon-btn" data-nav="home" aria-label="Назад">←</button>
+          <div><p class="brand-sm">БашЛегенды</p><h2>AFK</h2></div>
+        </header>
+        <div class="afk-box">
+          <div class="meter"><i id="afk-fill"></i></div>
+          <p id="afk-hours"></p>
+          <p class="afk-soft" id="afk-soft"></p>
+          <button class="btn primary" id="btn-claim-afk">Забрать</button>
+          <p class="muted">Накопление до 8 часов. Soft = часы × 90.</p>
+        </div>
+        <nav class="tabbar" data-tabs="afk"></nav>
+      </section>
+
+      <section class="screen battle" id="screen-battle" data-screen="battle" hidden>
+        <div class="battle-bg"></div>
+        <div class="battle-hud">
+          <div class="timer" id="timer">00:00</div>
+          <div class="chapter" id="chapter">Глава 1</div>
+        </div>
+        <div class="field">
+          <div class="col heroes" id="col-heroes"></div>
+          <div class="col enemies" id="col-enemies"></div>
+        </div>
+        <footer class="tray">
+          <p class="toast" id="toast">Автобой</p>
+          <div class="tray-row">
+            <div class="portraits" id="portraits"></div>
+            <button class="tray-btn on" id="btn-auto">АВТО</button>
+            <button class="tray-btn" id="btn-speed">×1</button>
+          </div>
+          <div class="end" id="battle-end" hidden>
+            <p id="end-title">Победа</p>
+            <p id="end-reward"></p>
+            <div class="end-actions">
+              <button class="btn primary" id="btn-next-stage">Дальше</button>
+              <button class="btn ghost" data-nav="home">В город</button>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
