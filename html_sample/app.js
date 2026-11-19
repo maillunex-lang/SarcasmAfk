@@ -1,203 +1,429 @@
 (() => {
-  const state = {
-    soft: 1240,
-    hard: 48,
-    level: 3,
-    power: 6280,
-    afkHours: 2.4,
-    screen: "splash",
-    speed: 1,
-    battle: null,
+  const SAVE_KEY = "bashlegends_html_v1";
+  const AFK_CAP = 8;
+  const AFK_RATE = 90;
+
+  const CATALOG = {
+    heroes: [
+      { id: "H01", name: "Каэрон", role: "tank", power: 1400, hp: 4200, atk: 280, speed: 95, color: "#4ecdc4", row: "front" },
+      { id: "H02", name: "Вейриса", role: "mage", power: 1520, hp: 2800, atk: 420, speed: 110, color: "#7aa2ff", row: "back" },
+      { id: "H03", name: "Эльдарион", role: "support", power: 1180, hp: 3000, atk: 220, speed: 100, color: "#c9a227", row: "back" },
+      { id: "H04", name: "Рустам", role: "fighter", power: 1300, hp: 3600, atk: 360, speed: 105, color: "#e35d6a", row: "front" },
+      { id: "H05", name: "Лейла", role: "ranger", power: 1220, hp: 2600, atk: 390, speed: 120, color: "#5dcea0", row: "back" },
+      { id: "H06", name: "Буран", role: "tank", power: 1280, hp: 4400, atk: 250, speed: 85, color: "#8aa0b8", row: "front" },
+      { id: "H07", name: "Зима", role: "mage", power: 1450, hp: 2500, atk: 450, speed: 115, color: "#9ec9ff", row: "back" },
+      { id: "H08", name: "Орлан", role: "fighter", power: 1240, hp: 3400, atk: 370, speed: 108, color: "#d4a574", row: "front" },
+    ],
+    stages: [
+      {
+        id: "S01", title: "Площадь талонов", soft: 120, xp: 40,
+        enemies: [
+          { id: "E1", name: "Талон", hp: 1800, atk: 160, speed: 90, color: "#e35d6a" },
+          { id: "E2", name: "Очередь", hp: 1700, atk: 150, speed: 88, color: "#c45d7a" },
+          { id: "E3", name: "Штамп", hp: 1500, atk: 200, speed: 100, color: "#a84d5f" },
+        ],
+      },
+      {
+        id: "S02", title: "Очередь у окна", soft: 180, xp: 60,
+        enemies: [
+          { id: "E4", name: "Окно", hp: 2200, atk: 200, speed: 95, color: "#e35d6a" },
+          { id: "E5", name: "Форма", hp: 2000, atk: 210, speed: 100, color: "#c45d7a" },
+          { id: "E6", name: "Клерк", hp: 2400, atk: 230, speed: 85, color: "#a84d5f" },
+          { id: "E7", name: "Печать", hp: 1900, atk: 240, speed: 110, color: "#8a4050" },
+        ],
+      },
+      {
+        id: "S03", title: "Архив с характером", soft: 240, xp: 80,
+        enemies: [
+          { id: "E8", name: "Дух", hp: 2600, atk: 250, speed: 105, color: "#e35d6a" },
+          { id: "E9", name: "Том", hp: 2800, atk: 240, speed: 80, color: "#c45d7a" },
+          { id: "E10", name: "Страж", hp: 3200, atk: 260, speed: 75, color: "#a84d5f" },
+        ],
+      },
+      {
+        id: "S04", title: "Мост регламента", soft: 300, xp: 100,
+        enemies: [
+          { id: "E11", name: "Балка", hp: 3000, atk: 270, speed: 90, color: "#e35d6a" },
+          { id: "E12", name: "Трос", hp: 2700, atk: 290, speed: 115, color: "#c45d7a" },
+          { id: "E13", name: "Надзор", hp: 3400, atk: 280, speed: 85, color: "#a84d5f" },
+          { id: "E14", name: "Штраф", hp: 2500, atk: 310, speed: 100, color: "#8a4050" },
+        ],
+      },
+      {
+        id: "S05", title: "Начальник окошка", soft: 420, xp: 140,
+        enemies: [
+          { id: "E15", name: "Охрана", hp: 3600, atk: 300, speed: 80, color: "#e35d6a" },
+          { id: "E16", name: "Охрана", hp: 3600, atk: 300, speed: 82, color: "#c45d7a" },
+          { id: "BOSS", name: "Начальник", hp: 5200, atk: 360, speed: 90, color: "#ff6b6b" },
+        ],
+      },
+    ],
+    shop: [
+      { id: "pack_soft", name: "Мешок soft", costHard: 0, costSoft: 0, grantSoft: 500, grantHard: 0, free: true },
+      { id: "ticket", name: "Тикет призыва", costHard: 10, costSoft: 0, grantSoft: 0, grantHard: 0, ticket: 1 },
+      { id: "gold_bag", name: "Мешок hard", costSoft: 800, costHard: 0, grantSoft: 0, grantHard: 5 },
+    ],
   };
 
-  const heroes = [
-    { id: "H01", name: "Каэрон", role: "tank", power: 1400, color: "#4ecdc4" },
-    { id: "H02", name: "Вейриса", role: "mage", power: 1520, color: "#7aa2ff" },
-    { id: "H03", name: "Эльдарион", role: "support", power: 1180, color: "#c9a227" },
-    { id: "H04", name: "Рустам", role: "fighter", power: 1300, color: "#e35d6a" },
-    { id: "H05", name: "Лейла", role: "ranger", power: 1220, color: "#5dcea0" },
+  const TABS = [
+    { id: "home", label: "Город" },
+    { id: "campaign", label: "Кампания" },
+    { id: "heroes", label: "Герои" },
+    { id: "afk", label: "AFK" },
   ];
 
-  const stages = [
-    { id: "S01", title: "Площадь талонов", open: true, cleared: true },
-    { id: "S02", title: "Очередь у окна", open: true, cleared: false },
-    { id: "S03", title: "Архив с характером", open: false, cleared: false },
-  ];
+  let state = defaultState();
+  let battle = null;
 
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  function defaultState() {
+    return {
+      soft: 800,
+      hard: 30,
+      xp: 120,
+      tickets: 2,
+      party: ["H01", "H02", "H03", "H04", "H05"],
+      cleared: {},
+      activeStage: "S01",
+      afkStart: Date.now() - 2.4 * 3600 * 1000,
+      freeClaimed: false,
+    };
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      state = { ...defaultState(), ...data };
+    } catch (_) { /* ignore */ }
+  }
+
+  function save() {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+  }
+
+  function level() {
+    return Math.max(1, Math.floor(state.xp / 100) + 1);
+  }
+
+  function partyPower() {
+    return state.party.reduce((sum, id) => {
+      const h = CATALOG.heroes.find((x) => x.id === id);
+      return sum + (h ? h.power : 0);
+    }, 0);
+  }
+
+  function stageOpen(id) {
+    if (id === "S01") return true;
+    const idx = CATALOG.stages.findIndex((s) => s.id === id);
+    if (idx <= 0) return false;
+    return !!state.cleared[CATALOG.stages[idx - 1].id];
+  }
+
+  function afkHours() {
+    const h = (Date.now() - state.afkStart) / 3600000;
+    return Math.max(0, Math.min(AFK_CAP, h));
+  }
 
   function go(screen) {
-    state.screen = screen;
+    if (battle && screen !== "battle") stopBattle();
     $$(".screen").forEach((el) => {
       el.hidden = el.dataset.screen !== screen;
     });
-    if (screen === "battle") startBattle();
+    if (screen === "home") renderHome();
+    if (screen === "campaign") renderCampaign();
+    if (screen === "heroes") renderHeroes();
+    if (screen === "shop") renderShop();
     if (screen === "afk") renderAfk();
-    syncHud();
+    if (screen === "battle") startBattle(state.activeStage);
+    renderTabbars(screen === "shop" ? "home" : screen);
   }
 
-  function syncHud() {
-    const soft = $("#soft");
-    const hard = $("#hard");
-    const lvl = $("#lvl");
-    const power = $("#power");
-    if (soft) soft.textContent = String(state.soft);
-    if (hard) hard.textContent = String(state.hard);
-    if (lvl) lvl.textContent = String(state.level);
-    if (power) power.textContent = String(state.power);
+  function renderTabbars(active) {
+    $$(".tabbar").forEach((bar) => {
+      const key = bar.dataset.tabs || active;
+      const current = key === "home" && active === "shop" ? "home" : active;
+      bar.innerHTML = TABS.map(
+        (t) => `<button type="button" data-nav="${t.id}" class="${t.id === current ? "active" : ""}">${t.label}</button>`
+      ).join("");
+    });
+  }
+
+  function renderHud(host) {
+    host.innerHTML = `
+      <div class="avatar" aria-hidden="true"></div>
+      <div class="meta">
+        <strong>Командир</strong>
+        <span>Ур.${level()} · Сила ${partyPower()}</span>
+      </div>
+      <div class="chips">
+        <span class="chip">${state.soft}</span>
+        <span class="chip hard">${state.hard}</span>
+      </div>
+    `;
+  }
+
+  function renderHome() {
+    renderHud($("[data-hud]"));
+    const next = CATALOG.stages.find((s) => stageOpen(s.id) && !state.cleared[s.id]);
+    $("#home-tip").textContent = next
+      ? `Продолжи: ${next.title}`
+      : "Все этапы открыты · крути AFK";
   }
 
   function renderCampaign() {
-    const list = $("#stage-list");
+    const list = $("#campaign-list");
     list.innerHTML = "";
-    stages.forEach((s) => {
+    CATALOG.stages.forEach((s) => {
+      const open = stageOpen(s.id);
+      const cleared = !!state.cleared[s.id];
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div class="swatch" style="background:${s.cleared ? "var(--success)" : s.open ? "var(--gold)" : "var(--muted)"}"></div>
+        <div class="sw" style="background:${cleared ? "var(--ok)" : open ? "var(--gold)" : "var(--muted)"}"></div>
         <div class="meta">
           <strong>${s.id} · ${s.title}</strong>
-          <span>${s.cleared ? "Пройдено" : s.open ? "Открыто" : "Закрыто"}</span>
+          <span>${cleared ? "Пройдено" : open ? `+${s.soft} soft` : "Закрыто"}</span>
         </div>
-        <button ${s.open ? "" : "disabled"}>Бой</button>
+        <button type="button" ${open ? "" : "disabled"}></button>
       `;
       const btn = card.querySelector("button");
-      if (s.open) {
-        btn.textContent = "Бой";
+      btn.textContent = open ? "Бой" : "Закрыто";
+      if (open) {
         btn.addEventListener("click", () => {
-          $("#chapter").textContent = `Глава 1 · ${s.title}`;
+          state.activeStage = s.id;
+          save();
           go("battle");
         });
-      } else {
-        btn.textContent = "Закрыто";
       }
       list.appendChild(card);
     });
   }
 
   function renderHeroes() {
-    const list = $("#hero-list");
+    $("#party-line").textContent = `Партия ${state.party.length}/5 · сила ${partyPower()}`;
+    const list = $("#heroes-list");
     list.innerHTML = "";
-    heroes.forEach((h) => {
+    CATALOG.heroes.forEach((h) => {
+      const inParty = state.party.includes(h.id);
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div class="swatch" style="background:${h.color}"></div>
+        <div class="sw" style="background:${h.color}"></div>
         <div class="meta">
           <strong>${h.name}</strong>
-          <span>${h.role} · сила ${h.power}</span>
+          <span>${h.role} · ${h.power} · ${h.row}</span>
         </div>
-        <button type="button">В партии</button>
+        <button type="button" class="${inParty ? "ghost" : ""}"></button>
       `;
+      const btn = card.querySelector("button");
+      btn.textContent = inParty ? "Убрать" : "Взять";
+      btn.addEventListener("click", () => {
+        toggleParty(h.id);
+        renderHeroes();
+        save();
+      });
       list.appendChild(card);
     });
   }
 
-  function renderAfk() {
-    const pct = Math.min(100, (state.afkHours / 8) * 100);
-    $("#afk-fill").style.width = `${pct}%`;
-    $("#afk-hours").textContent = `Накоплено ${state.afkHours.toFixed(1)} ч / 8 ч`;
-    const reward = Math.floor(state.afkHours * 90);
-    $("#afk-reward").textContent = `+${reward} soft`;
+  function toggleParty(id) {
+    const i = state.party.indexOf(id);
+    if (i >= 0) {
+      if (state.party.length <= 1) return;
+      state.party.splice(i, 1);
+    } else {
+      if (state.party.length >= 5) state.party.shift();
+      state.party.push(id);
+    }
   }
 
-  function startBattle() {
-    stopBattle();
-    const end = $("#battle-end");
-    end.hidden = true;
-    state.speed = 1;
-    $("#speed-btn").textContent = "×1";
-    $("#toast").textContent = "Автобой";
-    $("#timer").textContent = "00:00";
+  function renderShop() {
+    const list = $("#shop-list");
+    list.innerHTML = "";
+    CATALOG.shop.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const price = item.free
+        ? state.freeClaimed
+          ? "Уже взято"
+          : "Бесплатно"
+        : item.costHard
+          ? `${item.costHard} hard`
+          : `${item.costSoft} soft`;
+      card.innerHTML = `
+        <div class="sw" style="background:var(--gold)"></div>
+        <div class="meta">
+          <strong>${item.name}</strong>
+          <span>${price}</span>
+        </div>
+        <button type="button"></button>
+      `;
+      const btn = card.querySelector("button");
+      btn.textContent = "Купить";
+      if (item.free && state.freeClaimed) btn.disabled = true;
+      btn.addEventListener("click", () => buy(item));
+      list.appendChild(card);
+    });
+  }
 
-    const party = heroes.map((h, i) => ({
-      id: h.id,
-      name: h.name,
-      color: h.color,
-      team: "hero",
-      hp: 1,
-      energy: 0.2 * i,
+  function buy(item) {
+    if (item.free) {
+      if (state.freeClaimed) return;
+      state.soft += item.grantSoft;
+      state.freeClaimed = true;
+    } else if (item.costHard) {
+      if (state.hard < item.costHard) return toastShop("Не хватает hard");
+      state.hard -= item.costHard;
+      if (item.ticket) state.tickets += item.ticket;
+      state.soft += item.grantSoft;
+      state.hard += item.grantHard;
+    } else if (item.costSoft) {
+      if (state.soft < item.costSoft) return toastShop("Не хватает soft");
+      state.soft -= item.costSoft;
+      state.hard += item.grantHard;
+    }
+    save();
+    renderShop();
+  }
+
+  function toastShop(msg) {
+    const line = $("#party-line");
+    if (!line) alert(msg);
+  }
+
+  function renderAfk() {
+    const h = afkHours();
+    $("#afk-fill").style.width = `${(h / AFK_CAP) * 100}%`;
+    $("#afk-hours").textContent = `Накоплено ${h.toFixed(1)} ч / ${AFK_CAP} ч`;
+    $("#afk-soft").textContent = `+${Math.floor(h * AFK_RATE)} soft`;
+  }
+
+  function claimAfk() {
+    const gain = Math.floor(afkHours() * AFK_RATE);
+    state.soft += gain;
+    state.afkStart = Date.now();
+    save();
+    renderAfk();
+    $("#btn-claim-afk").textContent = `+${gain}`;
+    setTimeout(() => { $("#btn-claim-afk").textContent = "Забрать"; }, 1000);
+  }
+
+  function heroById(id) {
+    return CATALOG.heroes.find((h) => h.id === id);
+  }
+
+  function startBattle(stageId) {
+    stopBattle();
+    const stage = CATALOG.stages.find((s) => s.id === stageId) || CATALOG.stages[0];
+    state.activeStage = stage.id;
+    $("#chapter").textContent = `Глава 1 · ${stage.title}`;
+    $("#battle-end").hidden = true;
+    $("#btn-speed").textContent = "×1";
+    $("#toast").textContent = "Автобой";
+
+    const party = state.party.map((id) => {
+      const h = heroById(id);
+      return {
+        id: h.id,
+        name: h.name,
+        team: "hero",
+        color: h.color,
+        maxHp: h.hp,
+        hp: h.hp,
+        atk: h.atk,
+        speed: h.speed,
+        energy: 0,
+        alive: true,
+      };
+    });
+    const foes = stage.enemies.map((e) => ({
+      id: e.id,
+      name: e.name,
+      team: "enemy",
+      color: e.color,
+      maxHp: e.hp,
+      hp: e.hp,
+      atk: e.atk,
+      speed: e.speed,
+      energy: Math.random() * 20,
       alive: true,
     }));
-    const foes = [
-      { id: "E1", name: "Талон", color: "#e35d6a", team: "enemy", hp: 1, energy: 0, alive: true },
-      { id: "E2", name: "Печать", color: "#c45d7a", team: "enemy", hp: 1, energy: 0.1, alive: true },
-      { id: "E3", name: "Очередь", color: "#a84d5f", team: "enemy", hp: 1, energy: 0.05, alive: true },
-    ];
 
-    state.battle = {
+    battle = {
+      stage,
+      units: [...party, ...foes],
+      speed: 1,
       t0: performance.now(),
       elapsed: 0,
-      units: [...party, ...foes],
       raf: 0,
       done: false,
     };
-
-    paintUnits();
-    loopBattle();
+    paintBattle();
+    loop();
   }
 
   function stopBattle() {
-    if (state.battle?.raf) cancelAnimationFrame(state.battle.raf);
-    state.battle = null;
+    if (battle?.raf) cancelAnimationFrame(battle.raf);
+    battle = null;
   }
 
-  function paintUnits() {
-    const heroesEl = $("#side-heroes");
-    const enemiesEl = $("#side-enemies");
+  function paintBattle() {
+    const heroes = $("#col-heroes");
+    const enemies = $("#col-enemies");
     const portraits = $("#portraits");
-    heroesEl.innerHTML = "";
-    enemiesEl.innerHTML = "";
+    heroes.innerHTML = "";
+    enemies.innerHTML = "";
     portraits.innerHTML = "";
 
-    state.battle.units.forEach((u) => {
-      const node = document.createElement("div");
-      node.className = `unit ${u.team === "enemy" ? "enemy" : ""} ${u.alive ? "" : "dead"}`;
-      node.dataset.id = u.id;
-      node.style.background = u.color;
-      node.innerHTML = `<div class="hp"><i style="width:${Math.max(0, u.hp) * 100}%"></i></div><span class="name">${u.name}</span>`;
-      (u.team === "hero" ? heroesEl : enemiesEl).appendChild(node);
+    battle.units.forEach((u) => {
+      const el = document.createElement("div");
+      el.className = `unit ${u.team === "enemy" ? "enemy" : ""} ${u.alive ? "" : "dead"}`;
+      el.dataset.id = u.id;
+      el.style.background = u.color;
+      el.innerHTML = `<div class="hp"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><span class="nm">${u.name}</span>`;
+      (u.team === "hero" ? heroes : enemies).appendChild(el);
 
       if (u.team === "hero") {
         const p = document.createElement("button");
         p.type = "button";
         p.className = "portrait";
-        p.innerHTML = `<div class="face" style="background:${u.color}"></div><span>${u.name.slice(0, 6)}</span><div class="energy"><i style="width:${u.energy * 100}%"></i></div>`;
+        p.innerHTML = `<div class="face" style="background:${u.color}"></div><span>${u.name.slice(0, 6)}</span><div class="en"><i style="width:${u.energy}%"></i></div>`;
         p.addEventListener("click", () => {
-          if (!u.alive || u.energy < 0.8) return;
+          if (!u.alive || u.energy < 80) return;
           u.energy = 0;
-          strike(u, true);
-          $("#toast").textContent = `ULT · ${u.name}`;
+          act(u, true);
         });
         portraits.appendChild(p);
       }
     });
   }
 
-  function refreshBars() {
-    state.battle.units.forEach((u) => {
-      const node = $(`.unit[data-id="${u.id}"]`);
-      if (!node) return;
-      node.classList.toggle("dead", !u.alive);
-      const bar = node.querySelector(".hp > i");
-      if (bar) bar.style.width = `${Math.max(0, u.hp) * 100}%`;
+  function refreshBattle() {
+    battle.units.forEach((u) => {
+      const el = $(`.unit[data-id="${u.id}"]`);
+      if (!el) return;
+      el.classList.toggle("dead", !u.alive);
+      const bar = el.querySelector(".hp > i");
+      if (bar) bar.style.width = `${Math.max(0, (u.hp / u.maxHp) * 100)}%`;
     });
     $$("#portraits .portrait").forEach((p, i) => {
-      const u = state.battle.units.filter((x) => x.team === "hero")[i];
+      const u = battle.units.filter((x) => x.team === "hero")[i];
       if (!u) return;
-      const e = p.querySelector(".energy > i");
-      if (e) e.style.width = `${u.energy * 100}%`;
+      const e = p.querySelector(".en > i");
+      if (e) e.style.width = `${u.energy}%`;
     });
   }
 
-  function strike(actor, ultimate = false) {
-    const targets = state.battle.units.filter(
-      (u) => u.alive && u.team !== actor.team
-    );
-    if (!targets.length) return;
+  function act(actor, ult = false) {
+    if (battle.done || !actor.alive) return;
+    const targets = battle.units.filter((u) => u.alive && u.team !== actor.team);
+    if (!targets.length) return finish(actor.team === "hero");
     const target = targets[Math.floor(Math.random() * targets.length)];
-    const dmg = ultimate ? 0.45 : 0.12 + Math.random() * 0.1;
+    const dmg = actor.atk * (ult ? 2.2 : 1) * (0.9 + Math.random() * 0.2);
     target.hp = Math.max(0, target.hp - dmg);
     if (target.hp <= 0) target.alive = false;
     const node = $(`.unit[data-id="${target.id}"]`);
@@ -205,84 +431,94 @@
       node.classList.add("hit");
       setTimeout(() => node.classList.remove("hit"), 120);
     }
-    $("#toast").textContent = `${actor.name} → ${target.name}`;
-    refreshBars();
+    $("#toast").textContent = ult
+      ? `ULT · ${actor.name} → ${target.name}`
+      : `${actor.name} → ${target.name}`;
+    refreshBattle();
     checkEnd();
   }
 
   function checkEnd() {
-    const heroesAlive = state.battle.units.some((u) => u.team === "hero" && u.alive);
-    const enemiesAlive = state.battle.units.some((u) => u.team === "enemy" && u.alive);
-    if (heroesAlive && enemiesAlive) return;
-    state.battle.done = true;
-    const won = heroesAlive;
+    const h = battle.units.some((u) => u.team === "hero" && u.alive);
+    const e = battle.units.some((u) => u.team === "enemy" && u.alive);
+    if (!e) finish(true);
+    else if (!h) finish(false);
+  }
+
+  function finish(won) {
+    if (battle.done) return;
+    battle.done = true;
     const end = $("#battle-end");
     end.hidden = false;
     $("#end-title").textContent = won ? "Победа" : "Поражение";
-    $("#end-title").style.color = won ? "var(--success)" : "var(--danger)";
+    $("#end-title").style.color = won ? "var(--ok)" : "var(--danger)";
+    const nextBtn = $("#btn-next-stage");
     if (won) {
-      state.soft += 180;
-      $("#end-reward").textContent = "+180 soft · этап открыт";
-      stages[1].cleared = true;
-      stages[2].open = true;
-      syncHud();
+      const s = battle.stage;
+      state.soft += s.soft;
+      state.xp += s.xp;
+      state.cleared[s.id] = true;
+      const idx = CATALOG.stages.findIndex((x) => x.id === s.id);
+      const next = CATALOG.stages[idx + 1];
+      if (next) state.activeStage = next.id;
+      save();
+      $("#end-reward").textContent = `+${s.soft} soft · +${s.xp} XP`;
+      nextBtn.hidden = !next;
+      nextBtn.textContent = next ? `Дальше · ${next.title}` : "Дальше";
     } else {
-      $("#end-reward").textContent = "Попробуй сменить партию";
+      $("#end-reward").textContent = "Смени партию и попробуй снова";
+      nextBtn.hidden = true;
     }
   }
 
-  function loopBattle() {
-    const b = state.battle;
-    if (!b || b.done) return;
+  function loop() {
+    if (!battle || battle.done) return;
     const now = performance.now();
-    const dt = ((now - b.t0) / 1000) * state.speed;
-    b.t0 = now;
-    b.elapsed += dt;
-    const sec = Math.floor(b.elapsed);
+    const dt = ((now - battle.t0) / 1000) * battle.speed;
+    battle.t0 = now;
+    battle.elapsed += dt;
+    const sec = Math.floor(battle.elapsed);
     $("#timer").textContent = `${String(Math.floor(sec / 60)).padStart(2, "0")}:${String(sec % 60).padStart(2, "0")}`;
 
-    b.units.forEach((u) => {
+    battle.units.forEach((u) => {
       if (!u.alive) return;
-      u.energy = Math.min(1, u.energy + dt * 0.18);
-      if (u.energy >= 1) {
+      u.energy = Math.min(100, u.energy + u.speed * dt * 0.35);
+      if (u.energy >= 100) {
         u.energy = 0;
-        strike(u, false);
+        act(u, false);
       }
     });
-    refreshBars();
-    if (!b.done) b.raf = requestAnimationFrame(loopBattle);
+    refreshBattle();
+    if (!battle.done) battle.raf = requestAnimationFrame(loop);
   }
 
   document.addEventListener("click", (e) => {
-    const goEl = e.target.closest("[data-go]");
-    if (goEl) {
-      go(goEl.getAttribute("data-go"));
+    const nav = e.target.closest("[data-nav]");
+    if (nav) {
+      go(nav.getAttribute("data-nav"));
       return;
     }
   });
 
-  $("#claim-afk").addEventListener("click", () => {
-    const reward = Math.floor(state.afkHours * 90);
-    state.soft += reward;
-    state.afkHours = 0.1;
-    renderAfk();
-    syncHud();
-    $("#claim-afk").textContent = "Забрано";
-    setTimeout(() => { $("#claim-afk").textContent = "Забрать"; }, 1200);
+  $("#btn-claim-afk").addEventListener("click", claimAfk);
+  $("#btn-reset").addEventListener("click", () => {
+    localStorage.removeItem(SAVE_KEY);
+    state = defaultState();
+    go("splash");
   });
-
-  $("#speed-btn").addEventListener("click", () => {
-    state.speed = state.speed < 1.5 ? 2 : 1;
-    $("#speed-btn").textContent = state.speed > 1.5 ? "×2" : "×1";
+  $("#btn-speed").addEventListener("click", () => {
+    if (!battle) return;
+    battle.speed = battle.speed < 1.5 ? 2 : 1;
+    $("#btn-speed").textContent = battle.speed > 1.5 ? "×2" : "×1";
   });
-
-  $("#auto-btn").addEventListener("click", () => {
+  $("#btn-auto").addEventListener("click", () => {
     $("#toast").textContent = "Автобой включён";
   });
+  $("#btn-next-stage").addEventListener("click", () => {
+    go("battle");
+  });
 
-  renderCampaign();
-  renderHeroes();
-  renderAfk();
-  syncHud();
+  load();
+  renderTabbars("splash");
   go("splash");
 })();

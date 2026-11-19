@@ -1,20 +1,24 @@
-# HTML-образец — БашЛегенды
+# БашЛегенды — HTML-клиент (образец)
 
-Интерактивный UI-макет (9:16) оболочки idle AFK-арены:
+Полноценный **редактируемый UI** на HTML/CSS/JS (9:16). Godot не нужен для оболочки.
 
-- Город (top bar · rails · bottom nav)
-- Кампания / Герои / AFK
-- Бой: герои слева, враги справа, таймер, портреты, АВТО/×2
+## Экраны
 
-Бренд **БашЛегенды**. Не копия AFK Arena.
+- Splash · Город (POI + rails + tabbar)
+- Кампания (5 этапов, прогрессия)
+- Герои (партия 5, localStorage)
+- Магазин (soft/hard, бесплатный пак)
+- AFK (накопление до 8ч)
+- Бой L/R + АВТО/×2/ULT по портрету
 
-## Открыть
+Сохранение: `localStorage` ключ `bashlegends_html_v1`.
+
+## Правка UI
+
+Редактируй `index.html` / `styles.css` / `app.js` — сразу видно в браузере.
 
 ```bash
-# просто файл
-xdg-open html_sample/index.html
-
-# или локальный сервер
 python3 -m http.server 8765 --directory html_sample --bind 127.0.0.1
-# http://127.0.0.1:8765
 ```
+
+Live: https://bashlegends-shell.apps.grok.bot
