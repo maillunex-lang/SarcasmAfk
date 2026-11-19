@@ -225,7 +225,9 @@ func _refresh_unit(unit: BattleUnit) -> void:
 		(w["energy"] as ProgressBar).value = unit.energy / maxf(unit.energy_max, 1.0)
 	if w["ult"] != null:
 		(w["ult"] as Button).disabled = not unit.can_ultimate()
-	var spr: TextureRect = w["sprite"]
+	var spr := w["sprite"] as TextureRect
+	if spr == null:
+		return
 	if not unit.alive:
 		spr.modulate = Color(0.4, 0.4, 0.4, 0.7)
 		if spr is CombatSpriteRect:
@@ -235,8 +237,8 @@ func _refresh_unit(unit: BattleUnit) -> void:
 
 
 func _on_action_resolved(actor: BattleUnit, target: BattleUnit) -> void:
-	var aw: Dictionary = _unit_widgets.get(actor.id, {})
-	var tw: Dictionary = _unit_widgets.get(target.id, {})
+	var aw: Dictionary = _unit_widgets.get(actor.id, {}) as Dictionary
+	var tw: Dictionary = _unit_widgets.get(target.id, {}) as Dictionary
 	if aw.has("sprite") and aw["sprite"] is CombatSpriteRect:
 		(aw["sprite"] as CombatSpriteRect).play_once("attack")
 	if tw.has("sprite") and tw["sprite"] is CombatSpriteRect and target.alive:

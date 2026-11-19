@@ -964,8 +964,8 @@ func upgrade_instance(instance_id: String) -> bool:
 	var u := int(inst.get("upgrade_level", 0))
 	if u >= max_u:
 		return false
-	var mult := {"N": 1, "R": 2, "SR": 4, "SSR": 8, "UR": 16, "Mythic": 32}.get(rarity, 1)
-	var soft_cost := 100 * (u + 1) * int(mult)
+	var mult: int = int({"N": 1, "R": 2, "SR": 4, "SSR": 8, "UR": 16, "Mythic": 32}.get(rarity, 1))
+	var soft_cost := 100 * (u + 1) * mult
 	var scrap := 0 if rarity == "N" else 1 + int(u / 2)
 	if soft_currency < soft_cost:
 		return false

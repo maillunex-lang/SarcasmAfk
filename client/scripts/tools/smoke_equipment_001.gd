@@ -19,8 +19,8 @@ func _run() -> void:
 		push_error("catalog size %d" % gs.catalog.equipment_by_id.size())
 		quit(2)
 		return
-	var blade := gs.grant_equipment_template("eq_n_starter_blade", "smoke")
-	var coat := gs.grant_equipment_template("eq_ch01_clerk_coat", "smoke")
+	var blade: String = str(gs.grant_equipment_template("eq_n_starter_blade", "smoke"))
+	var coat: String = str(gs.grant_equipment_template("eq_ch01_clerk_coat", "smoke"))
 	if blade == "" or coat == "":
 		push_error("grant failed")
 		quit(3)
@@ -39,7 +39,7 @@ func _run() -> void:
 		push_error("upgrade")
 		quit(6)
 		return
-	var free := gs.grant_equipment_template("eq_n_wooden_decree", "smoke")
+	var free: String = str(gs.grant_equipment_template("eq_n_wooden_decree", "smoke"))
 	if not gs.salvage_instance(free):
 		push_error("salvage")
 		quit(7)

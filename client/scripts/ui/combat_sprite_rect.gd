@@ -40,13 +40,13 @@ func _load_anims() -> void:
 	if unit_type == "":
 		return
 	for anim in ["idle", "attack", "hit", "death", "special", "telegraph"]:
-		var meta_path := AssetPaths.enemy_atlas_meta(unit_type, anim)
-		var png_path := AssetPaths.enemy_atlas(unit_type, anim)
+		var meta_path: String = AssetPaths.enemy_atlas_meta(unit_type, anim)
+		var png_path: String = AssetPaths.enemy_atlas(unit_type, anim)
 		if meta_path == "" or png_path == "":
 			continue
 		if not ResourceLoader.exists(meta_path) or not ResourceLoader.exists(png_path):
 			continue
-		var file := FileAccess.open(meta_path, FileAccess.READ)
+		var file: FileAccess = FileAccess.open(meta_path, FileAccess.READ)
 		if file == null:
 			continue
 		var parsed: Variant = JSON.parse_string(file.get_as_text())
