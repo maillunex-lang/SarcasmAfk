@@ -311,13 +311,18 @@ func (s *Server) battles(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		cmds := make([]battleverify.Command, 0, len(acc.BattleCommands))
+		autoCast := true // D-COMBAT-02 default
 		for _, c := range acc.BattleCommands {
 			cmds = append(cmds, battleverify.Command{Op: c.Op, UnitID: c.UnitID, AtTick: c.AtTick})
+			// D-COMBAT-03: recorded manual ultimates disable server auto-cast so replay matches player taps.
+			if c.Op == "ultimate" {
+				autoCast = false
+			}
 		}
 		replayIn := battleverify.ReplayInput{
 			Seed: acc.BattleSeed, BalanceVersion: body.BalanceVersion,
 			PartyIDs: append([]string{}, acc.PartyIDs...), Heroes: heroUnits, Enemies: enemyUnits,
-			Commands: cmds, AutoCast: true, DurationMS: body.DurationMS,
+			Commands: cmds, AutoCast: autoCast, DurationMS: body.DurationMS,
 		}
 		sim, errCode := battleverify.CheckFinishReplay(replayIn)
 		if errCode != "" {

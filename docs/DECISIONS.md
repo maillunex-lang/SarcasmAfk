@@ -37,6 +37,7 @@
 | D-NET-04 | При ошибке live **не** переключаться молча на mock |
 | D-NET-05 | **T-114:** release-сборки: `use_mock=false` по умолчанию после прохождения integration (auth/battle/rewards/save/resume); debug: явный mock/live |
 | D-NET-06 | P3 guild/arena/events live — только после CH01 accepted; до этого stubs + контракты |
+| D-NET-07 | Live URL: использовать существующий `client_config` / env; не выдумывать адрес и не уходить в offline-only без согласования (2026-11-19) |
 
 ## D-ART — Арт
 
@@ -48,6 +49,8 @@
 | D-ART-04 | Sample-атлас (`sample_unit`) — **только** для техотладки пайплайна, не финальный игровой ассет (2026-11-19) |
 | D-ART-05 | H01 Каэрон / H02 Вейриса / H03 Эльдарион и враги CH01: уникальный дизайн по `HEROES.md`, `CHARACTER_STYLE_GUIDE.md`, `ART_DIRECTION.md` |
 | D-ART-06 | Не начинать CH02 и массовую генерацию ассетов до приёмки CH01 |
+| D-ART-07 | H01–H03/E01 combat = **черновики** до явного art-approve; H01 модель = Meshy GLB владельца (не генерировать заново) (2026-11-19) |
+| D-ART-08 | Stage E (финальные 2D-атласы H01) только после owner grip + Stage D confirm (T-131) (2026-11-19) |
 
 ## D-SCOPE — Отложенное
 
@@ -63,6 +66,7 @@
 | D-ADMIN-01 | Admin: полноценная auth + RBAC (роли admin, viewer); API key только для доверенных сервисов; секреты не в клиенте; audit |
 | D-ADMIN-02 | APK: проверить SDK/templates/keystore; не создавать новый релизный ключ если есть; не коммитить секреты; сначала debug APK, потом release |
 | D-ADMIN-03 | Release keystore: искать на VPS/CI secrets; не создавать и не перезаписывать; пароли/ключи не в логах и не в git (2026-11-19) |
+| D-ADMIN-04 | Пока только **debug APK**; release отложен до keystore владельца (Q1 2026-11-19) |
 
 ## D-PRODUCT — Продукт / платформа
 

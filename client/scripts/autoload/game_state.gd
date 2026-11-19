@@ -266,6 +266,9 @@ func set_party_slot(index: int, hero_id: String) -> bool:
 		party_ids.append("")
 	party_ids[index] = hero_id
 	save_game()
+	# Keep live party in sync when not mock (best-effort; offline still saves locally).
+	if api != null and not api.is_mock():
+		api.put_party(party_ids)
 	progress_changed.emit()
 	return true
 

@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (после T-125 / PR #14).  
+> Актуализация: **2026-11-19** (T-132 CH01 test report; owner Q answers).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -16,7 +16,7 @@
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | Guild / Arena / Events live | ЗАБЛОКИРОВАНО | Stubs до **CH01 accepted** (D-NET-06 / D-SCOPE-01) |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
-| Приёмка CH01 | НА ПРОВЕРКЕ у владельца | Нужен явный «CH01 accepted» |
+| Приёмка CH01 | НЕ ПРИНЯТО | Отчёт готов; ждём device/review владельца (T-128) |
 
 ### Открыто в очереди
 
@@ -495,16 +495,23 @@
 - Не сделано: ответы владельца
 - Следующий шаг: Q1–Q4 в OWNER_CLARIFICATIONS
 
+### 2026-11-19 — T-130…T-132 owner answers + CH01 test report
+- Статус: ОТЧЁТ ГОТОВ; CH01 **не accepted**
+- Сделано: ответы Q1–Q4/T-131 в OWNER_CLARIFICATIONS + DECISIONS; полный mock/live cycle; debug APK; DEF-01 live auto_cast; party portraits; `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`
+- Не сделано: T-128 accept; T-131 Stage E; phone live URL; release keystore
+- Следующий шаг: T-133/T-134 (без арта) · device review владельца
+
 ## 9. Текущий следующий шаг + уточнения владельца
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md) + [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md).
 
 1. ~~P0…T-125 + T-114~~ — сделано (CI green, в `main`).
-2. **T-130** — CH01 polish: B01 HP↑, energy/hit 28, пауза на ULT, панель награды, Home Continue, AFK без rewind.
-3. H01 Kaeron grip → **T-131** (владелец правит локально; Stage E не стартуем).
-4. **Ждём ответы** по T-126…T-129 (`OWNER_CLARIFICATIONS.md`).
-5. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
-6. PX до отдельного разрешения: CH02+ (T-090), mass art (T-091), rename (T-092).
+2. ~~T-130 / T-132~~ — CH01 polish + acceptance test report; debug APK; live ULT auto_cast fix.
+3. **Сейчас (без Каэрона):** T-133 баланс B02+ · T-134 UX polish.
+4. H01 grip → **T-131** (владелец Blender; Stage E запрещён до confirm).
+5. Ждём: T-128 accept · T-129 phone URL · T-126 keystore (debug-only пока).
+6. После **CH01 accepted** (T-128): T-112 guild/arena/events live.
+7. PX: CH02+ / mass art / rename — только с явным разрешением.
 
 ### Что уже верно (не требует уточнения)
 
@@ -519,8 +526,8 @@
 |---|---|---|---|
 | 1 | **T-126** | Release APK | Путь/наличие действующего keystore (или «keystore нет — оставить debug»). Alias + пароли **только** через secrets/env, не в чат. Не создавать новый, если существует. |
 | 2 | **T-127** | Арт H01/H02/H03/E01 | Accept drafts / reject / правки силуэта·цвета·реквизита; нужен ли полный набор idle/atk/ult/hit/win/lose сейчас или только idle для CH01. |
-| 3 | **T-128** | CH01 accepted | Явное «принято» / «не принято» + список дефектов для доработки перед P3. |
-| 4 | **T-129** | Live URL | Базовый URL API для телефонов (LAN/VPS/домен). Без этого release live на устройстве не к чему подключаться. |
+| 3 | **T-128** | CH01 accepted | Отчёт: `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`. Нужно явное «принято» после device/review. |
+| 4 | **T-129** | Live URL | Сейчас `127.0.0.1:8080/v1`. Нужен LAN/VPS/домен для телефонов (не выдумываем). |
 | 5 | *(опц.)* | Баланс B01 | **Pass 1 в T-130** (HP 720, energy/hit 28). Можно вернуть/подкрутить. |
 | 6 | *(опц.)* | Админ prod | Значение `ADMIN_API_KEY` только в secrets; роли admin/viewer ок? |
 | 7 | *(позже)* | T-112 | После T-128: объём live guild/arena/events (MVP-минимум vs полный ROAD). |

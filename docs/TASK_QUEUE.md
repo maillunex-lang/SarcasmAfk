@@ -75,11 +75,14 @@
 | T-114 | P1 | **DONE** | Release defaults live (no silent mock); debug toggle | D-NET-05 + integration_live_slice | T-110 |
 | T-125 | P1 | **DONE** | CH01 Android vertical slice APK | home→map→L01→dialog→party→battle→ult→reward→save | T-124 |
 | T-130 | P1 | **DONE** | CH01 gameplay polish (ULT reachable, pause, reward UI, Home continue, AFK honesty) | battle/home/afk + B01 balance + smoke | T-125 |
+| T-132 | P1 | **DONE** | CH01 acceptance test report + owner Q answers; debug APK; live ULT auto_cast fix; party portraits | `docs/reports/CH01_ACCEPTANCE_TEST_2026-11-19.md` | T-130 |
+| T-133 | P1 | **TODO** | Balance pass-2: B02+ HP/energy so ULT reachable (no art dependency) | `ch01_battles.json` + server content | T-132 |
+| T-134 | P2 | **TODO** | Heroes/Inventory/AFK UX polish (mock+live, draft art OK) | client UI screens | T-132 |
 | T-131 | P2 | **BLOCKED** | H01 Kaeron grip + Stage E atlases | owner local Blender grip; then Stage D confirm | owner |
-| T-126 | P1 | **BLOCKED** | Release APK signed | need ANDROID_RELEASE_KEYSTORE from owner | T-125 |
-| T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | accept/reject + anim scope | T-125 |
-| T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | unlocks T-112 | T-125 |
-| T-129 | P1 | **BLOCKED** | Production/live API URL for devices | client_config / secrets | T-114 |
+| T-126 | P1 | **BLOCKED** | Release APK signed | debug-only until owner keystore (Q1) | T-125 |
+| T-127 | P1 | **BLOCKED** | Owner art-approve H01/H02/H03/E01 | drafts only; no new H01 model | T-125 |
+| T-128 | P1 | **BLOCKED** | CH01 accepted (owner sign-off) | report ready; waiting device/review | T-132 |
+| T-129 | P1 | **BLOCKED** | Production/live API URL for devices | keep `127.0.0.1:8080/v1`; need owner URL | T-114 |
 | T-112 | P3 | **TODO** | Guild/arena/events live | after CH01 accepted | T-128 |
 | T-090 | PX | **BLOCKED** | Детализация глав 02–12 (не открывать игрокам) | D-SCOPE-02 | Явное разрешение |
 | T-091 | PX | **BLOCKED** | Массовая генерация ассетов вне V0 | — | Явное разрешение |
@@ -95,6 +98,6 @@
 
 ## Следующий конкретный шаг
 
-Довести **T-130** (smoke_ch01_vertical + go test).  
-Владелец: [`OWNER_CLARIFICATIONS.md`](OWNER_CLARIFICATIONS.md) (T-126…T-129); H01 grip — локально (T-131).  
+Независимо от Каэрона: **T-133** (баланс B02+) → **T-134** (UX polish).  
+Владелец: device review → T-128; grip → T-131; phone URL → T-129.  
 После T-128 → T-112. PX (T-090…092) без отдельного разрешения не трогать.

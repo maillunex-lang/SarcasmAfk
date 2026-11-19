@@ -1,6 +1,7 @@
 extends "res://scripts/ui/screen_base.gd"
 
 var _slot_labels: Array = []
+var _slot_portraits: Array = []
 
 
 func _ready() -> void:
@@ -20,10 +21,17 @@ func _ready() -> void:
 		row.add_theme_constant_override("separation", 12)
 		vbox.add_child(row)
 		var slot_i := i
+		var portrait := TextureRect.new()
+		portrait.custom_minimum_size = Vector2(96, 96)
+		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		row.add_child(portrait)
+		_slot_portraits.append(portrait)
 		var lab := DesignTokens.make_label(_slot_text(i), 24, DesignTokens.COLOR_TEXT_IVORY, HORIZONTAL_ALIGNMENT_LEFT)
 		lab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(lab)
 		_slot_labels.append(lab)
+		_apply_portrait(i)
 		var btn := DesignTokens.make_button("Сменить", false)
 		btn.custom_minimum_size = Vector2(220, 80)
 		btn.pressed.connect(func() -> void: _cycle_slot(slot_i))
@@ -59,6 +67,17 @@ func _slot_text(i: int) -> String:
 	return "Слот %d · %s (%s / %s)" % [i + 1, str(h.get("name", id)), str(h.get("row", "")), str(h.get("class", ""))]
 
 
+func _apply_portrait(i: int) -> void:
+	if i < 0 or i >= _slot_portraits.size():
+		return
+	var portrait: TextureRect = _slot_portraits[i]
+	var id := str(GameState.party_ids[i]) if i < GameState.party_ids.size() else ""
+	if id == "":
+		portrait.texture = null
+		return
+	portrait.texture = AssetPaths.tex(AssetPaths.hero_portrait(id))
+
+
 func _rows_summary() -> String:
 	var f := 0
 	var b := 0
@@ -86,8 +105,7 @@ func _cycle_slot(index: int) -> void:
 	var nxt: String = str(owned[(at + 1) % owned.size()])
 	GameState.set_party_slot(index, nxt)
 	(_slot_labels[index] as Label).text = _slot_text(index)
-	var summary := get_node_or_null("MarginContainer/VBoxContainer/RowsSummary")
-	# rebuild summary label text via search
+	_apply_portrait(index)
 	for c in get_children():
 		_refresh_summary_walk(c)
 
