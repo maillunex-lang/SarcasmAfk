@@ -1,6 +1,6 @@
 # STATUS.md — Единый снимок состояния проекта
 
-> Дата снимка: **2026-11-19** · Ветка: `cursor/ch01-campaign-embed-beaf` → `cursor/phase0-design-docs-beaf`  
+> Дата снимка: **2026-11-19** · Ветка: `main` (T-055 влит)  
 > Playable V0-C stub + **CH01 campaign embed** (12 квестов / 30 боёв на моках). Это **не** полный MVP.
 
 ## NOW (текущий фокус)
