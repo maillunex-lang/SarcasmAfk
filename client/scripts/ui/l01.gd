@@ -15,9 +15,14 @@ func _ready() -> void:
 	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.35)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	dim.z_index = 1
 	add_child(dim)
 
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
+	# _make_root_vbox appends ColorRect + MarginContainer; raise them above parallax.
+	for child in get_children():
+		if child is ColorRect or child is MarginContainer:
+			child.z_index = maxi(child.z_index, 2)
 	var loc_name := str(loc.get("name", loc_id))
 	vbox.add_child(DesignTokens.make_label("%s · %s" % [loc_id, loc_name], 36, DesignTokens.COLOR_ACCENT_GOLD))
 
@@ -86,28 +91,39 @@ func _step_hint() -> String:
 
 
 func _add_location_layers(loc_id: String, loc: Dictionary) -> void:
+	# Keep parallax layers BELOW UI. Positive z_index on mid used to cover all buttons
+	# (player saw only loc_*_mid art when trying to start a fight).
+	var layer_root := Control.new()
+	layer_root.name = "LocationLayers"
+	layer_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	layer_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer_root.z_index = -10
+	add_child(layer_root)
+	move_child(layer_root, 0)
+
 	var layers: Dictionary = loc.get("layers", {})
 	if typeof(layers) == TYPE_DICTIONARY and not layers.is_empty():
-		_add_layer(str(layers.get("sky", AssetPaths.location_layer(loc_id, "sky"))), 0)
-		_add_layer(str(layers.get("far", AssetPaths.location_layer(loc_id, "far"))), 1)
-		_add_layer(str(layers.get("mid", AssetPaths.location_layer(loc_id, "mid"))), 2)
+		_add_layer(layer_root, str(layers.get("sky", AssetPaths.location_layer(loc_id, "sky"))), 0)
+		_add_layer(layer_root, str(layers.get("far", AssetPaths.location_layer(loc_id, "far"))), 1)
+		_add_layer(layer_root, str(layers.get("mid", AssetPaths.location_layer(loc_id, "mid"))), 2)
 		return
 	# Fallback L01 classic
 	if loc_id == "L01":
-		_add_layer(AssetPaths.L01_SKY, 0)
-		_add_layer(AssetPaths.L01_FAR, 1)
-		_add_layer(AssetPaths.L01_MID, 2)
+		_add_layer(layer_root, AssetPaths.L01_SKY, 0)
+		_add_layer(layer_root, AssetPaths.L01_FAR, 1)
+		_add_layer(layer_root, AssetPaths.L01_MID, 2)
 		return
 	var hint := str(loc.get("bg_hint", AssetPaths.L01_MID))
-	_add_layer(hint if hint != "" else AssetPaths.L01_MID, 0)
+	_add_layer(layer_root, hint if hint != "" else AssetPaths.L01_MID, 0)
 
 
-func _add_layer(path: String, z: int) -> void:
+func _add_layer(parent: Control, path: String, z: int) -> void:
 	var layer := TextureRect.new()
 	layer.texture = AssetPaths.tex(path)
 	layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	layer.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	layer.stretch_mode = TextureRect.STRETCH_SCALE
 	layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.z_as_relative = true
 	layer.z_index = z
-	add_child(layer)
+	parent.add_child(layer)
