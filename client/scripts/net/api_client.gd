@@ -403,7 +403,7 @@ func finish_battle(battle_id: String, victory: bool, duration_ms: int = 0) -> Di
 		var res := _http("POST", path, {
 			"victory": victory,
 			"duration_ms": duration_ms,
-			"balance_version": "2026.11.19-atb1",
+			"balance_version": "2026.11.19-monsters1",
 		})
 		_log("POST", path, bool(res.get("ok", false)))
 		return res

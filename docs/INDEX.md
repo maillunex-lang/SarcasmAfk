@@ -28,6 +28,8 @@
 | [`EQUIPMENT_SYSTEM.md`](EQUIPMENT_SYSTEM.md) | EQUIPMENT-001 архитектура / API / slots | Draft system |
 | [`EQUIPMENT_BALANCE.md`](EQUIPMENT_BALANCE.md) | Upgrade / sets / salvage Draft числа | Draft balance |
 | [`EQUIPMENT_CONTENT.md`](EQUIPMENT_CONTENT.md) | Каталог 32, CH01 rewards, TEMP icons | Content pack |
+| [`CH01_ENEMY_AUDIT.md`](CH01_ENEMY_AUDIT.md) | Аудит 29 enemy_type / арт-дыры | Audit |
+| [`MONSTERS_CH01.md`](MONSTERS_CH01.md) | MONSTERS-CH01-001 статус и блок D-ART-06 | In progress |
 
 ## 3. Визуал
 

@@ -11,10 +11,21 @@ const (
 
 type unit struct {
 	id, name, team, row string
+	enemyType                  string
 	maxHP, hp, atk, def, speed int
 	energy, energyMax, atb     float64
 	ultimateID                 string
 	alive                      bool
+	// MONSTERS-CH01-001
+	statuses        []statusEffect
+	skill           EnemySkillSpec
+	specialCD       int
+	nextStrikeBonus float64
+	pendingTarget   string
+	pendingMul      float64
+	pendingDelay    int
+	actionCount     int
+	phase2, phase3  bool
 }
 
 // SimResult is the outcome of a deterministic ATB autofight.
@@ -32,6 +43,7 @@ func SimulateATB(seed int64, heroes, enemies []map[string]any) SimResult {
 
 func simulateATB(seed int64, heroes, enemies []map[string]any, autoCast bool, cmds []Command) SimResult {
 	rng := rand.New(rand.NewSource(seed))
+	bal := defaultEnemyBalance()
 	hs := make([]*unit, 0, len(heroes))
 	for _, h := range heroes {
 		hs = append(hs, unitFromMap(h, "hero", rng))
@@ -74,12 +86,12 @@ func simulateATB(seed int64, heroes, enemies []map[string]any, autoCast bool, cm
 			if !u.alive {
 				continue
 			}
-			u.atb += float64(u.speed) * 1.15 * simDelta
+			u.atb += float64(u.effectiveSpeed(bal)) * 1.15 * simDelta
 			if u.atb < atbThreshold {
 				continue
 			}
 			u.atb = 0
-			act(u, hs, es, rng, autoCast)
+			act(u, hs, es, rng, autoCast, bal)
 			if !anyAlive(es) {
 				return SimResult{Victory: true, Ticks: t, Seed: seed, Note: "atb_replay"}
 			}
@@ -97,6 +109,7 @@ func unitFromMap(m map[string]any, team string, rng *rand.Rand) *unit {
 		name:       asString(m["name"]),
 		team:       team,
 		row:        asString(m["row"]),
+		enemyType:  asString(m["enemy_type"]),
 		maxHP:      asInt(m["hp"]),
 		atk:        asInt(m["atk"]),
 		def:        asInt(m["defense"]),
@@ -104,6 +117,9 @@ func unitFromMap(m map[string]any, team string, rng *rand.Rand) *unit {
 		energyMax:  float64(asInt(m["energy_max"])),
 		ultimateID: asString(m["ultimate_id"]),
 		alive:      true,
+	}
+	if u.enemyType == "" {
+		u.enemyType = u.id
 	}
 	if u.maxHP <= 0 {
 		u.maxHP = 100
@@ -122,17 +138,29 @@ func unitFromMap(m map[string]any, team string, rng *rand.Rand) *unit {
 	}
 	u.hp = u.maxHP
 	u.atb = rng.Float64() * 40.0
+	if team == "enemy" {
+		u.skill = skillFromMap(m)
+		// Also accept nested skill fields from battle enemy rows via enemy_type catalog merge upstream.
+		if u.skill.SpecialKind == "" {
+			if sk, _ := m["special_kind"].(string); sk != "" {
+				u.skill.SpecialKind = sk
+				u.skill.SpecialVal = asFloat(m["special_value"])
+				u.skill.ProcChance = asFloat(m["special_proc"])
+				if u.skill.ProcChance <= 0 {
+					u.skill.ProcChance = 0.25
+				}
+			}
+		}
+	}
 	return u
 }
 
-func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand, autoCast bool) {
-	var pool []*unit
-	if actor.team == "hero" {
-		pool = enemies
-	} else {
-		pool = heroes
+func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand, autoCast bool, bal EnemyBalance) {
+	if actor.team == "enemy" {
+		enemyAct(actor, heroes, enemies, rng, bal)
+		return
 	}
-	target := pickTarget(pool, rng)
+	target := pickTarget(enemies, rng)
 	if target == nil {
 		return
 	}
@@ -141,16 +169,15 @@ func act(actor *unit, heroes, enemies []*unit, rng *rand.Rand, autoCast bool) {
 	if raw < 1 {
 		raw = 1
 	}
-	takeDamage(target, raw)
-	if actor.team == "hero" {
-		actor.energy += energyPerHit
-		if actor.energy > actor.energyMax {
-			actor.energy = actor.energyMax
-		}
-		if autoCast && actor.energy >= actor.energyMax && actor.ultimateID != "" {
-			castUltimate(actor, heroes, enemies, rng)
-		}
+	takeDamageBalanced(target, raw, bal)
+	actor.energy += energyPerHit
+	if actor.energy > actor.energyMax {
+		actor.energy = actor.energyMax
 	}
+	if autoCast && actor.energy >= actor.energyMax && actor.ultimateID != "" {
+		castUltimate(actor, heroes, enemies, rng)
+	}
+	actor.tickStatusesAfterAction()
 }
 
 func castUltimate(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
@@ -196,16 +223,7 @@ func castUltimate(actor *unit, heroes, enemies []*unit, rng *rand.Rand) {
 }
 
 func takeDamage(u *unit, raw int) {
-	mitigated := raw - int(float64(u.def)*0.35)
-	if mitigated < 1 {
-		mitigated = 1
-	}
-	u.hp -= mitigated
-	if u.hp <= 0 {
-		u.hp = 0
-		u.alive = false
-		u.energy = 0
-	}
+	takeDamageBalanced(u, raw, defaultEnemyBalance())
 }
 
 func pickTarget(pool []*unit, rng *rand.Rand) *unit {

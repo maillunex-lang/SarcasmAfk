@@ -28,6 +28,7 @@ type Loader struct {
 	eqAliases           map[string]string
 	eqCH01Rewards       map[string]string
 	eqRandomDropEnabled bool
+	enemyCatalog        map[string]EnemyCatalogEntry
 }
 
 func New(root string) *Loader {
@@ -44,6 +45,7 @@ func New(root string) *Loader {
 		eqSets:       map[string]store.EquipmentSetDef{},
 		eqAliases:    map[string]string{},
 		eqCH01Rewards: map[string]string{},
+		enemyCatalog:  map[string]EnemyCatalogEntry{},
 	}
 	l.reload()
 	return l
@@ -112,6 +114,7 @@ func (l *Loader) reload() {
 	}
 	l.loadExpansion()
 	l.loadEquipmentCatalog()
+	l.loadEnemyCatalog()
 }
 
 func (l *Loader) Heroes() []any {
