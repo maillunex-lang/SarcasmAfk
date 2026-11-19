@@ -63,7 +63,7 @@ func main() {
 		st = store.NewMemory(*persist)
 	}
 
-	api := httpapi.New(st, cl)
+	api := httpapi.New(st, cl).WithBackend(backend)
 	log.Printf("bashlegends-api listening on %s content=%s backend=%s", *addr, root, backend)
 	if err := http.ListenAndServe(*addr, api.Handler()); err != nil {
 		log.Fatal(err)

@@ -69,7 +69,7 @@
 - [x] Серверные награды, лимит AFK 24 часа, экономика, гача и защита от дублей *(T-082)*.
 - [x] Старт/финиш боёв + soft power/seed verify *(T-083/T-088/T-085; full tick-sim later)*.
 - [x] Гильдии, арена, события — клиентские API stubs *(T-084)*.
-- [ ] Админка, мониторинг, бэкапы, права доступа и аудит безопасности.
+- [x] Админка stub: `/readyz`, `/v1/admin/metrics`, request logging, `backup_db.sh` *(T-093…T-096; RBAC later)*.
 - [ ] Интеграционные тесты, нагрузочные проверки, тестовый онлайн и APK.
 
 ### Фаза 3. Приёмка расширенного MVP
@@ -407,10 +407,16 @@
 - Не сделано: admin, full tick-sim, APK online
 - Следующий шаг: admin/monitoring или UI live-toggle
 
+### 2026-11-19 — Phase 2 admin + live toggle T-093…T-096
+- Статус: ГОТОВО
+- Сделано: `/readyz`, `/v1/admin/metrics`, request log middleware, More live/mock toggle, `backup_db.sh`
+- Не сделано: RBAC admin, full tick-sim, APK
+- Следующий шаг: tick-sim / load / APK
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-060 / T-061 / T-081…T-089 / T-085~~ — сделано.
-2. Далее: админка/мониторинг или UI live-toggle; T-031 при Blender.
+1. ~~T-060 / T-061 / T-081…T-089 / T-085 / T-093…T-096~~ — сделано.
+2. Далее: tick-sim / load / APK online; T-031 при Blender.
 3. Запреты: главы 02–12, rename.

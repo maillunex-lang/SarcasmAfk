@@ -38,6 +38,22 @@ func _ready() -> void:
 		btn.pressed.connect(item[2])
 		row.add_child(btn)
 
+	vbox.add_child(DesignTokens.make_label("Сеть", 28, DesignTokens.COLOR_ACCENT_GOLD))
+	var mode_lbl := DesignTokens.make_label(_api_mode_text(), 20, DesignTokens.COLOR_TEXT_MUTED)
+	vbox.add_child(mode_lbl)
+	var toggle := DesignTokens.make_button(
+		"Включить Live API" if GameState.api.is_mock() else "Вернуть моки",
+		true
+	)
+	toggle.pressed.connect(func() -> void:
+		var want_live := GameState.api.is_mock()
+		var res: Dictionary = GameState.set_live_api(want_live)
+		mode_lbl.text = _api_mode_text()
+		toggle.text = "Включить Live API" if GameState.api.is_mock() else "Вернуть моки"
+		print("[More] api mode live=%s ok=%s" % [res.get("live"), res.get("ok")])
+	)
+	vbox.add_child(toggle)
+
 	var pad := Control.new()
 	pad.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(pad)
@@ -45,3 +61,9 @@ func _ready() -> void:
 	bottom.custom_minimum_size = Vector2(0, 120)
 	vbox.add_child(bottom)
 	HubChrome.attach(self, get_tree(), "more")
+
+
+func _api_mode_text() -> String:
+	if GameState.api.is_mock():
+		return "Режим: локальные моки (офлайн)"
+	return "Режим: Live → %s" % GameState.live_api_url

@@ -13,15 +13,24 @@ import (
 type Server struct {
 	Store   store.Store
 	Content *content.Loader
+	Backend string
+	Metrics *Metrics
 }
 
 func New(st store.Store, c *content.Loader) *Server {
-	return &Server{Store: st, Content: c}
+	return &Server{Store: st, Content: c, Backend: "memory", Metrics: NewMetrics()}
+}
+
+func (s *Server) WithBackend(name string) *Server {
+	s.Backend = name
+	return s
 }
 
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/healthz", s.health)
+	mux.HandleFunc("/readyz", s.readyz)
+	mux.HandleFunc("/v1/admin/metrics", s.adminMetrics)
 	mux.HandleFunc("/v1/auth/anonymous", s.authAnonymous)
 	mux.HandleFunc("/v1/me/progress", s.meProgress)
 	mux.HandleFunc("/v1/me/party", s.meParty)
@@ -35,7 +44,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("/v1/guild", s.guild)
 	mux.HandleFunc("/v1/arena", s.arena)
 	mux.HandleFunc("/v1/events", s.events)
-	return withCORS(mux)
+	return withLogging(s.Metrics, withCORS(mux))
 }
 
 func withCORS(next http.Handler) http.Handler {
@@ -70,7 +79,32 @@ func bearer(r *http.Request) string {
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]any{"ok": true, "service": "bashlegends-api", "phase": 2})
+	writeJSON(w, http.StatusOK, map[string]any{
+		"ok": true, "service": "bashlegends-api", "phase": 2, "backend": s.Backend,
+	})
+}
+
+func (s *Server) readyz(w http.ResponseWriter, _ *http.Request) {
+	// Store is always constructed before listen; soft readiness for ops probes.
+	if s.Store == nil || s.Content == nil {
+		writeErr(w, http.StatusServiceUnavailable, "NOT_READY")
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"ok": true, "ready": true, "backend": s.Backend})
+}
+
+func (s *Server) adminMetrics(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeErr(w, http.StatusMethodNotAllowed, "METHOD")
+		return
+	}
+	snap := map[string]any{"ok": true, "backend": s.Backend, "heroes": len(s.Content.HeroIDs())}
+	if s.Metrics != nil {
+		for k, v := range s.Metrics.Snapshot() {
+			snap[k] = v
+		}
+	}
+	writeJSON(w, http.StatusOK, snap)
 }
 
 func (s *Server) authAnonymous(w http.ResponseWriter, r *http.Request) {

@@ -31,6 +31,8 @@ var claimed_rewards: Dictionary = {}
 var active_quest_id: String = ""
 var active_battle_id: String = ""
 var pending_dialogue_quest_id: String = ""
+var prefer_live_api: bool = false
+var live_api_url: String = "http://127.0.0.1:8080/v1"
 
 # AFK / expeditions
 var afk_started_unix: int = 0
@@ -51,9 +53,36 @@ func _ready() -> void:
 	_load_content_packs()
 	_load_heroes()
 	load_game()
+	_apply_api_mode()
 	if afk_started_unix == 0:
 		afk_started_unix = int(Time.get_unix_time_from_system())
 		afk_claimed_unix = afk_started_unix
+
+
+func _apply_api_mode() -> void:
+	if prefer_live_api:
+		api.configure_live(live_api_url)
+		var auth: Dictionary = api.auth_anonymous()
+		if not bool(auth.get("ok", false)):
+			push_warning("Live API auth failed; staying configured live with empty token")
+	else:
+		api.configure_mock()
+
+
+func set_live_api(enabled: bool, url: String = "") -> Dictionary:
+	prefer_live_api = enabled
+	if url != "":
+		live_api_url = url
+	_apply_api_mode()
+	save_game()
+	progress_changed.emit()
+	return {
+		"ok": true,
+		"live": prefer_live_api,
+		"mock": api.is_mock(),
+		"token": api.auth_token,
+		"base_url": api.base_url,
+	}
 
 
 func _load_content_packs() -> void:
@@ -426,6 +455,8 @@ func save_game() -> void:
 		"afk_claimed_unix": afk_claimed_unix,
 		"active_expedition_id": active_expedition_id,
 		"expedition_ends_unix": expedition_ends_unix,
+		"prefer_live_api": prefer_live_api,
+		"live_api_url": live_api_url,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -465,6 +496,8 @@ func load_game() -> void:
 	afk_claimed_unix = int(data.get("afk_claimed_unix", afk_claimed_unix))
 	active_expedition_id = str(data.get("active_expedition_id", ""))
 	expedition_ends_unix = int(data.get("expedition_ends_unix", 0))
+	prefer_live_api = bool(data.get("prefer_live_api", false))
+	live_api_url = str(data.get("live_api_url", live_api_url))
 	var old_flags = data.get("quest_flags", {})
 	if typeof(old_flags) == TYPE_DICTIONARY and old_flags.get("CH01-Q01", false):
 		completed_quests["CH01-Q01"] = true
@@ -491,5 +524,8 @@ func reset_progress() -> void:
 	afk_claimed_unix = afk_started_unix
 	active_expedition_id = ""
 	expedition_ends_unix = 0
+	prefer_live_api = false
+	if api != null:
+		api.configure_mock()
 	save_game()
 	progress_changed.emit()
