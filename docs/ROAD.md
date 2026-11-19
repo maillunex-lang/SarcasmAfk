@@ -318,11 +318,16 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — MONSTERS-CH01-001 Stage D TEMP art
+
+- Unique TEMP concept+portrait+idle for all 29 enemy_types (no shared E28 JPG).
+- Multi-frame atlases / VFX still MISSING; labeled TEMP not FINAL (D-ART-06).
+
 ### Журнал 2026-11-19 — MONSTERS-CH01-001 (A–C + server E)
 
 - Audit: 29 types; E21–E30 shared E28 JPG; battleverify had no statuses.
 - Catalog + art registry; EnrichEnemyUnit on battle finish; balance `2026.11.19-monsters1`.
-- Pilot TEMP concepts: E01 E03 E05 E10 E13 E20 E22 E28 E30 — **await owner ACK** before mass art (D-ART-06).
+- Pilot TEMP concepts then full 29 after owner continue.
 - Bestiary screen; battles/quests/rewards untouched.
 
 ### Журнал 2026-11-19 — EQUIPMENT-001 (EQ-P1…P5)

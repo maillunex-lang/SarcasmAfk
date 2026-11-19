@@ -8,11 +8,13 @@
 |-------|-------|
 | Catalog `enemy_catalog_ch01.json` | DONE — 29 IDs, no E18/E19 |
 | Server statuses + specials + E20/E30 phases | DONE — `battleverify` `2026.11.19-monsters1` |
-| Pilot concepts E01/E03/E05/E10/E13/E20/E22/E28/E30 | TEMP — await owner ACK |
-| Remaining 20 concepts + atlases/VFX | **GENERATION_BLOCKED** (D-ART-06) |
+| Unique TEMP concepts (all 29) | DONE — `assets/enemies/E*/concept.jpg` |
+| Combat idle (single-frame TEMP) | DONE — `idle.jpg` copy of concept |
+| Multi-frame atlases (attack/hit/death/special) | **MISSING** — still TEMP single-frame |
+| VFX / SFX packs | **AUDIO/VFX_BLOCKED** or MISSING |
 | Bestiary UI | DONE (More → Бестиарий) |
 | Battle HP/ATK compositions/rewards | Unchanged |
 
-## Approve to unlock Stage D
+## Not FINAL
 
-Owner ACK on pilot silhouettes → generate remaining TEMP concepts + atlases (still labeled TEMP until CH01 accepted).
+Per D-ART-06 these are **TEMP** concepts, not Stage E / accepted final atlases.
