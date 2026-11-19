@@ -11,7 +11,22 @@ const BG_GUILD := "res://assets/branding/bg_guild.jpg"
 const BG_ARENA := "res://assets/branding/bg_arena.jpg"
 const BG_CAMPAIGN := "res://assets/branding/bg_campaign.jpg"
 const BG_HEROES := "res://assets/branding/bg_heroes.jpg"
+const BG_SHOP := "res://assets/branding/bg_shop.jpg"
+const BG_VIP := "res://assets/branding/bg_vip.jpg"
+const BG_CHAT := "res://assets/branding/bg_chat.jpg"
 const LOGO := "res://assets/branding/ui_logo_wordmark.jpg"
+const HOME_HERO_STAGE := "res://assets/ui/home/home_hero_stage.jpg"
+const AVATAR_DEFAULT := "res://assets/ui/avatars/avatar_default.jpg"
+const SHOP_BANNER := "res://assets/ui/shop/shop_banner_featured.jpg"
+const SHOP_ICON_DIAMONDS := "res://assets/ui/shop/shop_icon_diamonds.jpg"
+const SHOP_ICON_RESOURCES := "res://assets/ui/shop/shop_icon_resources.jpg"
+const SHOP_ICON_GROWTH := "res://assets/ui/shop/shop_icon_growth.jpg"
+const SHOP_ICON_DEAL := "res://assets/ui/shop/shop_icon_deal.jpg"
+const SHOP_ICON_COSMETIC := "res://assets/ui/shop/shop_icon_cosmetic.jpg"
+const SHOP_ICON_VIP := "res://assets/ui/shop/shop_icon_vip.jpg"
+const VIP_BADGE_GOLD := "res://assets/ui/vip/vip_badge_gold.jpg"
+const VIP_BADGE_FRAME := "res://assets/ui/vip/vip_badge_frame.jpg"
+const UI_CURRENCY_CHIP := "res://assets/ui/panels/ui_currency_chip.jpg"
 
 const L01_SKY := "res://assets/locations/L01/loc_L01_sky.jpg"
 const L01_FAR := "res://assets/locations/L01/loc_L01_far.jpg"
@@ -52,6 +67,27 @@ const ICON_EXPEDITION := "res://assets/ui/icons/ui_icon_expedition.jpg"
 const ICON_SOFT := "res://assets/ui/icons/ui_icon_soft.jpg"
 const ICON_HARD := "res://assets/ui/icons/ui_icon_hard.jpg"
 const ICON_TICKET := "res://assets/ui/icons/ui_icon_ticket.jpg"
+const ICON_SHOP := "res://assets/ui/icons/ui_icon_shop.jpg"
+const ICON_VIP := "res://assets/ui/icons/ui_icon_vip.jpg"
+const ICON_CHAT := "res://assets/ui/icons/ui_icon_chat.jpg"
+
+
+static func shop_icon_for_category(category: String) -> String:
+	match category:
+		"diamonds":
+			return SHOP_ICON_DIAMONDS
+		"resource_packs":
+			return SHOP_ICON_RESOURCES
+		"growth_packs":
+			return SHOP_ICON_GROWTH
+		"daily", "weekly", "monthly":
+			return SHOP_ICON_DEAL
+		"cosmetic":
+			return SHOP_ICON_COSMETIC
+		"vip":
+			return SHOP_ICON_VIP
+		_:
+			return SHOP_ICON_DEAL
 
 
 static func tex(path: String) -> Texture2D:
@@ -78,7 +114,10 @@ static func hero_portrait(hero_id: String) -> String:
 
 
 static func hero_full(hero_id: String) -> String:
-	return "res://assets/characters/%s/%s_full.jpg" % [hero_id, hero_id]
+	var path := "res://assets/characters/%s/%s_full.jpg" % [hero_id, hero_id]
+	if ResourceLoader.exists(path):
+		return path
+	return hero_portrait(hero_id)
 
 
 static func dialog_portrait_for(speaker_id: String) -> Texture2D:

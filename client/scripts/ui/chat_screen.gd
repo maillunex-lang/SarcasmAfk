@@ -7,15 +7,27 @@ var _channel: String = "global"
 
 func _ready() -> void:
 	super._ready()
-	_set_bg_texture(AssetPaths.BG_HOME)
+	_set_bg_texture(AssetPaths.BG_CHAT)
 	var dim := ColorRect.new()
-	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.6)
+	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.55)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Чат", 40, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Канал: global · отправитель только с сервера", 18, DesignTokens.COLOR_TEXT_MUTED))
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 12)
+	vbox.add_child(head)
+	var chat_icon := TextureRect.new()
+	chat_icon.texture = AssetPaths.tex(AssetPaths.ICON_CHAT)
+	chat_icon.custom_minimum_size = Vector2(64, 64)
+	chat_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	chat_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	head.add_child(chat_icon)
+	var titles := VBoxContainer.new()
+	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.add_child(titles)
+	titles.add_child(DesignTokens.make_label("Чат", 36, DesignTokens.COLOR_ACCENT_GOLD, HORIZONTAL_ALIGNMENT_LEFT))
+	titles.add_child(DesignTokens.make_label("Канал: global · отправитель только с сервера", 16, DesignTokens.COLOR_TEXT_MUTED, HORIZONTAL_ALIGNMENT_LEFT))
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL

@@ -1,6 +1,6 @@
 # ROAD — Дорожная карта сатирической онлайн AFK RPG по Башкортостану
 
-> Актуализация: **2026-11-19** (T-140…T-144 online systems P1–P2 foundation; D-SCOPE-03).  
+> Актуализация: **2026-11-19** (online stack merged to `main`; UI TEMP art pass T-155; D-SCOPE-03).  
 > Канон «что сейчас»: [`STATUS.md`](STATUS.md) · очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md) · решения: [`DECISIONS.md`](DECISIONS.md).  
 > §8 ниже — журнал; §0 / §9 — **текущая** истина (старые «Не сделано» в §8 исторические).
 
@@ -13,8 +13,9 @@
 | Debug APK | ГОТОВО | `scripts/build_debug_apk.sh` → `build/BashLegends-debug.apk` |
 | Release APK | ЗАБЛОКИРОВАНО | Нет действующего release keystore (T-126) |
 | Live API / auth / replay / rewards | ГОТОВО | Integration + CI; silent mock запрещён |
-| Heroes 36 + progression | ЧАСТИЧНО | H01–H12 MVP + H13–H36 Draft; level/star/equip API |
-| Chat / Guild / Shop / VIP | ЧАСТИЧНО | REST chat; guild create/join; simulated shop; VIP Draft |
+| Heroes 36 + progression | ЧАСТИЧНО | H01–H12 MVP + H13–H36 Draft lore/API; TEMP portraits (+fulls) |
+| Chat / Guild / Shop / VIP / Gacha | ЧАСТИЧНО | WS+PG chat; guild quests/vault; TEST_PURCHASE shop; VIP 0–10; pity Draft |
+| UI арт (home/shop/VIP) | ЧАСТИЧНО | TEMP BG/icons/banner/badges wired (T-155); Stage E blocked |
 | Combat art H01–H03/E01 | ЧАСТИЧНО | Blender pipeline **drafts**, не финальный арт |
 | Arena / Events live | ЗАБЛОКИРОВАНО | Stubs (D-SCOPE-01 arena/events); guilds unlocked by D-SCOPE-03 |
 | CH02+ | ЗАБЛОКИРОВАНО | D-SCOPE-02 / D-ART-06 |
@@ -24,12 +25,13 @@
 
 | ID | Статус | Что |
 |---|---|---|
-| T-145…T-149 | TODO | Chat WS · guild depth · gacha pity · shop provider · VIP grants |
+| T-153 | TODO | Real payment provider (когда одобрит владелец) |
+| T-112 | TODO | Arena/events live |
 | T-126 | BLOCKED | Signed release APK |
-| T-127 / T-131 | BLOCKED | Art approve / Stage E |
+| T-127 / T-131 | BLOCKED | Art approve / Stage E Kaeron atlases |
 | T-128 | BLOCKED | CH01 accepted (не гейт online) |
 | T-129 | BLOCKED | Production/live API URL для телефонов |
-| T-090…T-092 | PX BLOCKED | CH02+, mass art, rename |
+| T-090…T-092 | PX BLOCKED | CH02+, mass final art, rename |
 
 ## 1. Неизменяемые решения о процессе
 
@@ -97,7 +99,7 @@
 - [x] Go API, авторизация anonymous, модели прогресса *(memory + Postgres/Redis T-085)*.
 - [x] Серверные награды, лимит AFK 24 часа, экономика, гача и защита от дублей *(T-082)*.
 - [x] Старт/финиш боёв + ATB tick-sim + replay/commands *(T-083/T-088/T-097/T-098/T-113)*.
-- [x] Гильдии, арена, события — API stubs + UI «НЕДОСТУПНО» *(T-084/T-122)*.
+- [x] Гильдии live (create/join/quests/vault) + арена/события stubs UI «НЕДОСТУПНО» *(T-084/T-122/T-146/T-152)*.
 - [x] Админка: health/metrics + RBAC/`ADMIN_API_KEY` + audit *(T-093…T-096/T-111)*.
 - [x] Нагрузочный smoke *(T-099)*; debug APK toolchain *(T-110)*; session resume *(T-123)*.
 - [x] Ultimates в server sim + client seed sync *(T-101/T-102)*; live probe без silent mock *(T-120)*.
@@ -115,7 +117,7 @@
 - [x] ROAD/STATUS/TASK_QUEUE актуализированы *(этот документ)*.
 
 ### Фаза 4. После MVP
-- [ ] Расширение коллекции до 36 героев к полноценному релизу.
+- [x] Каталог 36 героев Draft + TEMP арт H13–H36 *(T-141/T-150/T-155; финальный арт — Stage E)*.
 - [ ] Гильдейские базы, территории, войны и осады.
 - [ ] Турниры, межсерверные соревнования, масштабные рейды.
 - [ ] Развитая экономическая симуляция, сезонные системы и контент регионов.
@@ -321,6 +323,14 @@
 
 ### Журнал 2026-11-19 — Online P3 (T-151/T-152)
 
+### Журнал 2026-11-19 — UI TEMP art + merge to main (T-155)
+
+- Online stack tip merged into `main`.
+- Generated/wired TEMP: `bg_shop`/`bg_vip`/home refresh, shop banner+SKU icons, VIP badges, avatar default, icons shop/vip/chat.
+- H13–H36 TEMP portraits + full-body drafts under `client/assets/characters/H13…H36/`.
+- Redesigned Home (hero stage, currency chips, quick grid) and Donate Shop (banner, category icons, SKU cards); VIP screen uses `BG_VIP`.
+- Docs: STATUS / ROAD §0 / TASK_QUEUE T-155.
+
 ### Журнал 2026-11-19 — Online P3 chat PG (T-154)
 
 - `ChatService` interface; `PostgresChat` persists messages/blocks/reports/mutes.
@@ -330,7 +340,7 @@
 - Admin chat moderation: reports, mute/unmute, delete message.
 - Guild daily quests, vault donate, member contribution board.
 - Migration 005: vault/quests columns + empty boss/war hooks (wars not implemented).
-- Chat PG persistence still TODO (T-154).
+- Chat PG persistence completed as T-154.
 
 
 - Owner approvals: H13–H36 Draft lore (D-SCOPE-04), gacha rates/pity (D-GACHA-01), TEST_PURCHASE shop (D-SHOP-01), VIP 0–10 (D-VIP-01).

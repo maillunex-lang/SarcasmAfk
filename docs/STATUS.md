@@ -1,21 +1,22 @@
 # STATUS.md — Единый снимок состояния проекта
 
-> Дата снимка: **2026-11-19** · Ветка: `cursor/online-systems-p1-beaf`  
+> Дата снимка: **2026-11-19** · Ветка: `main` (+ UI art `cursor/ui-art-shop-home-beaf`)  
 > Аудит: [`reports/ONLINE_SYSTEMS_AUDIT.md`](reports/ONLINE_SYSTEMS_AUDIT.md) · Спека: [`ONLINE_SYSTEMS_SPEC.md`](ONLINE_SYSTEMS_SPEC.md)  
 > Отчёт CH01: [`reports/CH01_ACCEPTANCE_TEST_2026-11-19.md`](reports/CH01_ACCEPTANCE_TEST_2026-11-19.md)
 
 ## NOW
 
-P3: chat moderation admin + guild quests/vault/board. Stack: #17 → #18 → online-p3.  
+Online systems P1–P3b **слиты в `main`** (chat WS+PG, guild depth, gacha pity, TEST_PURCHASE, VIP 0–10).  
+UI TEMP art pass (T-155): home/shop/VIP polish + H13–H36 portraits/fulls + shop icons/banner.  
 CH02 + Stage E blocked. CH01 not accepted.
 
 ## Работает / частично / заглушки
 
 | | |
 |---|---|
-| **Работает** | P2 systems + admin mute/delete/reports; guild donate/quests/board; war/boss hook tables empty |
-| **Частично** | Chat still in-memory (PG tables exist; T-154 wire); awaken/skills depth |
-| **Заглушки** | Real payments OFF; paid gacha OFF; guild wars; CH02; GameBrain runtime |
+| **Работает** | Live API auth/battle/rewards; progression; gacha pity Draft; TEST_PURCHASE shop; VIP daily; chat WS+PG; guild roles/quests/vault/board; admin mute/delete/reports |
+| **Частично** | H13–H36 TEMP art (не Stage E); home/shop/VIP UI на TEMP ассетах; awaken/skills depth |
+| **Заглушки** | Real payments OFF (`T-153`); paid gacha OFF; guild wars/boss; CH02; GameBrain runtime; arena/events live |
 
 ## BLOCKED / ждёт владельца
 
@@ -25,10 +26,10 @@ CH02 + Stage E blocked. CH01 not accepted.
 | T-131 | H01 grip + Stage E | Owner Blender |
 | T-126 / T-129 | Release APK / phone URL | Keystore / LAN URL |
 | T-090 | CH02 | Отдельное разрешение |
-| Draft knobs | H13–H36 names, gacha rates, VIP/shop prices | Owner approval |
+| T-153 | Real payment provider | Owner + D-SHOP-01 |
 
 ## Известные ограничения
 
-- Shop = `purchase_mode: simulated` only (не реальные платежи).
-- Chat hub in-memory until PG persistence wired end-to-end.
-- WebSocket chat — следующий срез (P3); сейчас REST history/send + rate limit.
+- Shop = `TEST_PURCHASE` only (не реальные платежи; дневные лимиты).
+- Весь новый арт помечен TEMP — не финальный Stage E.
+- Arena/events UI «НЕДОСТУПНО» (D-SCOPE-01).
