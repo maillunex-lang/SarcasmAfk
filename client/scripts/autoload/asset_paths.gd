@@ -14,6 +14,16 @@ const BG_HEROES := "res://assets/branding/bg_heroes.jpg"
 const BG_SHOP := "res://assets/branding/bg_shop.jpg"
 const BG_VIP := "res://assets/branding/bg_vip.jpg"
 const BG_CHAT := "res://assets/branding/bg_chat.jpg"
+const BG_INVENTORY := "res://assets/branding/bg_inventory.jpg"
+const BG_PARTY := "res://assets/branding/bg_party.jpg"
+const BG_BESTIARY := "res://assets/branding/bg_bestiary.jpg"
+const BG_DIALOG := "res://assets/branding/bg_dialog.jpg"
+const GACHA_PORTAL := "res://assets/branding/gacha_portal.jpg"
+const UI_EMPTY_STATE := "res://assets/ui/panels/ui_empty_state.jpg"
+const MAP_UFA := "res://assets/maps/map_ufa_campaign.jpg"
+const GUILD_ICON_CREST := "res://assets/ui/guild/guild_icon_crest.jpg"
+const GUILD_ICON_VAULT := "res://assets/ui/guild/guild_icon_vault.jpg"
+const GUILD_ICON_BOARD := "res://assets/ui/guild/guild_icon_board.jpg"
 const LOGO := "res://assets/branding/ui_logo_wordmark.jpg"
 const HOME_HERO_STAGE := "res://assets/ui/home/home_hero_stage.jpg"
 const AVATAR_DEFAULT := "res://assets/ui/avatars/avatar_default.jpg"
@@ -84,6 +94,16 @@ static func equipment_icon(icon_asset_id: String) -> String:
 	if ResourceLoader.exists(path):
 		return path
 	return ICON_INVENTORY
+
+
+static func gacha_frame(rarity: String) -> String:
+	var key := rarity.strip_edges().to_upper()
+	if key == "":
+		key = "N"
+	var path := "res://assets/ui/gacha/gacha_frame_%s.png" % key.to_lower()
+	if ResourceLoader.exists(path):
+		return path
+	return "res://assets/ui/gacha/gacha_frame_n.png"
 
 
 static func shop_icon_for_category(category: String) -> String:

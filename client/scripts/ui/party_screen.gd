@@ -6,15 +6,15 @@ var _slot_portraits: Array = []
 
 func _ready() -> void:
 	super._ready()
-	_set_bg_texture(AssetPaths.BG_HEROES)
+	_set_bg_texture(AssetPaths.BG_PARTY if ResourceLoader.exists(AssetPaths.BG_PARTY) else AssetPaths.BG_HEROES)
 	var dim := ColorRect.new()
 	dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.55)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Отряд · 5 героев · 2 линии", 36, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label("Фронт бьют первыми. Тыл — маги/поддержка.", 22, DesignTokens.COLOR_TEXT_MUTED))
+	vbox.add_child(DesignTokens.make_display_label("Отряд", 44))
+	vbox.add_child(DesignTokens.make_label("5 героев · 2 линии · фронт бьют первыми", 22, DesignTokens.COLOR_TEXT_MUTED))
 
 	for i in range(5):
 		var row := HBoxContainer.new()

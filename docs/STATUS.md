@@ -6,8 +6,8 @@
 
 ## NOW
 
-MONSTERS-CH01-001: 29 TEMP-концептов + атласы + shared VFX/SFX, бой с анимациями/FX, Бестиарий.  
-Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
+**VISUAL OVERHAUL 001** в работе (`cursor/visual-overhaul-001-beaf`): аудит 23 экранов, OFL-шрифты, polish Splash/Home/Gacha/Inventory.  
+MONSTERS-CH01 TEMP atlases+VFX/SFX на `main`. Финальный арт **не** Stage E (D-ART-06). CH02 blocked.
 
 ## Работает / частично / заглушки
 

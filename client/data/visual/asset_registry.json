@@ -1,0 +1,4596 @@
+{
+  "version": 1,
+  "generated_at": "2026-11-19T14:46:38.943516+00:00",
+  "project": "BashLegends Visual Overhaul 001",
+  "counts": {
+    "assets": 555,
+    "scenes": 23,
+    "assetpaths_constants": 74,
+    "broken_constants": 0,
+    "by_ext": {
+      ".jpg": 489,
+      ".png": 53,
+      ".ttf": 3,
+      ".ogg": 10
+    },
+    "by_status": {
+      "PRESENT": 356,
+      "TEMP": 196,
+      "FINAL_FONT_OFL": 3
+    }
+  },
+  "screens": [
+    {
+      "id": "AFK",
+      "scene": "res://scenes/afk/afk.tscn",
+      "script": "res://scripts/ui/afk_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "ARENA",
+      "scene": "res://scenes/arena/arena.tscn",
+      "script": "res://scripts/ui/arena_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "LOCKED_STUB",
+      "notes": "D-SCOPE-01 locked / unavailable UI."
+    },
+    {
+      "id": "BATTLE",
+      "scene": "res://scenes/battle/battle.tscn",
+      "script": "res://scripts/ui/battle.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "BESTIARY",
+      "scene": "res://scenes/bestiary/bestiary.tscn",
+      "script": "res://scripts/ui/bestiary_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "SPLASH",
+      "scene": "res://scenes/boot/splash.tscn",
+      "script": "res://scripts/ui/splash.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "POLISHED_TEMP",
+      "notes": "Splash uses branding + OFL fonts; art still TEMP."
+    },
+    {
+      "id": "CAMPAIGN",
+      "scene": "res://scenes/campaign/campaign.tscn",
+      "script": "res://scripts/ui/campaign.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "CHAT",
+      "scene": "res://scenes/chat/chat.tscn",
+      "script": "res://scripts/ui/chat_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "DIALOG",
+      "scene": "res://scenes/dialog/dialog.tscn",
+      "script": "res://scripts/ui/dialog_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "EVENTS",
+      "scene": "res://scenes/events/events.tscn",
+      "script": "res://scripts/ui/events_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "LOCKED_STUB",
+      "notes": "D-SCOPE-01 locked / unavailable UI."
+    },
+    {
+      "id": "EXPEDITION",
+      "scene": "res://scenes/expedition/expedition.tscn",
+      "script": "res://scripts/ui/expedition_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "GACHA",
+      "scene": "res://scenes/gacha/gacha.tscn",
+      "script": "res://scripts/ui/gacha_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "POLISHED_TEMP",
+      "notes": "Stage C polish started; dedicated BG/portal where applicable."
+    },
+    {
+      "id": "GUILD",
+      "scene": "res://scenes/guild/guild.tscn",
+      "script": "res://scripts/ui/guild_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "HERO_DETAIL",
+      "scene": "res://scenes/heroes/hero_detail.tscn",
+      "script": "res://scripts/ui/hero_detail_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "HEROES",
+      "scene": "res://scenes/heroes/heroes.tscn",
+      "script": "res://scripts/ui/heroes_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "HOME",
+      "scene": "res://scenes/home/home.tscn",
+      "script": "res://scripts/ui/home.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "POLISHED_TEMP",
+      "notes": "Stage C polish started; dedicated BG/portal where applicable."
+    },
+    {
+      "id": "INVENTORY",
+      "scene": "res://scenes/inventory/inventory.tscn",
+      "script": "res://scripts/ui/inventory_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "POLISHED_TEMP",
+      "notes": "Stage C polish started; dedicated BG/portal where applicable."
+    },
+    {
+      "id": "L01",
+      "scene": "res://scenes/location/l01.tscn",
+      "script": "res://scripts/ui/l01.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "MAP",
+      "scene": "res://scenes/map/map.tscn",
+      "script": "res://scripts/ui/map_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "MORE",
+      "scene": "res://scenes/more/more.tscn",
+      "script": "res://scripts/ui/more_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "PARTY",
+      "scene": "res://scenes/party/party.tscn",
+      "script": "res://scripts/ui/party_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "POI",
+      "scene": "res://scenes/poi/poi.tscn",
+      "script": "res://scripts/ui/poi_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "SHOP",
+      "scene": "res://scenes/shop/shop.tscn",
+      "script": "res://scripts/ui/shop_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    },
+    {
+      "id": "VIP",
+      "scene": "res://scenes/vip/vip.tscn",
+      "script": "res://scripts/ui/vip_screen.gd",
+      "script_exists": true,
+      "build": "code_built_ScreenBase",
+      "visual_status": "TEMP",
+      "notes": "Code-built UI; art mostly TEMP branding."
+    }
+  ],
+  "assetpaths_constants": [
+    {
+      "id": "BG_SPLASH",
+      "path": "res://assets/branding/bg_splash.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_HOME",
+      "path": "res://assets/branding/bg_home.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_MAP",
+      "path": "res://assets/branding/bg_map.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_AFK",
+      "path": "res://assets/branding/bg_afk.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_GACHA",
+      "path": "res://assets/branding/bg_gacha.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_GUILD",
+      "path": "res://assets/branding/bg_guild.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_ARENA",
+      "path": "res://assets/branding/bg_arena.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_CAMPAIGN",
+      "path": "res://assets/branding/bg_campaign.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_HEROES",
+      "path": "res://assets/branding/bg_heroes.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_SHOP",
+      "path": "res://assets/branding/bg_shop.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_VIP",
+      "path": "res://assets/branding/bg_vip.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_CHAT",
+      "path": "res://assets/branding/bg_chat.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_INVENTORY",
+      "path": "res://assets/branding/bg_inventory.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_PARTY",
+      "path": "res://assets/branding/bg_party.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_BESTIARY",
+      "path": "res://assets/branding/bg_bestiary.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "BG_DIALOG",
+      "path": "res://assets/branding/bg_dialog.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GACHA_PORTAL",
+      "path": "res://assets/branding/gacha_portal.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "UI_EMPTY_STATE",
+      "path": "res://assets/ui/panels/ui_empty_state.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "MAP_UFA",
+      "path": "res://assets/maps/map_ufa_campaign.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_CREST",
+      "path": "res://assets/ui/guild/guild_icon_crest.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_VAULT",
+      "path": "res://assets/ui/guild/guild_icon_vault.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "GUILD_ICON_BOARD",
+      "path": "res://assets/ui/guild/guild_icon_board.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "LOGO",
+      "path": "res://assets/branding/ui_logo_wordmark.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "HOME_HERO_STAGE",
+      "path": "res://assets/ui/home/home_hero_stage.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "AVATAR_DEFAULT",
+      "path": "res://assets/ui/avatars/avatar_default.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_BANNER",
+      "path": "res://assets/ui/shop/shop_banner_featured.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_DIAMONDS",
+      "path": "res://assets/ui/shop/shop_icon_diamonds.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_RESOURCES",
+      "path": "res://assets/ui/shop/shop_icon_resources.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_GROWTH",
+      "path": "res://assets/ui/shop/shop_icon_growth.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_DEAL",
+      "path": "res://assets/ui/shop/shop_icon_deal.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_COSMETIC",
+      "path": "res://assets/ui/shop/shop_icon_cosmetic.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "SHOP_ICON_VIP",
+      "path": "res://assets/ui/shop/shop_icon_vip.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "VIP_BADGE_GOLD",
+      "path": "res://assets/ui/vip/vip_badge_gold.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "VIP_BADGE_FRAME",
+      "path": "res://assets/ui/vip/vip_badge_frame.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "UI_CURRENCY_CHIP",
+      "path": "res://assets/ui/panels/ui_currency_chip.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "L01_SKY",
+      "path": "res://assets/locations/L01/loc_L01_sky.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "L01_FAR",
+      "path": "res://assets/locations/L01/loc_L01_far.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "L01_MID",
+      "path": "res://assets/locations/L01/loc_L01_mid.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "L01_TERMINAL",
+      "path": "res://assets/locations/L01/loc_L01_props_terminal.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ARENA_FLOOR",
+      "path": "res://assets/arenas/ARENA-L01/arena_L01_floor.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H01_PORTRAIT",
+      "path": "res://assets/characters/H01/H01_portrait.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H01_FULL",
+      "path": "res://assets/characters/H01/H01_full.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H02_PORTRAIT",
+      "path": "res://assets/characters/H02/H02_portrait.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H02_FULL",
+      "path": "res://assets/characters/H02/H02_full.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H03_PORTRAIT",
+      "path": "res://assets/characters/H03/H03_portrait.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "H03_FULL",
+      "path": "res://assets/characters/H03/H03_full.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "E01",
+      "path": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "DLG_H01",
+      "path": "res://assets/dialogs/dialog_portrait_H01.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "DLG_H02",
+      "path": "res://assets/dialogs/dialog_portrait_H02.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "DLG_H03",
+      "path": "res://assets/dialogs/dialog_portrait_H03.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "DLG_TERMINAL",
+      "path": "res://assets/dialogs/dialog_portrait_NPC_TERMINAL.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_HOME",
+      "path": "res://assets/ui/icons/ui_icon_home.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_AFK",
+      "path": "res://assets/ui/icons/ui_icon_afk.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_QUEST",
+      "path": "res://assets/ui/icons/ui_icon_quest.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_BATTLE",
+      "path": "res://assets/ui/icons/ui_icon_battle.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SKIP",
+      "path": "res://assets/ui/icons/ui_icon_skip.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_CLOSE",
+      "path": "res://assets/ui/icons/ui_icon_close.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_MAP",
+      "path": "res://assets/ui/icons/ui_icon_map.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_HEROES",
+      "path": "res://assets/ui/icons/ui_icon_heroes.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_GUILD",
+      "path": "res://assets/ui/icons/ui_icon_guild.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_ARENA",
+      "path": "res://assets/ui/icons/ui_icon_arena.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SUMMON",
+      "path": "res://assets/ui/icons/ui_icon_summon.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_EVENTS",
+      "path": "res://assets/ui/icons/ui_icon_events.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SETTINGS",
+      "path": "res://assets/ui/icons/ui_icon_settings.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SPEED",
+      "path": "res://assets/ui/icons/ui_icon_speed.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_INVENTORY",
+      "path": "res://assets/ui/icons/ui_icon_inventory.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_EXPEDITION",
+      "path": "res://assets/ui/icons/ui_icon_expedition.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SOFT",
+      "path": "res://assets/ui/icons/ui_icon_soft.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_HARD",
+      "path": "res://assets/ui/icons/ui_icon_hard.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_TICKET",
+      "path": "res://assets/ui/icons/ui_icon_ticket.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_SHOP",
+      "path": "res://assets/ui/icons/ui_icon_shop.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_VIP",
+      "path": "res://assets/ui/icons/ui_icon_vip.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_CHAT",
+      "path": "res://assets/ui/icons/ui_icon_chat.jpg",
+      "exists": true,
+      "status": "OK"
+    },
+    {
+      "id": "ICON_MAT_EQUIPMENT_SCRAP",
+      "path": "res://assets/ui/equipment/ui_icon_mat_equipment_scrap.jpg",
+      "exists": true,
+      "status": "OK"
+    }
+  ],
+  "assets": [
+    {
+      "id": "assets_arenas_ARENA-L01_arena_L01_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L01/arena_L01_floor.jpg",
+      "bytes": 208434,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L02_arena_L02_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L02/arena_L02_floor.jpg",
+      "bytes": 207959,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L03_arena_L03_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L03/arena_L03_floor.jpg",
+      "bytes": 217500,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L04_arena_L04_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L04/arena_L04_floor.jpg",
+      "bytes": 359833,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L05_arena_L05_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L05/arena_L05_floor.jpg",
+      "bytes": 423614,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L06_arena_L06_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L06/arena_L06_floor.jpg",
+      "bytes": 274314,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L07_arena_L07_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L07/arena_L07_floor.jpg",
+      "bytes": 240082,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L08_arena_L08_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L08/arena_L08_floor.jpg",
+      "bytes": 188924,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L09_arena_L09_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L09/arena_L09_floor.jpg",
+      "bytes": 348748,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_arenas_ARENA-L10_arena_L10_floor_jpg",
+      "path": "res://assets/arenas/ARENA-L10/arena_L10_floor.jpg",
+      "bytes": 450555,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_afk_jpg",
+      "path": "res://assets/branding/bg_afk.jpg",
+      "bytes": 398724,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_arena_jpg",
+      "path": "res://assets/branding/bg_arena.jpg",
+      "bytes": 346032,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_bestiary_jpg",
+      "path": "res://assets/branding/bg_bestiary.jpg",
+      "bytes": 273550,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_campaign_jpg",
+      "path": "res://assets/branding/bg_campaign.jpg",
+      "bytes": 381263,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_chat_jpg",
+      "path": "res://assets/branding/bg_chat.jpg",
+      "bytes": 389021,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_dialog_jpg",
+      "path": "res://assets/branding/bg_dialog.jpg",
+      "bytes": 303120,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_gacha_jpg",
+      "path": "res://assets/branding/bg_gacha.jpg",
+      "bytes": 395496,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_guild_jpg",
+      "path": "res://assets/branding/bg_guild.jpg",
+      "bytes": 404607,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_heroes_jpg",
+      "path": "res://assets/branding/bg_heroes.jpg",
+      "bytes": 452602,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_home_jpg",
+      "path": "res://assets/branding/bg_home.jpg",
+      "bytes": 351724,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_inventory_jpg",
+      "path": "res://assets/branding/bg_inventory.jpg",
+      "bytes": 231948,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_map_jpg",
+      "path": "res://assets/branding/bg_map.jpg",
+      "bytes": 384476,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_party_jpg",
+      "path": "res://assets/branding/bg_party.jpg",
+      "bytes": 301746,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_shop_jpg",
+      "path": "res://assets/branding/bg_shop.jpg",
+      "bytes": 358168,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_splash_jpg",
+      "path": "res://assets/branding/bg_splash.jpg",
+      "bytes": 261160,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_bg_vip_jpg",
+      "path": "res://assets/branding/bg_vip.jpg",
+      "bytes": 474414,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_gacha_portal_jpg",
+      "path": "res://assets/branding/gacha_portal.jpg",
+      "bytes": 363384,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_branding_ui_logo_wordmark_jpg",
+      "path": "res://assets/branding/ui_logo_wordmark.jpg",
+      "bytes": 211741,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H01_H01_full_jpg",
+      "path": "res://assets/characters/H01/H01_full.jpg",
+      "bytes": 281726,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H01_H01_portrait_jpg",
+      "path": "res://assets/characters/H01/H01_portrait.jpg",
+      "bytes": 318254,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H02_H02_full_jpg",
+      "path": "res://assets/characters/H02/H02_full.jpg",
+      "bytes": 323437,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H02_H02_portrait_jpg",
+      "path": "res://assets/characters/H02/H02_portrait.jpg",
+      "bytes": 343067,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H03_H03_full_jpg",
+      "path": "res://assets/characters/H03/H03_full.jpg",
+      "bytes": 299625,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H03_H03_portrait_jpg",
+      "path": "res://assets/characters/H03/H03_portrait.jpg",
+      "bytes": 435953,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H04_H04_full_jpg",
+      "path": "res://assets/characters/H04/H04_full.jpg",
+      "bytes": 317087,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H04_H04_portrait_jpg",
+      "path": "res://assets/characters/H04/H04_portrait.jpg",
+      "bytes": 368775,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H05_H05_full_jpg",
+      "path": "res://assets/characters/H05/H05_full.jpg",
+      "bytes": 337249,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H05_H05_portrait_jpg",
+      "path": "res://assets/characters/H05/H05_portrait.jpg",
+      "bytes": 451258,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H06_H06_full_jpg",
+      "path": "res://assets/characters/H06/H06_full.jpg",
+      "bytes": 333824,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H06_H06_portrait_jpg",
+      "path": "res://assets/characters/H06/H06_portrait.jpg",
+      "bytes": 277350,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H07_H07_full_jpg",
+      "path": "res://assets/characters/H07/H07_full.jpg",
+      "bytes": 348012,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H07_H07_portrait_jpg",
+      "path": "res://assets/characters/H07/H07_portrait.jpg",
+      "bytes": 324162,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H08_H08_full_jpg",
+      "path": "res://assets/characters/H08/H08_full.jpg",
+      "bytes": 304026,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H08_H08_portrait_jpg",
+      "path": "res://assets/characters/H08/H08_portrait.jpg",
+      "bytes": 370293,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H09_H09_full_jpg",
+      "path": "res://assets/characters/H09/H09_full.jpg",
+      "bytes": 292074,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H09_H09_portrait_jpg",
+      "path": "res://assets/characters/H09/H09_portrait.jpg",
+      "bytes": 352912,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H10_H10_full_jpg",
+      "path": "res://assets/characters/H10/H10_full.jpg",
+      "bytes": 368975,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H10_H10_portrait_jpg",
+      "path": "res://assets/characters/H10/H10_portrait.jpg",
+      "bytes": 483020,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H11_H11_full_jpg",
+      "path": "res://assets/characters/H11/H11_full.jpg",
+      "bytes": 314628,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H11_H11_portrait_jpg",
+      "path": "res://assets/characters/H11/H11_portrait.jpg",
+      "bytes": 376411,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H12_H12_full_jpg",
+      "path": "res://assets/characters/H12/H12_full.jpg",
+      "bytes": 343865,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H12_H12_portrait_jpg",
+      "path": "res://assets/characters/H12/H12_portrait.jpg",
+      "bytes": 333945,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H13_H13_full_jpg",
+      "path": "res://assets/characters/H13/H13_full.jpg",
+      "bytes": 377452,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H13_H13_portrait_jpg",
+      "path": "res://assets/characters/H13/H13_portrait.jpg",
+      "bytes": 454339,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H14_H14_full_jpg",
+      "path": "res://assets/characters/H14/H14_full.jpg",
+      "bytes": 414918,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H14_H14_portrait_jpg",
+      "path": "res://assets/characters/H14/H14_portrait.jpg",
+      "bytes": 620702,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H15_H15_full_jpg",
+      "path": "res://assets/characters/H15/H15_full.jpg",
+      "bytes": 467413,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H15_H15_portrait_jpg",
+      "path": "res://assets/characters/H15/H15_portrait.jpg",
+      "bytes": 660326,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H16_H16_full_jpg",
+      "path": "res://assets/characters/H16/H16_full.jpg",
+      "bytes": 346970,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H16_H16_portrait_jpg",
+      "path": "res://assets/characters/H16/H16_portrait.jpg",
+      "bytes": 515440,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H17_H17_full_jpg",
+      "path": "res://assets/characters/H17/H17_full.jpg",
+      "bytes": 309893,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H17_H17_portrait_jpg",
+      "path": "res://assets/characters/H17/H17_portrait.jpg",
+      "bytes": 392875,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H18_H18_full_jpg",
+      "path": "res://assets/characters/H18/H18_full.jpg",
+      "bytes": 345782,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H18_H18_portrait_jpg",
+      "path": "res://assets/characters/H18/H18_portrait.jpg",
+      "bytes": 461682,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H19_H19_full_jpg",
+      "path": "res://assets/characters/H19/H19_full.jpg",
+      "bytes": 456656,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H19_H19_portrait_jpg",
+      "path": "res://assets/characters/H19/H19_portrait.jpg",
+      "bytes": 465203,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H20_H20_full_jpg",
+      "path": "res://assets/characters/H20/H20_full.jpg",
+      "bytes": 348534,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H20_H20_portrait_jpg",
+      "path": "res://assets/characters/H20/H20_portrait.jpg",
+      "bytes": 425939,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H21_H21_full_jpg",
+      "path": "res://assets/characters/H21/H21_full.jpg",
+      "bytes": 395183,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H21_H21_portrait_jpg",
+      "path": "res://assets/characters/H21/H21_portrait.jpg",
+      "bytes": 421231,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H22_H22_full_jpg",
+      "path": "res://assets/characters/H22/H22_full.jpg",
+      "bytes": 309403,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H22_H22_portrait_jpg",
+      "path": "res://assets/characters/H22/H22_portrait.jpg",
+      "bytes": 453639,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H23_H23_full_jpg",
+      "path": "res://assets/characters/H23/H23_full.jpg",
+      "bytes": 382183,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H23_H23_portrait_jpg",
+      "path": "res://assets/characters/H23/H23_portrait.jpg",
+      "bytes": 554085,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H24_H24_full_jpg",
+      "path": "res://assets/characters/H24/H24_full.jpg",
+      "bytes": 371146,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H24_H24_portrait_jpg",
+      "path": "res://assets/characters/H24/H24_portrait.jpg",
+      "bytes": 436325,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H25_H25_full_jpg",
+      "path": "res://assets/characters/H25/H25_full.jpg",
+      "bytes": 375343,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H25_H25_portrait_jpg",
+      "path": "res://assets/characters/H25/H25_portrait.jpg",
+      "bytes": 368762,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H26_H26_full_jpg",
+      "path": "res://assets/characters/H26/H26_full.jpg",
+      "bytes": 350261,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H26_H26_portrait_jpg",
+      "path": "res://assets/characters/H26/H26_portrait.jpg",
+      "bytes": 459217,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H27_H27_full_jpg",
+      "path": "res://assets/characters/H27/H27_full.jpg",
+      "bytes": 372167,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H27_H27_portrait_jpg",
+      "path": "res://assets/characters/H27/H27_portrait.jpg",
+      "bytes": 519323,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H28_H28_full_jpg",
+      "path": "res://assets/characters/H28/H28_full.jpg",
+      "bytes": 417506,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H28_H28_portrait_jpg",
+      "path": "res://assets/characters/H28/H28_portrait.jpg",
+      "bytes": 515149,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H29_H29_full_jpg",
+      "path": "res://assets/characters/H29/H29_full.jpg",
+      "bytes": 386619,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H29_H29_portrait_jpg",
+      "path": "res://assets/characters/H29/H29_portrait.jpg",
+      "bytes": 471188,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H30_H30_full_jpg",
+      "path": "res://assets/characters/H30/H30_full.jpg",
+      "bytes": 382661,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H30_H30_portrait_jpg",
+      "path": "res://assets/characters/H30/H30_portrait.jpg",
+      "bytes": 558478,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H31_H31_full_jpg",
+      "path": "res://assets/characters/H31/H31_full.jpg",
+      "bytes": 364367,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H31_H31_portrait_jpg",
+      "path": "res://assets/characters/H31/H31_portrait.jpg",
+      "bytes": 433061,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H32_H32_full_jpg",
+      "path": "res://assets/characters/H32/H32_full.jpg",
+      "bytes": 326699,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H32_H32_portrait_jpg",
+      "path": "res://assets/characters/H32/H32_portrait.jpg",
+      "bytes": 459505,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H33_H33_full_jpg",
+      "path": "res://assets/characters/H33/H33_full.jpg",
+      "bytes": 386834,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H33_H33_portrait_jpg",
+      "path": "res://assets/characters/H33/H33_portrait.jpg",
+      "bytes": 465365,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H34_H34_full_jpg",
+      "path": "res://assets/characters/H34/H34_full.jpg",
+      "bytes": 406055,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H34_H34_portrait_jpg",
+      "path": "res://assets/characters/H34/H34_portrait.jpg",
+      "bytes": 440728,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H35_H35_full_jpg",
+      "path": "res://assets/characters/H35/H35_full.jpg",
+      "bytes": 393470,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H35_H35_portrait_jpg",
+      "path": "res://assets/characters/H35/H35_portrait.jpg",
+      "bytes": 511225,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H36_H36_full_jpg",
+      "path": "res://assets/characters/H36/H36_full.jpg",
+      "bytes": 391627,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_characters_H36_H36_portrait_jpg",
+      "path": "res://assets/characters/H36/H36_portrait.jpg",
+      "bytes": 516732,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E01_E01_atlas_png",
+      "path": "res://assets/combat/E01/E01_atlas.png",
+      "bytes": 90537,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E01_E01_idle_png",
+      "path": "res://assets/combat/E01/E01_idle.png",
+      "bytes": 109324,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E02_E02_idle_png",
+      "path": "res://assets/combat/E02/E02_idle.png",
+      "bytes": 103497,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E03_E03_idle_png",
+      "path": "res://assets/combat/E03/E03_idle.png",
+      "bytes": 123003,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E04_E04_idle_png",
+      "path": "res://assets/combat/E04/E04_idle.png",
+      "bytes": 107712,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E05_E05_idle_png",
+      "path": "res://assets/combat/E05/E05_idle.png",
+      "bytes": 100817,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E06_E06_idle_png",
+      "path": "res://assets/combat/E06/E06_idle.png",
+      "bytes": 107790,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E07_E07_idle_png",
+      "path": "res://assets/combat/E07/E07_idle.png",
+      "bytes": 110652,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E08_E08_idle_png",
+      "path": "res://assets/combat/E08/E08_idle.png",
+      "bytes": 105298,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E09_E09_idle_png",
+      "path": "res://assets/combat/E09/E09_idle.png",
+      "bytes": 113655,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E10_E10_idle_png",
+      "path": "res://assets/combat/E10/E10_idle.png",
+      "bytes": 107612,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E11_E11_idle_png",
+      "path": "res://assets/combat/E11/E11_idle.png",
+      "bytes": 113715,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E12_E12_idle_png",
+      "path": "res://assets/combat/E12/E12_idle.png",
+      "bytes": 115651,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E13_E13_idle_png",
+      "path": "res://assets/combat/E13/E13_idle.png",
+      "bytes": 99575,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E14_E14_idle_png",
+      "path": "res://assets/combat/E14/E14_idle.png",
+      "bytes": 97943,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E15_E15_idle_png",
+      "path": "res://assets/combat/E15/E15_idle.png",
+      "bytes": 110388,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E16_E16_idle_png",
+      "path": "res://assets/combat/E16/E16_idle.png",
+      "bytes": 106590,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E17_E17_idle_png",
+      "path": "res://assets/combat/E17/E17_idle.png",
+      "bytes": 107962,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E20_E20_idle_png",
+      "path": "res://assets/combat/E20/E20_idle.png",
+      "bytes": 117425,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E21_E21_idle_png",
+      "path": "res://assets/combat/E21/E21_idle.png",
+      "bytes": 107423,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E22_E22_idle_png",
+      "path": "res://assets/combat/E22/E22_idle.png",
+      "bytes": 101978,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E23_E23_idle_png",
+      "path": "res://assets/combat/E23/E23_idle.png",
+      "bytes": 104660,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E24_E24_idle_png",
+      "path": "res://assets/combat/E24/E24_idle.png",
+      "bytes": 110315,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E25_E25_idle_png",
+      "path": "res://assets/combat/E25/E25_idle.png",
+      "bytes": 102857,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E26_E26_idle_png",
+      "path": "res://assets/combat/E26/E26_idle.png",
+      "bytes": 109182,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E27_E27_idle_png",
+      "path": "res://assets/combat/E27/E27_idle.png",
+      "bytes": 118816,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E28_E28_idle_png",
+      "path": "res://assets/combat/E28/E28_idle.png",
+      "bytes": 102652,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E29_E29_idle_png",
+      "path": "res://assets/combat/E29/E29_idle.png",
+      "bytes": 101801,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E29A_E29A_idle_png",
+      "path": "res://assets/combat/E29A/E29A_idle.png",
+      "bytes": 107215,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_E30_E30_idle_png",
+      "path": "res://assets/combat/E30/E30_idle.png",
+      "bytes": 119858,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H01_H01_atlas_png",
+      "path": "res://assets/combat/H01/H01_atlas.png",
+      "bytes": 79967,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H01_H01_idle_png",
+      "path": "res://assets/combat/H01/H01_idle.png",
+      "bytes": 46038,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H02_H02_atlas_png",
+      "path": "res://assets/combat/H02/H02_atlas.png",
+      "bytes": 82916,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H02_H02_idle_png",
+      "path": "res://assets/combat/H02/H02_idle.png",
+      "bytes": 45869,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H03_H03_atlas_png",
+      "path": "res://assets/combat/H03/H03_atlas.png",
+      "bytes": 90857,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_combat_H03_H03_idle_png",
+      "path": "res://assets/combat/H03/H03_idle.png",
+      "bytes": 48204,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H01_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H01.jpg",
+      "bytes": 318254,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H02_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H02.jpg",
+      "bytes": 343067,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H03_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H03.jpg",
+      "bytes": 435953,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H04_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H04.jpg",
+      "bytes": 368775,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H05_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H05.jpg",
+      "bytes": 451258,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H06_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H06.jpg",
+      "bytes": 277350,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H07_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H07.jpg",
+      "bytes": 324162,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H08_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H08.jpg",
+      "bytes": 370293,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H09_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H09.jpg",
+      "bytes": 352912,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H10_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H10.jpg",
+      "bytes": 483020,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H11_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H11.jpg",
+      "bytes": 376411,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_H12_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_H12.jpg",
+      "bytes": 333945,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_dialogs_dialog_portrait_NPC_TERMINAL_jpg",
+      "path": "res://assets/dialogs/dialog_portrait_NPC_TERMINAL.jpg",
+      "bytes": 310039,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E01_E01_living_ticket_jpg",
+      "path": "res://assets/enemies/E01/E01_living_ticket.jpg",
+      "bytes": 304351,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_attack_jpg",
+      "path": "res://assets/enemies/E01/atlases/attack.jpg",
+      "bytes": 137850,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_death_jpg",
+      "path": "res://assets/enemies/E01/atlases/death.jpg",
+      "bytes": 120116,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_hit_jpg",
+      "path": "res://assets/enemies/E01/atlases/hit.jpg",
+      "bytes": 131165,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_idle_jpg",
+      "path": "res://assets/enemies/E01/atlases/idle.jpg",
+      "bytes": 139317,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_special_jpg",
+      "path": "res://assets/enemies/E01/atlases/special.jpg",
+      "bytes": 142264,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E01/atlases/telegraph.jpg",
+      "bytes": 115098,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E01_concept_jpg",
+      "path": "res://assets/enemies/E01/concept.jpg",
+      "bytes": 503262,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E01_idle_jpg",
+      "path": "res://assets/enemies/E01/idle.jpg",
+      "bytes": 503262,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E01_portrait_jpg",
+      "path": "res://assets/enemies/E01/portrait.jpg",
+      "bytes": 503262,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E02_E02_paper_guard_jpg",
+      "path": "res://assets/enemies/E02/E02_paper_guard.jpg",
+      "bytes": 268554,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_attack_jpg",
+      "path": "res://assets/enemies/E02/atlases/attack.jpg",
+      "bytes": 129654,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_death_jpg",
+      "path": "res://assets/enemies/E02/atlases/death.jpg",
+      "bytes": 113805,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_hit_jpg",
+      "path": "res://assets/enemies/E02/atlases/hit.jpg",
+      "bytes": 123793,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_idle_jpg",
+      "path": "res://assets/enemies/E02/atlases/idle.jpg",
+      "bytes": 131313,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_special_jpg",
+      "path": "res://assets/enemies/E02/atlases/special.jpg",
+      "bytes": 132842,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E02/atlases/telegraph.jpg",
+      "bytes": 102528,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E02_concept_jpg",
+      "path": "res://assets/enemies/E02/concept.jpg",
+      "bytes": 474931,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E02_idle_jpg",
+      "path": "res://assets/enemies/E02/idle.jpg",
+      "bytes": 474931,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E02_portrait_jpg",
+      "path": "res://assets/enemies/E02/portrait.jpg",
+      "bytes": 474931,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E03_E03_paper_golem_jpg",
+      "path": "res://assets/enemies/E03/E03_paper_golem.jpg",
+      "bytes": 316910,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_attack_jpg",
+      "path": "res://assets/enemies/E03/atlases/attack.jpg",
+      "bytes": 142899,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_death_jpg",
+      "path": "res://assets/enemies/E03/atlases/death.jpg",
+      "bytes": 123544,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_hit_jpg",
+      "path": "res://assets/enemies/E03/atlases/hit.jpg",
+      "bytes": 136813,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_idle_jpg",
+      "path": "res://assets/enemies/E03/atlases/idle.jpg",
+      "bytes": 143044,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_special_jpg",
+      "path": "res://assets/enemies/E03/atlases/special.jpg",
+      "bytes": 148375,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E03/atlases/telegraph.jpg",
+      "bytes": 123409,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E03_concept_jpg",
+      "path": "res://assets/enemies/E03/concept.jpg",
+      "bytes": 517958,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E03_idle_jpg",
+      "path": "res://assets/enemies/E03/idle.jpg",
+      "bytes": 517958,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E03_portrait_jpg",
+      "path": "res://assets/enemies/E03/portrait.jpg",
+      "bytes": 517958,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_attack_jpg",
+      "path": "res://assets/enemies/E04/atlases/attack.jpg",
+      "bytes": 124229,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_death_jpg",
+      "path": "res://assets/enemies/E04/atlases/death.jpg",
+      "bytes": 108457,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_hit_jpg",
+      "path": "res://assets/enemies/E04/atlases/hit.jpg",
+      "bytes": 112612,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_idle_jpg",
+      "path": "res://assets/enemies/E04/atlases/idle.jpg",
+      "bytes": 121234,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_special_jpg",
+      "path": "res://assets/enemies/E04/atlases/special.jpg",
+      "bytes": 121405,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E04/atlases/telegraph.jpg",
+      "bytes": 82053,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E04_concept_jpg",
+      "path": "res://assets/enemies/E04/concept.jpg",
+      "bytes": 492756,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E04_idle_jpg",
+      "path": "res://assets/enemies/E04/idle.jpg",
+      "bytes": 492756,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E04_portrait_jpg",
+      "path": "res://assets/enemies/E04/portrait.jpg",
+      "bytes": 492756,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E05_E05_sign_guard_jpg",
+      "path": "res://assets/enemies/E05/E05_sign_guard.jpg",
+      "bytes": 312770,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_attack_jpg",
+      "path": "res://assets/enemies/E05/atlases/attack.jpg",
+      "bytes": 125647,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_death_jpg",
+      "path": "res://assets/enemies/E05/atlases/death.jpg",
+      "bytes": 108904,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_hit_jpg",
+      "path": "res://assets/enemies/E05/atlases/hit.jpg",
+      "bytes": 115226,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_idle_jpg",
+      "path": "res://assets/enemies/E05/atlases/idle.jpg",
+      "bytes": 123365,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_special_jpg",
+      "path": "res://assets/enemies/E05/atlases/special.jpg",
+      "bytes": 124774,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E05/atlases/telegraph.jpg",
+      "bytes": 90186,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E05_concept_jpg",
+      "path": "res://assets/enemies/E05/concept.jpg",
+      "bytes": 465351,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E05_idle_jpg",
+      "path": "res://assets/enemies/E05/idle.jpg",
+      "bytes": 465351,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E05_portrait_jpg",
+      "path": "res://assets/enemies/E05/portrait.jpg",
+      "bytes": 465351,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_attack_jpg",
+      "path": "res://assets/enemies/E06/atlases/attack.jpg",
+      "bytes": 134448,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_death_jpg",
+      "path": "res://assets/enemies/E06/atlases/death.jpg",
+      "bytes": 116186,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_hit_jpg",
+      "path": "res://assets/enemies/E06/atlases/hit.jpg",
+      "bytes": 126552,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_idle_jpg",
+      "path": "res://assets/enemies/E06/atlases/idle.jpg",
+      "bytes": 133202,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_special_jpg",
+      "path": "res://assets/enemies/E06/atlases/special.jpg",
+      "bytes": 136601,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E06/atlases/telegraph.jpg",
+      "bytes": 106906,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E06_concept_jpg",
+      "path": "res://assets/enemies/E06/concept.jpg",
+      "bytes": 486308,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E06_idle_jpg",
+      "path": "res://assets/enemies/E06/idle.jpg",
+      "bytes": 486308,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E06_portrait_jpg",
+      "path": "res://assets/enemies/E06/portrait.jpg",
+      "bytes": 486308,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_attack_jpg",
+      "path": "res://assets/enemies/E07/atlases/attack.jpg",
+      "bytes": 141683,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_death_jpg",
+      "path": "res://assets/enemies/E07/atlases/death.jpg",
+      "bytes": 122311,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_hit_jpg",
+      "path": "res://assets/enemies/E07/atlases/hit.jpg",
+      "bytes": 135668,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_idle_jpg",
+      "path": "res://assets/enemies/E07/atlases/idle.jpg",
+      "bytes": 143502,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_special_jpg",
+      "path": "res://assets/enemies/E07/atlases/special.jpg",
+      "bytes": 147173,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E07/atlases/telegraph.jpg",
+      "bytes": 121888,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E07_concept_jpg",
+      "path": "res://assets/enemies/E07/concept.jpg",
+      "bytes": 514879,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E07_idle_jpg",
+      "path": "res://assets/enemies/E07/idle.jpg",
+      "bytes": 514879,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E07_portrait_jpg",
+      "path": "res://assets/enemies/E07/portrait.jpg",
+      "bytes": 514879,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E08_E08_form_phantom_jpg",
+      "path": "res://assets/enemies/E08/E08_form_phantom.jpg",
+      "bytes": 232470,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_attack_jpg",
+      "path": "res://assets/enemies/E08/atlases/attack.jpg",
+      "bytes": 128377,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_death_jpg",
+      "path": "res://assets/enemies/E08/atlases/death.jpg",
+      "bytes": 112716,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_hit_jpg",
+      "path": "res://assets/enemies/E08/atlases/hit.jpg",
+      "bytes": 118846,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_idle_jpg",
+      "path": "res://assets/enemies/E08/atlases/idle.jpg",
+      "bytes": 128355,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_special_jpg",
+      "path": "res://assets/enemies/E08/atlases/special.jpg",
+      "bytes": 129757,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E08/atlases/telegraph.jpg",
+      "bytes": 93942,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E08_concept_jpg",
+      "path": "res://assets/enemies/E08/concept.jpg",
+      "bytes": 469752,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E08_idle_jpg",
+      "path": "res://assets/enemies/E08/idle.jpg",
+      "bytes": 469752,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E08_portrait_jpg",
+      "path": "res://assets/enemies/E08/portrait.jpg",
+      "bytes": 469752,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_attack_jpg",
+      "path": "res://assets/enemies/E09/atlases/attack.jpg",
+      "bytes": 132131,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_death_jpg",
+      "path": "res://assets/enemies/E09/atlases/death.jpg",
+      "bytes": 116319,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_hit_jpg",
+      "path": "res://assets/enemies/E09/atlases/hit.jpg",
+      "bytes": 126086,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_idle_jpg",
+      "path": "res://assets/enemies/E09/atlases/idle.jpg",
+      "bytes": 132699,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_special_jpg",
+      "path": "res://assets/enemies/E09/atlases/special.jpg",
+      "bytes": 135725,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E09/atlases/telegraph.jpg",
+      "bytes": 107184,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E09_concept_jpg",
+      "path": "res://assets/enemies/E09/concept.jpg",
+      "bytes": 480722,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E09_idle_jpg",
+      "path": "res://assets/enemies/E09/idle.jpg",
+      "bytes": 480722,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E09_portrait_jpg",
+      "path": "res://assets/enemies/E09/portrait.jpg",
+      "bytes": 480722,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_attack_jpg",
+      "path": "res://assets/enemies/E10/atlases/attack.jpg",
+      "bytes": 130709,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_death_jpg",
+      "path": "res://assets/enemies/E10/atlases/death.jpg",
+      "bytes": 114321,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_hit_jpg",
+      "path": "res://assets/enemies/E10/atlases/hit.jpg",
+      "bytes": 123434,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_idle_jpg",
+      "path": "res://assets/enemies/E10/atlases/idle.jpg",
+      "bytes": 131456,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_special_jpg",
+      "path": "res://assets/enemies/E10/atlases/special.jpg",
+      "bytes": 133380,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E10/atlases/telegraph.jpg",
+      "bytes": 100056,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E10_concept_jpg",
+      "path": "res://assets/enemies/E10/concept.jpg",
+      "bytes": 481024,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E10_idle_jpg",
+      "path": "res://assets/enemies/E10/idle.jpg",
+      "bytes": 481024,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E10_portrait_jpg",
+      "path": "res://assets/enemies/E10/portrait.jpg",
+      "bytes": 481024,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_attack_jpg",
+      "path": "res://assets/enemies/E11/atlases/attack.jpg",
+      "bytes": 134681,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_death_jpg",
+      "path": "res://assets/enemies/E11/atlases/death.jpg",
+      "bytes": 118226,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_hit_jpg",
+      "path": "res://assets/enemies/E11/atlases/hit.jpg",
+      "bytes": 130060,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_idle_jpg",
+      "path": "res://assets/enemies/E11/atlases/idle.jpg",
+      "bytes": 135691,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_special_jpg",
+      "path": "res://assets/enemies/E11/atlases/special.jpg",
+      "bytes": 139626,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E11/atlases/telegraph.jpg",
+      "bytes": 114144,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E11_concept_jpg",
+      "path": "res://assets/enemies/E11/concept.jpg",
+      "bytes": 501185,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E11_idle_jpg",
+      "path": "res://assets/enemies/E11/idle.jpg",
+      "bytes": 501185,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E11_portrait_jpg",
+      "path": "res://assets/enemies/E11/portrait.jpg",
+      "bytes": 501185,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_attack_jpg",
+      "path": "res://assets/enemies/E12/atlases/attack.jpg",
+      "bytes": 135627,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_death_jpg",
+      "path": "res://assets/enemies/E12/atlases/death.jpg",
+      "bytes": 118019,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_hit_jpg",
+      "path": "res://assets/enemies/E12/atlases/hit.jpg",
+      "bytes": 128287,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_idle_jpg",
+      "path": "res://assets/enemies/E12/atlases/idle.jpg",
+      "bytes": 134585,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_special_jpg",
+      "path": "res://assets/enemies/E12/atlases/special.jpg",
+      "bytes": 137766,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E12/atlases/telegraph.jpg",
+      "bytes": 110903,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E12_concept_jpg",
+      "path": "res://assets/enemies/E12/concept.jpg",
+      "bytes": 538432,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E12_idle_jpg",
+      "path": "res://assets/enemies/E12/idle.jpg",
+      "bytes": 538432,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E12_portrait_jpg",
+      "path": "res://assets/enemies/E12/portrait.jpg",
+      "bytes": 538432,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_attack_jpg",
+      "path": "res://assets/enemies/E13/atlases/attack.jpg",
+      "bytes": 128610,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_death_jpg",
+      "path": "res://assets/enemies/E13/atlases/death.jpg",
+      "bytes": 111581,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_hit_jpg",
+      "path": "res://assets/enemies/E13/atlases/hit.jpg",
+      "bytes": 119175,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_idle_jpg",
+      "path": "res://assets/enemies/E13/atlases/idle.jpg",
+      "bytes": 126528,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_special_jpg",
+      "path": "res://assets/enemies/E13/atlases/special.jpg",
+      "bytes": 127986,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E13/atlases/telegraph.jpg",
+      "bytes": 95350,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E13_concept_jpg",
+      "path": "res://assets/enemies/E13/concept.jpg",
+      "bytes": 453499,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E13_idle_jpg",
+      "path": "res://assets/enemies/E13/idle.jpg",
+      "bytes": 453499,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E13_portrait_jpg",
+      "path": "res://assets/enemies/E13/portrait.jpg",
+      "bytes": 453499,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_attack_jpg",
+      "path": "res://assets/enemies/E14/atlases/attack.jpg",
+      "bytes": 123733,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_death_jpg",
+      "path": "res://assets/enemies/E14/atlases/death.jpg",
+      "bytes": 107731,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_hit_jpg",
+      "path": "res://assets/enemies/E14/atlases/hit.jpg",
+      "bytes": 115620,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_idle_jpg",
+      "path": "res://assets/enemies/E14/atlases/idle.jpg",
+      "bytes": 123726,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_special_jpg",
+      "path": "res://assets/enemies/E14/atlases/special.jpg",
+      "bytes": 124001,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E14/atlases/telegraph.jpg",
+      "bytes": 89060,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E14_concept_jpg",
+      "path": "res://assets/enemies/E14/concept.jpg",
+      "bytes": 427773,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E14_idle_jpg",
+      "path": "res://assets/enemies/E14/idle.jpg",
+      "bytes": 427773,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E14_portrait_jpg",
+      "path": "res://assets/enemies/E14/portrait.jpg",
+      "bytes": 427773,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_attack_jpg",
+      "path": "res://assets/enemies/E15/atlases/attack.jpg",
+      "bytes": 129962,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_death_jpg",
+      "path": "res://assets/enemies/E15/atlases/death.jpg",
+      "bytes": 114830,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_hit_jpg",
+      "path": "res://assets/enemies/E15/atlases/hit.jpg",
+      "bytes": 125731,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_idle_jpg",
+      "path": "res://assets/enemies/E15/atlases/idle.jpg",
+      "bytes": 130358,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_special_jpg",
+      "path": "res://assets/enemies/E15/atlases/special.jpg",
+      "bytes": 134547,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E15/atlases/telegraph.jpg",
+      "bytes": 108937,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E15_concept_jpg",
+      "path": "res://assets/enemies/E15/concept.jpg",
+      "bytes": 497620,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E15_idle_jpg",
+      "path": "res://assets/enemies/E15/idle.jpg",
+      "bytes": 497620,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E15_portrait_jpg",
+      "path": "res://assets/enemies/E15/portrait.jpg",
+      "bytes": 497620,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_attack_jpg",
+      "path": "res://assets/enemies/E16/atlases/attack.jpg",
+      "bytes": 128961,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_death_jpg",
+      "path": "res://assets/enemies/E16/atlases/death.jpg",
+      "bytes": 113769,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_hit_jpg",
+      "path": "res://assets/enemies/E16/atlases/hit.jpg",
+      "bytes": 121511,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_idle_jpg",
+      "path": "res://assets/enemies/E16/atlases/idle.jpg",
+      "bytes": 129869,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_special_jpg",
+      "path": "res://assets/enemies/E16/atlases/special.jpg",
+      "bytes": 132269,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E16/atlases/telegraph.jpg",
+      "bytes": 100923,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E16_concept_jpg",
+      "path": "res://assets/enemies/E16/concept.jpg",
+      "bytes": 466101,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E16_idle_jpg",
+      "path": "res://assets/enemies/E16/idle.jpg",
+      "bytes": 466101,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E16_portrait_jpg",
+      "path": "res://assets/enemies/E16/portrait.jpg",
+      "bytes": 466101,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_attack_jpg",
+      "path": "res://assets/enemies/E17/atlases/attack.jpg",
+      "bytes": 134545,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_death_jpg",
+      "path": "res://assets/enemies/E17/atlases/death.jpg",
+      "bytes": 116845,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_hit_jpg",
+      "path": "res://assets/enemies/E17/atlases/hit.jpg",
+      "bytes": 126564,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_idle_jpg",
+      "path": "res://assets/enemies/E17/atlases/idle.jpg",
+      "bytes": 133699,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_special_jpg",
+      "path": "res://assets/enemies/E17/atlases/special.jpg",
+      "bytes": 137925,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E17/atlases/telegraph.jpg",
+      "bytes": 108168,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E17_concept_jpg",
+      "path": "res://assets/enemies/E17/concept.jpg",
+      "bytes": 497063,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E17_idle_jpg",
+      "path": "res://assets/enemies/E17/idle.jpg",
+      "bytes": 497063,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E17_portrait_jpg",
+      "path": "res://assets/enemies/E17/portrait.jpg",
+      "bytes": 497063,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_attack_jpg",
+      "path": "res://assets/enemies/E20/atlases/attack.jpg",
+      "bytes": 140302,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_death_jpg",
+      "path": "res://assets/enemies/E20/atlases/death.jpg",
+      "bytes": 122326,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_hit_jpg",
+      "path": "res://assets/enemies/E20/atlases/hit.jpg",
+      "bytes": 135771,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_idle_jpg",
+      "path": "res://assets/enemies/E20/atlases/idle.jpg",
+      "bytes": 142464,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_special_jpg",
+      "path": "res://assets/enemies/E20/atlases/special.jpg",
+      "bytes": 147113,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E20/atlases/telegraph.jpg",
+      "bytes": 123841,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E20_concept_jpg",
+      "path": "res://assets/enemies/E20/concept.jpg",
+      "bytes": 548542,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E20_idle_jpg",
+      "path": "res://assets/enemies/E20/idle.jpg",
+      "bytes": 548542,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E20_portrait_jpg",
+      "path": "res://assets/enemies/E20/portrait.jpg",
+      "bytes": 548542,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_attack_jpg",
+      "path": "res://assets/enemies/E21/atlases/attack.jpg",
+      "bytes": 135275,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_death_jpg",
+      "path": "res://assets/enemies/E21/atlases/death.jpg",
+      "bytes": 117915,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_hit_jpg",
+      "path": "res://assets/enemies/E21/atlases/hit.jpg",
+      "bytes": 124109,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_idle_jpg",
+      "path": "res://assets/enemies/E21/atlases/idle.jpg",
+      "bytes": 133372,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_special_jpg",
+      "path": "res://assets/enemies/E21/atlases/special.jpg",
+      "bytes": 136354,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E21/atlases/telegraph.jpg",
+      "bytes": 100767,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E21_concept_jpg",
+      "path": "res://assets/enemies/E21/concept.jpg",
+      "bytes": 492702,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E21_idle_jpg",
+      "path": "res://assets/enemies/E21/idle.jpg",
+      "bytes": 492702,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E21_portrait_jpg",
+      "path": "res://assets/enemies/E21/portrait.jpg",
+      "bytes": 492702,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_attack_jpg",
+      "path": "res://assets/enemies/E22/atlases/attack.jpg",
+      "bytes": 128380,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_death_jpg",
+      "path": "res://assets/enemies/E22/atlases/death.jpg",
+      "bytes": 111271,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_hit_jpg",
+      "path": "res://assets/enemies/E22/atlases/hit.jpg",
+      "bytes": 117562,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_idle_jpg",
+      "path": "res://assets/enemies/E22/atlases/idle.jpg",
+      "bytes": 126557,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_special_jpg",
+      "path": "res://assets/enemies/E22/atlases/special.jpg",
+      "bytes": 126623,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E22/atlases/telegraph.jpg",
+      "bytes": 92511,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E22_concept_jpg",
+      "path": "res://assets/enemies/E22/concept.jpg",
+      "bytes": 481161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E22_idle_jpg",
+      "path": "res://assets/enemies/E22/idle.jpg",
+      "bytes": 481161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E22_portrait_jpg",
+      "path": "res://assets/enemies/E22/portrait.jpg",
+      "bytes": 481161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_attack_jpg",
+      "path": "res://assets/enemies/E23/atlases/attack.jpg",
+      "bytes": 125153,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_death_jpg",
+      "path": "res://assets/enemies/E23/atlases/death.jpg",
+      "bytes": 111026,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_hit_jpg",
+      "path": "res://assets/enemies/E23/atlases/hit.jpg",
+      "bytes": 118401,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_idle_jpg",
+      "path": "res://assets/enemies/E23/atlases/idle.jpg",
+      "bytes": 126386,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_special_jpg",
+      "path": "res://assets/enemies/E23/atlases/special.jpg",
+      "bytes": 128374,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E23/atlases/telegraph.jpg",
+      "bytes": 91585,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E23_concept_jpg",
+      "path": "res://assets/enemies/E23/concept.jpg",
+      "bytes": 461899,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E23_idle_jpg",
+      "path": "res://assets/enemies/E23/idle.jpg",
+      "bytes": 461899,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E23_portrait_jpg",
+      "path": "res://assets/enemies/E23/portrait.jpg",
+      "bytes": 461899,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_attack_jpg",
+      "path": "res://assets/enemies/E24/atlases/attack.jpg",
+      "bytes": 133409,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_death_jpg",
+      "path": "res://assets/enemies/E24/atlases/death.jpg",
+      "bytes": 115397,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_hit_jpg",
+      "path": "res://assets/enemies/E24/atlases/hit.jpg",
+      "bytes": 126691,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_idle_jpg",
+      "path": "res://assets/enemies/E24/atlases/idle.jpg",
+      "bytes": 133474,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_special_jpg",
+      "path": "res://assets/enemies/E24/atlases/special.jpg",
+      "bytes": 137856,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E24/atlases/telegraph.jpg",
+      "bytes": 110232,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E24_concept_jpg",
+      "path": "res://assets/enemies/E24/concept.jpg",
+      "bytes": 484929,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E24_idle_jpg",
+      "path": "res://assets/enemies/E24/idle.jpg",
+      "bytes": 484929,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E24_portrait_jpg",
+      "path": "res://assets/enemies/E24/portrait.jpg",
+      "bytes": 484929,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_attack_jpg",
+      "path": "res://assets/enemies/E25/atlases/attack.jpg",
+      "bytes": 128956,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_death_jpg",
+      "path": "res://assets/enemies/E25/atlases/death.jpg",
+      "bytes": 113436,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_hit_jpg",
+      "path": "res://assets/enemies/E25/atlases/hit.jpg",
+      "bytes": 122069,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_idle_jpg",
+      "path": "res://assets/enemies/E25/atlases/idle.jpg",
+      "bytes": 128074,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_special_jpg",
+      "path": "res://assets/enemies/E25/atlases/special.jpg",
+      "bytes": 130079,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E25/atlases/telegraph.jpg",
+      "bytes": 101895,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E25_concept_jpg",
+      "path": "res://assets/enemies/E25/concept.jpg",
+      "bytes": 522484,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E25_idle_jpg",
+      "path": "res://assets/enemies/E25/idle.jpg",
+      "bytes": 522484,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E25_portrait_jpg",
+      "path": "res://assets/enemies/E25/portrait.jpg",
+      "bytes": 522484,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_attack_jpg",
+      "path": "res://assets/enemies/E26/atlases/attack.jpg",
+      "bytes": 131243,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_death_jpg",
+      "path": "res://assets/enemies/E26/atlases/death.jpg",
+      "bytes": 115538,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_hit_jpg",
+      "path": "res://assets/enemies/E26/atlases/hit.jpg",
+      "bytes": 126423,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_idle_jpg",
+      "path": "res://assets/enemies/E26/atlases/idle.jpg",
+      "bytes": 131483,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_special_jpg",
+      "path": "res://assets/enemies/E26/atlases/special.jpg",
+      "bytes": 135259,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E26/atlases/telegraph.jpg",
+      "bytes": 109985,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E26_concept_jpg",
+      "path": "res://assets/enemies/E26/concept.jpg",
+      "bytes": 507161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E26_idle_jpg",
+      "path": "res://assets/enemies/E26/idle.jpg",
+      "bytes": 507161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E26_portrait_jpg",
+      "path": "res://assets/enemies/E26/portrait.jpg",
+      "bytes": 507161,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_attack_jpg",
+      "path": "res://assets/enemies/E27/atlases/attack.jpg",
+      "bytes": 141395,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_death_jpg",
+      "path": "res://assets/enemies/E27/atlases/death.jpg",
+      "bytes": 123846,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_hit_jpg",
+      "path": "res://assets/enemies/E27/atlases/hit.jpg",
+      "bytes": 136139,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_idle_jpg",
+      "path": "res://assets/enemies/E27/atlases/idle.jpg",
+      "bytes": 141425,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_special_jpg",
+      "path": "res://assets/enemies/E27/atlases/special.jpg",
+      "bytes": 146268,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E27/atlases/telegraph.jpg",
+      "bytes": 123578,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E27_concept_jpg",
+      "path": "res://assets/enemies/E27/concept.jpg",
+      "bytes": 537763,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E27_idle_jpg",
+      "path": "res://assets/enemies/E27/idle.jpg",
+      "bytes": 537763,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E27_portrait_jpg",
+      "path": "res://assets/enemies/E27/portrait.jpg",
+      "bytes": 537763,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E28_E28_inspector_jpg",
+      "path": "res://assets/enemies/E28/E28_inspector.jpg",
+      "bytes": 393498,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_attack_jpg",
+      "path": "res://assets/enemies/E28/atlases/attack.jpg",
+      "bytes": 126085,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_death_jpg",
+      "path": "res://assets/enemies/E28/atlases/death.jpg",
+      "bytes": 111331,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_hit_jpg",
+      "path": "res://assets/enemies/E28/atlases/hit.jpg",
+      "bytes": 117940,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_idle_jpg",
+      "path": "res://assets/enemies/E28/atlases/idle.jpg",
+      "bytes": 124555,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_special_jpg",
+      "path": "res://assets/enemies/E28/atlases/special.jpg",
+      "bytes": 126422,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E28/atlases/telegraph.jpg",
+      "bytes": 91487,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E28_concept_jpg",
+      "path": "res://assets/enemies/E28/concept.jpg",
+      "bytes": 483302,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E28_idle_jpg",
+      "path": "res://assets/enemies/E28/idle.jpg",
+      "bytes": 483302,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E28_portrait_jpg",
+      "path": "res://assets/enemies/E28/portrait.jpg",
+      "bytes": 483302,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_attack_jpg",
+      "path": "res://assets/enemies/E29/atlases/attack.jpg",
+      "bytes": 127822,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_death_jpg",
+      "path": "res://assets/enemies/E29/atlases/death.jpg",
+      "bytes": 112415,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_hit_jpg",
+      "path": "res://assets/enemies/E29/atlases/hit.jpg",
+      "bytes": 119495,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_idle_jpg",
+      "path": "res://assets/enemies/E29/atlases/idle.jpg",
+      "bytes": 126260,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_special_jpg",
+      "path": "res://assets/enemies/E29/atlases/special.jpg",
+      "bytes": 128333,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E29/atlases/telegraph.jpg",
+      "bytes": 97995,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29_concept_jpg",
+      "path": "res://assets/enemies/E29/concept.jpg",
+      "bytes": 459740,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29_idle_jpg",
+      "path": "res://assets/enemies/E29/idle.jpg",
+      "bytes": 459740,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29_portrait_jpg",
+      "path": "res://assets/enemies/E29/portrait.jpg",
+      "bytes": 459740,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_attack_jpg",
+      "path": "res://assets/enemies/E29A/atlases/attack.jpg",
+      "bytes": 132361,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_death_jpg",
+      "path": "res://assets/enemies/E29A/atlases/death.jpg",
+      "bytes": 115039,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_hit_jpg",
+      "path": "res://assets/enemies/E29A/atlases/hit.jpg",
+      "bytes": 123757,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_idle_jpg",
+      "path": "res://assets/enemies/E29A/atlases/idle.jpg",
+      "bytes": 131044,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_special_jpg",
+      "path": "res://assets/enemies/E29A/atlases/special.jpg",
+      "bytes": 133701,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E29A/atlases/telegraph.jpg",
+      "bytes": 102520,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E29A_concept_jpg",
+      "path": "res://assets/enemies/E29A/concept.jpg",
+      "bytes": 497859,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29A_idle_jpg",
+      "path": "res://assets/enemies/E29A/idle.jpg",
+      "bytes": 497859,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E29A_portrait_jpg",
+      "path": "res://assets/enemies/E29A/portrait.jpg",
+      "bytes": 497859,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_attack_jpg",
+      "path": "res://assets/enemies/E30/atlases/attack.jpg",
+      "bytes": 144835,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_death_jpg",
+      "path": "res://assets/enemies/E30/atlases/death.jpg",
+      "bytes": 126482,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_hit_jpg",
+      "path": "res://assets/enemies/E30/atlases/hit.jpg",
+      "bytes": 143377,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_idle_jpg",
+      "path": "res://assets/enemies/E30/atlases/idle.jpg",
+      "bytes": 147545,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_special_jpg",
+      "path": "res://assets/enemies/E30/atlases/special.jpg",
+      "bytes": 153649,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_atlases_telegraph_jpg",
+      "path": "res://assets/enemies/E30/atlases/telegraph.jpg",
+      "bytes": 137988,
+      "ext": ".jpg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_enemies_E30_concept_jpg",
+      "path": "res://assets/enemies/E30/concept.jpg",
+      "bytes": 548821,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E30_idle_jpg",
+      "path": "res://assets/enemies/E30/idle.jpg",
+      "bytes": 548821,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_enemies_E30_portrait_jpg",
+      "path": "res://assets/enemies/E30/portrait.jpg",
+      "bytes": 548821,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_fonts_Cinzel-SemiBold_ttf",
+      "path": "res://assets/fonts/Cinzel-SemiBold.ttf",
+      "bytes": 34032,
+      "ext": ".ttf",
+      "status": "FINAL_FONT_OFL"
+    },
+    {
+      "id": "assets_fonts_Manrope-Bold_ttf",
+      "path": "res://assets/fonts/Manrope-Bold.ttf",
+      "bytes": 35876,
+      "ext": ".ttf",
+      "status": "FINAL_FONT_OFL"
+    },
+    {
+      "id": "assets_fonts_Manrope-Regular_ttf",
+      "path": "res://assets/fonts/Manrope-Regular.ttf",
+      "bytes": 35996,
+      "ext": ".ttf",
+      "status": "FINAL_FONT_OFL"
+    },
+    {
+      "id": "assets_locations_L01_loc_L01_far_jpg",
+      "path": "res://assets/locations/L01/loc_L01_far.jpg",
+      "bytes": 160592,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L01_loc_L01_mid_jpg",
+      "path": "res://assets/locations/L01/loc_L01_mid.jpg",
+      "bytes": 448797,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L01_loc_L01_props_terminal_jpg",
+      "path": "res://assets/locations/L01/loc_L01_props_terminal.jpg",
+      "bytes": 299423,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L01_loc_L01_sky_jpg",
+      "path": "res://assets/locations/L01/loc_L01_sky.jpg",
+      "bytes": 151206,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L02_loc_L02_far_jpg",
+      "path": "res://assets/locations/L02/loc_L02_far.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L02_loc_L02_mid_jpg",
+      "path": "res://assets/locations/L02/loc_L02_mid.jpg",
+      "bytes": 418669,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L02_loc_L02_sky_jpg",
+      "path": "res://assets/locations/L02/loc_L02_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L03_loc_L03_far_jpg",
+      "path": "res://assets/locations/L03/loc_L03_far.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L03_loc_L03_mid_jpg",
+      "path": "res://assets/locations/L03/loc_L03_mid.jpg",
+      "bytes": 414344,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L03_loc_L03_sky_jpg",
+      "path": "res://assets/locations/L03/loc_L03_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L04_loc_L04_far_jpg",
+      "path": "res://assets/locations/L04/loc_L04_far.jpg",
+      "bytes": 183452,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L04_loc_L04_mid_jpg",
+      "path": "res://assets/locations/L04/loc_L04_mid.jpg",
+      "bytes": 422790,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L04_loc_L04_sky_jpg",
+      "path": "res://assets/locations/L04/loc_L04_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L05_loc_L05_far_jpg",
+      "path": "res://assets/locations/L05/loc_L05_far.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L05_loc_L05_mid_jpg",
+      "path": "res://assets/locations/L05/loc_L05_mid.jpg",
+      "bytes": 449901,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L05_loc_L05_sky_jpg",
+      "path": "res://assets/locations/L05/loc_L05_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L06_loc_L06_far_jpg",
+      "path": "res://assets/locations/L06/loc_L06_far.jpg",
+      "bytes": 277350,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L06_loc_L06_mid_jpg",
+      "path": "res://assets/locations/L06/loc_L06_mid.jpg",
+      "bytes": 438718,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L06_loc_L06_sky_jpg",
+      "path": "res://assets/locations/L06/loc_L06_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L07_loc_L07_far_jpg",
+      "path": "res://assets/locations/L07/loc_L07_far.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L07_loc_L07_mid_jpg",
+      "path": "res://assets/locations/L07/loc_L07_mid.jpg",
+      "bytes": 415367,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L07_loc_L07_sky_jpg",
+      "path": "res://assets/locations/L07/loc_L07_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L08_loc_L08_far_jpg",
+      "path": "res://assets/locations/L08/loc_L08_far.jpg",
+      "bytes": 85292,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L08_loc_L08_mid_jpg",
+      "path": "res://assets/locations/L08/loc_L08_mid.jpg",
+      "bytes": 393003,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L08_loc_L08_sky_jpg",
+      "path": "res://assets/locations/L08/loc_L08_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L09_loc_L09_far_jpg",
+      "path": "res://assets/locations/L09/loc_L09_far.jpg",
+      "bytes": 203694,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L09_loc_L09_mid_jpg",
+      "path": "res://assets/locations/L09/loc_L09_mid.jpg",
+      "bytes": 509011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L09_loc_L09_sky_jpg",
+      "path": "res://assets/locations/L09/loc_L09_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L10_loc_L10_far_jpg",
+      "path": "res://assets/locations/L10/loc_L10_far.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L10_loc_L10_mid_jpg",
+      "path": "res://assets/locations/L10/loc_L10_mid.jpg",
+      "bytes": 499983,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L10_loc_L10_sky_jpg",
+      "path": "res://assets/locations/L10/loc_L10_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L_shared_loc_shared_far_ufa_jpg",
+      "path": "res://assets/locations/L_shared/loc_shared_far_ufa.jpg",
+      "bytes": 150271,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_locations_L_shared_loc_shared_sky_jpg",
+      "path": "res://assets/locations/L_shared/loc_shared_sky.jpg",
+      "bytes": 150011,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_maps_map_ufa_campaign_jpg",
+      "path": "res://assets/maps/map_ufa_campaign.jpg",
+      "bytes": 536158,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_sfx_shared_attack_ogg",
+      "path": "res://assets/sfx/shared/attack.ogg",
+      "bytes": 3660,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_death_ogg",
+      "path": "res://assets/sfx/shared/death.ogg",
+      "bytes": 3893,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_disrupt_ogg",
+      "path": "res://assets/sfx/shared/disrupt.ogg",
+      "bytes": 4263,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_heal_ogg",
+      "path": "res://assets/sfx/shared/heal.ogg",
+      "bytes": 3829,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_hit_ogg",
+      "path": "res://assets/sfx/shared/hit.ogg",
+      "bytes": 4143,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_mark_ogg",
+      "path": "res://assets/sfx/shared/mark.ogg",
+      "bytes": 3765,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_shield_ogg",
+      "path": "res://assets/sfx/shared/shield.ogg",
+      "bytes": 3793,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_slow_ogg",
+      "path": "res://assets/sfx/shared/slow.ogg",
+      "bytes": 3801,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_special_ogg",
+      "path": "res://assets/sfx/shared/special.ogg",
+      "bytes": 3854,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_sfx_shared_telegraph_ogg",
+      "path": "res://assets/sfx/shared/telegraph.ogg",
+      "bytes": 3767,
+      "ext": ".ogg",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_ui_avatars_avatar_default_jpg",
+      "path": "res://assets/ui/avatars/avatar_default.jpg",
+      "bytes": 262379,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_buttons_ui_btn_primary_jpg",
+      "path": "res://assets/ui/buttons/ui_btn_primary.jpg",
+      "bytes": 140462,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_buttons_ui_btn_secondary_jpg",
+      "path": "res://assets/ui/buttons/ui_btn_secondary.jpg",
+      "bytes": 127448,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_alarm_bell_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_alarm_bell.jpg",
+      "bytes": 444988,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_archive_index_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_archive_index.jpg",
+      "bytes": 493095,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_archive_robe_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_archive_robe.jpg",
+      "bytes": 502077,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_archive_staff_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_archive_staff.jpg",
+      "bytes": 447686,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_archivist_glasses_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_archivist_glasses.jpg",
+      "bytes": 413137,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_blank_form_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_blank_form.jpg",
+      "bytes": 386534,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_broken_seal_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_broken_seal.jpg",
+      "bytes": 496066,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_ch01_clerk_coat_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_ch01_clerk_coat.jpg",
+      "bytes": 433748,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_clerk_coat_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_clerk_coat.jpg",
+      "bytes": 384826,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_emergency_armor_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_emergency_armor.jpg",
+      "bytes": 459214,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_emergency_battery_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_emergency_battery.jpg",
+      "bytes": 416833,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_eternal_signature_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_eternal_signature.jpg",
+      "bytes": 437164,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_final_counter_armor_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_final_counter_armor.jpg",
+      "bytes": 534360,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_ink_quill_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_ink_quill.jpg",
+      "bytes": 450463,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_last_stamp_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_last_stamp.jpg",
+      "bytes": 509200,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_order_core_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_order_core.jpg",
+      "bytes": 439299,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_paper_vest_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_paper_vest.jpg",
+      "bytes": 427278,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_queue_badge_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_queue_badge.jpg",
+      "bytes": 456898,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_queue_cutter_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_queue_cutter.jpg",
+      "bytes": 487876,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_queue_token_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_queue_token.jpg",
+      "bytes": 456484,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_regulation_edge_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_regulation_edge.jpg",
+      "bytes": 453114,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_sealed_report_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_sealed_report.jpg",
+      "bytes": 483380,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_signed_exception_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_signed_exception.jpg",
+      "bytes": 389154,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_stampbreaker_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_stampbreaker.jpg",
+      "bytes": 493234,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_starter_blade_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_starter_blade.jpg",
+      "bytes": 405287,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_starter_charm_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_starter_charm.jpg",
+      "bytes": 419700,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_starter_mail_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_starter_mail.jpg",
+      "bytes": 437005,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_ticket_ring_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_ticket_ring.jpg",
+      "bytes": 409819,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_traffic_sabre_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_traffic_sabre.jpg",
+      "bytes": 421176,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_unchanging_protocol_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_unchanging_protocol.jpg",
+      "bytes": 548816,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_window_key_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_window_key.jpg",
+      "bytes": 499961,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_eq_icon_wooden_decree_jpg",
+      "path": "res://assets/ui/equipment/eq_icon_wooden_decree.jpg",
+      "bytes": 428578,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_equipment_ui_icon_mat_equipment_scrap_jpg",
+      "path": "res://assets/ui/equipment/ui_icon_mat_equipment_scrap.jpg",
+      "bytes": 534552,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_n_png",
+      "path": "res://assets/ui/gacha/gacha_frame_n.png",
+      "bytes": 3443,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_r_png",
+      "path": "res://assets/ui/gacha/gacha_frame_r.png",
+      "bytes": 3440,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_sr_png",
+      "path": "res://assets/ui/gacha/gacha_frame_sr.png",
+      "bytes": 3432,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_ssr_png",
+      "path": "res://assets/ui/gacha/gacha_frame_ssr.png",
+      "bytes": 3437,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_gacha_gacha_frame_ur_png",
+      "path": "res://assets/ui/gacha/gacha_frame_ur.png",
+      "bytes": 3437,
+      "ext": ".png",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_board_jpg",
+      "path": "res://assets/ui/guild/guild_icon_board.jpg",
+      "bytes": 250478,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_crest_jpg",
+      "path": "res://assets/ui/guild/guild_icon_crest.jpg",
+      "bytes": 213372,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_guild_guild_icon_vault_jpg",
+      "path": "res://assets/ui/guild/guild_icon_vault.jpg",
+      "bytes": 251642,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_home_home_hero_stage_jpg",
+      "path": "res://assets/ui/home/home_hero_stage.jpg",
+      "bytes": 281909,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_afk_jpg",
+      "path": "res://assets/ui/icons/ui_icon_afk.jpg",
+      "bytes": 176940,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_arena_jpg",
+      "path": "res://assets/ui/icons/ui_icon_arena.jpg",
+      "bytes": 303766,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_battle_jpg",
+      "path": "res://assets/ui/icons/ui_icon_battle.jpg",
+      "bytes": 191684,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_chat_jpg",
+      "path": "res://assets/ui/icons/ui_icon_chat.jpg",
+      "bytes": 291196,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_close_jpg",
+      "path": "res://assets/ui/icons/ui_icon_close.jpg",
+      "bytes": 115382,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_events_jpg",
+      "path": "res://assets/ui/icons/ui_icon_events.jpg",
+      "bytes": 265397,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_expedition_jpg",
+      "path": "res://assets/ui/icons/ui_icon_expedition.jpg",
+      "bytes": 219604,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_guild_jpg",
+      "path": "res://assets/ui/icons/ui_icon_guild.jpg",
+      "bytes": 242582,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_hard_jpg",
+      "path": "res://assets/ui/icons/ui_icon_hard.jpg",
+      "bytes": 233543,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_heroes_jpg",
+      "path": "res://assets/ui/icons/ui_icon_heroes.jpg",
+      "bytes": 430804,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_home_jpg",
+      "path": "res://assets/ui/icons/ui_icon_home.jpg",
+      "bytes": 120325,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_inventory_jpg",
+      "path": "res://assets/ui/icons/ui_icon_inventory.jpg",
+      "bytes": 273576,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_map_jpg",
+      "path": "res://assets/ui/icons/ui_icon_map.jpg",
+      "bytes": 283245,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_quest_jpg",
+      "path": "res://assets/ui/icons/ui_icon_quest.jpg",
+      "bytes": 202500,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_settings_jpg",
+      "path": "res://assets/ui/icons/ui_icon_settings.jpg",
+      "bytes": 273887,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_shop_jpg",
+      "path": "res://assets/ui/icons/ui_icon_shop.jpg",
+      "bytes": 293859,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_skip_jpg",
+      "path": "res://assets/ui/icons/ui_icon_skip.jpg",
+      "bytes": 119982,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_soft_jpg",
+      "path": "res://assets/ui/icons/ui_icon_soft.jpg",
+      "bytes": 227498,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_speed_jpg",
+      "path": "res://assets/ui/icons/ui_icon_speed.jpg",
+      "bytes": 230806,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_summon_jpg",
+      "path": "res://assets/ui/icons/ui_icon_summon.jpg",
+      "bytes": 229774,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_ticket_jpg",
+      "path": "res://assets/ui/icons/ui_icon_ticket.jpg",
+      "bytes": 159437,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_icons_ui_icon_vip_jpg",
+      "path": "res://assets/ui/icons/ui_icon_vip.jpg",
+      "bytes": 310887,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_panels_ui_currency_chip_jpg",
+      "path": "res://assets/ui/panels/ui_currency_chip.jpg",
+      "bytes": 129324,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_panels_ui_empty_state_jpg",
+      "path": "res://assets/ui/panels/ui_empty_state.jpg",
+      "bytes": 26753,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_panels_ui_panel_dialog_jpg",
+      "path": "res://assets/ui/panels/ui_panel_dialog.jpg",
+      "bytes": 130951,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_panels_ui_panel_standard_jpg",
+      "path": "res://assets/ui/panels/ui_panel_standard.jpg",
+      "bytes": 88808,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_banner_featured_jpg",
+      "path": "res://assets/ui/shop/shop_banner_featured.jpg",
+      "bytes": 598732,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_cosmetic_jpg",
+      "path": "res://assets/ui/shop/shop_icon_cosmetic.jpg",
+      "bytes": 252360,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_deal_jpg",
+      "path": "res://assets/ui/shop/shop_icon_deal.jpg",
+      "bytes": 342156,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_diamonds_jpg",
+      "path": "res://assets/ui/shop/shop_icon_diamonds.jpg",
+      "bytes": 326155,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_growth_jpg",
+      "path": "res://assets/ui/shop/shop_icon_growth.jpg",
+      "bytes": 397290,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_resources_jpg",
+      "path": "res://assets/ui/shop/shop_icon_resources.jpg",
+      "bytes": 279876,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_shop_shop_icon_vip_jpg",
+      "path": "res://assets/ui/shop/shop_icon_vip.jpg",
+      "bytes": 280678,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_vip_vip_badge_frame_jpg",
+      "path": "res://assets/ui/vip/vip_badge_frame.jpg",
+      "bytes": 302210,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_ui_vip_vip_badge_gold_jpg",
+      "path": "res://assets/ui/vip/vip_badge_gold.jpg",
+      "bytes": 364609,
+      "ext": ".jpg",
+      "status": "PRESENT"
+    },
+    {
+      "id": "assets_vfx_shared_boss_burst_png",
+      "path": "res://assets/vfx/shared/boss_burst.png",
+      "bytes": 6140,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_burn_png",
+      "path": "res://assets/vfx/shared/burn.png",
+      "bytes": 2017,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_death_burst_png",
+      "path": "res://assets/vfx/shared/death_burst.png",
+      "bytes": 2943,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_disrupt_png",
+      "path": "res://assets/vfx/shared/disrupt.png",
+      "bytes": 5177,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_heal_png",
+      "path": "res://assets/vfx/shared/heal.png",
+      "bytes": 971,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_hit_png",
+      "path": "res://assets/vfx/shared/hit.png",
+      "bytes": 3035,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_mark_png",
+      "path": "res://assets/vfx/shared/mark.png",
+      "bytes": 2858,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_shield_png",
+      "path": "res://assets/vfx/shared/shield.png",
+      "bytes": 3401,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_slow_png",
+      "path": "res://assets/vfx/shared/slow.png",
+      "bytes": 1687,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_special_burst_png",
+      "path": "res://assets/vfx/shared/special_burst.png",
+      "bytes": 6136,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_telegraph_png",
+      "path": "res://assets/vfx/shared/telegraph.png",
+      "bytes": 3990,
+      "ext": ".png",
+      "status": "TEMP"
+    },
+    {
+      "id": "assets_vfx_shared_weaken_png",
+      "path": "res://assets/vfx/shared/weaken.png",
+      "bytes": 5186,
+      "ext": ".png",
+      "status": "TEMP"
+    }
+  ],
+  "known_gaps": [
+    {
+      "id": "FONTS_RUNTIME",
+      "status": "DONE_THIS_PR",
+      "note": "Manrope+Cinzel OFL wired"
+    },
+    {
+      "id": "MAPS_FOLDER",
+      "status": "MISSING",
+      "note": "client/assets/maps empty; map uses BG_MAP"
+    },
+    {
+      "id": "DIALOG_H13_H36",
+      "status": "MISSING",
+      "note": "dialog portraits only H01–H12 + NPC"
+    },
+    {
+      "id": "THEME_TRES",
+      "status": "MISSING",
+      "note": "No Godot Theme .tres; DesignTokens helpers only"
+    },
+    {
+      "id": "GACHA_RESULT_VFX",
+      "status": "TEMP",
+      "note": "Text results only; portal art added"
+    },
+    {
+      "id": "STAGE_E_ATLASES",
+      "status": "BLOCKED",
+      "note": "D-ART-06 / T-131"
+    }
+  ]
+}

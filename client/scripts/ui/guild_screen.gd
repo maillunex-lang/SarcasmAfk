@@ -15,12 +15,37 @@ func _ready() -> void:
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(dim)
 	var vbox := _make_root_vbox(Color(0, 0, 0, 0))
-	vbox.add_child(DesignTokens.make_label("Гильдия", 40, DesignTokens.COLOR_ACCENT_GOLD))
-	vbox.add_child(DesignTokens.make_label(
+	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation", 14)
+	var crest := TextureRect.new()
+	crest.texture = AssetPaths.tex(AssetPaths.GUILD_ICON_CREST)
+	crest.custom_minimum_size = Vector2(88, 88)
+	crest.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	crest.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	header.add_child(crest)
+	var titles := VBoxContainer.new()
+	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	titles.add_child(DesignTokens.make_display_label("Гильдия", 40))
+	titles.add_child(DesignTokens.make_label(
 		"Казна · задания · чат · роли (войны не включены)",
 		18,
-		DesignTokens.COLOR_TEXT_MUTED
+		DesignTokens.COLOR_TEXT_MUTED,
+		HORIZONTAL_ALIGNMENT_LEFT
 	))
+	header.add_child(titles)
+	vbox.add_child(header)
+
+	var icon_row := HBoxContainer.new()
+	icon_row.add_theme_constant_override("separation", 12)
+	for path in [AssetPaths.GUILD_ICON_VAULT, AssetPaths.GUILD_ICON_BOARD]:
+		var ic := TextureRect.new()
+		ic.texture = AssetPaths.tex(path)
+		ic.custom_minimum_size = Vector2(64, 64)
+		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon_row.add_child(ic)
+	vbox.add_child(icon_row)
+
 	_status = DesignTokens.make_label("…", 20, DesignTokens.COLOR_ACCENT_CYAN)
 	vbox.add_child(_status)
 

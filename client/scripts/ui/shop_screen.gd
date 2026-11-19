@@ -61,7 +61,7 @@ func _build_header() -> HBoxContainer:
 	var titles := VBoxContainer.new()
 	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(titles)
-	titles.add_child(DesignTokens.make_label("Донат-магазин", 38, DesignTokens.COLOR_ACCENT_GOLD, HORIZONTAL_ALIGNMENT_LEFT))
+	titles.add_child(DesignTokens.make_display_label("Донат-магазин", 36))
 	titles.add_child(DesignTokens.make_label("Алмазы · наборы · VIP · косметика", 18, DesignTokens.COLOR_TEXT_MUTED, HORIZONTAL_ALIGNMENT_LEFT))
 	return row
 

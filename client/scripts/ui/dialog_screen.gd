@@ -19,10 +19,17 @@ func _ready() -> void:
 		_quest_id = "CH01-Q01"
 	_load_dialogue()
 
-	var vbox := _make_root_vbox(DesignTokens.COLOR_BG_NAVY)
+	if ResourceLoader.exists(AssetPaths.BG_DIALOG):
+		_set_bg_texture(AssetPaths.BG_DIALOG)
+		var dim := ColorRect.new()
+		dim.color = Color(DesignTokens.COLOR_BG_NAVY, 0.62)
+		dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(dim)
+	var vbox := _make_root_vbox(Color(0, 0, 0, 0) if ResourceLoader.exists(AssetPaths.BG_DIALOG) else DesignTokens.COLOR_BG_NAVY)
 	var quest: Dictionary = GameState.catalog.get_quest(_quest_id)
 	var title := str(quest.get("title", _quest_id))
-	_title_label = DesignTokens.make_label("%s · %s" % [_quest_id, title], 34, DesignTokens.COLOR_ACCENT_GOLD)
+	_title_label = DesignTokens.make_display_label("%s · %s" % [_quest_id, title], 36)
 	vbox.add_child(_title_label)
 
 	var row := HBoxContainer.new()
