@@ -48,7 +48,9 @@ func get_heroes() -> Dictionary:
 	if not USE_MOCK:
 		_log("GET", path, false)
 		return _http_not_ready(path)
-	var data := _read_json("res://data/heroes/roster_v0.json")
+	var data := _read_json("res://data/heroes/roster_mvp.json")
+	if not data.has("heroes"):
+		data = _read_json("res://data/heroes/roster_v0.json")
 	var ok: bool = data.has("heroes")
 	_log("GET", path, ok)
 	return {"ok": ok, "heroes": data.get("heroes", []), "mock": true}
