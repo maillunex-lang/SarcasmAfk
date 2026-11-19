@@ -49,9 +49,10 @@ func _ready() -> void:
 	for q in GameState.catalog.quest_list():
 		list.add_child(_make_quest_row(q))
 
-	var back := DesignTokens.make_button("На главную", false)
-	back.pressed.connect(func() -> void: SceneNav.to_home(get_tree()))
-	vbox.add_child(back)
+	var pad := Control.new()
+	pad.custom_minimum_size = Vector2(0, 140)
+	vbox.add_child(pad)
+	HubChrome.attach(self, get_tree(), "campaign")
 
 
 func _make_quest_row(q: Dictionary) -> PanelContainer:

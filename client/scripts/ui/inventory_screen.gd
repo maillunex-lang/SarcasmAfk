@@ -76,9 +76,10 @@ func _ready() -> void:
 	_list.add_theme_constant_override("separation", 10)
 	scroll.add_child(_list)
 
-	var back := DesignTokens.make_button("Назад", false)
-	back.pressed.connect(func() -> void: SceneNav.to_more(get_tree()))
-	vbox.add_child(back)
+	var pad := Control.new()
+	pad.custom_minimum_size = Vector2(0, 140)
+	vbox.add_child(pad)
+	HubChrome.attach(self, get_tree(), "inventory")
 
 	_sync_from_api()
 	_refresh()

@@ -44,10 +44,21 @@ func _run() -> void:
 		else:
 			print("OK field units=", field.get_child_count())
 
-	# Legacy text-dump log should not dominate layout.
-	if battle.find_child("RichTextLabel", true, false) != null:
-		# RichTextLabel may still exist elsewhere; ensure no giant log min height via naming.
-		pass
+	var tray := battle.get_node_or_null("BattleTray")
+	if tray == null:
+		push_error("FAIL BattleTray missing")
+		failed = true
+	else:
+		print("OK BattleTray")
+	var portraits := battle.find_child("PortraitTray", true, false)
+	if portraits == null:
+		push_error("FAIL PortraitTray missing")
+		failed = true
+	elif portraits.get_child_count() < 1:
+		push_error("FAIL PortraitTray empty")
+		failed = true
+	else:
+		print("OK PortraitTray count=", portraits.get_child_count())
 
 	# Stretch mode must fill modern tall phones (no letterbox keep).
 	var aspect := str(ProjectSettings.get_setting("display/window/stretch/aspect", ""))

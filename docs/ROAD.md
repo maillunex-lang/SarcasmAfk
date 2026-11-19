@@ -323,6 +323,14 @@
 
 ## 8. Журнал прогресса
 
+### Журнал 2026-11-19 — T-163 AFK-shell rebuild (D-UI-SHELL-01)
+
+- Owner approved AFK-ref UI Canon → **D-UI-SHELL-01**.
+- Battle: heroes LEFT / enemies RIGHT, top timer, bottom portrait tray + АВТО/×2 (`battle.gd`).
+- City: avatar+power top bar, left/right rails, bottom nav Город/Кампания/Герои/Сумка/AFK (`home.gd`, `hub_chrome.gd`).
+- Smokes: `smoke_battle_layout`, `smoke_city_hub`, `smoke_mvp`, `smoke_ch01` EXIT 0.
+- Branding stays БашЛегенды; no 1:1 commercial asset copy.
+
 ### Журнал 2026-11-19 — T-159 CITY-HUB-001 (Stage 0 → Godot)
 
 - Owner approved Stage 0 Canvas «Уфа, столица Абсурда» → **D-UI-CITY-01**.
