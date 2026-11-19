@@ -1,6 +1,6 @@
 # REPO_REORG_DELETE_CANDIDATES.md — awaiting owner confirmation
 
-> SHA `60ebe23ddc4b78a1c5d8bb72b96d1dd9638f4615` · **NO FILES DELETED**. Approve rows explicitly before PR-4.
+> SHA `7b820a1692375620a19577b7125c98933d708a35` · **NO FILES DELETED**. Approve rows explicitly before PR-4.
 
 ## A. Tracked DELETE_CANDIDATE
 
@@ -37,7 +37,7 @@ KEEP:
 
 ## D. Identical media content groups (KEEP until owner decides)
 
-_Same SHA256; often intentional TEMP copies (concept=idle=portrait). Prefer symlink/dedupe only with owner OK._
+_Same SHA256; often intentional TEMP copies. Do not delete without owner OK._
 
 ### `45a40f191946…` (10 files)
 - [ ] `client/assets/locations/L06/loc_L06_sky.jpg`

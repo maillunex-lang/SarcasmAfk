@@ -1,6 +1,6 @@
 # REPO_REORG_AUDIT.md — REPO-REORG-001
 
-> Snapshot: **2026-11-19T14:53:33.323174+00:00** · SHA `60ebe23ddc4b78a1c5d8bb72b96d1dd9638f4615` · branch `cursor/chore-repo-reorg-001-beaf`
+> Snapshot: **2026-11-19T14:54:53.533574+00:00** · SHA `7b820a1692375620a19577b7125c98933d708a35` · branch `cursor/chore-repo-reorg-001-beaf`
 > Machine inventory: [`repo_inventory.json`](repo_inventory.json)
 
 ## Scope
@@ -9,12 +9,12 @@ Read-only inventory of **tracked** files at HEAD. No deletions performed.
 
 ## Totals
 
-- Tracked files: **1139**
-- Status counts: `{'KEEP': 1137, 'UNKNOWN': 2}`
-- Subsystem counts: `{'ci': 1, 'root': 3, 'client': 864, 'godot-import': 143, 'other': 1, 'docs': 36, 'docs-reports': 2, 'scripts': 17, 'secrets': 1, 'server': 59, 'tools': 12}`
+- Tracked files: **1145**
+- Status counts: `{'KEEP': 1143, 'UNKNOWN': 2}`
+- Subsystem counts: `{'ci': 1, 'root': 3, 'client': 864, 'godot-import': 143, 'other': 1, 'docs': 36, 'docs-reports': 7, 'scripts': 18, 'secrets': 1, 'server': 59, 'tools': 12}`
 - Duplicate content groups (non-media sample ≤8MB): **0**
 - Secret-name hits (paths only): **1**
-- Local untracked (not in git): **418**
+- Local untracked (not in git): **416**
 
 ## Large files (≥512 KiB)
 
@@ -60,7 +60,7 @@ _No tracked DELETE_CANDIDATE by heuristic. See untracked local noise and delete-
 
 ## Untracked local noise (not committed)
 
-Count: **418**. Dominated by Godot `.import` regenerations and blender scratch dirs.
+Count: **416**. Dominated by Godot `.import` regenerations and blender scratch dirs.
 These must **not** be mass-added without review; also must **not** be `git clean`'d without owner OK.
 
 Sample:
@@ -95,7 +95,7 @@ Sample:
 - `client/assets/characters/H25/H25_full.jpg.import`
 - `client/assets/characters/H25/H25_portrait.jpg.import`
 - `client/assets/characters/H26/H26_full.jpg.import`
-- … +388 more
+- … +386 more
 
 ## Classification notes (manual)
 
@@ -103,24 +103,6 @@ Sample:
 |------|-----------|--------|
 | `docker-compose.yml` | UNKNOWN | **KEEP** — local Postgres/Redis |
 | `scripts/check_release_keystore.sh` | UNKNOWN/secret-name | **KEEP** — checker script, not a keystore |
-
-## Evidence-backed subsystem snapshot (code + tests)
-
-| Subsystem | Code paths | Tests / smoke | Status label |
-|-----------|------------|---------------|--------------|
-| Godot client MVP + CH01 | `client/scripts`, `client/scenes`, `client/data` | `smoke_v0a/c`, `smoke_ch01*`, `smoke_mvp`, CI Godot | `DONE_VERIFIED` (mock path); live gated |
-| Go API auth/battle/rewards | `server/cmd/api`, `server/internal/*` | `go test`, `smoke_live_api.sh`, CI go-api | `DONE_VERIFIED` (memory; PG opt-in) |
-| Online: shop/VIP/gacha/chat/guild | `server/internal/httpapi/online.go`, client screens | unit + live smokes in CI | `PARTIAL` / `DONE_VERIFIED` mix — see TASK_QUEUE |
-| EQUIPMENT-001 | equipment JSON + client inventory | equipment smokes | `IMPLEMENTED_UNVERIFIED`→verify in PR-2 |
-| MONSTERS TEMP atlases/VFX | `client/assets/enemies`, `vfx`, `sfx` | `validate_monsters_ch01.py` | `PARTIAL` (TEMP; Stage E blocked) |
-| Visual Overhaul 001 | fonts, BGs, VO docs | `smoke_visual_screens.gd` | Merged to main `60ebe23`; Stage F open |
-| Real payments / CH02 / Stage E Kaeron | — | — | `BLOCKED` |
-
-## Doc freshness issues (fix in PR-2)
-
-- `docs/STATUS.md` still references `cursor/visual-overhaul-001-beaf` / atlases branch — stale vs `main` @ `60ebe23`.
-- `docs/TASK_QUEUE.md` “next step” underplays VO merge and T-157.
-- `docs/INDEX.md` missing VO-001 / AI router docs (to add).
 
 ## Next (PR-2+)
 
