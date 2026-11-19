@@ -33,3 +33,5 @@
 ## Быстрый ответ «где мы?»
 
 Смотри блок **NOW** в [`docs/STATUS.md`](docs/STATUS.md).
+
+Клиент V0-A: [`client/`](client/) (Godot 4.3). Это каркас, не готовый MVP.

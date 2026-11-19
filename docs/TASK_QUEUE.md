@@ -24,7 +24,7 @@
 | T-005 | P0 | **DONE** | План реализации V0 | `V0_IMPLEMENTATION_PLAN.md` | T-004 |
 | T-006 | P0 | **DONE** | Merge документов в `main` | PR #1 merged | T-005 |
 | T-007 | P0 | **DONE** | Дефрагментация docs для ИИ | `AGENTS.md`, `STATUS`, `INDEX`, `TASK_QUEUE`, `DECISIONS` | T-006 |
-| T-010 | P1 | **TODO** | **V0-A:** Godot 4 skeleton 9:16 | Splash/Home/L01/Dialog/Battle stubs + тема | T-007 |
+| T-010 | P1 | **DONE** | **V0-A:** Godot 4 skeleton 9:16 | `client/` Splash/Home/L01/Dialog/Battle + smoke | T-007 |
 | T-020 | P2 | **TODO** | Phase 0: API/data contracts + audit репо | `docs/PHASE0_SPEC.md` (создать) | T-001 |
 | T-021 | P2 | **TODO** | Минимальный CI (docs/lint или Godot check) | `.github/workflows/…` | T-010 желательно |
 | T-030 | P1 | **TODO** | **V0-B:** точечный арт только среза | wordmark, L01, арена, H01–H03, E01 | T-010 |
@@ -46,6 +46,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-007
+## Следующий конкретный шаг после T-010
 
-Начать **T-010 V0-A** по `V0_IMPLEMENTATION_PLAN.md` § фаза V0-A.
+Выбрать с владельцем: **T-020** (Phase 0 API) или **T-030** (V0-B арт). По умолчанию логики V0 — **T-030**, API можно параллельно.

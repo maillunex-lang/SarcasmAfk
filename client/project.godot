@@ -1,0 +1,24 @@
+; Engine configuration file.
+; V0-A skeleton — BashLegends / БашЛегенды: Эпоха Абсурда
+; Repo remains SarcasmAfk; package ID not set for Android yet.
+config_version=5
+
+[application]
+config/name="БашЛегенды: Эпоха Абсурда"
+config/description="BashLegends AFK RPG — V0-A client skeleton (not a finished prototype)"
+run/main_scene="res://scenes/boot/splash.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+config/icon="res://icon.svg"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=405
+window/size/window_height_override=720
+window/handheld/orientation=1
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
