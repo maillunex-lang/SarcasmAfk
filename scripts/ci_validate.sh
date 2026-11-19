@@ -34,10 +34,17 @@ if missing:
 print("assets_ok", len(required))
 PY
 
-for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/V0_REVIEW.md client/project.godot; do
+for f in AGENTS.md docs/STATUS.md docs/TASK_QUEUE.md docs/DECISIONS.md docs/PHASE0_SPEC.md docs/V0_REVIEW.md client/project.godot server/go.mod server/cmd/api/main.go; do
   test -f "$f"
   echo "OK $f"
 done
+
+if command -v go >/dev/null 2>&1; then
+  (cd server && go test ./... -count=1)
+  echo "go_api_ok"
+else
+  echo "WARN: go not found; skipped API tests"
+fi
 
 GODOT_BIN="${GODOT_BIN:-}"
 if [[ -z "$GODOT_BIN" ]]; then

@@ -1,31 +1,29 @@
 # STATUS.md — Единый снимок состояния проекта
 
-> Дата снимка: **2026-11-19** · Ветка: `main` (ROAD Фаза 1 · 7 этапов на моках)  
-> Клиентский MVP-мок: hub/навигация/12 героев/5вбоях/AFK/гача/гильдия/арена. **Не** релиз без моков.
+> Дата снимка: **2026-11-19** · Ветка: `main` (Phase 2 Go API stub T-081…T-084)  
+> Клиент MVP на моках + Go API stub. Postgres/Redis ещё нет.
 
 ## NOW (текущий фокус)
 
-**Закрыто:** `T-060` — уникальные слои L02–L10 + арены ARENA-L02–L10.  
-**Дальше:** `T-080` сервер Go **или** T-031 Blender-атласы.  
-**Запрещено:** главы 02–12; rename; «релиз готов».
+**Закрыто:** `T-081`…`T-084` — Go API (auth/progress/rewards/AFK/gacha/battles/guild/arena/events).  
+**Дальше:** `T-085` Postgres+Redis+battle verify **или** интеграция клиента `USE_MOCK=false`.  
+**Запрещено:** главы 02–12; rename; «релиз без моков».
 
-Очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md). Аудит: [`PHASE1_AUDIT.md`](PHASE1_AUDIT.md).
+Очередь: [`TASK_QUEUE.md`](TASK_QUEUE.md). Сервер: [`server/README.md`](../server/README.md).
 
-## Сводка статусов
+## Сводка
 
-| Область | Статус | Доказательство |
-|---|---|---|
-| ROAD Фаза 1 клиент на моках | ГОТОВО (stub) | hub screens + `smoke_mvp` |
-| CH01 campaign | ГОТОВО (моки) | CampaignCatalog |
-| ApiClient USE_MOCK | ГОТОВО | `api_client.gd` |
-| CI | ГОТОВО | + smoke_mvp |
-| Blender T-031 | BLOCKED | — |
-| Backend Go / Фаза 2 | НЕ НАЧАТО | — |
+| Область | Статус |
+|---|---|
+| Клиент Phase1 + art | ГОТОВО (stub) |
+| Go API Phase2 stub | ГОТОВО |
+| Postgres / Redis | НЕ НАЧАТО (T-085) |
+| Blender T-031 | BLOCKED |
 
 ## Очерёдность
 
 ```
-DONE: T-056 → T-071…T-077 (Фаза 1)
- → T-060 арт и/или T-080 сервер
+DONE: T-060/T-061 → T-081…T-084
+ → T-085 harden store / client live API
  → T-031 при Blender
 ```
