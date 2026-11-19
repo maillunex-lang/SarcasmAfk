@@ -321,6 +321,12 @@
 
 ### Журнал 2026-11-19 — Online P3 (T-151/T-152)
 
+### Журнал 2026-11-19 — Online P3 chat PG (T-154)
+
+- `ChatService` interface; `PostgresChat` persists messages/blocks/reports/mutes.
+- Migration 006; Redis optional rate-limit; memory ChatHub remains default without DATABASE_URL.
+
+
 - Admin chat moderation: reports, mute/unmute, delete message.
 - Guild daily quests, vault donate, member contribution board.
 - Migration 005: vault/quests columns + empty boss/war hooks (wars not implemented).

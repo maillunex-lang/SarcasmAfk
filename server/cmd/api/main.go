@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"time"
 
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/content"
 	"github.com/maillunex-lang/SarcasmAfk/server/internal/httpapi"
@@ -34,10 +33,10 @@ func main() {
 
 	cl := content.New(root)
 	var st store.Store
+	var chat store.ChatService = store.NewChatHub()
 	backend := "memory"
 	if *databaseURL != "" {
-		ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
-		defer cancel()
+		ctx := context.Background()
 		pg, err := store.OpenPostgres(ctx, *databaseURL, *redisAddr)
 		if err != nil {
 			log.Fatalf("postgres: %v", err)
@@ -55,6 +54,7 @@ func main() {
 			log.Fatalf("migrate: %v", err)
 		}
 		st = pg
+		chat = store.NewPostgresChat(ctx, pg.Pool(), pg.Redis())
 		backend = "postgres"
 		if *redisAddr != "" {
 			backend = "postgres+redis"
@@ -63,7 +63,7 @@ func main() {
 		st = store.NewMemory(*persist)
 	}
 
-	api := httpapi.New(st, cl).WithBackend(backend)
+	api := httpapi.New(st, cl).WithBackend(backend).WithChat(chat)
 	log.Printf("bashlegends-api listening on %s content=%s backend=%s", *addr, root, backend)
 	if err := http.ListenAndServe(*addr, api.Handler()); err != nil {
 		log.Fatal(err)

@@ -13,7 +13,7 @@ import (
 type Server struct {
 	Store   store.Store
 	Content *content.Loader
-	Chat    *store.ChatHub
+	Chat    store.ChatService
 	Guilds  *store.GuildHub
 	WS      *wsHub
 	Backend string
@@ -29,6 +29,13 @@ func New(st store.Store, c *content.Loader) *Server {
 
 func (s *Server) WithBackend(name string) *Server {
 	s.Backend = name
+	return s
+}
+
+func (s *Server) WithChat(chat store.ChatService) *Server {
+	if chat != nil {
+		s.Chat = chat
+	}
 	return s
 }
 

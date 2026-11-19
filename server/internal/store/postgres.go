@@ -53,6 +53,12 @@ func (p *Postgres) Close() {
 	p.pool.Close()
 }
 
+// Pool exposes the pgx pool for companion services (chat, etc.).
+func (p *Postgres) Pool() *pgxpool.Pool { return p.pool }
+
+// Redis exposes optional Redis client (may be nil).
+func (p *Postgres) Redis() *redis.Client { return p.rdb }
+
 func (p *Postgres) Migrate(sqlPath string) error {
 	info, err := os.Stat(sqlPath)
 	if err != nil {
