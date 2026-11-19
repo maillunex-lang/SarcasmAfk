@@ -24,7 +24,7 @@
 | MONSTERS TEMP atlases/VFX/SFX | `PARTIAL` | assets + validator; Stage E `BLOCKED` |
 | Visual Overhaul 001 A–F | `DONE_VERIFIED` (TEMP art) | Theme.tres + H13–H36 busts + gallery; Stage E Kaeron still blocked |
 | CITY-HUB-001 Ufa interactive hub | `DONE_VERIFIED` (TEMP art) | D-UI-CITY-01; `home.gd` city + 10 hotspots + decor anims + `smoke_city_hub.gd` |
-| AFK-shell UI (battle L/R + hub chrome) | `IMPLEMENTED_UNVERIFIED` → smoke OK | D-UI-SHELL-01; `battle.gd` L/R+tray; `home.gd` rails/power; `hub_chrome.gd` 5-tab; `smoke_battle_layout`/`smoke_city_hub` EXIT 0 |
+| AFK-shell UI (battle L/R + hub chrome) | `IMPLEMENTED_UNVERIFIED` (CI green; owner taste pending) | D-UI-SHELL-01; PR #32; smokes + `ci_validate` OK; debug APK gofile |
 | CH01 RPG Expansion A–E | `DONE_VERIFIED` (automation) | merged #28; device accept still T-128 |
 | Arena / events live | `BLOCKED` | D-SCOPE-01; T-112 |
 | CH02 | `BLOCKED` | T-090 / D-SCOPE-02 |

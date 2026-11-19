@@ -112,7 +112,7 @@
 | T-160 | P0 | **DONE_VERIFIED** | REPO-REORG-001 backup+audit+AI context | reports + AGENTS/STATUS/router; PR #27 | D-REORG-01 |
 | T-161 | P1 | **DONE_VERIFIED** | REPO-REORG validators + CI path/link checks | `check_doc_links/ai_docs/content_refs` in `ci_validate.sh` | T-160 |
 | T-162 | P1 | **DEPRECATED** | REPO-REORG tracked deletes | No safe tracked deletes; see `REPO_REORG_CLEANUP_DECISIONS.md` | T-160 |
-| T-163 | P0 | **IN_PROGRESS** | AFK-shell rebuild: battle L/R + tray; city power/rails; bottom nav 5 tabs | D-UI-SHELL-01 · `battle.gd`/`home.gd`/`hub_chrome.gd` + smokes + debug APK | owner AFK refs approve |
+| T-163 | P0 | **IMPLEMENTED_UNVERIFIED** | AFK-shell rebuild: battle L/R + tray; city power/rails; bottom nav 5 tabs | D-UI-SHELL-01 · PR #32 CI green · debug APK; owner device taste for DONE_VERIFIED | owner AFK refs approve |
 
 ## Правила исполнения
 
