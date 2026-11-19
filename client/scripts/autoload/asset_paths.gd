@@ -155,11 +155,16 @@ static func hero_full(hero_id: String) -> String:
 
 
 static func dialog_portrait_for(speaker_id: String) -> Texture2D:
-	if speaker_id.begins_with("H") and speaker_id.length() <= 3:
+	# H01–H36 dialog busts (TEMP for H13–H36 until Stage E).
+	if speaker_id.begins_with("H"):
 		var path := "res://assets/dialogs/dialog_portrait_%s.jpg" % speaker_id
-		var t := tex(path)
-		if t:
-			return t
+		if ResourceLoader.exists(path):
+			var t := tex(path)
+			if t:
+				return t
+		var fallback := hero_portrait(speaker_id)
+		if ResourceLoader.exists(fallback):
+			return tex(fallback)
 	match speaker_id:
 		"NPC_TERMINAL":
 			return tex("res://assets/dialogs/dialog_portrait_NPC_TERMINAL.jpg")

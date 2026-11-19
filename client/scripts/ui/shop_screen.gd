@@ -15,7 +15,11 @@ func _ready() -> void:
 	vbox.add_theme_constant_override("separation", 14)
 
 	vbox.add_child(_build_header())
-	vbox.add_child(_build_banner())
+	var banner := _build_banner()
+	banner.modulate.a = 0.0
+	vbox.add_child(banner)
+	var banner_tw := create_tween()
+	banner_tw.tween_property(banner, "modulate:a", 1.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	vbox.add_child(DesignTokens.make_label(
 		"TEST_PURCHASE · цены-заглушки · не реальная выручка",
 		16,

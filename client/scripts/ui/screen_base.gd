@@ -2,9 +2,20 @@ extends Control
 class_name ScreenBase
 ## Shared portrait full-rect root for stub screens.
 
+@export var play_enter_fade: bool = true
+
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	if play_enter_fade:
+		modulate.a = 0.0
+		call_deferred("_play_enter_fade")
+
+
+func _play_enter_fade() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 1.0, 0.35).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _set_bg_texture(path: String) -> void:

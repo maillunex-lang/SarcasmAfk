@@ -27,7 +27,11 @@ func _ready() -> void:
 	portal.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	portal.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	portal.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	portal.modulate = Color(1, 1, 1, 0.55)
 	vbox.add_child(portal)
+	var portal_tw := create_tween().set_loops()
+	portal_tw.tween_property(portal, "modulate:a", 1.0, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	portal_tw.tween_property(portal, "modulate:a", 0.7, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	var reveal := CenterContainer.new()
 	reveal.custom_minimum_size = Vector2(0, 200)

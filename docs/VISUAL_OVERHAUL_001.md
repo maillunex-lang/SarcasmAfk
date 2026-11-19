@@ -1,6 +1,6 @@
 # VISUAL OVERHAUL 001 — BashLegends
 
-> Started: 2026-11-19 · Branch: `cursor/visual-overhaul-001-beaf` · Base: `main` @ `71035ef`
+> Started: 2026-11-19 · Stage F branch: `cursor/visual-overhaul-stage-f-4106` · Base: `main` @ `747a6f5`
 
 ## Goal
 
@@ -10,12 +10,12 @@ Bring all screens to a coherent **Premium Clean Stylized Anime Fantasy 2.5D + Pr
 
 | Stage | Status | Notes |
 |-------|--------|-------|
-| A Audit | DONE (this PR) | 23 scenes inventoried; registry JSON+MD |
-| B Design system | IN PROGRESS | OFL fonts + expanded DesignTokens |
-| C Core path | IN PROGRESS | Splash/Home/Dialog/Battle + Gacha/Inventory |
-| D RPG screens | IN PROGRESS | Heroes/party/bestiary + map_ufa art |
-| E Online systems | IN PROGRESS | Guild crest/vault/board; shop display title |
-| F Polish | TODO | Animations, APK, before/after shots |
+| A Audit | DONE | 23 scenes inventoried; registry JSON+MD |
+| B Design system | DONE | OFL fonts + DesignTokens + Theme.tres |
+| C Core path | DONE | Splash/Home/Dialog/Battle + Gacha/Inventory |
+| D RPG screens | DONE | Heroes/party/bestiary + map_ufa art |
+| E Online systems | DONE | Guild crest/vault/board; shop/VIP TEMP |
+| F Polish | DONE_VERIFIED (T-158) | Animations, Theme.tres, H13–H36 busts, gallery, debug APK |
 
 ## Constraints honored
 
@@ -23,19 +23,21 @@ Bring all screens to a coherent **Premium Clean Stylized Anime Fantasy 2.5D + Pr
 - TEMP art remains labeled TEMP.
 - Arena/events stay locked stubs (D-SCOPE-01).
 
-## Deliverables this PR
+## Stage F deliverables
 
-- `docs/VISUAL_AUDIT.md`, `docs/ASSET_REGISTRY.md`, `docs/UI_DESIGN_SYSTEM.md`
-- `docs/ASSET_GENERATION_PROMPTS.md`, `docs/VISUAL_QA_REPORT.md`
-- `client/data/visual/asset_registry.json`
-- `scripts/audit_visual_assets.py`
-- Fonts Manrope/Cinzel (OFL)
-- New art: `bg_inventory.jpg`, `gacha_portal.jpg`, `ui_empty_state.jpg`, `bg_party.jpg`, `bg_bestiary.jpg`, `bg_dialog.jpg`
-- Splash fade-in; Home display type; Gacha portal; Inventory BG
-- Party/Bestiary/Dialog TEMP BGs; Heroes rarity frames; Battle victory display chrome
-- Map Ufa campaign art; guild crest/vault/board icons; TEMP gacha rarity frames
-- `smoke_visual_screens.gd` headless screen/asset gate in `ci_validate.sh`
+- `client/themes/bashlegends_theme.tres` + `project.godot` gui/theme/custom
+- TEMP dialog busts `dialog_portrait_H13.jpg` … `H36.jpg` (+ generator)
+- Screen enter fades (ScreenBase), dialog portrait slide, gacha portal pulse, shop banner fade
+- Gallery pack `docs/reports/visual_gallery/` + `smoke_visual_gallery.gd`
+- Debug APK rebuild evidence in STATUS / QA report
 
-## Next PR
+## Evidence
 
-Stage D/E deepen: map marker polish, Theme.tres, dialog busts H13–H36, guild/shop icons, before/after gallery + APK.
+```bash
+python3 scripts/generate_dialog_busts_h13_h36.py
+python3 scripts/generate_visual_gallery.py
+# Godot
+godot4 --headless --path client -s res://scripts/tools/smoke_visual_screens.gd
+godot4 --headless --path client -s res://scripts/tools/smoke_visual_gallery.gd
+bash scripts/build_debug_apk.sh
+```

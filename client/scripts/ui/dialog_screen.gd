@@ -103,7 +103,13 @@ func _show_line() -> void:
 	_speaker_label.text = str(line.get("speaker", "?"))
 	_body_label.text = str(line.get("text", ""))
 	_portrait.texture = AssetPaths.dialog_portrait_for(str(line.get("speaker_id", "")))
-	_progress_label.text = "Реплика %d / %d · статичный портрет" % [_index + 1, _lines.size()]
+	_progress_label.text = "Реплика %d / %d · портрет (TEMP busts H13–H36)" % [_index + 1, _lines.size()]
+	_portrait.modulate.a = 0.0
+	_portrait.position.x = -24.0
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(_portrait, "modulate:a", 1.0, 0.28).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(_portrait, "position:x", 0.0, 0.28).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _on_next() -> void:

@@ -1,0 +1,87 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bashlegends_theme_vo001"]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Manrope-Regular.ttf" id="1_body"]
+[ext_resource type="FontFile" path="res://assets/fonts/Manrope-Bold.ttf" id="2_bold"]
+[ext_resource type="FontFile" path="res://assets/fonts/Cinzel-SemiBold.ttf" id="3_display"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_primary"]
+bg_color = Color(0.909804, 0.737255, 0.407843, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 24
+content_margin_top = 16
+content_margin_right = 24
+content_margin_bottom = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0.835294, 0.678431, 0.372549, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 24
+content_margin_top = 16
+content_margin_right = 24
+content_margin_bottom = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.113725, 0.192157, 0.329412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.909804, 0.737255, 0.407843, 0.2)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 24
+content_margin_top = 24
+content_margin_right = 24
+content_margin_bottom = 24
+shadow_color = Color(0, 0, 0, 0.33)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lineedit"]
+bg_color = Color(0.141176, 0.227451, 0.388235, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.329412, 0.85098, 0.854902, 0.35)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 16
+content_margin_top = 12
+content_margin_right = 16
+content_margin_bottom = 12
+
+[resource]
+default_font = ExtResource("1_body")
+default_font_size = 28
+Button/colors/font_color = Color(0.101961, 0.0784314, 0.0313726, 1)
+Button/colors/font_disabled_color = Color(0.101961, 0.0784314, 0.0313726, 0.55)
+Button/colors/font_hover_color = Color(0.101961, 0.0784314, 0.0313726, 1)
+Button/colors/font_pressed_color = Color(0.101961, 0.0784314, 0.0313726, 1)
+Button/fonts/font = ExtResource("2_bold")
+Button/font_sizes/font_size = 36
+Button/styles/disabled = SubResource("StyleBoxFlat_btn_primary")
+Button/styles/hover = SubResource("StyleBoxFlat_btn_primary")
+Button/styles/normal = SubResource("StyleBoxFlat_btn_primary")
+Button/styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+Label/colors/font_color = Color(0.960784, 0.941176, 0.898039, 1)
+Label/fonts/font = ExtResource("1_body")
+Label/font_sizes/font_size = 28
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")
+LineEdit/colors/font_color = Color(0.960784, 0.941176, 0.898039, 1)
+LineEdit/fonts/font = ExtResource("1_body")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_lineedit")
+RichTextLabel/colors/default_color = Color(0.960784, 0.941176, 0.898039, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_body")
+RichTextLabel/fonts/bold_font = ExtResource("2_bold")
+RichTextLabel/fonts/italics_font = ExtResource("3_display")

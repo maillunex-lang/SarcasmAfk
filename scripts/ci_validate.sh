@@ -90,6 +90,8 @@ fi
 if [[ -n "${GODOT_BIN}" ]]; then
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0a.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_visual_screens.gd)
+  python3 scripts/generate_visual_gallery.py
+  (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_visual_gallery.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_v0c.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01.gd)
   (cd client && "$GODOT_BIN" --headless --path . -s res://scripts/tools/smoke_ch01_expansion.gd)
