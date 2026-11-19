@@ -71,10 +71,12 @@
 - [x] Гильдии, арена, события — клиентские API stubs *(T-084)*.
 - [x] Админка stub: `/readyz`, `/v1/admin/metrics`, request logging, `backup_db.sh` *(T-093…T-096; RBAC later)*.
 - [x] Нагрузочный smoke *(T-099)*; Android export preset example *(T-100)*.
-- [ ] Подписанный тестовый APK / online (нужны SDK + templates).
+- [x] Ultimates в server sim + client seed sync *(T-101/T-102)*; аудит [`PHASE2_AUDIT.md`](PHASE2_AUDIT.md).
+- [ ] Подписанный тестовый APK / online (нужны SDK + templates) *(T-110)*.
+- [ ] Admin RBAC · guild/arena live · battle replay *(T-111…T-113)*.
 
 ### Фаза 3. Приёмка расширенного MVP
-- [ ] Все обязательные сценарии MVP работают без моков в релизном режиме.
+- [ ] Все обязательные сценарии MVP работают без моков в релизном режиме *(T-114)*.
 - [ ] Данные сохраняются после перезапуска и разрыва соединения.
 - [ ] Нет критических ошибок экономики, наград, платежей и авторизации.
 - [ ] Пройдены регрессия, аудит, Android-профилирование и проверка подписанного APK.
@@ -420,10 +422,16 @@
 - Не сделано: signed APK, ultimates auto-cast on server
 - Следующий шаг: APK / ultimates-in-sim / T-031
 
+### 2026-11-19 — Ultimates + seed sync + audit T-101…T-103
+- Статус: ГОТОВО
+- Сделано: server ultimate auto-cast, client `BattleEngine` seed from API, `PHASE2_AUDIT`, roadmap refresh
+- Не сделано: signed APK, RBAC, guild live, replay
+- Следующий шаг: выбор владельца (T-110…T-114 / T-031 / PX)
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-060…T-100 Phase2 stubs~~ — сделано.
-2. Далее: signed APK / ultimates-in-sim; T-031 при Blender.
-3. Запреты: главы 02–12, rename.
+1. ~~Phase 0–2 stubs through T-103~~ — сделано.
+2. Далее: T-110 APK / T-111 RBAC / T-112 guild-live / T-113 replay / T-031 / PX unlock.
+3. Запреты без разрешения: главы 02–12, rename, mass art.

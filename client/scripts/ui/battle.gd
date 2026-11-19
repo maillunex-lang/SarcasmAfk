@@ -43,7 +43,11 @@ func _start_engine() -> void:
 	_engine.unit_updated.connect(_refresh_unit)
 	_engine.battle_ended.connect(_on_battle_ended)
 	_engine.ultimate_ready.connect(_on_ult_ready)
-	_engine.setup(GameState.get_party(), _battle_def.get("enemies", []))
+	var seed_val: int = -1
+	if start_res.has("client_seed"):
+		# Keep within signed 32-bit for Godot RNG; server seed is int64.
+		seed_val = int(abs(int(start_res.get("client_seed"))) % 2147483647)
+	_engine.setup(GameState.get_party(), _battle_def.get("enemies", []), seed_val)
 	for u in _engine.all_units():
 		_refresh_unit(u)
 	var seed_txt := str(start_res.get("client_seed", "?"))

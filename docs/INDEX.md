@@ -36,25 +36,29 @@
 | [`ASSET_PIPELINE.md`](ASSET_PIPELINE.md) | Производство и оптимизация ассетов |
 | [`VISUAL_ROADMAP.md`](VISUAL_ROADMAP.md) | Порядок визуальных работ + аудит |
 
-## 4. Исполнение V0 / инженерия
+## 4. Исполнение / инженерия
 
 | Файл | Роль |
 |---|---|
 | [`V0_IMPLEMENTATION_PLAN.md`](V0_IMPLEMENTATION_PLAN.md) | Фазы V0-A…D |
 | [`V0_REVIEW.md`](V0_REVIEW.md) | Review + стоп-линия T-050 |
-| [`PHASE0_SPEC.md`](PHASE0_SPEC.md) | API/data contracts T-020 |
+| [`PHASE0_SPEC.md`](PHASE0_SPEC.md) | API/data contracts |
+| [`PHASE1_AUDIT.md`](PHASE1_AUDIT.md) | Аудит клиентского MVP |
+| [`PHASE2_AUDIT.md`](PHASE2_AUDIT.md) | Аудит сервера / mock-replace |
 | [`../client/README.md`](../client/README.md) | Как запустить клиент |
-| [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | CI T-021 |
+| [`../server/README.md`](../server/README.md) | Go API (memory / Postgres+Redis) |
+| [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | CI |
 | [`../scripts/ci_validate.sh`](../scripts/ci_validate.sh) | Локальный CI |
+| [`../docker-compose.yml`](../docker-compose.yml) | Postgres + Redis |
 
 ## 5. Код и ассеты
 
 | Путь | Сейчас |
 |---|---|
-| [`../client/`](../client/) | **V0-A skeleton** (Godot 4.3) |
-| `client/assets/` | только placeholders / нет финального арта |
-| `.github/workflows/` | отсутствует |
-| `server/` | отсутствует |
+| [`../client/`](../client/) | Godot 4.3: V0 + Phase1 screens + CH01 data (mock default) |
+| `client/assets/` | Draft/placeholder art (не Blender atlases) |
+| [`../server/`](../server/) | Phase 2 Go API + tick-sim |
+| `.github/workflows/` | JSON + Godot smokes + Go API + load |
 
 ## 6. Анти-фрагментация (правила)
 
