@@ -6,7 +6,7 @@ var _lines: Array = []
 var _index: int = 0
 var _speaker_label: Label
 var _body_label: Label
-var _portrait_label: Label
+var _portrait: TextureRect
 var _progress_label: Label
 
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 	_load_dialogue()
 	var vbox := _make_root_vbox(DesignTokens.COLOR_BG_NAVY)
 
-	vbox.add_child(DesignTokens.make_label("CH01-Q01 · Талон в неизвестность", 36, DesignTokens.COLOR_ACCENT_GOLD))
+	vbox.add_child(DesignTokens.make_label("CH01-Q01 · Талон в неизвестность", 34, DesignTokens.COLOR_ACCENT_GOLD))
 
 	var row := HBoxContainer.new()
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -23,12 +23,14 @@ func _ready() -> void:
 	vbox.add_child(row)
 
 	var portrait_panel := PanelContainer.new()
-	portrait_panel.custom_minimum_size = Vector2(280, 360)
+	portrait_panel.custom_minimum_size = Vector2(320, 400)
 	portrait_panel.add_theme_stylebox_override("panel", DesignTokens.make_panel_style(DesignTokens.COLOR_BG_DEEP, 16))
 	row.add_child(portrait_panel)
-	_portrait_label = DesignTokens.make_label("Portrait\n(static)", 28, DesignTokens.COLOR_ACCENT_CYAN)
-	_portrait_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	portrait_panel.add_child(_portrait_label)
+	_portrait = TextureRect.new()
+	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_portrait.custom_minimum_size = Vector2(280, 360)
+	portrait_panel.add_child(_portrait)
 
 	var text_panel := PanelContainer.new()
 	text_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -51,6 +53,13 @@ func _ready() -> void:
 	buttons.add_theme_constant_override("separation", 16)
 	vbox.add_child(buttons)
 
+	var skip_icon := TextureRect.new()
+	skip_icon.texture = AssetPaths.tex(AssetPaths.ICON_SKIP)
+	skip_icon.custom_minimum_size = Vector2(88, 88)
+	skip_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	skip_icon.stretch_mode = TextureRect.STRETCH_SCALE
+	buttons.add_child(skip_icon)
+
 	var skip := DesignTokens.make_button("Пропуск", false)
 	skip.pressed.connect(_on_skip)
 	buttons.add_child(skip)
@@ -65,7 +74,6 @@ func _ready() -> void:
 func _load_dialogue() -> void:
 	var file := FileAccess.open(DIALOGUE_PATH, FileAccess.READ)
 	if file == null:
-		push_error("Missing dialogue file: %s" % DIALOGUE_PATH)
 		_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Диалог не найден."}]
 		return
 	var data = JSON.parse_string(file.get_as_text())
@@ -82,8 +90,8 @@ func _show_line() -> void:
 	var line: Dictionary = _lines[_index]
 	_speaker_label.text = str(line.get("speaker", "?"))
 	_body_label.text = str(line.get("text", ""))
-	_portrait_label.text = "STATIC\n%s" % str(line.get("speaker_id", "?"))
-	_progress_label.text = "Реплика %d / %d · без lipsync" % [_index + 1, _lines.size()]
+	_portrait.texture = AssetPaths.dialog_portrait_for(str(line.get("speaker_id", "")))
+	_progress_label.text = "Реплика %d / %d · статичный портрет" % [_index + 1, _lines.size()]
 
 
 func _on_next() -> void:
