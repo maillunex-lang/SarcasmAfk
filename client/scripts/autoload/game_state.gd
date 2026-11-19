@@ -4,7 +4,6 @@ extends Node
 signal progress_changed
 
 const SAVE_PATH := "user://bashlegends_v0_save.json"
-const HEROES_PATH := "res://data/heroes/roster_v0.json"
 
 var soft_currency: int = 0
 var commander_xp: int = 0
@@ -12,6 +11,7 @@ var party_ids: Array = ["H01", "H02", "H03"]
 var heroes_catalog: Array = []
 var last_battle_result: Dictionary = {}
 
+var api: ApiClient
 var catalog: CampaignCatalog
 var completed_quests: Dictionary = {} # quest_id -> true
 var completed_battles: Dictionary = {} # battle_id -> true
@@ -22,6 +22,7 @@ var pending_dialogue_quest_id: String = ""
 
 
 func _ready() -> void:
+	api = ApiClient.new()
 	catalog = CampaignCatalog.new()
 	catalog.load_all()
 	_load_heroes()
@@ -32,13 +33,11 @@ func _ready() -> void:
 
 
 func _load_heroes() -> void:
-	var file := FileAccess.open(HEROES_PATH, FileAccess.READ)
-	if file == null:
-		push_error("Missing heroes roster")
-		return
-	var data = JSON.parse_string(file.get_as_text())
-	if typeof(data) == TYPE_DICTIONARY and data.has("heroes"):
-		heroes_catalog = data["heroes"]
+	var res: Dictionary = api.get_heroes()
+	if bool(res.get("ok", false)):
+		heroes_catalog = res.get("heroes", [])
+	else:
+		push_error("Missing heroes roster via ApiClient")
 
 
 func get_hero(hero_id: String) -> Dictionary:
@@ -165,18 +164,27 @@ func _next_incomplete_battle() -> String:
 
 
 func claim_reward(bundle_id: String, soft: int, xp: int) -> bool:
-	if claimed_rewards.get(bundle_id, false):
+	var res: Dictionary = api.claim_reward(bundle_id, soft, xp, claimed_rewards)
+	if not bool(res.get("ok", false)):
+		return false
+	if bool(res.get("already_claimed", false)):
 		return false
 	claimed_rewards[bundle_id] = true
-	soft_currency += soft
-	commander_xp += xp
+	soft_currency += int(res.get("soft_delta", soft))
+	commander_xp += int(res.get("xp_delta", xp))
 	progress_changed.emit()
 	save_game()
 	return true
 
 
+func export_progress() -> Dictionary:
+	return api.get_progress(self)
+
+
 func set_battle_result(result: Dictionary) -> void:
 	last_battle_result = result
+	if api and result.has("battle_id"):
+		api.finish_battle(str(result.get("battle_id", "")), bool(result.get("victory", false)))
 
 
 # Back-compat helpers used by older UI

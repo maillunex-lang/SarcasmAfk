@@ -32,6 +32,7 @@
 | T-040 | P1 | **DONE** | **V0-C:** playable demo-path | autofight B01 + GameState + rewards | T-030 |
 | T-050 | P1 | **DONE** | **V0-D:** review + стоп-линия | `docs/V0_REVIEW.md` | T-040 |
 | T-055 | P1 | **DONE** | **CH01 embed:** квесты/локации/бои/диалоги в клиент | `client/data/` + CampaignCatalog + campaign UI + `smoke_ch01.gd` | T-050 |
+| T-056 | P1 | **DONE** | Тонкий `ApiClient` + `USE_MOCK` | `client/scripts/net/api_client.gd` + `smoke_api.gd` | T-020, T-055 |
 | T-060 | P3 | **TODO** | Расширение арта CH01 (L02–L10) | по LOCATION/CAMPAIGN | T-050 |
 | T-070 | P3 | **TODO** | Клиент MVP экраны (ROAD Фаза 1) | 12 экранов на моках | T-050, T-020 |
 | T-080 | P3 | **TODO** | Сервер Go + замена моков (Фаза 2) | TECH-001 | T-070 |
@@ -47,6 +48,6 @@
 4. `PX` не трогать без письменного решения владельца в чате/issue + запись в `DECISIONS.md`.
 5. Если задача выяснила новый блокер — статус `BLOCKED` и строка в `STATUS.md`.
 
-## Следующий конкретный шаг после T-055
+## Следующий конкретный шаг после T-056
 
-Добавить Godot `ApiClient` (USE_MOCK) **или** арт `T-060` (L02–L10). **T-031** — при Blender. Владельцу: визуальный sign-off по `V0_REVIEW.md`.
+Арт `T-060` (L02–L10) **или** экраны `T-070` (MVP на моках). **T-031** — при Blender. Владельцу: визуальный sign-off по `V0_REVIEW.md`.

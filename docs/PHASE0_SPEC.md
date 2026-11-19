@@ -149,6 +149,7 @@ Auth: `Authorization: Bearer <token>` (после auth-модуля)
 
 ## 9. Следующий инженерный шаг после спеки
 
-1. CI на JSON + Godot smoke (T-021).  
-2. Тонкий `ApiClient` в Godot с переключателем `USE_MOCK=true`.  
-3. Не строить полный сервер, пока клиент MVP-экраны не стабилизированы (ROAD-002 A).
+1. ~~CI на JSON + Godot smoke (T-021).~~  
+2. ~~Тонкий `ApiClient` в Godot с переключателем `USE_MOCK=true`.~~ → `client/scripts/net/api_client.gd`  
+3. Не строить полный сервер, пока клиент MVP-экраны не стабилизированы (ROAD-002 A).  
+4. При `USE_MOCK=false` ответы пока `HTTP_NOT_IMPLEMENTED` (сервер отсутствует).

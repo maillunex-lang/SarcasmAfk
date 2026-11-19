@@ -364,10 +364,17 @@
 - Доказательства: `client/data/quests|locations|enemies|battles|dialogues`, `client/scripts/ui/campaign.gd`
 - Следующий шаг: ApiClient (USE_MOCK) или T-060
 
+### 2026-11-19 — T-056 ApiClient USE_MOCK
+- Статус: ГОТОВО (тонкий фасад, без HTTP)
+- Сделано: `ApiClient` (content/progress/claim/start/finish), проводка в GameState/Battle/Dialog, `smoke_api.gd` + CI
+- Не сделано: реальный HTTP, auth, сервер
+- Доказательства: `client/scripts/net/api_client.gd`
+- Следующий шаг: T-060 или T-070
+
 ## 9. Текущий следующий шаг
 
 > Канон: [`STATUS.md`](STATUS.md) + [`TASK_QUEUE.md`](TASK_QUEUE.md).
 
-1. ~~T-040 / T-050 / T-020 / T-021 / T-055~~ — сделано.
-2. Далее: `ApiClient` **или** T-060 арт L02+; T-031 при Blender.
+1. ~~T-040 / T-050 / T-020 / T-021 / T-055 / T-056~~ — сделано.
+2. Далее: T-060 арт L02+ **или** T-070 MVP-экраны; T-031 при Blender.
 3. Запреты: главы 02–12, массовые ассеты вне очереди, rename.

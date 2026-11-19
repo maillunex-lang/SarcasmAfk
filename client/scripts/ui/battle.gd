@@ -27,17 +27,16 @@ func _load_battle() -> void:
 	var battle_id := GameState.active_battle_id
 	if battle_id == "":
 		battle_id = "B01"
-	_battle_def = GameState.catalog.get_battle(battle_id)
-	if _battle_def.is_empty():
-		# Fallback standalone file
-		var file := FileAccess.open("res://data/battles/B01.json", FileAccess.READ)
-		if file:
-			var data = JSON.parse_string(file.get_as_text())
-			if typeof(data) == TYPE_DICTIONARY:
-				_battle_def = data
+	var res: Dictionary = GameState.api.get_battle(battle_id, GameState.catalog)
+	if bool(res.get("ok", false)):
+		_battle_def = res.get("battle", {})
+	else:
+		_battle_def = GameState.catalog.get_battle(battle_id)
 
 
 func _start_engine() -> void:
+	var battle_id := str(_battle_def.get("battle_id", GameState.active_battle_id))
+	var start_res: Dictionary = GameState.api.start_battle(battle_id, GameState.party_ids)
 	_engine = BattleEngine.new()
 	_engine.log_line.connect(_on_log)
 	_engine.unit_updated.connect(_refresh_unit)
@@ -46,7 +45,10 @@ func _start_engine() -> void:
 	_engine.setup(GameState.get_party(), _battle_def.get("enemies", []))
 	for u in _engine.all_units():
 		_refresh_unit(u)
-	_on_log("Бой %s начался. Автобой активен." % str(_battle_def.get("battle_id", "?")))
+	var seed_txt := str(start_res.get("client_seed", "?"))
+	_on_log("Бой %s начался. Автобой активен. seed=%s mock=%s" % [
+		battle_id, seed_txt, str(start_res.get("mock", true))
+	])
 
 
 func _build_ui() -> void:

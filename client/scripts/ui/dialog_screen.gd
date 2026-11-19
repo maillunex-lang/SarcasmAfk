@@ -80,16 +80,12 @@ func _ready() -> void:
 
 
 func _load_dialogue() -> void:
-	var path := GameState.catalog.dialogue_path(_quest_id)
-	var file := FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Диалог не найден: %s" % path}]
+	var res: Dictionary = GameState.api.get_dialogue(_quest_id, GameState.catalog)
+	if bool(res.get("ok", false)):
+		var data: Dictionary = res.get("dialogue", {})
+		_lines = data.get("lines", [])
 		return
-	var data = JSON.parse_string(file.get_as_text())
-	if typeof(data) == TYPE_DICTIONARY and data.has("lines"):
-		_lines = data["lines"]
-	else:
-		_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Некорректный JSON диалога."}]
+	_lines = [{"speaker": "Система", "speaker_id": "SYS", "text": "Диалог не найден: %s" % _quest_id}]
 
 
 func _show_line() -> void:
